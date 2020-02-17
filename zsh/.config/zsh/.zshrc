@@ -18,3 +18,4 @@ plugins=(git archlinux cargo ssh-agent)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_AU.UTF-8
 
+alias vim="nvim"

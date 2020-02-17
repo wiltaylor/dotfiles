@@ -19,9 +19,9 @@ picom &
 
 bspc config focus_follows_pointer true
 
-bspc monitor DP-0 -d I II II
-bspc monitor DP-2 -d IV V VI
-bspc monitor DP-4 -d VII VIII IX
+bspc monitor DP-0 -d 1 2 3
+bspc monitor DP-2 -d 4 5 6
+bspc monitor DP-4 -d 7 8 9
 
 bspc config border_width         2
 bspc config window_gap          12

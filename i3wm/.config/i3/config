@@ -1,0 +1,236 @@
+# __          ___ _   _______          _            
+# \ \        / (_) | |__   __|        | |           
+#  \ \  /\  / / _| |    | | __ _ _   _| | ___  _ __ 
+#   \ \/  \/ / | | |    | |/ _` | | | | |/ _ \| '__|
+#    \  /\  /  | | |    | | (_| | |_| | | (_) | |   
+#     \/  \/   |_|_|    |_|\__,_|\__, |_|\___/|_|   
+#                                 __/ |             
+#                                |___/              
+# Web: https://wil.dev
+# Github: https://github.com/wiltaylor
+# Contact: web@wiltaylor.dev
+# Feel free to use this configuration as you wish.
+set $mod Mod4
+
+new_window pixel 1
+new_float normal
+
+# Applications
+exec --no-startup-id onboard &
+exec --no-startup-id dropbox &
+exec --no-startup-id touchegg &
+exec --no-startup-id udiskie &
+exec --no-startup-id dropbox &
+exec --no-startup-id protonmail-bridge --no-window &
+exec --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+
+# Special effects and wallpaper
+exec --no-startup-id picom &
+exec --no-startup-id feh --bg-scale ~/Dropbox/wallpapers/doometernal.jpg &
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+font xft:URWGothic-Book 11
+floating_modifier $mod
+
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+e exec emacs
+bindsym $mod+w exec firefox
+bindsym $mod+g exec gnome-games
+bindsym $mod+j exec joplin-desktop
+# Window kill command
+bindsym $mod+Shift+q kill
+
+# start program launcher
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym Print exec --no-startup-id flameshot full -p ~/pictures/screenshot
+bindsym $mod+Print exec --no-startup-id flameshot gui
+
+# split orientation
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+q split toggle
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Space floating toggle 
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+#Multimedia keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 ndtoggle
+bindsym XF86AudioNext exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym XF86AudioPrev exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86AudioPlay exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioStop exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+
+# navigate workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+
+#fixing browse dialouges
+floating_minimum_size 500 x 300
+floating_maximum_size 2000 x 1500
+for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
+
+
+
+
+# workspaces
+set $ws1 1 
+set $ws2 2 
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+
+# Open specific applications in floating mode
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border 
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Set shut down, restart and locking features
+bindsym XF86PowerOff exec --no-startup-id i3lock -c 000000 -i ~/.config/i3/lock.png
+bindsym $mod+l exec --no-startup-id i3lock -c 000000 -i ~/.config/i3/lock.png
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ogout, (s)hutdown or (r)eboot
+mode "$mode_system" {
+    bindsym s exec --no-startup-id shutdown now, mode "default"
+    bindsym r exec --no-startup-id reboot, mode "default"
+    bindsym l exec --no-startup-id i3-msg exit, mode "default"
+    
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Theme colors
+client.focused #56737a #1e1e20 #56737a #56737a #56737a
+client.focused_inactive #56737a #1e1e20 #56737a #2c5159 #2c5159
+client.unfocused #56737a #1e1e20 #56737a #2c5159 #2c5159
+client.urgent #56737a #1e1e20 #56737a #2c5159 #2c5159
+client.placeholder #56737a #1e1e20 #56737a #2c5159 #2c5159
+
+client.background #1e1e20
+
+# Gaps
+gaps inner 10
+gaps outer -4
+
+smart_gaps on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
