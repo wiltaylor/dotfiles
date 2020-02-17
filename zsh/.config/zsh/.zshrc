@@ -13,7 +13,7 @@
 
 export ZSH="$XDG_CONFIG_HOME/zsh/oh-my-zsh"
 ZSH_THEME="awesomepanda"
-plugins=(git archlinux cargo)
+plugins=(git archlinux cargo ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 export LANG=en_AU.UTF-8
