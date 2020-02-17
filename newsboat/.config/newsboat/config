@@ -1,0 +1,10 @@
+auto-reload yes
+prepopulate-query-feeds yes
+
+urls-source "ocnews"
+ocnews-flag-star "s"
+ocnews-login "wiltaylor"
+ocnews-passwordfile "~/.secrets/newsboat"
+ocnews-url "https://trashbox.cloud/"
+
+
