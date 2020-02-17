@@ -22,7 +22,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export TERMINAL="alacritty"
 export GOPATH=~/.go
 export BROWSER=firefox
-export EDITOR="vim"
+export EDITOR="nvim"
 export READER="zathura"
 export FILE="ranger"
 
