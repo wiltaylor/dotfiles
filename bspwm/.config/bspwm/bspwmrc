@@ -13,7 +13,7 @@
 # Feel free to use this configuration as you wish.
 
 sxhkd &
-feh --bg-scale ~/Dropbox/wallpapers/doometernal.jpg &
+feh --bg-scale ~/.config/bspwm/wall.jpg &
 ~/.config/polybar/launch.sh & 
 picom &
 
