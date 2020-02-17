@@ -1,0 +1,62 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	alacritty
+
+# program launcher
+super + d
+	rofi -show run
+#
+# Applications
+#
+super + w
+        firefox
+
+super + e
+	emacs
+
+
+#
+# bspwm hotkeys
+#
+#Exit
+super + x
+	bspc quit
+
+# quit/restart bspwm
+super + shift + r
+	bspc {quit,wm -r}
+
+# close and kill
+super + shift + q
+	bspc node -c
+
+#Lock Screen
+super + l
+        dm-tool lock
+
+#Float window
+super + space 
+        bspc node -t {floating, tiled}
+
+# volume key bindings
+{XF86AudioLowerVolume} 
+   pactl set-sink-volume 0 -5%
+
+{XF86AudioRaiseVolume} 
+   pactl set-sink-volume 0 +5%
+
+{XF86AudioMute}      
+    pactl set-sink-mute 0 toggle
+
+# focus or send to the given desktop
+super + 1
+	bspc desktop -f prev
+super + 2 
+	bspc desktop -f next
+
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}

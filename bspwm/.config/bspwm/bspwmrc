@@ -1,0 +1,33 @@
+#! /bin/bash
+
+sxhkd &
+#~/.screenlayout/home.sh
+#dropbox &
+#protonmail-bridge --no-window &
+feh --bg-scale ~/Dropbox/wallpapers/doometernal.jpg &
+~/.config/polybar/launch.sh & 
+picom &
+#xrander --output DP-4 --left-of DP-2 &
+
+bspc config focus_follows_pointer true
+
+bspc monitor DP-0 -d I II II
+bspc monitor DP-2 -d IV V VI
+bspc monitor DP-4 -d VII VIII IX
+
+bspc config border_width         2
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+#Floating desktops
+FLOATING_DESKTOP_ID=$(bspc query -D -d '^0')
+
+bspc subscribe node_manage | while read -a msg ; do
+    desk_id=${msg[2]}
+    wid=${msg[3]}
+    [ "$FLOATING_DESKTOP_ID" = "$desk_id" ] && bspc node "$wid" -t floating
+done
+ 
