@@ -18,7 +18,7 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 #Launch bar1
-case $(hostname -s) in
+case $HOSTNAME in
 	titan)
 	MONITOR=DP-0 polybar bar1 &
 	MONITOR=DP-2 polybar bar1 &
