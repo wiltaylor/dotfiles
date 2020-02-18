@@ -12,7 +12,7 @@
 ; Feel free to use this configuration as you wish.
 [bar/bar1-mini]
 width = 100%
-height = 48
+height = 32
 monitor = ${env:MONITOR}
 radius = 0
 fixed-center = false
@@ -32,18 +32,18 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 0.5
 
-font-0 = "Source Code Pro Semibold:size=18;1"
-font-1 = "Font Awesome 5 Free:style=Solid:size=18;1"
-font-2 = "Font Awesome 5 Brands:size=18;1"
+font-0 = "Source Code Pro Semibold:size=12;1"
+font-1 = "Font Awesome 5 Free:style=Solid:size=12;1"
+font-2 = "Font Awesome 5 Brands:size=12;1"
 
 modules-left = powermenu bspwm
 ;modules-center = 
-modules-right = battery wlan-mini pulseaudio date 
+modules-right = battery-mini wlan-mini pulseaudio date 
 
 tray-position = right
 ;tray-padding =
 ;Increase the size of the system tray for the surface
-tray-maxsize = 32
+tray-maxsize = 24
 cursor-click = pointer
 cursor-scroll = ns-resize
 
@@ -257,6 +257,49 @@ screenchange-reload = true
 [global/wm]
 margin-top = 0
 margin-bottom = 0
+
+[module/battery-mini]
+type = internal/battery
+full-at = 100
+battery = BAT0
+adapter = AC
+poll-interval = 5
+time-format = %H:%M
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = Full
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
+
 
 [module/battery]
 type = internal/battery
