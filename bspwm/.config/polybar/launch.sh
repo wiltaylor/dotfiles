@@ -23,9 +23,9 @@ case $(hostname -s) in
 	MONITOR=DP-0 polybar bar1 &
 	MONITOR=DP-2 polybar bar1 &
 	MONITOR=DP-4 polybar bar1 &
-	
+	;;
 	*)
 	polybar bar1 &
-	
+	;;	
 esac
 echo "Bars launched"
