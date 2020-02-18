@@ -196,8 +196,6 @@ ramp-signal-3 = 
 ramp-signal-4 = 
 ;ramp-signal-foreground = #56737a
 
-format-disconnected =
-
 [module/date]
 type = internal/date
 interval = 5
