@@ -19,3 +19,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_AU.UTF-8
 
 alias vim="nvim"
+
+gpg-connect-agent updatestartuptty /bye > /dev/null
+
+alias reset-gpg="gpg-connect-agent updatestartuptty /bye > /dev/null"
