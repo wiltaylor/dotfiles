@@ -25,7 +25,7 @@ case $HOSTNAME in
 	MONITOR=DP-4 polybar bar1 &
 	;;
 	mini)
-	MONITOR=eDP1 polybar bar1 &
+	MONITOR=eDP1 polybar bar1-mini &
 	;;	
 esac
 echo "Bars launched"
