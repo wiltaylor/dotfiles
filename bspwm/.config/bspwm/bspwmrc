@@ -29,6 +29,9 @@ case $HOSTNAME in
 	;;
 	mini)
 	bspc monitor eDP1 -d 1 2 3
+	bspc rule -a onboard manage=off
+	screenrotator &
+	sleep 3 && onboard &
 	;;
 esac
 

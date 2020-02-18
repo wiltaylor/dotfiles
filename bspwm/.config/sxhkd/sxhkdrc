@@ -25,7 +25,7 @@ super + d
 # Applications
 #
 super + w
-        firefox
+        env MOZ_USE_XINPUT2=1 firefox
 
 super + e
 	emacs

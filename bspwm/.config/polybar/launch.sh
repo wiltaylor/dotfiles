@@ -26,8 +26,6 @@ case $HOSTNAME in
 	;;
 	mini)
 	MONITOR=eDP1 polybar bar1-mini &
-
-	screenrotator &
 	;;	
 esac
 echo "Bars launched"
