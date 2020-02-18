@@ -1,3 +1,5 @@
 [user]
 	email = cert@wiltaylor.dev
 	name = Wil Taylor
+[commit]
+	gpgsign = true
