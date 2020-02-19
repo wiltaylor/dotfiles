@@ -1,3 +1,8 @@
 #!/bin/env zsh
 gpg-connect-agent updatestartuptty /bye > /dev/null
-alias reset-gpg="gpg-connect-agent updatestartuptty /bye > /dev/null"
+
+reset-gpg() {
+	killall gpg-agent
+	rm -r ~/.gnupg/private-keys-v1.d
+	gpg-connect-agent updatestartuptty /bye > /dev/null
+}
