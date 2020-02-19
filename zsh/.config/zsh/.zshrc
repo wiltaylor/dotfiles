@@ -11,6 +11,7 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
+export PGP_KEY_ID=0xEC571018542D2ACC
 export LANG=en_AU.UTF-8
 alias vim="nvim"
 
