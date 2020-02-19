@@ -1,3 +1,4 @@
+#!/bin/env zsh
 # __          ___ _   _______          _
 # \ \        / (_) | |__   __|        | |
 #  \ \  /\  / / _| |    | | __ _ _   _| | ___  _ __
@@ -11,9 +12,8 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-export LANG=en_AU.UTF-8
-alias vim="nvim"
+export ZSH="$XDG_CONFIG_HOME/zsh/oh-my-zsh"
+ZSH_THEME="awesomepanda"
+plugins=(git archlinux cargo gpg-agent)
 
-for file in $XDG_CONFIG_HOME/zsh/startup/*; do
-	source $file;
-done
+source $ZSH/oh-my-zsh.sh

@@ -1,5 +1,6 @@
 [user]
 	email = cert@wiltaylor.dev
 	name = Wil Taylor
+	signingkey = 0xEC571018542D2ACC
 [commit]
 	gpgsign = true
