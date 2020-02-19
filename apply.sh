@@ -20,3 +20,6 @@ stow rofi
 stow tmux
 stow zsh
 
+
+gpg --import gpg/.gnupg/public.key
+
