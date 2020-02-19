@@ -1,8 +1,8 @@
 [submodule "doom-emacs/.emacs.d"]
 	path = doom-emacs/.emacs.d
 	url = https://github.com/hlissner/doom-emacs.git
-	ignore = dirty
+	ignore = all
 [submodule "zsh/.config/zsh/oh-my-zsh"]
 	path = zsh/.config/zsh/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
-	ignore = dirty
+	ignore = all
