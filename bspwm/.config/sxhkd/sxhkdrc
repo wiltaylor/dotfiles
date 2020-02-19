@@ -64,11 +64,9 @@ super + space
 {XF86AudioMute}      
     pactl set-sink-mute 0 toggle
 
-# focus or send to the given desktop
-super + 1
-	bspc desktop -f prev
-super + 2 
-	bspc desktop -f next
+#focus or send to the given desktop 
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} focused:'^{1-9,10}'
 
 super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
