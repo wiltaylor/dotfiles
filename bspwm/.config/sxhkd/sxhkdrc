@@ -36,11 +36,11 @@ super + e
 #
 #Exit
 super + x
-	bspc quit
+	~/.local/bin/logoff-menu
 
 # quit/restart bspwm
 super + shift + r
-	bspc {quit,wm -r}
+	~/.config/bspwm/bspwmrc
 
 # close and kill
 super + shift + q
@@ -70,3 +70,6 @@ super + {_,shift + }{1-9,0}
 
 super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
+
+Print
+	~/.local/bin/screenshot-menu

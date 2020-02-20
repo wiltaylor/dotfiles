@@ -12,7 +12,7 @@
 # Feel free to use this configuration as you wish.
 
 # Global Environment Variables
-export PATH="$HOME/go/bin:$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/go/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.cargo/bin:$HOME/.emacs.d/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Stop MS from sending Telemetry data back

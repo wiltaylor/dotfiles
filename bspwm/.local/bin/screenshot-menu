@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# options to be displayed
+options=( screen area window )
+
+for op in "${options[@]}"; do 
+    opts="$opts$op\n"
+done
+
+chosen="$(echo -e "$opts" | rofi -lines 4 -dmenu -p "screenshot")"
+case $chosen in
+    screen)
+        cd ~/Pictures && sleep 1 && scrot;;
+    area)
+        cd ~/Pictures && scrot -s;;
+    window)
+	cd ~/Pictures && sleep 1 && scrot -u ;;
+esac
