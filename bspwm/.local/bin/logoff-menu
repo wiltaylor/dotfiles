@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# options to be displayed
+option0="lock"
+option1="logout"
+option2="reboot"
+option3="shutdown"
+
+# options passed into variable
+options="$option0\n$option1\n$option2\n$option3\n"
+
+chosen="$(echo -e "$options" | rofi -lines 4 -dmenu -p "power")"
+case $chosen in
+    $option0)
+        dm-tool lock;;
+    $option1)
+        bspc quit;;
+    $option2)
+        reboot;;
+    $option3)
+        shutdown now;;
+esac

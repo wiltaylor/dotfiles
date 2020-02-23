@@ -36,11 +36,11 @@ super + e
 #
 #Exit
 super + x
-	bspc quit
+	~/.local/bin/logoff-menu
 
 # quit/restart bspwm
 super + shift + r
-	bspc {quit,wm -r}
+	~/.config/bspwm/bspwmrc
 
 # close and kill
 super + shift + q
@@ -73,3 +73,6 @@ super + {_,shift + }{Left,Down,Up,Right}
 
 super + F8
 	toggle-touchpad
+
+Print
+	~/.local/bin/screenshot-menu
