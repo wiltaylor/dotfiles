@@ -66,6 +66,9 @@ super + space
 {XF86AudioMute}      
     pactl set-sink-mute 0 toggle
 
+super + v
+	pavucontrol
+
 #focus or send to the given desktop 
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} focused:'^{1-9,10}'

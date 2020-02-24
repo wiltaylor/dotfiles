@@ -45,3 +45,4 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc rule -a onboard manage=off
+bspc rule -a Pavucontrol state=floating
