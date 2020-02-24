@@ -21,6 +21,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 # Default Applications
 export TERMINAL="alacritty"
 export GOPATH=~/.go
+export MOZ_USE_XINPUT2=1
 export BROWSER=firefox
 export EDITOR="nvim"
 export READER="zathura"

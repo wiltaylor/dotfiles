@@ -1,0 +1,14 @@
+#!/bin/env bash
+export Device="DELL089E:00 06CB:CCA6 Touchpad"
+export isEnabled=$(xinput list-props "$Device" | awk '/^\tDevice Enabled \([0-9]+\):\t[01]/ {print $NF}')
+
+case $isEnabled in
+	0)
+	xinput enable "DELL089E:00 06CB:CCA6 Touchpad"
+	;;
+	1)
+	xinput disable "DELL089E:00 06CB:CCA6 Touchpad"
+	;;
+	*)
+	;;
+esac
