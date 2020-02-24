@@ -30,6 +30,8 @@ super + w
 super + e
 	emacs
 
+super + r
+	$TERMINAL -e ranger
 
 #
 # bspwm hotkeys
