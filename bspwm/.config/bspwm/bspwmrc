@@ -18,8 +18,9 @@ killall sxhkd -9
 
 sxhkd &
 feh --bg-scale ~/.config/bspwm/wall.jpg &
-~/.config/polybar/launch.sh & 
-picom &
+~/.config/polybar/launch.sh &
+nextcloud --background &
+picom -c &
 
 bspc config focus_follows_pointer true
 
