@@ -52,4 +52,4 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! ob-mermaid)
-(package! org-brain)
+;;(package! org-brain)
