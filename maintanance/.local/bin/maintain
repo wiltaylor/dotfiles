@@ -1,0 +1,5 @@
+#!/bin/bash
+sudo echo nothing > /dev/null
+yay -Syu --noconfirm
+sudo pacman --noconfirm -Rns $(pacman -Qtdq)
+
