@@ -1,0 +1,64 @@
+set preview false
+set hidden true
+set color256 true
+set drawbox true
+set icons true
+set ignorecase true
+
+cmd open ${{
+  case $(file --mime-type "$f" -bL) in 
+  text/*) $EDITOR "$f";;
+  *) xdg-open "$f" ;;
+  esac
+}}
+
+cmd mkdir ${{
+  printf "Directory name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File name: "
+  read ans
+  $EDITOR $ans
+}}
+
+cmd chmod ${{
+  printf "Mode Bits:"
+  read ans
+
+  for file in "$fx"
+  do
+     chmod $ans $file
+  done
+}}
+
+cmd unarchive ${{
+  case "$f" in
+  *.zip) unzip "$f" ;;
+  *.tar.gz) tar -xzvf "$f" ;;
+  *.tar.bz2) tar -xjvf "$f" ;;
+  *.tar) tar -xvf "$f" ;;
+  *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+#file operations
+map e
+map ee $$EDITOR "$f"
+map es $sudo $EDITOR "$f"
+
+#archives
+map az zip
+map at tar
+map ag targz
+map ab tarbz2
+map au unarchive
+
+
