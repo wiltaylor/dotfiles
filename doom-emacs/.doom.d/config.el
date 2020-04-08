@@ -27,6 +27,9 @@
       :desc "Toggle Maths" "m" #'org-latex-preview
       :desc "Tottlge Image" "M" #'org-display-inline-images)
 
+(map! :leader
+      :desc "Toggle Treemacs" "t" #'treemacs)
+
 ;; Setting mouse pointer to white so it contrasts with theme properly
 (set-mouse-color "white")
 

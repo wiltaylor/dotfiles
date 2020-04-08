@@ -19,7 +19,6 @@ killall sxhkd -9
 sxhkd &
 feh --bg-scale ~/.config/bspwm/wall.jpg &
 ~/.config/polybar/launch.sh &
-nextcloud --background &
 picom -c &
 
 bspc config focus_follows_pointer true
@@ -47,3 +46,4 @@ bspc config gapless_monocle      true
 
 bspc rule -a onboard manage=off
 bspc rule -a Pavucontrol state=floating
+bspc rule -a Emacs state=tiled

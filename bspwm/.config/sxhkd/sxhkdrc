@@ -28,7 +28,7 @@ super + w
         env MOZ_USE_XINPUT2=1 firefox
 
 super + e
-	emacs
+	emacs -mm
 
 super + r
 	$TERMINAL -e ranger
