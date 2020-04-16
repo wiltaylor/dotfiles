@@ -14,6 +14,8 @@
 
 bscp rule -r "*"
 
+setxkbmap -option caps:escape
+
 killall sxhkd -9
 
 sxhkd &
