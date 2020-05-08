@@ -19,7 +19,7 @@ stow ranger
 stow rofi
 stow tmux
 stow zsh
-
+stow maintanance
 
 gpg --import gpg/.gnupg/public.key
 
