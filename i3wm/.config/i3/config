@@ -16,12 +16,6 @@ new_window pixel 1
 new_float normal
 
 # Applications
-exec --no-startup-id onboard &
-exec --no-startup-id dropbox &
-exec --no-startup-id touchegg &
-exec --no-startup-id udiskie &
-exec --no-startup-id dropbox &
-exec --no-startup-id protonmail-bridge --no-window &
 exec --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 # Special effects and wallpaper
