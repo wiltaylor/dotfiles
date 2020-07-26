@@ -20,7 +20,7 @@ exec --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 # Special effects and wallpaper
 exec --no-startup-id picom &
-exec --no-startup-id feh --bg-scale ~/Dropbox/wallpapers/doometernal.jpg &
+exec --no-startup-id feh --bg-scale ~/.config/i3/wall.jpg &
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
