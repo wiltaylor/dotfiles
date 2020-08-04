@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case $1 in
+	"work")
+	echo "Loading work profile"
+	;;
+	"home")
+	echo "Loading home profile"
+	;;
+esac

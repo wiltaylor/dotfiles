@@ -51,5 +51,5 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(package! ob-mermaid)
+;;(package! ob-mermaid)
 ;;(package! org-brain)

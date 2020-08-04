@@ -1,0 +1,10 @@
+name: "Linux Workstation Install Settings"
+author: "Wil Taylor"
+description: "Contains all of my system settings for setting up my workstations in linux."
+version: "0.1.0"
+Items:
+- Name: InstallVim #Name must be unique for each item
+  Resource: InstallVim #Name of resource that this item uses.
+  Options: #Options for the resource this action applies to.
+        installed: "yes" #You can put variables in options by putting
+        name: "vim" #$VARNAME or ${VARNAME}

@@ -20,6 +20,6 @@ stow rofi
 stow tmux
 stow zsh
 stow maintanance
-
+stow workprofile
 gpg --import gpg/.gnupg/public.key
 
