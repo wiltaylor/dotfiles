@@ -36,7 +36,7 @@ font-0 = "Source Code Pro Semibold:size=12;1"
 font-1 = "Font Awesome 5 Free:style=Solid:size=12;1"
 font-2 = "Font Awesome 5 Brands:size=12;1"
 
-modules-left = powermenu bspwm
+modules-left = powermenu bspwm i3
 ;modules-center = 
 modules-right = battery-mini wlan-mini pulseaudio date 
 
