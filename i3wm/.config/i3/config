@@ -145,7 +145,7 @@ bindsym $mod+Shift+r restart
 
 # Set shut down, restart and locking features
 bindsym XF86PowerOff exec --no-startup-id i3lock -c 000000 -i ~/.config/i3/lock.png
-bindsym $mod+l exec --no-startup-id i3lock -c 000000 -i ~/.config/i3/lock.png
+bindsym $mod+l exec --no-startup-id dm-tool lock 
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ogout, (s)hutdown or (r)eboot
 mode "$mode_system" {
