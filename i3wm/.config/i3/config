@@ -17,6 +17,7 @@ new_float normal
 
 # Applications
 exec --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 # Special effects and wallpaper
 exec --no-startup-id picom &
