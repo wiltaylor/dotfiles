@@ -1,0 +1,12 @@
+[Unit]
+Description=Alienware Amplifier Screen Profile selector
+Before=display-manager.service
+ConditionPathExists=/sys/bus/pci/devices/0000:02:00.0
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/ln -sf /etc/X11/docked.conf /etc/X11/xorg.conf
+
+[Install]
+WantedBy=multi-user.target

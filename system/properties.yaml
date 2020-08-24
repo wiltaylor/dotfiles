@@ -1,5 +1,0 @@
-
-# Put a list of properties that can be passed into a configuration
-# Have to be key value pairs and will end up as environment variables
-MyProperty: 'MyValue'
-MyOtherProperty: 'MyOtherValue'
