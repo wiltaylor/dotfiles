@@ -23,5 +23,7 @@ stow zsh
 stow maintanance
 stow workprofile
 stow wallpapers
+chown -R $(whoami) ~/.gnupg/
+chmod 700 ~/.gnupg -R
 gpg --import gpg/.gnupg/public.key
 
