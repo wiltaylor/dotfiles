@@ -22,5 +22,6 @@ stow tmux
 stow zsh
 stow maintanance
 stow workprofile
+stow wallpapers
 gpg --import gpg/.gnupg/public.key
 
