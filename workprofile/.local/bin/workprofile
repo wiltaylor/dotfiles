@@ -6,11 +6,14 @@ case $1 in
 	git config --global user.name "Wil Taylor"
 	git config --global user.email "wil.taylor@vygoapp.com"
 	git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa_vygo"
+	git config --global commit.gpgsign false
 	;;
 	"home")
 	echo "Loading home profile"
 	git config --global user.name "Wil Taylor"
 	git config --global user.email "wil.taylor@vygoapp.com"
 	sed '/^sshCommand/d' ~/.config/git/config
+	git config --global commit.gpgsign true
+	gpg-connect-agent /bye
 	;;
 esac
