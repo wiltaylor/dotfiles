@@ -7,6 +7,7 @@ case $1 in
 	git config --global user.email "wil.taylor@vygoapp.com"
 	git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa_vygo"
 	git config --global commit.gpgsign false
+	ln -sf /usr/bin/vivaldi-stable ~/.local/bin/browser 
 	;;
 	"home")
 	echo "Loading home profile"
@@ -15,5 +16,6 @@ case $1 in
 	sed '/^sshCommand/d' ~/.config/git/config
 	git config --global commit.gpgsign true
 	gpg-connect-agent /bye
+	ln -sf /usr/bin/firefox ~/.local/bin/browser 
 	;;
 esac

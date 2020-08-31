@@ -23,6 +23,7 @@ stow zsh
 stow maintanance
 stow workprofile
 stow wallpapers
+stow vscode
 chown -R $(whoami) ~/.gnupg/
 chmod 700 ~/.gnupg -R
 gpg --import gpg/.gnupg/public.key

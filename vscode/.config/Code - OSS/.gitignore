@@ -1,0 +1,5 @@
+#ZSH git ignore prevents crap from going into profile
+*
+!User
+!.gitignore
+
