@@ -24,7 +24,12 @@ stow maintanance
 stow workprofile
 stow wallpapers
 stow vscode
+
+#PGP Extra actions
 chown -R $(whoami) ~/.gnupg/
 chmod 700 ~/.gnupg -R
 gpg --import gpg/.gnupg/public.key
 
+#VSCode extra actions
+
+cat ./vscode/.config/Code\ -\ OSS/extensions.txt | xargs -L 1 code --install-extension
