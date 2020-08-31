@@ -25,8 +25,8 @@ case $HOSTNAME in
 	MONITOR=DP-4 polybar bar1 &
 	;;
 	mini)
-	xrandr --output DP1-1 --right-of eDP1 --output DP1-2 --left-of eDP1
-	sleep 1s
+	#xrandr --output DP1-1 --right-of eDP1 --output DP1-2 --left-of eDP1
+	#sleep 1s
 	MONITOR=eDP1 polybar bar1-mini &
 	MONITOR=DP1-1 polybar bar1-mini &
 	MONITOR=DP1-2 polybar bar1-mini &

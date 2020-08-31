@@ -31,3 +31,4 @@ export FILE="ranger"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 source /usr/share/nvm/init-nvm.sh
+

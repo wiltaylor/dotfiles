@@ -21,4 +21,3 @@ for file in $XDG_CONFIG_HOME/zsh/startup/*; do
 	source $file;
 done
 
-cd ~
