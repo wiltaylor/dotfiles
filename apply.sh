@@ -24,6 +24,7 @@ stow maintanance
 stow workprofile
 stow wallpapers
 stow vscode
+stow xorg
 
 #PGP Extra actions
 chown -R $(whoami) ~/.gnupg/

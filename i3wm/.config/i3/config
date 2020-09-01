@@ -30,7 +30,7 @@ floating_modifier $mod
 
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+e exec emacs
-bindsym $mod+w exec browser
+bindsym $mod+w exec firefox
 bindsym $mod+g exec gnome-games
 bindsym $mod+j exec joplin-desktop
 # Window kill command
@@ -44,6 +44,9 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+# Change work profile
+bindsym $mod+F10 exec workprofile menu
 
 # move focused window
 bindsym $mod+Shift+Left move left
