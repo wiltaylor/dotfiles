@@ -1,0 +1,18 @@
+---
+- name: Install Libvirt packages
+  package: name={{item}} state=present
+  with_items: "{{ pkgs }}"
+  tags: [ 'pkgs' ]
+
+- name: Enable libvirt systemd service
+  systemd:
+    enabled: yes
+    name: libvirtd.service
+
+- name: Enable nested virtualisation
+  template:
+    src: kvm-intel.conf
+    dest: /etc/modprobe.d/kvm-intel.conf
+    owner: root
+    group: root
+    mode: '0644'

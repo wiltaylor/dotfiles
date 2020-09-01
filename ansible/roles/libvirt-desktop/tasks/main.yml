@@ -1,0 +1,9 @@
+---
+- name: Installing libvirt backend
+  include_role:
+    name: libvirt
+
+- name: Install Libvirt desktop packages
+  package: name={{item}} state=present
+  with_items: "{{ pkgs }}"
+  tags: [ 'pkgs' ]

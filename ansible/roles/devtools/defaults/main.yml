@@ -1,0 +1,19 @@
+---
+pkgs:
+  - git 
+  - code
+  - npm
+  - python
+  - docker 
+  - docker-compose   
+  - kubectl 
+  - hugo 
+  - llvm 
+  - clang 
+  - lld 
+  - llvm-libs 
+  - strace 
+  - ltrace 
+  - terraform 
+  - valgrind 
+  - python-pip 

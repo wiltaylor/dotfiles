@@ -1,2 +1,26 @@
 ---
 # tasks file for base
+
+- name: Arch Base
+  pacman:
+    name: base
+    state: present
+
+- name: Arch Base-Devel
+  pacman:
+    name: base-devel
+    state: present
+
+- name: Linux Firmware
+  pacman:
+    name: linux-firmware
+    state: present
+
+- name: Make sure yay is installed
+  include_role:
+    name: yay
+
+- name: Install remaining base packages
+  package: name={{item}} state=present
+  with_items: "{{ pkgs }}"
+  tags: [ 'pkgs' ]

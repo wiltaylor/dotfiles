@@ -1,0 +1,30 @@
+---
+- name: clone yay from github
+  become: false
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /tmp/yay
+    version: master
+    update: yes
+    # notify: makepkg -si
+  tags:
+    - yay
+
+- name: makepkg --noconfirm -si
+  become: false
+  command: makepkg --noconfirm -si
+  args:
+    chdir: /tmp/yay
+    creates: /usr/bin/yay
+  tags:
+    - yay
+
+- name: mkdir -p "/home/{{ ansible_user }}/aur"
+  file:
+    path: "/home/{{ ansible_user }}/aur"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+    mode: 0755
+  tags:
+    - yay

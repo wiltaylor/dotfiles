@@ -1,0 +1,6 @@
+---
+pkgs:
+- nvidia 
+- nvidia-utils 
+- nvidia-settings 
+- nvtop

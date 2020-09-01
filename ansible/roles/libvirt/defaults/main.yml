@@ -1,0 +1,7 @@
+---
+pkgs:
+  - qemu 
+  - ovmf 
+  - ebtables 
+  - dnsmasq 
+  - dmidecode
