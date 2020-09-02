@@ -19,11 +19,11 @@
   tags:
     - yay
 
-- name: mkdir -p "/home/{{ ansible_user }}/aur"
+- name: mkdir -p "/home/wil/aur"
   file:
-    path: "/home/{{ ansible_user }}/aur"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    path: "/home/wil/aur"
+    owner: "wil"
+    group: "wil"
     state: directory
     mode: 0755
   tags:

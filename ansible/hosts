@@ -1,3 +1,2 @@
 [host]
-titan ansible_connection=local
-mini
+localhost ansible_connection=local

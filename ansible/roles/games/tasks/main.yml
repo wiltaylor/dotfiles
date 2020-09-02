@@ -1,0 +1,9 @@
+---
+- name: Install remaining game packages
+  package: name={{item}} state=present
+  with_items: "{{ pkgs }}"
+  tags: [ 'pkgs' ]
+
+- name: Make sure yay is installed
+  include_role:
+    name: yay

@@ -1,5 +1,11 @@
 ---
-# tasks file for base
+
+- name: Update pacman.conf to include multilib
+  blockinfile:
+    path: /etc/pacman.conf
+    block: |
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
 
 - name: Arch Base
   pacman:

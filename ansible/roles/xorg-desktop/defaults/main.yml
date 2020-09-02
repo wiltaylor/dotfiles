@@ -21,20 +21,14 @@ pkgs:
   - breeze-gtk 
   - discord 
   - gimp 
-  - inkscape 
-  - krita 
   - libreoffice-fresh 
-  - lmms 
   - lxappearance 
   - obs-studio 
   - vlc 
   - libfdk-aac 
   - libva-intel-driver 
-  - steam 
   - scrot 
   - ttf-liberation 
-  - wireshark-qt 
-  - wireshark-cli 
   - zathura 
   - zathura-cb 
   - zathura-djvu 
@@ -44,3 +38,16 @@ pkgs:
   - noto-fonts
   - ttf-nerd-fonts-symbols 
   - deepin-screenshot
+
+yaypkgs:
+  - plymouth-git 
+  - polybar 
+  - joplin-appimage 
+  - ttf-ms-fonts 
+  - wps-office 
+  - ttf-wps-fonts 
+  - wps-office-fonts 
+  - wps-office-mime 
+  - arch-silence-grub-theme-git 
+  - g810-led-git 
+  - headsetcontrol

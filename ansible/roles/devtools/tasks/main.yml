@@ -3,3 +3,12 @@
   package: name={{item}} state=present
   with_items: "{{ pkgs }}"
   tags: [ 'pkgs' ]
+
+- name: Make sure yay is installed
+  include_role:
+    name: yay
+
+- name: Install remaining dev yay packages
+  yay: name={{item}} user=wil
+  with_items: "{{ yaypkgs }}"
+  tags: [ 'pkgs' ]

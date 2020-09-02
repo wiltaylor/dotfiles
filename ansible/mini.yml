@@ -1,5 +1,5 @@
 ---
-- hosts: titan
+- hosts: localhost
   tasks:
     - name: update pacman
       pacman:
@@ -11,5 +11,3 @@
     - {role: btrfs}
     - {role: xorg-desktop}
     - {role: devtools}
-    - {role: nvidia-gpu}
-    - {role: libvirt-desktop}

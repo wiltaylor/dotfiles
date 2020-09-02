@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  tasks:
+    - name: update pacman
+      pacman:
+        update_cache: yes
+        upgrade: yes
+  roles:
+    - {role: base }
+    - {role: intel-cpu}
+    - {role: btrfs}
+    - {role: xorg-desktop}
+    - {role: devtools}
+    - {role: nvidia-gpu}
+    - {role: libvirt-desktop}
+    - {role: games}
+    - {role: gamesdev}

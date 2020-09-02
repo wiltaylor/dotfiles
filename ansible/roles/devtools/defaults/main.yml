@@ -17,3 +17,19 @@ pkgs:
   - terraform 
   - valgrind 
   - python-pip 
+  - wireshark-qt 
+  - wireshark-cli 
+
+yaypkgs:
+  - nvm 
+  - clion 
+  - clion-jre 
+  - clion-cmake 
+  - clion-gdb 
+  - clion-lldb 
+  - rider 
+  - mono 
+  - msbuild-15-bin 
+  - dotnet-sdk 
+  - pycharm-professional 
+  - zeal 
