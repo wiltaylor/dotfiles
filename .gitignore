@@ -2,3 +2,5 @@ nvim/.config/nvim/.netrwhist
 .gitsecret/keys/random_seed
 !*.secret
 ansible/.password
+gpg/.ssh/id_rsa_vygo
+gpg/.ssh/id_rsa_vygo.pub
