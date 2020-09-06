@@ -1,5 +1,6 @@
 ---
 - name: Install remaining desktop packages
+  become: yes
   package: name={{item}} state=present
   with_items: "{{ pkgs }}"
   tags: [ 'pkgs' ]
@@ -9,6 +10,7 @@
     name: yay
 
 - name: Install remaining desktop yay packages
+  become: yes
   yay: name={{item}} user=wil
   with_items: "{{ yaypkgs }}"
   tags: [ 'pkgs' ]

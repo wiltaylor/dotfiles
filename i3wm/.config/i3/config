@@ -55,7 +55,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym Print exec --no-startup-id flameshot full -p ~/pictures/screenshot
+bindsym Print exec --no-startup-id deepin-screenshot
 bindsym $mod+Print exec --no-startup-id flameshot gui
 
 # split orientation

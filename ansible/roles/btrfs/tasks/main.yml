@@ -1,6 +1,7 @@
 ---
 
 - name: Snapper
+  become: yes
   pacman:
     name: snapper
     state: present

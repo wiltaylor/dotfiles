@@ -1,4 +1,5 @@
 ---
+  pkgs:
   - inkscape 
   - krita 
   - lmms 

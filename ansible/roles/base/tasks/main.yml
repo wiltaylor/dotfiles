@@ -1,6 +1,7 @@
 ---
 
 - name: Update pacman.conf to include multilib
+  become: yes
   blockinfile:
     path: /etc/pacman.conf
     block: |
@@ -8,16 +9,19 @@
       Include = /etc/pacman.d/mirrorlist
 
 - name: Arch Base
+  become: yes
   pacman:
     name: base
     state: present
 
 - name: Arch Base-Devel
+  become: yes
   pacman:
     name: base-devel
     state: present
 
 - name: Linux Firmware
+  become: yes
   pacman:
     name: linux-firmware
     state: present
@@ -27,6 +31,7 @@
     name: yay
 
 - name: Install remaining base packages
+  become: yes
   package: name={{item}} state=present
   with_items: "{{ pkgs }}"
   tags: [ 'pkgs' ]

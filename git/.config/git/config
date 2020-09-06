@@ -3,4 +3,4 @@
 	name = Wil Taylor
 	signingkey = 0xEC571018542D2ACC
 [commit]
-	gpgSign = true
+	gpgsign = true

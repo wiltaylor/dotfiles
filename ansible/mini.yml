@@ -2,6 +2,7 @@
 - hosts: localhost
   tasks:
     - name: update pacman
+      become: true
       pacman:
         update_cache: yes
         upgrade: yes

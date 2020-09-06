@@ -18,13 +18,3 @@
     creates: /usr/bin/yay
   tags:
     - yay
-
-- name: mkdir -p "/home/wil/aur"
-  file:
-    path: "/home/wil/aur"
-    owner: "wil"
-    group: "wil"
-    state: directory
-    mode: 0755
-  tags:
-    - yay
