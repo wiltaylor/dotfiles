@@ -1,11 +1,13 @@
 ---
 - name: clone yay from github
   become: false
+  changed_when: false
   git:
     repo: https://aur.archlinux.org/yay.git
     dest: /tmp/yay
     version: master
     update: yes
+
     # notify: makepkg -si
   tags:
     - yay

@@ -33,3 +33,4 @@ yaypkgs:
   - dotnet-sdk 
   - pycharm-professional 
   - zeal 
+  - git-secret

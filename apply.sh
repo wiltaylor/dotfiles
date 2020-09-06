@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Git secret
+git secret reveal
 
 #Pulling in sub modules
 git submodule update --init --recursive
@@ -33,3 +35,19 @@ gpg --import gpg/.gnupg/public.key
 #VSCode extra actions
 
 cat ./vscode/.config/Code\ -\ OSS/extensions.txt | xargs -L 1 code --install-extension
+
+
+# Apply ansilbe
+compname=`cat /etc/hostname`
+cd ansible
+
+case $compname in 
+    titan)
+        ansible-playbook titan.yml -K
+        ;;
+    mini)
+        ansible-playbook titan.yml -K
+        ;;
+esac
+
+cd ..

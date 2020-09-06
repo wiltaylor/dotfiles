@@ -1,0 +1,17 @@
+---
+- name: Create my user account
+  become: yes
+  user:
+    name: wil
+    comment: Wil Taylor
+    uid: 1000
+    groups: [wheel, libvirt]
+    shell: /usr/bin/zsh
+    update_password: always
+    password: "{{ '%s' | format(linux_password) | password_hash('sha512') }}"
+
+- name: Install user yay packages
+  yay: name={{item}} user=wil
+  with_items: "{{ yaypkgs }}"
+  tags: [ 'pkgs' ]
+  become: yes

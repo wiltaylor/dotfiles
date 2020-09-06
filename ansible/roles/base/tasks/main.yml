@@ -26,6 +26,10 @@
     name: linux-firmware
     state: present
 
+- name: Make sure user accounts are setup before yay
+  include_role:
+    name: users
+
 - name: Make sure yay is installed
   include_role:
     name: yay
@@ -35,3 +39,16 @@
   package: name={{item}} state=present
   with_items: "{{ pkgs }}"
   tags: [ 'pkgs' ]
+
+- name: Make sure sudo file contains Wheel entry
+  become: yes
+  lineinfile:
+    path: /etc/sudoers
+    regex: "#%wheel.ALL=\\(ALL\\).ALL"
+    line: "%wheel ALL=(ALL) ALL"
+
+- name: Add cached sudo logins to prevent it asking every time
+  become: yes
+  lineinfile:
+    path: /etc/sudoers
+    line: "Defaults env_reset,timestamp_timeout=-1"
