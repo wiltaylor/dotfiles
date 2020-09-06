@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Git secret
-git secret reveal
+git secret reveal -f
 
 #Pulling in sub modules
 git submodule update --init --recursive

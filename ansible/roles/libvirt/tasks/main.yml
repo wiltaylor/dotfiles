@@ -19,3 +19,11 @@
     owner: root
     group: root
     mode: '0644'
+
+- name: Add user to libvirt group
+  become: yes
+  user:
+    name: wil
+    groups: [ libvirt ]
+    append: yes
+
