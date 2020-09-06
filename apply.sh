@@ -46,7 +46,7 @@ case $compname in
         ansible-playbook titan.yml -K
         ;;
     mini)
-        ansible-playbook titan.yml -K
+        ansible-playbook mini.yml -K
         ;;
 esac
 
