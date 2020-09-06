@@ -1,2 +1,4 @@
 Angular.ng-template
 bungcip.better-toml
+streetsidesoftware.code-spell-checker
+TianyiShi.rmarkdown
