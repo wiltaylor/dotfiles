@@ -1,1 +1,4 @@
 nvim/.config/nvim/.netrwhist
+.gitsecret/keys/random_seed
+!*.secret
+ansible/.password
