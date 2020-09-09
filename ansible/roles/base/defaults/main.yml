@@ -35,4 +35,5 @@ pkgs:
   - unionfs-fuse 
   - xclip 
   - neovim 
-  - python-pip 
+  - python-pip
+  - usbutils
