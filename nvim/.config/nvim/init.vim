@@ -10,6 +10,8 @@
 " Github: https://github.com/wiltaylor
 " Contact: web@wiltaylor.dev
 " Feel free to use this configuration as you wish.
+
+"Basic editor config
 set clipboard+=unnamedplus
 set mouse=a
 set encoding=utf-8
@@ -26,8 +28,13 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'arcticicestudio/nord-vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
+
+"Colour theme
+colorscheme nord
+let g:lightline = { 'colorscheme': 'nord', }
 
 "Nerd tree config
 map <C-n> :NERDTreeToggle<CR>
