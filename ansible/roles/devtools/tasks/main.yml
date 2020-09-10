@@ -32,3 +32,15 @@
 - name: Update Rust
   command: rustup update
   changed_when: false
+
+- name: Add user to docker group
+  user:
+    name: wil
+    groups: docker
+    append: yes
+
+- name: Enable docker service
+  become: yes
+  systemd:
+    enabled: yes
+    name: docker.service

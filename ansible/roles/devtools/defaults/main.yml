@@ -34,3 +34,4 @@ yaypkgs:
   - pycharm-professional 
   - zeal 
   - git-secret
+  - neovim-symlinks

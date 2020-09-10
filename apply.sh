@@ -30,7 +30,10 @@ stow vscode
 #PGP Extra actions
 chown -R $(whoami) ~/.gnupg/
 chmod 700 ~/.gnupg -R
+chmod 700 ~/.ssh/id_rsa_vygo
 gpg --import gpg/.gnupg/public.key
+gpg --import gpg/.gnupg/vygo-public.key
+gpg --import gpg/.gnupg/vygo-private.key
 
 #VSCode extra actions
 
