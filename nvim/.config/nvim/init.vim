@@ -14,3 +14,21 @@ set clipboard+=unnamedplus
 set mouse=a
 set encoding=utf-8
 set number
+set noswapfile
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+" Plugins
+call plug#begin(stdpath('data') . '/plugged')
+" Project panel on the side
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
+"Nerd tree config
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
