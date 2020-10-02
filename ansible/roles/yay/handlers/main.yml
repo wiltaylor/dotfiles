@@ -1,9 +1,0 @@
----
-
-- name: makepkg -si
-  command: makepkg -si
-  args:
-    chdir: /usr/local/src/yay
-    # creates: /usr/bin/yay
-  tags:
-    - yay

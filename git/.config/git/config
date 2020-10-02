@@ -1,7 +1,0 @@
-[include]
-	path = personal.conf
-
-[includeIf "gitdir:**/Vygo/**"]
-	path = vygo.conf
-
-

@@ -1,7 +1,0 @@
----
-- name: Install Nvidia packages
-  package: name={{item}} state=present
-  with_items: "{{ pkgs }}"
-  tags: [ 'pkgs' ]
-  become: yes
-
