@@ -45,6 +45,9 @@
     xclip
     gimp
     libnotify
+
+    breeze-gtk
+    breeze-qt5
   ];
 
   services.dunst = {
@@ -450,12 +453,55 @@ Jl3LgcMI6r7XK83wQBQs52RY6+4Fo8PP2Z4ZdmOLCBTjrxXuzQ2XgpKwo6U=
 	    "${modifier}+shift+Down" = "move down";
 	    "${modifier}+Print" = "exec maim --format png | xclip -selection clipboard -t image/png -i";
 	    "${modifier}+Shift+Print" = "exec maim -s --format png | xclip -selection clipboard -t image/png -i";
+
+
+            "${modifier}+1" = "workspace 1";
+            "${modifier}+2" = "workspace 2";
+            "${modifier}+3" = "workspace 3";
+            "${modifier}+4" = "workspace 4";
+            "${modifier}+5" = "workspace 5";
+            "${modifier}+6" = "workspace 6";
+            "${modifier}+7" = "workspace 7";
+            "${modifier}+8" = "workspace 8";
+            "${modifier}+9" = "workspace 9";
+            "${modifier}+0" = "workspace 10";
+
+            "${modifier}+Shift+1" = "move container to workspace 1";
+            "${modifier}+Shift+2" = "move container to workspace 2";
+            "${modifier}+Shift+3" = "move container to workspace 3";
+            "${modifier}+Shift+4" = "move container to workspace 4";
+            "${modifier}+Shift+5" = "move container to workspace 5";
+            "${modifier}+Shift+6" = "move container to workspace 6";
+            "${modifier}+Shift+7" = "move container to workspace 7";
+            "${modifier}+Shift+8" = "move container to workspace 8";
+            "${modifier}+Shift+9" = "move container to workspace 9";
+            "${modifier}+Shift+0" = "move container to workspace 10";
 	  };
+
 	};
+   	extraConfig = ''
+smart_gaps on
+for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+	'';
+	
     };
   };
 
   home.file = {
+    ".config/gtk-4.0/settings.ini".source = ./files/gtk/4/settings.ini;
+    ".config/gtk-3.0/settings.ini".source = ./files/gtk/3/settings.ini;
+    ".config/gtk-3.0/colors.css".source = ./files/gtk/3/colors.css;
+    ".config/gtk-3.0/gtk.css".source = ./files/gtk/3/gtk.css;
+
+    ".kde4/share/config/kdeglobals".source = ./files/kde/kdeglobals;
+    ".kde4/share/apps/color-schemes/Breeze.colors".source = ./files/kde/Breeze.colors;
+    ".kde4/share/apps/color-schemes/BreezeDark.colors".source = ./files/kde/BreezeDark.colors;
+
     ".config/polybar/launch.sh" = {
     	source = ./files/polybar/launch.sh;
 	executable = true;
@@ -465,6 +511,10 @@ Jl3LgcMI6r7XK83wQBQs52RY6+4Fo8PP2Z4ZdmOLCBTjrxXuzQ2XgpKwo6U=
   services.polybar = {
     enable = true;
     script = "polybar top1 &";
+  
+    package = pkgs.polybar.override {
+      i3GapsSupport = true;
+    };
 
     config = rec {
       
