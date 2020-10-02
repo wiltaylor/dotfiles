@@ -52,7 +52,36 @@
     breeze-gtk
     breeze-qt5
     bat
+    xorg.xev
   ];
+
+  systemd.user.services.spotifyd = {
+    Service = {
+      ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path .config/spotifyd/config";
+      Restart = "always";
+      RestartSec = 6;
+    };
+
+    Unit = {
+      After = "graphical-session-pre.target";
+      Description = "Spotify Daemon";
+      PartOf = "graphical-session.target";
+    };
+  };
+
+  systemd.user.services.xmousepasteblock = {
+    Service = {
+      ExecStart = "${pkgs.xmousepasteblock}/bin/xmousepasteblock";
+      Restart = "always";
+      RestartSec = 6;
+    };
+
+    Unit = {
+      After = "graphical-session-pre.target";
+      Description = "Tool that disables middle click paste in xorg.";
+      PartOf = "graphical-session.target";
+    };
+  };
 
   services.dunst = {
     enable = true;
@@ -116,6 +145,7 @@
   # TODO: Replace this with proper nix configs.
   # Getting it all in now and slowly fixing it.
   home.file = {
+    ".config/spotifyd/config".source = ./.secret/spotifyd/spotifyd.conf;
     ".config/alacritty/alacritty.yml".source = ./files/alacritty/alacritty.yml;
     ".config/fontconfig/fonts.conf".text = ''
 <?xml version="1.0"?>
@@ -135,7 +165,6 @@
 </fontconfig>
     '';
   };
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -279,7 +308,7 @@ PUQg8lvMMMzQXznYykpTW49P/KARQ+Efuy+UsNCjPB9/Wv8WyyJ+ztwakm43oFV7
 8e2r7NFZmG0nLgEvv2de4t9XVVGwV2dnFCLVrY9n6R867/YJiU5ilmECfSCzBHjQ
 ZrcNdU2345EX8vW/+1YPuXzWYvJ1kNSDGSOAIvuAUn1HmKAnJYDQPaZ6b/QY4zQe
 tklFMQUCNLaHnL7ogILosVG9MGbrXTft7KPSfbilY4drUEKN21kRsbGEbLJK2sEE
-dH/TxBiWd+zc9g4KHuQx+FHXw3i+dSAKUFMGgWIAXJd7hASl25XuGw5zs/7ZYRb7
+dH/TxBiWd+zc9g4KHuQx+FHXw3i+dSAKUFMGgWIAXJd7hASl2XF86AudioMute5XuGw5zs/7ZYRb7
 Di53zCEVXyG0H1dpbCBUYXlsb3IgPHdvcmtAd2lsdGF5bG9yLmRldj6JAkwEEwEK
 ADYWIQRzYa/g1MyG9ulzdw7sVxAYVC0qzAUCXksxTwIbAQQLCQgHBBUKCQgFFgID
 AQACHgECF4AACgkQ7FcQGFQtKsy/Zw/8COSwbFHatAJjqlt5AyWZw1uUUk/OMD2y
@@ -306,7 +335,7 @@ UUElYHMII2rW7Y/h1TFoep9mD4GMcgwT/tdjTHeR4H/GG7xh6JiXj2tGcANflFgj
 kDYrx5rf7ONMbyB3p4dIGKukDWOfYOQaauUxLyK0L4eemEqBnoy9QdtUF61agd9h
 563270STWzhNv27GDvDATG7XsqClh/36IsgWZIxeXlFIbRvurg7tUZSzmG0jVtke
 d/5At+vdkpCij203VLZaU4z1NoLT3onjJdDw/6h7l9j8xdBBUy0ad6jXjqfkDwPK
-qBP0IBSs/E3puQINBF5LMB0BEADTjufmeaYM2ALWgAEyCjmnQq0KvoCCvU8JzCCz
+qBP0IBSs/E3puQINBF5LMB0BEADTjufmeaYXF86AudioMuteM2ALWgAEyCjmnQq0KvoCCvU8JzCCz
 aWYhag9JQHRX4C4cmG68mCBDzKcXkvIq7YIGX4HG+xCF9R20Pvo6xfZtN7uxwueW
 wVAT8EZqKAnG5KPsAVa+p3rvumrWUO4hOJ2UFyzdF0304qpciUI/tNG3voJfUVf/
 FxN5KjncvZ+QXPRKJwLEbdk3ulHwrCbwjB0L7ovVgap9gZ7Nh94VlVt8XYxQPc7q
@@ -457,8 +486,8 @@ Jl3LgcMI6r7XK83wQBQs52RY6+4Fo8PP2Z4ZdmOLCBTjrxXuzQ2XgpKwo6U=
 	    "${modifier}+shift+Right" = "move right";
 	    "${modifier}+shift+Up" = "move up";
 	    "${modifier}+shift+Down" = "move down";
-	    "${modifier}+Print" = "exec maim --format png | xclip -selection clipboard -t image/png -i";
-	    "${modifier}+Shift+Print" = "exec maim -s --format png | xclip -selection clipboard -t image/png -i";
+	    "Print" = "exec maim --format png | xclip -selection clipboard -t image/png -i";
+	    "${modifier}+Print" = "exec maim -s --format png | xclip -selection clipboard -t image/png -i";
 
 
             "${modifier}+1" = "workspace 1";
@@ -482,7 +511,13 @@ Jl3LgcMI6r7XK83wQBQs52RY6+4Fo8PP2Z4ZdmOLCBTjrxXuzQ2XgpKwo6U=
             "${modifier}+Shift+8" = "move container to workspace 8";
             "${modifier}+Shift+9" = "move container to workspace 9";
             "${modifier}+Shift+0" = "move container to workspace 10";
+
+	    "${modifier}+l" = "exec --no-startup-id dm-tool lock";
+	    "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` +5%";
+	    "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` -5%";
+	    "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` ndtoggle";
 	  };
+
 
 	};
    	extraConfig = ''
@@ -493,6 +528,9 @@ for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
+
+floating_minimum_size 500 x 300
+floating_maximum_size 2000 x 1500
 	'';
 	
     };
@@ -768,6 +806,4 @@ for_window [class="qt5ct"] floating enable sticky enable border normal
     };
 
   };
-
-
 }

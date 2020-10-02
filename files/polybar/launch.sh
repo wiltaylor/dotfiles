@@ -13,7 +13,7 @@
 # Feel free to use this configuration as you wish.
 #terminate already running bar instances
 
-killall -q .pollybar-wrappe
+killall -q .polybar-wrappe
 killall -q polybar
 
 sleep 1;
