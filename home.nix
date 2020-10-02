@@ -22,6 +22,7 @@
     nix-zsh-completions
     oh-my-zsh
     git
+    git-crypt
     joplin-desktop
     spotify-tui
     spotifyd
@@ -45,9 +46,12 @@
     xclip
     gimp
     libnotify
+    neofetch
+    htop
 
     breeze-gtk
     breeze-qt5
+    bat
   ];
 
   services.dunst = {
@@ -232,7 +236,9 @@ use-agent
 # Disable recipient key ID in messages
 throw-keyids
 #Trust own GPG key
-trusted-key 0xEC571018542D2ACC'';
+trusted-key 0xEC571018542D2ACC
+default-key 0xEC571018542D2ACC
+'';
 
    ".gnupg/public.key".text = ''
 -----BEGIN PGP PUBLIC KEY BLOCK-----
