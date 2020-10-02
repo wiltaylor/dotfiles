@@ -53,6 +53,7 @@
     breeze-qt5
     bat
     xorg.xev
+    feh
   ];
 
   systemd.user.services.spotifyd = {
@@ -145,6 +146,7 @@
   # TODO: Replace this with proper nix configs.
   # Getting it all in now and slowly fixing it.
   home.file = {
+    ".config/wallpapers".source = ./files/wallpapers;
     ".config/spotifyd/config".source = ./.secret/spotifyd/spotifyd.conf;
     ".config/alacritty/alacritty.yml".source = ./files/alacritty/alacritty.yml;
     ".config/fontconfig/fonts.conf".text = ''
@@ -452,6 +454,11 @@ Jl3LgcMI6r7XK83wQBQs52RY6+4Fo8PP2Z4ZdmOLCBTjrxXuzQ2XgpKwo6U=
 	  startup = [
 	    { command = "${pkgs.xorg.xmodmap} -e 'clear Lock' -e 'keycode 0x42 = Escape'"; }
 	    { command = "${pkgs.xmousepasteblock}"; }
+	    { 
+	      command = "${pkgs.feh}/bin/feh --bg-fill --randomize ~/.config/wallpapers/*"; 
+	      always = true;
+	      notification = false;
+	    }
 
 	    { 
 	      command = "~/.config/polybar/launch.sh"; 
@@ -512,6 +519,13 @@ Jl3LgcMI6r7XK83wQBQs52RY6+4Fo8PP2Z4ZdmOLCBTjrxXuzQ2XgpKwo6U=
             "${modifier}+Shift+9" = "move container to workspace 9";
             "${modifier}+Shift+0" = "move container to workspace 10";
 
+	    "${modifier}+f" = "fullscreen toggle";
+	    "${modifier}+space" = "floating toggle";
+	    "${modifier}+h" = "split h";
+	    "${modifier}+v" = "split v";
+	    "${modifier}+shift+minus" = "move scratchpad";
+	    "${modifier}+minus" = "scratchpad show";
+
 	    "${modifier}+l" = "exec --no-startup-id dm-tool lock";
 	    "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` +5%";
 	    "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` -5%";
@@ -531,6 +545,7 @@ for_window [class="qt5ct"] floating enable sticky enable border normal
 
 floating_minimum_size 500 x 300
 floating_maximum_size 2000 x 1500
+floating_modifier Mod4
 	'';
 	
     };
