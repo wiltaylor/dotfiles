@@ -4,6 +4,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  nixpkgs.overlays = import ./packages;
   nixpkgs.config.allowUnfree = true;
 
   services.lorri.enable = true;
@@ -30,7 +31,9 @@
     virt-manager
     xorg.xmodmap
     xmousepasteblock
-    tmux
+    vscodium
+    my.vscodium-alias
+    my.g810-led
 
     noto-fonts
     noto-fonts-cjk
@@ -54,6 +57,11 @@
     bat
     xorg.xev
     feh
+    zip
+    unzip
+    file
+    p7zip
+    mpv
   ];
 
   systemd.user.services.spotifyd = {
@@ -440,6 +448,19 @@ Jl3LgcMI6r7XK83wQBQs52RY6+4Fo8PP2Z4ZdmOLCBTjrxXuzQ2XgpKwo6U=
     shadow = lib.mkDefault false;
     backend = lib.mkDefault "glx";
     vSync = true;
+  };
+
+  programs.tmux = {
+    enable = true;
+    terminal = "tmux-256color";
+    escapeTime = 0;
+    aggressiveResize = true;
+    keyMode = "vi";
+    shortcut = "a";
+
+    extraConfig = ''
+setw -g mouse on
+    '';
   };
 
   xsession = {
