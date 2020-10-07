@@ -23,17 +23,15 @@ stdenv.mkDerivation {
    mkdir $out/etc/udev/rules.d -p
    mkdir $out/usr/lib/systemd/system -p
    cp -R bin $out
-   ln -s $out/bin/g810-ld $out/bin/g213-led
-   ln -s $out/bin/g810-ld $out/bin/g410-led
-   ln -s $out/bin/g810-ld $out/bin/g413-led
-   ln -s $out/bin/g810-ld $out/bin/g512-led
-   ln -s $out/bin/g810-ld $out/bin/g513-led
-   ln -s $out/bin/g810-ld $out/bin/g610-led
-   ln -s $out/bin/g810-ld $out/bin/g815-led
-   ln -s $out/bin/g810-ld $out/bin/gpro-led
+   ln -s $out/bin/g810-led $out/bin/g213-led
+   ln -s $out/bin/g810-led $out/bin/g410-led
+   ln -s $out/bin/g810-led $out/bin/g413-led
+   ln -s $out/bin/g810-led $out/bin/g512-led
+   ln -s $out/bin/g810-led $out/bin/g513-led
+   ln -s $out/bin/g810-led $out/bin/g610-led
+   ln -s $out/bin/g810-led $out/bin/g815-led
+   ln -s $out/bin/g810-led $out/bin/gpro-led
+   ln -s $out/bin/g810-led $out/bin/g910-led
    cp sample_profiles/* $out/etc/g810-led/samples
-   cp udev/g810-led.rules $out/etc/udev/rules.d
-   cp systemd/g810-led-reboot.service $out/usr/lib/systemd/system
-
   '';
 }
