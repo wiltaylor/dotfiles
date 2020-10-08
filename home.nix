@@ -63,11 +63,13 @@
     file
     p7zip
     mpv
+    ueberzug
+    ranger
   ];
 
   programs.vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ nerdtree nerdtree-git-plugin nord-vim vim-devicons vim-nerdtree-syntax-highlight ];
+    plugins = with pkgs.vimPlugins; [ nerdtree nerdtree-git-plugin nord-vim vim-devicons vim-nerdtree-syntax-highlight vimwiki ];
     settings = { ignorecase = true; };
     extraConfig = ''
       " Basic editor config
@@ -101,8 +103,15 @@
       let NERDTreeShowHidden=1
 
       "COC settings
-      map <a-cr> :CocAction<CR> 
+      map <a-cr> :CocAction<CR>
+
+      "Vim wiki settings
+      let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.wiki'}]
     '';
+  };
+
+  services.syncthing = {
+    enable = true;
   };
 
 
@@ -147,6 +156,8 @@
 	gpg-connect-agent "learn --force" /bye
         export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
       }
+
+      eval "$(direnv hook zsh)"
     '';
 
     oh-my-zsh = {
@@ -163,7 +174,7 @@
     userEmail = "cert@wiltaylor.dev";
     signing = {
       key = "0xEC571018542D2ACC";
-      signByDefault = true;
+      signByDefault = false;
     };
   };
  
@@ -216,12 +227,6 @@ setw -g mouse on
 	      always = true;
 	      notification = false;
 	    }
-
-	    { 
-	      command = "~/.config/polybar/launch.sh"; 
-	      always = true; 
-	      notification = false;
-	    }
 	  ];
 
 	  gaps = {
@@ -239,7 +244,8 @@ setw -g mouse on
 	    "${modifier}+Shift+r" = "restart";
    	    "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
 	    "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
-	    "${modifier}+w" = "exec ${pkgs.firefox}/bin/firefox";
+      "${modifier}+w" = "exec ${pkgs.firefox}/bin/firefox";
+      "${modifier}+shift+w" = "exec ${pkgs.firefox}/bin/firefox -p vygo";
 	    "${modifier}+Shift+q" = "kill";
 	    "${modifier}+j" = "exec ${pkgs.joplin-desktop}/bin/joplin-desktop";
 	    "${modifier}+Left" = "focus left";
@@ -292,6 +298,9 @@ setw -g mouse on
 
 	};
    	extraConfig = ''
+new_window pixel 1
+new_float normal
+
 smart_gaps on
 for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 for_window [title="i3_help"] floating enable sticky enable border normal
@@ -303,6 +312,15 @@ for_window [class="qt5ct"] floating enable sticky enable border normal
 floating_minimum_size 500 x 300
 floating_maximum_size 2000 x 1500
 floating_modifier Mod4
+
+# Theme colors
+client.focused #56737a #1e1e20 #56737a #56737a #56737a
+client.focused_inactive #56737a #1e1e20 #56737a #2c5159 #2c5159
+client.unfocused #56737a #1e1e20 #56737a #2c5159 #2c5159
+client.urgent #56737a #1e1e20 #56737a #2c5159 #2c5159
+client.placeholder #56737a #1e1e20 #56737a #2c5159 #2c5159
+
+client.background #1e1e20
 	'';
 	
     };
@@ -317,16 +335,11 @@ floating_modifier Mod4
     ".kde4/share/config/kdeglobals".source = ./files/kde/kdeglobals;
     ".kde4/share/apps/color-schemes/Breeze.colors".source = ./files/kde/Breeze.colors;
     ".kde4/share/apps/color-schemes/BreezeDark.colors".source = ./files/kde/BreezeDark.colors;
-
-    ".config/polybar/launch.sh" = {
-    	source = ./files/polybar/launch.sh;
-	executable = true;
-    };
   };
 
   services.polybar = {
     enable = true;
-    script = "polybar top1 &";
+    script = "polybar -q -r top1 & polybar -q -r top2 & polybar -q -r top3 & polybar -q -r top4 & polybar -q -r top5 & polybar -q -r top6 &";
   
     package = pkgs.polybar.override {
       i3GapsSupport = true;
