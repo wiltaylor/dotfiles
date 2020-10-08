@@ -110,6 +110,11 @@
     '';
   };
 
+  home.sessionVariables = {
+
+    EDITOR = "${pkgs.neovim}/bin/nvim";
+  };
+
   services.syncthing = {
     enable = true;
   };
@@ -583,7 +588,7 @@ client.background #1e1e20
 	  menu-2-1-exec = "menu-open-0";
 
 	  menu-3-0 = "log off";
-	  menu-3-0-exec = "pkill -KILL -u $USER";
+	  menu-3-0-exec = "i3-msg exit";
 	  menu-3-1 = "cancel";
 	  menu-3-1-exec = "menu-open-0";
 	};
