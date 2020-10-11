@@ -65,7 +65,20 @@
     mpv
     ueberzug
     ranger
+
+    vimwiki-markdown
+    taskwarrior
+    vit
+
+    pass-otp
+
+    #proton mail server
+    protonmail-bridge
+    offlineimap
+    neomutt
+    notmuch
   ];
+
 
   programs.vim = {
     enable = true;
@@ -106,7 +119,7 @@
       map <a-cr> :CocAction<CR>
 
       "Vim wiki settings
-      let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.wiki'}]
+      let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/site_html', 'custom_wiki2html': 'vimwiki_markdown'}]
     '';
   };
 
@@ -179,7 +192,7 @@
     userEmail = "cert@wiltaylor.dev";
     signing = {
       key = "0xEC571018542D2ACC";
-      signByDefault = false;
+      signByDefault =false;
     };
   };
  
@@ -225,7 +238,8 @@ setw -g mouse on
           modifier = "Mod4";
 
 	  startup = [
-	    { command = "${pkgs.xorg.xmodmap} -e 'clear Lock' -e 'keycode 0x42 = Escape'"; }
+      { command = "${pkgs.xorg.xmodmap} -e 'clear Lock' -e 'keycode 0x42 = Escape'"; }
+      { command = "systemctl --user restart polybar.service"; always = true; notification = false; }
 	    { command = "${pkgs.xmousepasteblock}"; }
 	    { 
 	      command = "${pkgs.feh}/bin/feh --bg-fill --randomize ~/.config/wallpapers/*"; 

@@ -5,10 +5,10 @@
         "homepage": "https://rycee.gitlab.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "da6077a89971235dc839ae4b69df031dc2b2bb16",
-        "sha256": "04f1qcpbva9qhx6qc96w3pczhg1vlxhk3vrh4qhb0r8www8j779h",
+        "rev": "473d9acdadc2969ba2b5c1c55b440fdda5d213e5",
+        "sha256": "0kb61qg8gwbm45r4f3swsx1fpqlvvh3vz0dzxq9b5lpkqpdig77q",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/da6077a89971235dc839ae4b69df031dc2b2bb16.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/473d9acdadc2969ba2b5c1c55b440fdda5d213e5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -17,10 +17,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "29ddaaf4e099c3ac0647f5b652469dfc79cd3b53",
-        "sha256": "1va6myp07gkspgxfch8z3rs9nyvys6jmgzkys6a2c4j09qxp1bs0",
+        "rev": "9d35b9e4837ab88517210b1701127612c260eccf",
+        "sha256": "0q50xhnm8g2yfyakrh0nly4swyygxpi0a8cb9gp65wcakcgvzvdh",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/29ddaaf4e099c3ac0647f5b652469dfc79cd3b53.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/9d35b9e4837ab88517210b1701127612c260eccf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-unstable": {
