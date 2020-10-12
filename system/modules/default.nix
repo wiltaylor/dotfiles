@@ -1,9 +1,13 @@
-[
-  (self: super: with super; {
+{pkgs, ... }:
+{
+  config = {
+    nixpkgs.overlays = import ./pkgs;
 
-    my = {
-      g810-led = (callPackage ./g810-led.nix {});
-    };
+  };
 
-  })
-]
+  imports = [
+    ./g810-led.nix
+    ./users.nix
+    ./nixos.nix
+  ];
+}

@@ -6,16 +6,12 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+      ./hardware-configuration.nix
+      ../../modules
     ];
 
   # Make sure old crap is removed.
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 5d";
-
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = import ../../modules;
-
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -57,7 +53,7 @@
    environment.systemPackages = with pkgs; [
      wget 
      #(neovim.override  { vimAlias = true; })
-     my.g810-led 
+     #my.g810-led 
      gnupg
      yubikey-personalization
      yubioath-desktop
@@ -116,89 +112,9 @@
     displayManager.job.logToJournal = true;
     libinput.enable = true;
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  programs.zsh.enable = true;
-  programs.zsh.ohMyZsh.enable = true;
-
-  users.users.wil= {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" "libvirtd" ]; 
-     uid = 1000;
-     shell = pkgs.zsh; 
-  };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
   
-  security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";
-
-
-
   # Setting up config for g810
-  services.udev = {
-    extraRules = ''
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c336", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g213-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c330", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g410-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33a", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g413-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c342", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g512-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33c", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g513-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c333", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g610-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c338", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g610-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c331", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g810-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c337", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g810-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33f", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g815-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c32b", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g910-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c335", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g910-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c339", MODE="666" RUN+="${pkgs.my.g810-led}/bin/gpro-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c336", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g213-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c330", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g410-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33a", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g413-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c342", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g512-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33c", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g513-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c333", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g610-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c338", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g610-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c331", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g810-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c337", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g810-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c32b", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g910-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c335", MODE="666" RUN+="${pkgs.my.g810-led}/bin/g910-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c339", MODE="666" RUN+="${pkgs.my.g810-led}/bin/gpro-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys"
-    '';
-  };
-
-  systemd.services.g810-led = {
-    description = "Set Logitech G810 Led Profile";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.my.g810-led}/bin/g810-led -p ${pkgs.my.g810-led}/etc/g810-led/samples/group_keys";
-      Type = "oneshot";
-      RemainAfterExit = "yes";
-    };
-  };
-
-  systemd.services.g810-led-reboot = {
-    description = "Set G810 profile on shutown";
-    wantedBy = [ "shutdown.target" ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = "yes";
-      ExecStart = "${pkgs.my.g810-led}/bin/g810-led -p ${pkgs.my.g810-led}/etc/g810-led/sampels/all_off";
-      Before = ["shutdown.target" "reboot.target" "halt.target" ];
-      DefaultDependencies = "no";
-    };
-  };
-
-
-  environment.etc = {
-    "/etc/g810-led/group_keys".source = "${pkgs.my.g810-led}/etc/g810-led/samples/group_keys";
-    "/etc/g810-led/reboot".source = "${pkgs.my.g810-led}/etc/g810-led/sampels/all_off";
-  };
+  wil.hardware.g810led.enable = true;
 
 }
 

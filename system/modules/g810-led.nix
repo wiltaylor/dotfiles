@@ -1,37 +1,86 @@
-{ fetchFromGitHub, pkgs, stdenv, lib }:
-
+{ config, pkgs, lib, ... }:
 with lib;
-stdenv.mkDerivation {
-  pname = "g810led";
-  version = "0.4.2";
 
-  src = fetchFromGitHub {
-    owner = "MatMoul";
-    repo = "g810-led";
-    rev = "5ee810a520f809e65048de8a8ce24bac0ce34490";
-    sha256 = "1ymkp7i7nc1ig2r19wz0pcxfnpawkjkgq7vrz6801xz428cqwmhl";
+let 
+  cfg = config.wil.hardware.g810led;
+
+in {
+
+  options.wil.hardware.g810led = {
+    enable = mkEnableOption "Enable G810 Keyboard led control";
+
+    package = mkOption {
+      type = types.package;
+      default = pkgs.wil.g810-led;
+      defaultText = "pkgs.wil.g810-led";
+      description = "G810 package to use";
+    };
   };
 
-  buildInputs = [ pkgs.hidapi ];
+  config = mkIf (cfg.enable) {
 
-  dontBuild = true;
+    environment.systemPackages = [ cfg.package ];
 
-  installPhase = ''
-   make bin
-   mkdir $out -p
-   mkdir $out/etc/g810-led/samples -p
-   mkdir $out/etc/udev/rules.d -p
-   mkdir $out/usr/lib/systemd/system -p
-   cp -R bin $out
-   ln -s $out/bin/g810-led $out/bin/g213-led
-   ln -s $out/bin/g810-led $out/bin/g410-led
-   ln -s $out/bin/g810-led $out/bin/g413-led
-   ln -s $out/bin/g810-led $out/bin/g512-led
-   ln -s $out/bin/g810-led $out/bin/g513-led
-   ln -s $out/bin/g810-led $out/bin/g610-led
-   ln -s $out/bin/g810-led $out/bin/g815-led
-   ln -s $out/bin/g810-led $out/bin/gpro-led
-   ln -s $out/bin/g810-led $out/bin/g910-led
-   cp sample_profiles/* $out/etc/g810-led/samples
-  '';
+    services.udev = {
+      extraRules = ''
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c336", MODE="666" RUN+="${cfg.package}/bin/g213-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c330", MODE="666" RUN+="${cfg.package}/bin/g410-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33a", MODE="666" RUN+="${cfg.package}/bin/g413-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c342", MODE="666" RUN+="${cfg.package}/bin/g512-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33c", MODE="666" RUN+="${cfg.package}/bin/g513-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c333", MODE="666" RUN+="${cfg.package}/bin/g610-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c338", MODE="666" RUN+="${cfg.package}/bin/g610-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c331", MODE="666" RUN+="${cfg.package}/bin/g810-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c337", MODE="666" RUN+="${cfg.package}/bin/g810-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33f", MODE="666" RUN+="${cfg.package}/bin/g815-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c32b", MODE="666" RUN+="${cfg.package}/bin/g910-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c335", MODE="666" RUN+="${cfg.package}/bin/g910-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c339", MODE="666" RUN+="${cfg.package}/bin/gpro-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c336", MODE="666" RUN+="${cfg.package}/bin/g213-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c330", MODE="666" RUN+="${cfg.package}/bin/g410-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33a", MODE="666" RUN+="${cfg.package}/bin/g413-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c342", MODE="666" RUN+="${cfg.package}/bin/g512-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c33c", MODE="666" RUN+="${cfg.package}/bin/g513-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c333", MODE="666" RUN+="${cfg.package}/bin/g610-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c338", MODE="666" RUN+="${cfg.package}/bin/g610-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c331", MODE="666" RUN+="${cfg.package}/bin/g810-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c337", MODE="666" RUN+="${cfg.package}/bin/g810-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c32b", MODE="666" RUN+="${cfg.package}/bin/g910-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c335", MODE="666" RUN+="${cfg.package}/bin/g910-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c339", MODE="666" RUN+="${cfg.package}/bin/gpro-led -p ${cfg.package}/etc/g810-led/samples/group_keys"
+      '';
+
+    };
+
+    systemd.services.g810-led = {
+      description = "Set Logitech G810 Led Profile";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        ExecStart = "${cfg.package}/bin/g810-led -p ${cfg.package}/etc/g810-led/samples/group_keys";
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+      };
+    };
+
+    systemd.services.g810-led-reboot = {
+      description = "Set G810 profile on shutown";
+      wantedBy = [ "shutdown.target" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+        ExecStart = "${cfg.package}/bin/g810-led -p ${cfg.package}/etc/g810-led/sampels/all_off";
+        Before = ["shutdown.target" "reboot.target" "halt.target" ];
+        DefaultDependencies = "no";
+      };
+    };
+
+
+    environment.etc = {
+      "/etc/g810-led/group_keys".source = "${cfg.package}/etc/g810-led/samples/group_keys";
+      "/etc/g810-led/reboot".source = "${cfg.package}/etc/g810-led/sampels/all_off";
+    };
+  };
 }
+
+
