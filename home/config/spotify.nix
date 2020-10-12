@@ -3,7 +3,7 @@
 
   systemd.user.services.spotifyd = {
     Service = {
-      ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path .config/spotifyd/config";
+      ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path ~/.config/spotifyd/config";
       Restart = "always";
       RestartSec = 6;
     };

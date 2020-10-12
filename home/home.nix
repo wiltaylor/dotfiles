@@ -72,6 +72,8 @@
 
     pass-otp
 
+    appimage-run
+
     #proton mail server
     protonmail-bridge
     offlineimap
@@ -137,7 +139,7 @@
   # Getting it all in now and slowly fixing it.
   home.file = {
     ".config/wallpapers".source = ./files/wallpapers;
-    ".config/spotifyd/config".source = ./.secret/spotifyd/spotifyd.conf;
+    ".config/spotifyd/config".source = ../.secret/spotifyd/spotifyd.conf;
     ".config/alacritty/alacritty.yml".source = ./files/alacritty/alacritty.yml;
     ".config/fontconfig/fonts.conf".text = ''
 <?xml version="1.0"?>
