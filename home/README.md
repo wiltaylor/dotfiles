@@ -1,24 +1,23 @@
-# Wil's dot files
-Here are my personal dotfiles which i deploy whenever I setup a new machine. 
-Feel free to copy and use anything you want from it.
+# Home DotFiles Configuration
 
-This is a constant work in progress so if you deploy it to your own machine don't 
-be suprised if it just randomy breaks. The idea is you should get inspiration to 
-create your own configuration not just blindly apply mine.
+## Home Manager Template dotfiles
+This part of the repo was originally based off the home manager template.
 
-# Nix
-I have recently moved my dotfiles over from a stow based workflow to a nix based one.
+It allows you to run home manager totally out of the repo and it doesn't exist
+on the rest of the system.
 
-This was mainly done due to the fact I moved over to NixOS from Arch. This was done
-due to the pure nature of how nix works. It means I can have a heap of different
-tool chains on my system without them messing with each other.
+## Usage
+WARNING: Do not install on your own system. This repo will not work without 
+secrets. I have left most of the repo visable though so you can see how
+my files are setup and use them for inspiration.
 
-# System config
-To setup a nixos system from scratch see the machines folder.
+### Apply
+Simply run the apply.sh script under the wil account and it will apply all the 
+user settings.
 
-# Applying home-manager config from this repo.
-1. Clone the repo to ~/.dotfiles 
-2. Run update.sh
+### Update
+You can run the update.sh to update home manager which will in turn update all
+packages. Then you can run apply again to get the latest version installed.
 
 # License
 The files and scripts in this repository are licensed under the MIT License, which is a very 
