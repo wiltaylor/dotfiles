@@ -13,6 +13,10 @@ in {
       EDITOR = "${pkgs.neovim}/bin/nvim";
     };
 
+    home.packages = with pkgs; [
+      vimwiki-markdown
+    ];
+
     programs.vim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [

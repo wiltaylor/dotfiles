@@ -9,6 +9,10 @@ in {
   };
 
   config = mkIf (cfg.enable) {
+    home.packages = with pkgs; [
+      xmousepasteblock
+    ];
+
     systemd.user.services.xmousepasteblock = {
       Service = {
         ExecStart = "${pkgs.xmousepasteblock}/bin/xmousepasteblock";
