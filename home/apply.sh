@@ -1,1 +1,1 @@
-nix-shell --run "home-manager switch"
+nix-shell --run "home-manager -f ./machines/$(hostname).nix switch"

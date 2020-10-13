@@ -3,15 +3,18 @@
 {
 
   imports = [
-    ./config/gpg.nix
-    ./config/keyboard_mouse.nix
-    ./config/spotify.nix
-    ./config/dunst.nix
+    ../modules
   ];
 
+
+  wil.gpg.enable = true;
+  wil.dunst.enable = true;
+  wil.blockselection.enable = true;
+  wil.nvim.enable = true;
+  wil.spotify.enable = true;
+  wil.alacritty.enable = true;
+
   # Nix and home manager settings
-  nixpkgs.overlays = import ./packages;
-  nixpkgs.config.allowUnfree = true;
   services.lorri.enable = true;
   home.username = "wil";
   home.homeDirectory = "/home/wil";
@@ -19,7 +22,6 @@
   systemd.user.startServices = true;
 
   home.packages = with pkgs; [
-    alacritty
     rofi
     pavucontrol
     picom
@@ -34,7 +36,7 @@
     xorg.xmodmap
     xmousepasteblock
     vscodium
-    my.vscodium-alias
+    wil.vscodium-alias
 
     noto-fonts
     noto-fonts-cjk
@@ -81,55 +83,6 @@
     notmuch
   ];
 
-
-  programs.vim = {
-    enable = true;
-    plugins = with pkgs.vimPlugins; [ nerdtree nerdtree-git-plugin nord-vim vim-devicons vim-nerdtree-syntax-highlight vimwiki ];
-    settings = { ignorecase = true; };
-    extraConfig = ''
-      " Basic editor config
-      set clipboard+=unnamedplus
-      set mouse=a
-      set encoding=utf-8
-      set number
-      set noswapfile
-      set nobackup
-      set nowritebackup
-      set tabstop=2
-      set shiftwidth=2
-      set softtabstop=2
-      set expandtab
-      set ai "Auto indent
-      set si "Smart indent 
-      set pyxversion=3 "Avoid using python 2 when possible, its eol 
-
-      " No annoying sound on errors
-      set noerrorbells
-      set novisualbell
-      set t_vb=
-      set tm=500
-
-      "Colour theme
-      colorscheme nord
-      let g:lightline = { 'colorscheme': 'nord', }
-
-      "Nerd tree config
-      map <C-n> :NERDTreeToggle<CR>
-      let NERDTreeShowHidden=1
-
-      "COC settings
-      map <a-cr> :CocAction<CR>
-
-      "Vim wiki settings
-      let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/site_html', 'custom_wiki2html': 'vimwiki_markdown'}]
-    '';
-  };
-
-  home.sessionVariables = {
-
-    EDITOR = "${pkgs.neovim}/bin/nvim";
-  };
-
   services.syncthing = {
     enable = true;
   };
@@ -138,9 +91,7 @@
   # TODO: Replace this with proper nix configs.
   # Getting it all in now and slowly fixing it.
   home.file = {
-    ".config/wallpapers".source = ./files/wallpapers;
-    ".config/spotifyd/config".source = ../.secret/spotifyd/spotifyd.conf;
-    ".config/alacritty/alacritty.yml".source = ./files/alacritty/alacritty.yml;
+    ".config/wallpapers".source = ../../wallpapers;
     ".config/fontconfig/fonts.conf".text = ''
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -348,14 +299,14 @@ client.background #1e1e20
   };
 
   home.file = {
-    ".config/gtk-4.0/settings.ini".source = ./files/gtk/4/settings.ini;
-    ".config/gtk-3.0/settings.ini".source = ./files/gtk/3/settings.ini;
-    ".config/gtk-3.0/colors.css".source = ./files/gtk/3/colors.css;
-    ".config/gtk-3.0/gtk.css".source = ./files/gtk/3/gtk.css;
+    ".config/gtk-4.0/settings.ini".source = ../files/gtk/4/settings.ini;
+    ".config/gtk-3.0/settings.ini".source = ../files/gtk/3/settings.ini;
+    ".config/gtk-3.0/colors.css".source = ../files/gtk/3/colors.css;
+    ".config/gtk-3.0/gtk.css".source = ../files/gtk/3/gtk.css;
 
-    ".kde4/share/config/kdeglobals".source = ./files/kde/kdeglobals;
-    ".kde4/share/apps/color-schemes/Breeze.colors".source = ./files/kde/Breeze.colors;
-    ".kde4/share/apps/color-schemes/BreezeDark.colors".source = ./files/kde/BreezeDark.colors;
+    ".kde4/share/config/kdeglobals".source = ../files/kde/kdeglobals;
+    ".kde4/share/apps/color-schemes/Breeze.colors".source = ../files/kde/Breeze.colors;
+    ".kde4/share/apps/color-schemes/BreezeDark.colors".source = ../files/kde/BreezeDark.colors;
   };
 
   services.polybar = {
