@@ -11,12 +11,24 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-[
-  (self: super: with super; {
+{pkgs, config, lib, ... }:
+with lib;
+let
+  cfg = config.wil.yubikey;
 
-    wil = {
-      g810-led = (callPackage ./g810-led.nix {});
-    };
+in {
+  options.wil.yubikey = {
+    enable = mkEnableOption "Enable yubikey hardware services";
+  };
 
-  })
-]
+  config = mkIf (cfg.enable) {
+    environment.systemPackages = with pkgs; [
+      gnupg
+      yubikey-personalization
+      yubioath-desktop
+    ];
+
+    services.udev.packages = [ pkgs.yubikey-personalization ];
+    services.pcscd.enable = true;
+  };
+}

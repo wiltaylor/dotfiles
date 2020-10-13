@@ -11,12 +11,23 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-[
-  (self: super: with super; {
+{pkgs, lib, config, ...}:
+with lib;
+let 
+  cfg = config.wil.wifi;
 
-    wil = {
-      g810-led = (callPackage ./g810-led.nix {});
+in {
+  imports = [ ../../.secret/wifi.nix ];
+
+  options.wil.wifi = {
+    defaultWifi = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Disable on systems you don't want wifi";
     };
+  };
 
-  })
-]
+  config = mkIf cfg.defaultWifi {
+   networking.wireless.enable = true; 
+  };
+}

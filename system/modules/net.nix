@@ -11,12 +11,27 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-[
-  (self: super: with super; {
+{pkgs, config, lib, ... }:
+with lib;
+let
+  cfg = config.wil.net;
+in {
 
-    wil = {
-      g810-led = (callPackage ./g810-led.nix {});
-    };
+  options.wil.net = {
+    enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable or disable network stack";
+    };    
+  };
 
-  })
-]
+  config = mkIf (cfg.enable) {
+    networking.networkmanager.enable = true;
+    networking.networkmanager.unmanaged = [
+      "*" "except:type:wwan" "except:type:gsm"
+    ];
+
+    networking.useDHCP = false;
+
+  };
+}

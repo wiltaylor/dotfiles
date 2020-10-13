@@ -11,12 +11,17 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-[
-  (self: super: with super; {
+{pkgs, config, lib, ...}:
+with lib;
+let 
+  cfg = config.wil.sshd;
+in {
+  options.wil.sshd = {
+    enable = mkEnableOption "Enable ssh daemon";
+  };
 
-    wil = {
-      g810-led = (callPackage ./g810-led.nix {});
-    };
-
-  })
-]
+  config = mkIf (cfg.enable) {
+    services.openssh.enable = true;
+    networking.firewall.allowedTCPPorts = [ 22 ];
+  };
+}
