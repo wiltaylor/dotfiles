@@ -32,6 +32,8 @@ in {
     ./vscodium
     ./joplin
     ./virtman
+    ./gitkraken
+    ./youtube
   ];
 
   options.wil.desktop = {

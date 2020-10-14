@@ -34,4 +34,6 @@
   wil.appimage.enable = true;
   wil.pass.enable = true;
   wil.virtman.enable = true;
+  wil.gitkraken.enable = true;
+  wil.youtube.enable = true;
 }
