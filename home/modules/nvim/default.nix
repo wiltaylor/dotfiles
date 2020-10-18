@@ -39,6 +39,7 @@ in {
         nord-vim
         vim-devicons
         vim-nerdtree-syntax-highlight
+        vimwiki
       ];
 
       settings = { ignorecase = true; };

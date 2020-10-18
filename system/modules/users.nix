@@ -49,7 +49,7 @@ in {
 
     users.users.wil= {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "libvirtd" ]; 
+      extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ]; 
       uid = 1000;
       shell = pkgs.zsh; 
     };

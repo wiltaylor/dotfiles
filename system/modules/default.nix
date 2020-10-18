@@ -29,5 +29,6 @@
     ./yubikey.nix
     ./sshd.nix
     ./desktop.nix
+    ./games.nix
   ];
 }

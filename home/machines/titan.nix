@@ -36,4 +36,5 @@
   wil.virtman.enable = true;
   wil.gitkraken.enable = true;
   wil.youtube.enable = true;
+  wil.games.enable = true;
 }

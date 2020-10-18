@@ -46,5 +46,6 @@
     ./pass
     ./mail
     ./appimage
+    ./games
   ];
 }
