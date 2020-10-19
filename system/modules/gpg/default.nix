@@ -11,31 +11,29 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-
-{pkgs, config, lib, ...}:
+{ pkgs, config, lib, ...}:
 with lib;
-let
-  cfg = config.wil.git;
+let 
+  cfg = config.wil.gpg;
 in {
-  options.wil.git = {
-    enable = mkEnableOption "Enable Git";
+  
+  options.wil.gpg = {
+    enable = mkEnableOption "Enable user GPG services";
   };
 
   config = mkIf (cfg.enable) {
-    home.packages = with pkgs; [
-      git
-      git-crypt
+    environment.systemPackages = with pkgs; [
+      pinentry-gtk2
     ];
 
-
-    programs.git = {
-      enable = true;
-      userName  = "Wil Taylor";
-      userEmail = "cert@wiltaylor.dev";
-      signing = {
-        key = "0xEC571018542D2ACC";
-        signByDefault = false;
-      };
-    };    
+    system.activationScripts = { 
+      setup-gpg = ''
+        mkdir -p $out/home/wil/.gnupg
+        ln -sf ${./authorized_keys} /home/wil/.gnupg/authorized_keys
+        ln -sf ${./gpg-agent.conf} /home/wil/.gnupg/gpg-agent.conf
+        ln -sf ${./gpg.conf} /home/wil/.gnupg/gpg.conf
+        ln -sf ${./public.key} /home/wil/.gnupg/public.key
+      '';
+    };
   };
 }

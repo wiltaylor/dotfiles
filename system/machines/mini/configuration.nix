@@ -28,8 +28,7 @@
 
   # Host specific network settings
   networking.hostName = "mini"; 
-  networking.interfaces.enp62s0.useDHCP = true; #update these
-  networking.interfaces.wlp63s0.useDHCP = true;
+  networking.interfaces.wlo1.useDHCP = true;
   networking.firewall.allowedTCPPorts = [ ];
 
   wil.desktop.x11 = {

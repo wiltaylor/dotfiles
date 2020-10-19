@@ -53,6 +53,7 @@ in {
       mpv
       ueberzug
       gimp
+      google-chrome # Move to work shell
     ];
 
     home.file = {

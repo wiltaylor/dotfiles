@@ -30,5 +30,8 @@
     ./sshd.nix
     ./desktop.nix
     ./games.nix
+    ./i3wm.nix
+    ./git.nix
+    ./gpg
   ];
 }

@@ -51,6 +51,7 @@ in {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ]; 
       uid = 1000;
+      initialPassword = "P@ssw0rd01"; #Changed on first login.
       shell = pkgs.zsh; 
     };
 

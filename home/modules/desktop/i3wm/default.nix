@@ -70,8 +70,8 @@ in {
             "${modifier}+Shift+r" = "restart";
    	        "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
 	          "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
-            "${modifier}+w" = "exec ${pkgs.firefox}/bin/firefox";
-            "${modifier}+shift+w" = "exec ${pkgs.firefox}/bin/firefox -p vygo";
+            "${modifier}+w" = "exec MOZ_USE_XINPUT2=1 ${pkgs.firefox}/bin/firefox";
+            "${modifier}+shift+w" = "exec MOZ_USE_XINPUT2=1 ${pkgs.firefox}/bin/firefox -p vygo";
 	          "${modifier}+Shift+q" = "kill";
 	          "${modifier}+j" = "exec ${pkgs.joplin-desktop}/bin/joplin-desktop";
 	          "${modifier}+Left" = "focus left";

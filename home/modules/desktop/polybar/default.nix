@@ -151,15 +151,15 @@ in {
 	        };
 
 	        dp0-mini = {
-            monitor = "eDP1";
+            monitor = "eDP-1";
 	        };
 
 	        dp1-mini = {
-	          monitor = "DP1-1";
+	          monitor = "DP-1-1";
 	        };	
 
 	        dp2-mini = {
-	          monitor = "DP1-2";
+	          monitor = "DP-1-2";
 	        };
 
 	        "bar/top1" = templatebar // dp0;
