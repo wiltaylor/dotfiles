@@ -16,21 +16,13 @@
 with lib;
 let
   cfg = config.wil.polybar;
-in {
-  options.wil.polybar = {
-    enable = mkEnableOption "Enable polybar";
+
+  mini-font = {
+	          font-0 = "Source Code Pro Semibold:size=12;1";
+	          font-1 = "Font Awesome 5 Free:style=Solid:size=12;1";
+	          font-2 = "Font Awesome 5 Brands:size=12;1";	
   };
 
-  config = mkIf (cfg.enable) {
-      services.polybar = {
-        enable = true;
-        script = "polybar -q -r top1 & polybar -q -r top2 & polybar -q -r top3 & polybar -q -r top4 & polybar -q -r top5 & polybar -q -r top6 &";
-  
-        package = pkgs.polybar.override {
-          i3GapsSupport = true;
-        };
-
-        config = rec {    
 	        templatebar = {
 	          width = "100%";
 	          height = "2%";
@@ -116,6 +108,25 @@ in {
 	          animation-discharging-framerate = 500;
 	        };
 
+
+
+
+in {
+  options.wil.polybar = {
+    enable = mkEnableOption "Enable polybar";
+  };
+
+  config = mkIf (cfg.enable) {
+      services.polybar = {
+        enable = true;
+        script = "polybar -q -r top1 & polybar -q -r top2 & polybar -q -r top3 & polybar -q -r top4 & polybar -q -r top5 & polybar -q -r top6 &";
+  
+        package = pkgs.polybar.override {
+          i3GapsSupport = true;
+        };
+
+        config = rec {    
+
 	        bat0 = {
 	          battery = "BAT0";
 	          adapter = "AC";
@@ -165,9 +176,9 @@ in {
 	        "bar/top1" = templatebar // dp0;
 	        "bar/top2" = templatebar // dp2;
 	        "bar/top3" = templatebar // dp3;
-	        "bar/top4" = templatebar // dp0-mini;
-	        "bar/top5" = templatebar // dp1-mini;
-	        "bar/top6" = templatebar // dp2-mini;
+	        "bar/top4" = templatebar // dp0-mini // mini-font;
+	        "bar/top5" = templatebar // dp1-mini // mini-font;
+	        "bar/top6" = templatebar // dp2-mini // mini-font;
 
 	        "module/wifi0" = templatewlan // wifi0;
 	        "module/wifi1" = templatewlan // wifi1;

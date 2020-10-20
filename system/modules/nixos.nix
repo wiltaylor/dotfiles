@@ -45,6 +45,7 @@ in {
       curl
       bind
       killall
+      dmidecode
     ];
   };
 }

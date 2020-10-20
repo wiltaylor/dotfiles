@@ -30,6 +30,7 @@
   networking.hostName = "mini"; 
   networking.interfaces.wlo1.useDHCP = true;
   networking.firewall.allowedTCPPorts = [ ];
+  hardware.bluetooth.enable = true;
 
   wil.desktop.x11 = {
     enable = true;
