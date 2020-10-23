@@ -31,8 +31,10 @@ in {
       vimwiki-markdown
     ];
 
-    programs.vim = {
+    programs.neovim = {
       enable = true;
+      vimAlias = true;
+      vimdiffAlias = true;
       plugins = with pkgs.vimPlugins; [
         nerdtree
         nerdtree-git-plugin
@@ -42,7 +44,6 @@ in {
         vimwiki
       ];
 
-      settings = { ignorecase = true; };
       extraConfig = ''
         " Basic editor config
         set clipboard+=unnamedplus
@@ -78,6 +79,11 @@ in {
         map <a-cr> :CocAction<CR>
         "Vim wiki settings
         let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/site_html', 'custom_wiki2html': 'vimwiki_markdown'}]
+
+        noremap <Up> <Nop>
+        noremap <Down> <Nop>
+        noremap <Left> <Nop>
+        noremap <Right> <Nop>
       '';
     };
   };
