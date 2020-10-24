@@ -35,11 +35,6 @@ in {
       options = "--delete-older-than 5d";
     };
 
-    nix.package = pkgs.nixUnstable;
-    nix.extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-
     i18n.defaultLocale = "en_AU.UTF-8";
     time.timeZone = "Australia/Brisbane";
 

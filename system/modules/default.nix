@@ -22,7 +22,7 @@
 
   imports = [
     ./g810-led.nix
-    ./users.nix
+    ./users.nix 
     ./nixos.nix
     ./wifi.nix
     ./net.nix
@@ -30,8 +30,5 @@
     ./sshd.nix
     ./desktop.nix
     ./games.nix
-    ./i3wm.nix
-    ./git.nix
-    ./gpg
   ];
 }

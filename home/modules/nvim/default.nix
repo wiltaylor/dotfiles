@@ -49,7 +49,7 @@ in {
         set clipboard+=unnamedplus
         set mouse=a
         set encoding=utf-8
-        set number
+        set number relativenumber
         set noswapfile
         set nobackup
         set nowritebackup
@@ -80,11 +80,18 @@ in {
         "Vim wiki settings
         let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/site_html', 'custom_wiki2html': 'vimwiki_markdown'}]
 
-        noremap <Up> <Nop>
-        noremap <Down> <Nop>
-        noremap <Left> <Nop>
-        noremap <Right> <Nop>
-      '';
+        " Disable Arrow keys in Normal mode
+        map <up> <nop>
+        map <down> <nop>
+        map <left> <nop>
+        map <right> <nop>
+
+        " Disable Arrow keys in Insert mode
+        imap <up> <nop>
+        imap <down> <nop>
+        imap <left> <nop>
+        imap <right> <nop>
+'';
     };
   };
 }
