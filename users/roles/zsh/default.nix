@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     spaceship-prompt
     nix-zsh-completions
+    direnv
   ];
 
   home.file = {
