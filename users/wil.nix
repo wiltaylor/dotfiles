@@ -19,6 +19,7 @@
       ./roles/desktop/i3wm
       ./roles/ranger
       ./roles/tmux
+      ./roles/zsh
     ];
 
     nixpkgs.config.allowUnfree = true;
