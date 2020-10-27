@@ -13,28 +13,17 @@
 
 
 {pkgs, config, lib, ...}:
-with lib;
-let
-  cfg = config.wil.cli;
-in {
+{
+    programs.tmux = {
+      enable = true;
+      terminal = "tmux-256color";
+      escapeTime = 0;
+      aggressiveResize = true;
+      keyMode = "vi";
+      shortcut = "a";
 
-  options.wil.cli = {
-    enable = mkEnableOption "Enable basic cli tools";
-  };
-
-  config = mkIf (cfg.enable) {
-    home.packages = with pkgs; [
-      neofetch
-      htop
-      bat
-      zip
-      unzip
-      file
-      p7zip
-      ranger
-      strace
-      ltrace
-    ];
-  };
-
+      extraConfig = ''
+        setw -g mouse on
+      '';
+    };
 }

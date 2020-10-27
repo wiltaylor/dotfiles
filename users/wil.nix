@@ -17,6 +17,8 @@
       ./roles/neovim
       ./roles/git
       ./roles/desktop/i3wm
+      ./roles/ranger
+      ./roles/tmux
     ];
 
     nixpkgs.config.allowUnfree = true;

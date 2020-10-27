@@ -12,18 +12,15 @@
 # Feel free to use this configuration as you wish.
 
 
-{pkgs, config, lib, ...}:
-with lib;
-let
-  cfg = config.wil.appimage;
-in {
-  options.wil.appimage = {
-    enable = mkEnableOption "Enable appimage support";
-  };
-
-  config = mkIf (cfg.enable) {
+{pkgs, config, lib, ... }:
+{
     home.packages = with pkgs; [
-      appimage-run
+      breeze-qt5
     ];
-  };
+
+    home.file = {
+      ".kde4/share/config/kdeglobals".source = ./kdeglobals;
+      ".kde4/share/apps/color-schemes/Breeze.colors".source = ./Breeze.colors;
+      ".kde4/share/apps/color-schemes/BreezeDark.colors".source = ./BreezeDark.colors;
+    };
 }

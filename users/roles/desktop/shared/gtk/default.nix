@@ -11,26 +11,19 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-{ pkgs, config, lib, ...}:
-with lib;
-let 
-  cfg = config.wil.gpg;
-in {
-  
-  options.wil.gpg = {
-    enable = mkEnableOption "Enable user GPG services";
-  };
 
-  config = mkIf (cfg.enable) {
-    home.packages = with pkgs; [
-      pinentry-gtk2
-    ];
+{pkgs, config, lib, ...}:
+{
 
     home.file = {
-      ".ssh/authorized_keys".source = ./authorized_keys;
-      ".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
-      ".gnupg/gpg.confg".source = ./gpg.conf;
-      ".gnupg/public.key".source = ./public.key;
+      ".config/gtk-4.0/settings.ini".source = ./4/settings.ini;
+      ".config/gtk-3.0/settings.ini".source = ./3/settings.ini;
+      ".config/gtk-3.0/colors.css".source = ./3/colors.css;
+      ".config/gtk-3.0/gtk.css".source = ./3/gtk.css;
     };
-  };
+
+    home.packages = with pkgs; [
+      breeze-gtk
+    ];
+
 }

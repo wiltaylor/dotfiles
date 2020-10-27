@@ -1,5 +1,10 @@
 {pkgs, config, lib, ...}:
 {
+
+  imports = [
+    ./spotify.nix
+  ];
+
   home.packages = with pkgs;[
     firefox
     pavucontrol
@@ -10,6 +15,13 @@
     feh
     mpv
     gimp
-    google-chrome # TODO: Move to work shell so i can get this off my main profile
+    virt-manager
+    youtube-dl
+
+    # This stuff should be moved to work shell eventually
+    google-chrome
+    vscodium-alias
+    vscodium
+    gitkraken
   ];
 }

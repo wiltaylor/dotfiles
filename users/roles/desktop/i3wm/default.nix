@@ -25,6 +25,8 @@
     ../shared/rofi.nix
     ../shared/fixSelection.nix
     ../shared/applications.nix
+    ../shared/gtk
+    ../shared/kde
   ];
 
   xsession = {

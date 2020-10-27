@@ -13,15 +13,7 @@
 
 
 {pkgs, config, lib, ...}:
-with lib;
-let 
-  cfg = config.wil.ranger;
-in {
-  options.wil.ranger = {
-    enable = mkEnableOption "Ranger file manager";
-  };
-
-  config = mkIf (cfg.enable) {
+{
     home.packages = with pkgs; [
       ranger
     ];
@@ -32,5 +24,4 @@ in {
       ".config/ranger/rifle.conf".source = ./rifle.conf;
       ".config/ranger/scope.sh".source = ./scope.sh;
     };
-  };
 }
