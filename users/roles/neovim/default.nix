@@ -17,7 +17,7 @@
       nerdtree-git-plugin
       nord-vim
       vim-devicons
-      vim-nerdtree-syntax-highlight
+#      vim-nerdtree-syntax-highlight
       vimwiki
     ];
 
@@ -69,5 +69,6 @@
       imap <left> <nop>
       imap <right> <nop>
   '';
+  };
 }
   

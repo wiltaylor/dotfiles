@@ -16,12 +16,15 @@
 {
 
   imports = [
-    ../shared/fonts
+    ../shared/fonts.nix
     ./polybar.nix
     ../shared/alacritty
+    ../shared/wallpaper.nix
     ../shared/dunst.nix
     ../shared/picom.nix
     ../shared/rofi.nix
+    ../shared/fixSelection.nix
+    ../shared/applications.nix
   ];
 
   xsession = {

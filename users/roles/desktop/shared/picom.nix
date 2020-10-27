@@ -1,6 +1,6 @@
 {pkgs, config, lib, ...}:
 {
-  home.pacakges = with pkgs; [
+  home.packages = with pkgs; [
     picom
   ];
 
@@ -10,6 +10,5 @@
     fadeDelta = 5;
     shadow = false;
     backend = "glx";
-    vsync = true;
   };
 }
