@@ -1,5 +1,10 @@
 {pkgs, config, lib, ...}:
 {
+
+  home.packages = with pkgs; [
+    pinentry-gtk2
+  ];
+
   home.file = {
     ".ssh/authorized_keys".source = ./authorized_keys;
     ".gnupg/gpg_agent.conf".source = ./gpg-agent.conf;
