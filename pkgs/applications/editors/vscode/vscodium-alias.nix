@@ -11,9 +11,8 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-{pkgs}:
-
-(import <nixpkgs> {}).runCommand "vscodium-alias" {} ''
-mkdir -p $out/bin
-ln -s ${pkgs.vscodium}/bin/codium $out/bin/code
-''
+{ pkgs }:
+  pkgs.runCommand "vscodium-alias" {} '' 
+    mkdir -p $out/bin
+    ln -s ${pkgs.vscodium}/bin/codium $out/bin/code
+  ''
