@@ -21,7 +21,7 @@
 
   wil.gpg.enable = true;
   wil.nvim.enable = true;
-  wil.spotify.enable = true;
+  #wil.spotify.enable = true;
   wil.zsh.enable = true;
   wil.tmux.enable = true;
   wil.git.enable = true;

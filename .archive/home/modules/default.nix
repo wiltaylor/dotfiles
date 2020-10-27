@@ -35,7 +35,7 @@
   imports = [
     ./gpg
     ./nvim
-    ./spotify
+  #  ./spotify
     ./zsh
     ./tmux
     ./git
