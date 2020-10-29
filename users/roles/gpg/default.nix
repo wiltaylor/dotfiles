@@ -3,13 +3,18 @@ with lib;
 {
 
   home.packages = with pkgs; [
-    pinentry-curses
     pass
+    pinentry-gtk2
   ];
 
   home.file = {
     ".ssh/authorized_keys".source = ./authorized_keys;
-    ".gnupg/gpg_agent.conf".source = ./gpg-agent.conf;
+    ".gnupg/gpg_agent.conf".text = ''
+      enable-ssh-support
+      default-cache-ttl 60
+      max-cache-ttl 60
+      pinentry-program /home/wil/.nix-profile/bin/pinentry-gtk-2
+    '';
     ".gnupg/gpg.conf".source = ./gpg.conf;
     ".gnupg/public.key".source = ./public.key;
   };

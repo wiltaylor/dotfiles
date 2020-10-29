@@ -51,6 +51,11 @@
             notification = false;
           }
           {
+            command = "systemctl --user restart gpg-agent.service";
+            always = false;
+            notification = false;
+          }
+          {
             command = "${pkgs.xmousepasteblock}"; 
             always = true;
             notification = false;

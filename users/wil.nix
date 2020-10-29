@@ -13,7 +13,7 @@
   home-manager.users.wil = {
     
     imports = [
-      ./roles/gpg
+#      ./roles/gpg
       ./roles/neovim
       ./roles/git
       ./roles/desktop/i3wm
