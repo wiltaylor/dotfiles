@@ -2,11 +2,13 @@
 {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.g810led.enable = true;
 
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ]; #TODO: Make possible to select nvidia or intel
     displayManager.lightdm.enable = true;
+    displayManager.lightdm.greeters.gtk.enable = true;
     displayManager.session = [
       {
         manage = "desktop";

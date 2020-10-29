@@ -2,7 +2,6 @@
 {
   users.users.wil = {
     name = "wil";
-    description = "Wil Taylor";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
     uid = 1000;

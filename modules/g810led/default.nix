@@ -24,7 +24,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.wil.g810-led;
+      default = pkgs.g810-led;
       defaultText = "pkgs.wil.g810-led";
       description = "G810 package to use";
     };
