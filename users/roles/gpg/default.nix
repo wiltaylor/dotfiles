@@ -1,4 +1,5 @@
 {pkgs, config, lib, ...}:
+with lib;
 {
 
   home.packages = with pkgs; [
@@ -28,5 +29,9 @@
       export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
     }
   '';
+
+  home.activation.gpgtrust = hm.dag.entryAfter ["LinkGeneration"] (''
+    gpg --import ~/.gnupg/public.key
+  '');
 
 }
