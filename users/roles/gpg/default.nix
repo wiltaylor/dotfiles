@@ -2,7 +2,8 @@
 {
 
   home.packages = with pkgs; [
-    pinentry-gtk2
+    pinentry-curses
+    pass
   ];
 
   home.file = {
