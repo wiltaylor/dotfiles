@@ -2,9 +2,13 @@
 {
   system.stateVersion = "20.09";
 
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 5d";
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = "experimental-features = nix-command flakes";
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 5d";
+    };
   };
 
   i18n.defaultLocale = "en_AU.UTF-8";

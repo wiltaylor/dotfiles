@@ -7,7 +7,7 @@
     userEmail = "cert@wiltaylor.dev";
     signing = {
       key = "0xEC571018542D2ACC";
-      signByDefault = true;
+      signByDefault = false;
     };
   };
 }

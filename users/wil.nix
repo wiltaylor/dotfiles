@@ -1,4 +1,4 @@
-{config, pkgs, lib, ...}:
+{config, pkgs, lib, home-manager, ...}:
 {
   users.users.wil = {
     name = "wil";
