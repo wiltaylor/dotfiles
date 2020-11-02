@@ -11,6 +11,4 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-export NIX_PATH="nixos-config=$PWD/hosts/$(hostname).nix:$NIX_PATH"
-echo $NIX_PATH
-nixos-rebuild switch --show-trace
+nixos-rebuild switch --flake '.#' 

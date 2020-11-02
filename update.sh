@@ -1,1 +1,1 @@
-nix-channel --update
+nix flake update --recreate-lock-file
