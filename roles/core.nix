@@ -13,6 +13,7 @@
 
   i18n.defaultLocale = "en_AU.UTF-8";
   time.timeZone = "Australia/Brisbane";
+  services.earlyoom.enable = true;
 
   environment.systemPackages = with pkgs; [
     wget
@@ -34,6 +35,9 @@
     git-crypt
     tmux
     zsh
+    dmg2img
+    unrar
+    python3
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";
