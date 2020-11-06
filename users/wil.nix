@@ -19,6 +19,7 @@
       ./roles/ranger
       ./roles/tmux
       ./roles/zsh
+      ./roles/email
     ];
 
     nixpkgs.config.allowUnfree = true;
