@@ -1,0 +1,32 @@
+source ~/.secrets/mail
+
+set realname='Wil Taylor'
+set from=$my_email
+set folder="imap://localhost:1143/"
+set spoolfile = "+inbox"
+set record = "Sent"
+set trash = "Trash"
+set postponed = "Drafts"
+set imap_user = $my_user 
+set imap_pass = $my_password 
+set imap_check_subscribed = yes
+set imap_list_subscribed = yes
+set mail_check=90
+set timeout =15
+set ssl_force_tls = no
+set imap_keepalive=180
+set smtp_url = "smtp://$my_user:$my_password@localhost:1025"
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+unset imap_passive
+
+set header_cache=~/.cache/mutt
+set message_cachedir=~/.cache/mutt
+
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CI sidebar-open
+bind index,pager \CB sidebar-toggle-visible
+
+
