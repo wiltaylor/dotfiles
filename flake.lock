@@ -51,11 +51,46 @@
         "type": "indirect"
       }
     },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1604369895,
+        "narHash": "sha256-uB/ihiWdfTjVQ9sKdtj6xeyvb41uC2J4MXiOLkwJccs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "34ad166a830d3ac1541dcce571c52231f2f0865a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixos": "nixos",
-        "nixos-unstable": "nixos-unstable"
+        "nixos-unstable": "nixos-unstable",
+        "wtdevtools": "wtdevtools"
+      }
+    },
+    "wtdevtools": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1604815250,
+        "narHash": "sha256-wKB+G7qzxrnfLz2CvziXqzmb3fFGhOCXvWWjqpwv3T8=",
+        "owner": "wiltaylor",
+        "repo": "wtdevtools",
+        "rev": "309e61b783a12b2df9c313bcf28363751de7a047",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wiltaylor",
+        "repo": "wtdevtools",
+        "type": "github"
       }
     }
   },
