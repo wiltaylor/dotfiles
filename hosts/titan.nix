@@ -46,33 +46,33 @@
   #TODO: Use labels so this can be more generic across laptops.
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/62b6381c-86d6-454f-b431-c9d1189bfb3f";
+    { device = "/dev/disk/by-label/ROOT";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/59ed63ef-6bc3-4640-8020-94aa36b2a072";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/CRYPTROOT";
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/62b6381c-86d6-454f-b431-c9d1189bfb3f";
+    { device = "/dev/disk/by-label/ROOT";
       fsType = "btrfs";
       options = [ "subvol=@home" ];
     };
 
   fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/62b6381c-86d6-454f-b431-c9d1189bfb3f";
+    { device = "/dev/disk/by-label/ROOT";
       fsType = "btrfs";
       options = [ "subvol=@var" ];
     };
 
   fileSystems."/.pagefile" =
-    { device = "/dev/disk/by-uuid/62b6381c-86d6-454f-b431-c9d1189bfb3f";
+    { device = "/dev/disk/by-label/ROOT";
       fsType = "btrfs";
       options = [ "subvol=@pagefile" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8412-6A78";
+    { device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
     };
 
