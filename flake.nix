@@ -21,21 +21,34 @@
 
     #legacyPackages."${system}"."devtools" = wtdevtools."${system}";
     
-    nixosConfigurations.titan = nixos.lib.nixosSystem {
-      inherit system;
+    nixosConfigurations = {
+        titan = nixos.lib.nixosSystem {
+          inherit system;
 
-      specialArgs = {
-       dts = wtdevtools;
-      };
+          specialArgs = {
+            dts = wtdevtools;
+          };
 
       
-      modules = [
-        home-manager.nixosModules.home-manager
-        (import ./hosts/titan.nix)
+          modules = [
+            home-manager.nixosModules.home-manager
+            (import ./hosts/titan.nix)
+          ];
+        };
 
-      ];
+        mini = nixos.lib.nixosSystem {
+          inherit system;
+
+          specialArgs = {
+            dts = wtdevtools;
+          };
+
+          modules = [
+            home-manager.nixosModules.home-manager
+            (import ./hosts/mini.nix)
+          ];
+        };
     };
-
 
   };
 }
