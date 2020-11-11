@@ -1,2 +1,3 @@
 * Have user accounts listed in lightdm
-* 
+* Fix i3wm workspace (start on 1 instead of 10)
+* Add alienware 17 GPU selection scripts for docked and undocked
