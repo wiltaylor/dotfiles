@@ -17,6 +17,7 @@
 
   environment.systemPackages = with pkgs; [
     wget
+    pciutils
     curl
     bind
     killall

@@ -6,7 +6,6 @@
 
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ]; #TODO: Make possible to select nvidia or intel
     displayManager.lightdm.enable = true;
     displayManager.session = [
       {

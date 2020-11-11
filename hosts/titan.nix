@@ -16,7 +16,7 @@
     devtools = dts.defaultPackage.x86_64-linux;
   })];
 
-  environment.systemPackages = [ pkgs.devtools ];
+  environment.systemPackages = [ pkgs.devtools pkgs.microcodeIntel ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
@@ -40,5 +40,7 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   nix.maxJobs = lib.mkDefault 8;
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+
+  services.xserver.videoDrivers = [ "nvidia" ];
   
 }
