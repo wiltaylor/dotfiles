@@ -9,6 +9,7 @@
     ../roles/yubikey.nix
     ../roles/desktop-xorg.nix
     ../roles/games.nix
+    ../roles/efi.nix
   ];
  
   nixpkgs.overlays = [ (final: prev: {
@@ -16,8 +17,6 @@
   })];
 
   environment.systemPackages = [ pkgs.devtools ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
@@ -42,43 +41,4 @@
   nix.maxJobs = lib.mkDefault 8;
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   
-  # System specific disk layout options
-  #TODO: Use labels so this can be more generic across laptops.
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-label/ROOT";
-      fsType = "btrfs";
-      options = [ "subvol=@" ];
-    };
-
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/CRYPTROOT";
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-label/ROOT";
-      fsType = "btrfs";
-      options = [ "subvol=@home" ];
-    };
-
-  fileSystems."/var" =
-    { device = "/dev/disk/by-label/ROOT";
-      fsType = "btrfs";
-      options = [ "subvol=@var" ];
-    };
-
-  fileSystems."/.pagefile" =
-    { device = "/dev/disk/by-label/ROOT";
-      fsType = "btrfs";
-      options = [ "subvol=@pagefile" ];
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
-      fsType = "vfat";
-    };
-
-  swapDevices = [ 
-    {
-      device = "/.pagefile/pagefile";
-    }
-  ]; 
 }
