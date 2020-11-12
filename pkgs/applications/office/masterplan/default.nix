@@ -3,6 +3,8 @@ buildGoPackage {
   pname = "masterplan";
   version = "0.6.0";
 
+# Broken - need to add c++ deps and also pre-reqs so it works
+
   goPackagePath = "github.com/SolarLune/masterplan";
 
   goDeps = ./deps.nix;
