@@ -56,7 +56,7 @@
             notification = false;
           }
           {
-            command = "${pkgs.xmousepasteblock}"; 
+            command = "systemctl --user restart xmousepasteblock"; 
             always = true;
             notification = false;
           }
