@@ -23,5 +23,6 @@
     vscodium-alias
     vscodium
     gitkraken
+    masterplan
   ];
 }

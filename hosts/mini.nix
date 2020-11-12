@@ -1,4 +1,4 @@
-{pkgs, lib, config, ...}:
+{pkgs, lib, config, dts, ...}:
 {
   imports = [
     ../modules
@@ -20,6 +20,8 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+
+  hardware.enableRedistributableFirmware = lib.mkDefault true;
   
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;

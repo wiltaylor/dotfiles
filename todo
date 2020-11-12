@@ -1,3 +1,5 @@
 * Have user accounts listed in lightdm
 * Fix i3wm workspace (start on 1 instead of 10)
 * Add alienware 17 GPU selection scripts for docked and undocked
+* Fix polybar to show wifi and battery on all systems
+* Fix screens on mini laptop at work
