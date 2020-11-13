@@ -32,9 +32,9 @@
   networking.firewall.allowedTCPPorts = [ ];
 #  networking.wireless.enable = true;
   networking.networkmanager.enable = true;
-  networking.networkmanager.unmanaged = [
-    "*" "except:type:wwan" "except:type:gsm"
-  ];
+  #networking.networkmanager.unmanaged = [
+  #  "*" "except:type:wwan" "except:type:gsm"
+ # ];
   networking.useDHCP = false; # Stop new devices auto connecting
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
@@ -42,5 +42,8 @@
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+
+  hardware.enableRedistributableFirmware = lib.mkDefault true;
   
 }
