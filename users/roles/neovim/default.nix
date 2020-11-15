@@ -6,6 +6,7 @@
 
   home.packages = with pkgs; [
     vimwiki-markdown
+    python3
   ];
 
   programs.neovim = {
@@ -29,7 +30,25 @@
       vim-devicons
       vimwiki
       vim-nix
-      YouCompleteMe
+      coc-nvim
+      coc-python
+      coc-tsserver
+      coc-json
+      coc-yaml
+      coc-wxml
+      coc-markdownlint
+      coc-vimlsp
+      coc-vimtex
+      coc-snippets
+      coc-rls
+      coc-html
+      coc-jest
+      coc-go
+      coc-git
+      coc-fzf
+      coc-eslint
+      coc-css
+
     ];
 
     extraConfig = ''
