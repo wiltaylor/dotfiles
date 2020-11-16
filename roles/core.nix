@@ -3,7 +3,6 @@
   system.stateVersion = "20.09";
 
   nix = {
-    package = pkgs.nixUnstable;
     extraOptions = "experimental-features = nix-command flakes";
     gc = {
       automatic = true;
@@ -41,6 +40,8 @@
     unrar
     python3
     nix-bundle
+    my.devtools 
+    microcodeIntel
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";

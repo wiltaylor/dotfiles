@@ -47,6 +47,10 @@
       
           modules = [
             {
+              nix = {
+                package = pkgs.unstable.nixUnstable;
+              };
+
               nixpkgs.pkgs = pkgs;
             }
             home-manager.nixosModules.home-manager
