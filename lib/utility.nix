@@ -3,7 +3,7 @@
   pkgImport = pkgs:
     import pkgs {
       inherit system;
-      config = { allowUnfree = true; };
+      config = { allowUnfree = true; };,
     };
 
   mkOverlay = pkgs:

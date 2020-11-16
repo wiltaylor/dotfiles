@@ -28,7 +28,7 @@
     system = "x86_64-linux";
 
 
-    hst = import ./lib/host.nix { inherit system pkgs home-manager; };
+    hst = import ./lib/host.nix { inherit system pkgs home-manager lib; };
 
   in {
     overlay = 
@@ -41,56 +41,56 @@
 
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
-    #nixosConfigurations = {
-    #  titan = hst.mkHost {
-    #    name = "titan";
-    #    NICS = [ "enp62s0" "wlp63s0" ];
-    #    initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "core" ];
-    #    kernelMods = [" kvm-intel" ];
-    #    roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" ];
-    #    user = [ "wil" ];
-    #  };
+    nixosConfigurations = {
+      titan = hst.mkHost {
+        name = "titan";
+        NICS = [ "enp62s0" "wlp63s0" ];
+        initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "core" ];
+        kernelMods = [" kvm-intel" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" ];
+        user = [ "wil" ];
+      };
 
       #mini = mkHost {
 
       #};
-    #};
-
-    nixosConfigurations = {
-        titan = nixos.lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-          };
-
-      
-          modules = [
-            {
-              nix = {
-                package = pkgs.unstable.nixUnstable;
-              };
-
-              nixpkgs.pkgs = pkgs;
-            }
-            home-manager.nixosModules.home-manager
-            
-            (import ./hosts/titan.nix)
-          ];
-        };
-
-        mini = nixos.lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-            inherit pkgs;
-          };
-
-          modules = [
-            home-manager.nixosModules.home-manager
-            (import ./hosts/mini.nix)
-          ];
-        };
     };
+
+   # nixosConfigurations = {
+   #     titan = nixos.lib.nixosSystem {
+   #       inherit system;
+#
+#          specialArgs = {
+#          };
+#
+#      
+#          modules = [
+#            {
+#              nix = {
+#                package = pkgs.unstable.nixUnstable;
+#              };
+#
+#              nixpkgs.pkgs = pkgs;
+#            }
+#            home-manager.nixosModules.home-manager
+##            
+#            (import ./hosts/titan.nix)
+#          ];
+#        };
+#
+#        mini = nixos.lib.nixosSystem {
+  #        inherit system;
+#
+#          specialArgs = {
+#            inherit pkgs;
+#          };
+#
+     #     modules = [
+#            home-manager.nixosModules.home-manager
+#            (import ./hosts/mini.nix)
+#          ];
+#        };
+ #   };
 
   };
 }

@@ -1,4 +1,4 @@
-{ system, pkgs, home-manager, ...}:
+{ system, pkgs, home-manager, lib, ...}:
 {
   mkHost = { name, NICs, initrdMods, kernelMods, roles, users, cpuCores }:
     let 
@@ -9,7 +9,7 @@
       roles_mods = (map (r: mkRole r) roles );
       user_mods = (map (u: mkUser u) users);
 
-    in {
+    in lib.nixosSystem {
       inherit system;
 
       specialArgs = {};
