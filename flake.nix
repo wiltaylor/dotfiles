@@ -19,7 +19,7 @@
     mkPkgs = pkgs: extraOverlays: import pkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = extraOverlays ++ (attrValues self.overlays);
+      overlays = extraOverlays;
     };
     pkgs = mkPkgs nixos [ self.overlay ];
     upkgs = mkPkgs nixos-unstable [];
@@ -33,21 +33,9 @@
         my = self.packages."${system}";
       };
 
-      packages."${system}" = import ./pkgs { inherit pkgs wtdevtools;};
+    packages."${system}" = import ./pkgs { inherit pkgs wtdevtools;};
 
-    overlays = {};
-
-    #packages."${system}" = lib.recursiveUpdate self.overlay pkgs;
-
-    #devShell."${system}" = import ./shell.nix { inherit pkgs; };
-
-    nixosModules = [
-      ({ pkgs, ... }: {
-        nixpkgs.overlays = self.overlay;
-        imports = [ ./modules ];
-      })
-
-    ];
+    devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
     nixosConfigurations = {
         titan = nixos.lib.nixosSystem {
