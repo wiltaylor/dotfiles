@@ -1,4 +1,4 @@
-{pkgs, lib, config, home-manager, dts, ...}:
+{pkgs, lib, config, home-manager, ...}:
 {
   imports = [
     ../modules
@@ -11,12 +11,13 @@
     ../roles/games.nix
     ../roles/efi.nix
   ];
- 
-  nixpkgs.overlays = [ (final: prev: {
-    devtools = dts.defaultPackage.x86_64-linux;
-  })];
 
-  environment.systemPackages = [ pkgs.devtools pkgs.microcodeIntel ];
+  #nixpkgs.overlays = overlay;
+  #nixpkgs.overlays = [ (final: prev: {
+  #  devtools = dts.defaultPackage.x86_64-linux;
+  #})];
+
+  environment.systemPackages = [ pkgs.my.devtools pkgs.microcodeIntel ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];

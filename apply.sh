@@ -11,4 +11,4 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-nixos-rebuild switch --flake '.#' 
+nixos-rebuild switch --flake '.#'  

@@ -20,7 +20,7 @@
 
     # This stuff should be moved to work shell eventually
     google-chrome
-    vscodium-alias
+    my.vscodium-alias
     vscodium
     gitkraken
     #masterplan

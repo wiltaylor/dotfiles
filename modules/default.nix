@@ -1,9 +1,6 @@
 {pkgs, ... }:
 {
-  config = {
-    nixpkgs.config.allowUnfree = true;
-    nixpkgs.overlays = import ../pkgs;
-  };
+  #nixpkgs.overlays = overlay;
 
   imports = [
     ./g810led

@@ -1,7 +1,7 @@
 {pkgs, lib, config, dts, ...}:
 {
   imports = [
-    ../modules
+    #../modules
     ../users
     ../.secret/wifi.nix
     ../roles/core.nix

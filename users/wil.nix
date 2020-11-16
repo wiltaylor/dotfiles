@@ -23,7 +23,7 @@
     ];
 
     nixpkgs.config.allowUnfree = true;
-    nixpkgs.overlays = import ../pkgs;
+    nixpkgs.overlays = pkgs.overlays;
 
     systemd.user.startServices = true;
     home.stateVersion = "20.09";

@@ -38,11 +38,11 @@
     },
     "nixos-unstable": {
       "locked": {
-        "lastModified": 1605171959,
-        "narHash": "sha256-JIM7QrQ2jpnA6qRfP8MzXD8USiWYStfL9Cssz01QvMw=",
+        "lastModified": 1605225031,
+        "narHash": "sha256-W+7blIrccTCTyQCCE4aGn1cFrGIuTinN96GxZrJiojs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a371c1071161104d329f6a85d922fd92b7cbab63",
+        "rev": "2deeb58f49480f468adca6b08291322de4dbce6b",
         "type": "github"
       },
       "original": {
@@ -52,6 +52,20 @@
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1605488225,
+        "narHash": "sha256-484euur4b4E7F8lQOVuuZaidycO3DS4qvbWDtS8mCkk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4dfa36fe6d14e534c4d5a319563e46ada64ab097",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1604762992,
         "narHash": "sha256-7VB4fm5uIyqcMaUAgyx4MCqQEjsl9xZDdDzJMoi1DHo=",
@@ -72,12 +86,13 @@
         "home-manager": "home-manager",
         "nixos": "nixos",
         "nixos-unstable": "nixos-unstable",
+        "nixpkgs": "nixpkgs",
         "wtdevtools": "wtdevtools"
       }
     },
     "wtdevtools": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1605323830,

@@ -9,6 +9,7 @@
       automatic = true;
       options = "--delete-older-than 5d";
     };
+
   };
 
   i18n.defaultLocale = "en_AU.UTF-8";
@@ -39,6 +40,7 @@
     dmg2img
     unrar
     python3
+    nix-bundle
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";

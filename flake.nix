@@ -9,29 +9,60 @@
     wtdevtools.url = "github:wiltaylor/wtdevtools";
   };
 
-  outputs = inputs @ {self, nixos, nixos-unstable, home-manager, wtdevtools, ... }:
-  let 
+  outputs = inputs @ {self, nixos, nixos-unstable, home-manager, wtdevtools, nixpkgs, ... }:
+  let
+    inherit (nixos) lib;
+    inherit (lib) attrValues;
+
+    util = import ./lib/utility.nix { inherit system; };
+
+    mkPkgs = pkgs: extraOverlays: import pkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = extraOverlays ++ (attrValues self.overlays);
+    };
+    pkgs = mkPkgs nixos [ self.overlay ];
+    upkgs = mkPkgs nixos-unstable [];
+
     system = "x86_64-linux";
 
   in {
+    overlay = 
+      final: prev: {
+        unstable = upkgs;
+        my = self.packages."${system}";
+      };
 
-    overlay = final: prev: {
-      devtool = wtdevtools.defaultPackage.${system};
-    };
+      packages."${system}" = import ./pkgs { inherit pkgs wtdevtools;};
 
-    #legacyPackages."${system}"."devtools" = wtdevtools."${system}";
-    
+    overlays = {};
+
+    #packages."${system}" = lib.recursiveUpdate self.overlay pkgs;
+
+    #devShell."${system}" = import ./shell.nix { inherit pkgs; };
+
+    nixosModules = [
+      ({ pkgs, ... }: {
+        nixpkgs.overlays = self.overlay;
+        imports = [ ./modules ];
+      })
+
+    ];
+
     nixosConfigurations = {
         titan = nixos.lib.nixosSystem {
           inherit system;
 
           specialArgs = {
-            dts = wtdevtools;
           };
 
       
           modules = [
+            {
+              nixpkgs.pkgs = pkgs;
+            }
             home-manager.nixosModules.home-manager
+            
             (import ./hosts/titan.nix)
           ];
         };
@@ -40,7 +71,7 @@
           inherit system;
 
           specialArgs = {
-            dts = wtdevtools;
+            inherit pkgs;
           };
 
           modules = [
