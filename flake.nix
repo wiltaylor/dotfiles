@@ -44,16 +44,13 @@
     nixosConfigurations = {
       titan = hst.mkHost {
         name = "titan";
-        NICS = [ "enp62s0" "wlp63s0" ];
+        NICs = [ "enp62s0" "wlp63s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "core" ];
         kernelMods = [" kvm-intel" ];
         roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" ];
-        user = [ "wil" ];
+        users = [ "wil" ];
+        cpuCores = 8;
       };
-
-      #mini = mkHost {
-
-      #};
     };
 
    # nixosConfigurations = {
