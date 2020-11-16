@@ -1,0 +1,4 @@
+{ ...}:
+{
+  imports = [ ../.secret/wifi.nix ];
+}

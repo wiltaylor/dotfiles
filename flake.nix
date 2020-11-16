@@ -16,6 +16,7 @@
 
     util = import ./lib/utility.nix { inherit system; };
 
+
     mkPkgs = pkgs: extraOverlays: import pkgs {
       inherit system;
       config.allowUnfree = true;
@@ -25,6 +26,9 @@
     upkgs = mkPkgs nixos-unstable [];
 
     system = "x86_64-linux";
+
+
+    hst = import ./lib/host.nix { inherit system pkgs home-manager; };
 
   in {
     overlay = 
@@ -36,6 +40,21 @@
     packages."${system}" = import ./pkgs { inherit pkgs wtdevtools;};
 
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
+
+    #nixosConfigurations = {
+    #  titan = hst.mkHost {
+    #    name = "titan";
+    #    NICS = [ "enp62s0" "wlp63s0" ];
+    #    initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "core" ];
+    #    kernelMods = [" kvm-intel" ];
+    #    roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" ];
+    #    user = [ "wil" ];
+    #  };
+
+      #mini = mkHost {
+
+      #};
+    #};
 
     nixosConfigurations = {
         titan = nixos.lib.nixosSystem {
