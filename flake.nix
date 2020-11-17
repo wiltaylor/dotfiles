@@ -47,7 +47,7 @@
         NICs = [ "enp62s0" "wlp63s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core"];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core" "alienware-amplifier"];
         users = [ (user.mkUser {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
