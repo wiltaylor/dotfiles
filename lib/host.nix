@@ -9,7 +9,7 @@ with builtins;
 
       roles_mods = (map (r: mkRole r) roles );
 
-      mkRole = name: import (../roles + "/${name}.nix");
+      mkRole = name: import (../roles + "/${name}");
 
     in lib.nixosSystem {
       inherit system;
