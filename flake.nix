@@ -14,22 +14,21 @@
     inherit (nixos) lib;
     inherit (lib) attrValues;
 
-    util = import ./lib/utility.nix { inherit system; };
+    util = import ./lib { inherit system pkgs home-manager lib; };
 
+    inherit (util) host;
+    inherit (util) user;
 
     mkPkgs = pkgs: extraOverlays: import pkgs {
       inherit system;
       config.allowUnfree = true;
       overlays = extraOverlays;
     };
+
     pkgs = mkPkgs nixos [ self.overlay ];
     upkgs = mkPkgs nixos-unstable [];
 
     system = "x86_64-linux";
-
-
-    hst = import ./lib/host.nix { inherit system pkgs home-manager lib; };
-    usr = import ./lib/user.nix { inherit pkgs home-manager; };
 
   in {
     overlay = 
@@ -43,13 +42,13 @@
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
     nixosConfigurations = {
-      titan = hst.mkHost {
+      titan = host.mkHost {
         name = "titan";
         NICs = [ "enp62s0" "wlp63s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
         roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core"];
-        users = [ (usr.mkUser {
+        users = [ (user.mkUser {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
@@ -59,13 +58,13 @@
         cpuCores = 8;
       };
 
-      mini = hst.mkHost {
+      mini = host.mkHost {
         name = "mini";
         NICs = [ "wlo1" ];
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
-        users = [ (usr.mkUser {
+        users = [ (user.mkUser {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
