@@ -58,43 +58,22 @@
         })];
         cpuCores = 8;
       };
+
+      mini = hst.mkHost {
+        name = "mini";
+        NICs = [ "wlo1" ];
+        initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
+        kernelMods = [ "kvm-intel" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
+        users = [ (usr.mkUser {
+          name = "wil";
+          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+          uid = 1000;
+          shell = "zsh";
+          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
+        })];
+        cpuCores = 2;
+      };      
     };
-
-   # nixosConfigurations = {
-   #     titan = nixos.lib.nixosSystem {
-   #       inherit system;
-#
-#          specialArgs = {
-#          };
-#
-#      
-#          modules = [
-#            {
-#              nix = {
-#                package = pkgs.unstable.nixUnstable;
-#              };
-#
-#              nixpkgs.pkgs = pkgs;
-#            }
-#            home-manager.nixosModules.home-manager
-##            
-#            (import ./hosts/titan.nix)
-#          ];
-#        };
-#
-#        mini = nixos.lib.nixosSystem {
-  #        inherit system;
-#
-#          specialArgs = {
-#            inherit pkgs;
-#          };
-#
-     #     modules = [
-#            home-manager.nixosModules.home-manager
-#            (import ./hosts/mini.nix)
-#          ];
-#        };
- #   };
-
   };
 }
