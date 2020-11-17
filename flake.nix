@@ -29,6 +29,7 @@
 
 
     hst = import ./lib/host.nix { inherit system pkgs home-manager lib; };
+    usr = import ./lib/user.nix { inherit pkgs home-manager; };
 
   in {
     overlay = 
@@ -45,10 +46,16 @@
       titan = hst.mkHost {
         name = "titan";
         NICs = [ "enp62s0" "wlp63s0" ];
-        initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "core" ];
+        initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" ];
-        users = [ "wil" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core"];
+        users = [ (usr.mkUser {
+          name = "wil";
+          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+          uid = 1000;
+          shell = "zsh";
+          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
+        })];
         cpuCores = 8;
       };
     };

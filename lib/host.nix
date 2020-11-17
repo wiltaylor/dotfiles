@@ -8,11 +8,8 @@ with builtins;
       }) NICs);
 
       roles_mods = (map (r: mkRole r) roles );
-      user_mods = (map (u: mkUser u) users);
 
       mkRole = name: import (../roles + "/${name}.nix");
-
-      mkUser = name: import (../users + "/${name}.nix");
 
     in lib.nixosSystem {
       inherit system;
@@ -21,7 +18,7 @@ with builtins;
 
       modules = [
         {
-          imports = [ ../modules ] ++ roles_mods ++ user_mods;
+          imports = [ ../modules ] ++ roles_mods ;
 
           networking.hostName = "${name}";
           networking.interfaces = networkCfg;
@@ -32,15 +29,13 @@ with builtins;
           boot.initrd.availableKernelModules = initrdMods;
           boot.kernelModules = kernelMods;
 
-          #imports = roles_mods; # ++ user_mods;
-
           nix.package = pkgs.unstable.nixUnstable;
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;
         }
 
       home-manager.nixosModules.home-manager
-      ];
+      ] ++ users;
     };
 
 

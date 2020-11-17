@@ -14,7 +14,7 @@
   i18n.defaultLocale = "en_AU.UTF-8";
   time.timeZone = "Australia/Brisbane";
   services.earlyoom.enable = true;
-  powerManagement.couFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   hardware.enableRedistributableFirmware = lib.mkDefault true;
   
