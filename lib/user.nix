@@ -9,7 +9,7 @@
     else
       pkgs.bash;
 
-    mkRole = name: import (../users/roles + "/${name}");
+    mkRole = name: import (../roles/users + "/${name}");
 
     mod_roles = map (r: mkRole r) roles;
 
