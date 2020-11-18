@@ -2,8 +2,8 @@
   description = "Wil Taylor's system configuration";
 
   inputs = {
-    nixos.url = "nixpkgs/nixos-20.09";
-    nixos-unstable.url = "nixpkgs/nixos-unstable";
+    nixos.url = "nixpkgs/nixos-unstable";
+    nixos-unstable.url = "nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/release-20.09";
     home-manager.inputs.nixpkgs.follows = "nixos";
     wtdevtools.url = "github:wiltaylor/wtdevtools";
