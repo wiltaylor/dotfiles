@@ -24,5 +24,6 @@
     vscodium
     gitkraken
     #masterplan
+    dfeet
   ];
 }
