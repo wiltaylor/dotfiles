@@ -7,9 +7,10 @@
     home-manager.url = "github:nix-community/home-manager/release-20.09";
     home-manager.inputs.nixpkgs.follows = "nixos";
     wtdevtools.url = "github:wiltaylor/wtdevtools";
+    nixbundler.url = "github:wiltaylor/nix/IgnoreReferenceSwitch";
   };
 
-  outputs = inputs @ {self, nixos, nixos-unstable, home-manager, wtdevtools, nixpkgs, ... }:
+  outputs = inputs @ {self, nixos, nixos-unstable, home-manager, wtdevtools, nixpkgs, nixbundler, ... }:
   let
     inherit (nixos) lib;
     inherit (lib) attrValues;
@@ -25,7 +26,7 @@
       overlays = extraOverlays;
     };
 
-    pkgs = mkPkgs nixos [ self.overlay ];
+    pkgs = mkPkgs nixos [ self.overlay nixbundler.overlay ];
     upkgs = mkPkgs nixos-unstable [];
 
     system = "x86_64-linux";

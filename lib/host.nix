@@ -29,7 +29,7 @@ with builtins;
           boot.initrd.availableKernelModules = initrdMods;
           boot.kernelModules = kernelMods;
 
-          nix.package = pkgs.unstable.nixUnstable;
+          nix.package = pkgs.nix; #Unstable;
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;
         }

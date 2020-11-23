@@ -6,7 +6,7 @@
   ];
 
   home.packages = with pkgs;[
-    firefox
+    unstable.firefox
     pavucontrol
     xorg.xmodmap
     maim
