@@ -2,15 +2,16 @@
   description = "Wil Taylor's system configuration";
 
   inputs = {
-    nixos.url = "nixpkgs/nixos-unstable";
-    nixos-unstable.url = "nixpkgs/master";
+    nixos.url = "nixpkgs/nixos-20.09";
+    nixos-unstable.url = "nixpkgs/nixos-unstable";
+    nixos-master.url = "nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/release-20.09";
     home-manager.inputs.nixpkgs.follows = "nixos";
     wtdevtools.url = "github:wiltaylor/wtdevtools";
     nixbundler.url = "github:wiltaylor/nix/IgnoreReferenceSwitch";
   };
 
-  outputs = inputs @ {self, nixos, nixos-unstable, home-manager, wtdevtools, nixpkgs, nixbundler, ... }:
+  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, wtdevtools, nixpkgs, nixbundler, ... }:
   let
     inherit (nixos) lib;
     inherit (lib) attrValues;
@@ -28,6 +29,7 @@
 
     pkgs = mkPkgs nixos [ self.overlay nixbundler.overlay ];
     upkgs = mkPkgs nixos-unstable [];
+    mpkgs = mkPkgs nixos-master [];
 
     system = "x86_64-linux";
 
@@ -35,6 +37,7 @@
     overlay = 
       final: prev: {
         unstable = upkgs;
+        master = mpkgs;
         my = self.packages."${system}";
       };
 
