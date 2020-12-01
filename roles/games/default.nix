@@ -13,5 +13,7 @@
   environment.systemPackages = with pkgs; [
     steam
     steam-run
+    glxinfo
+    xonotic
   ];
 }

@@ -51,7 +51,8 @@
         NICs = [ "enp62s0" "wlp63s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core" "alienware-amplifier"];
+        kernelParams = ["intel_pstate=active" "nvidia-drm.modeset=1" ];
+        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core" "alienware-amplifier"];
         users = [ (user.mkUser {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -67,6 +68,7 @@
         NICs = [ "wlo1" ];
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
+        kernelParams = [ "intel_pstate=active" ];
         roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
         users = [ (user.mkUser {
           name = "wil";
