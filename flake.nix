@@ -24,6 +24,7 @@
     mkPkgs = pkgs: extraOverlays: import pkgs {
       inherit system;
       config.allowUnfree = true;
+      config.allowBroken = true;
       overlays = extraOverlays;
     };
 
@@ -51,7 +52,7 @@
         NICs = [ "enp62s0" "wlp63s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
-        kernelParams = ["intel_pstate=active" "nvidia-drm.modeset=1" ];
+        kernelParams = ["intel_pstate=active" ];
         roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core" "alienware-amplifier"];
         users = [ (user.mkUser {
           name = "wil";
