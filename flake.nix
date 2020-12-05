@@ -50,6 +50,7 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp62s0" "wlp63s0" ];
+        kernelPackage = pkgs.linuxPackages_5_9;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
         kernelParams = ["intel_pstate=active" ];
@@ -67,6 +68,7 @@
       mini = host.mkHost {
         name = "mini";
         NICs = [ "wlo1" ];
+        kernelPackage = pkgs.linuxPackages_5_9;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];

@@ -1,7 +1,7 @@
 { system, pkgs, home-manager, lib, ...}:
 with builtins;
 {
-  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, roles, users, cpuCores }:
+  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores }:
     let 
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
@@ -29,6 +29,7 @@ with builtins;
           boot.initrd.availableKernelModules = initrdMods;
           boot.kernelModules = kernelMods;
           boot.kernelParams = kernelParams;
+          boot.kernelPackages = kernelPackage;
 
           nix.package = pkgs.nix; #Unstable;
           nixpkgs.pkgs = pkgs;

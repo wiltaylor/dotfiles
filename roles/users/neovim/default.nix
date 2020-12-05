@@ -48,7 +48,7 @@
       coc-fzf
       coc-eslint
       coc-css
-
+      fzf-vim
     ];
 
     extraConfig = ''

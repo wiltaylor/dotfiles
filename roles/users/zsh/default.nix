@@ -4,6 +4,8 @@
     spaceship-prompt
     nix-zsh-completions
     direnv
+    fzf
+    fzf-zsh
   ];
 
   home.file = {
