@@ -24,8 +24,6 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
-      nerdtree
-      nerdtree-git-plugin
       nord-vim
       vim-devicons
       vimwiki
@@ -48,6 +46,7 @@
       coc-fzf
       coc-eslint
       coc-css
+      coc-explorer
       fzf-vim
     ];
 
