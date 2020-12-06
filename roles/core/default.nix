@@ -49,6 +49,7 @@
     imagemagick
     pstree
     linuxPackages_5_9.bcc
+    my.dotfiles-manpages
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";

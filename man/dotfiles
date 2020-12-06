@@ -1,0 +1,10 @@
+.\" Manpage for dotfiles
+.\" Contact dotifles@wiltaylor.dev to correct errors or typos
+.TH man "06 Dec 2020" "dotfile man page"
+.SH NAME
+Wil Taylor's dot files reference
+.SH DESCRIPTION
+This page contains a reference for all the key bindings and scripts i have added to my dotfiles.
+Mostly a reference for myself but can be useful to anyone reading my dotfiles.
+
+
