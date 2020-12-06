@@ -128,6 +128,7 @@
       };
 
       extraConfig = ''
+        mouse_warping none
         new_window pixel 1
         new_float normal
         smart_gaps on
