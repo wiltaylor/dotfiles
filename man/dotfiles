@@ -1,10 +1,83 @@
 .\" Manpage for dotfiles
 .\" Contact dotifles@wiltaylor.dev to correct errors or typos
 .TH man "06 Dec 2020" "dotfile man page"
+
 .SH NAME
 Wil Taylor's dot files reference
+
 .SH DESCRIPTION
 This page contains a reference for all the key bindings and scripts i have added to my dotfiles.
 Mostly a reference for myself but can be useful to anyone reading my dotfiles.
 
+.SH Sys Command
+As part of my devtools package I have created a sys command which manages the systems maintanance.
 
+.B sys 
+.RB {COMMAND}
+.RB [OPTIONS]
+
+.SS COMMAND
+.B apply
+- Will apply the nix config in ~/.dotfiles repo
+
+.B clean
+- Does a Nix garbage collectin and dedupe on nix store (hard links identical files) 
+
+.B find | search {Package Name}
+- Searches for package in nixpkgs
+
+.B info
+- Prints information about the operating system
+
+.B install
+- Does nothing on nixos. You need to update dot files repo instead. 
+
+.B lsrollback
+- Lists configs that you can rollback to.
+
+.B uninstall
+- Does nothing on nixos. You need to update dot files repo instead.
+
+.B update
+- Does a flake update on dotfiles repo
+
+.SH Hot Keys
+.SS Window Manager (i3wm)
+Note: Mod key is windows key on most keyboards.
+
+.nf
+- Mod + Shift + r: Restart window manager
+- Mod + Return: Open terminal window
+- Mod + d: Open Application launcher
+- Mod + w: Start Firefox (default Profile)
+- Mod + Shift + w: Start Firefox (work profile)
+- Mod + Shift + q: Kill current window
+- Mod + Left: Move to left window
+- Mod + Right: Move to right window
+- Mod + Up: Move to up window
+- Mod + Down: Move to down window
+- Prtsc: Copy screenshot to clipboard
+- Mod + Prtsc: Take sub screenshot (selection tool opens)
+- Mod + [1-9]: Open workspace 1 through 9
+- Mod + Shift + [1-9]: Move current window to workspace 1 through 9
+- Mod + f: Toggle fullscreen
+- Mod + Space: Toggle floating window
+- Mod + h: Next split Horrizontal
+- Mod + v: Next split verticle 
+- Mod + Shift + Minus: Move window into scratch pad
+- Mod + Minus: Toggle Scratch Pad
+- Vol Up/Down: Change master pulse volume up and down
+- Mute: Mute master volume
+
+.SS Neo Vim
+.nf
+- y / p: Yank and paste. This is setup to also work with system clipboard
+- i / a: insert or append into edit mode
+- hjkl: Movement keys. Arrows unmapped (help with habbit of using hjkl)
+- .: Replay last action
+- q <leter><commands>q: Record macro (press q in normal mode to stop)
+- <number>@<letter>: Replay macro number of times
+- \\ww - Open Vim Wiki
+
+
+.SS Terminal (ZSH)
