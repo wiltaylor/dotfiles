@@ -85,7 +85,6 @@
          "${modifier}+w" = "exec MOZ_USE_XINPUT2=1 ${pkgs.firefox}/bin/firefox";
          "${modifier}+shift+w" = "exec MOZ_USE_XINPUT2=1 ${pkgs.firefox}/bin/firefox -p vygo";
          "${modifier}+Shift+q" = "kill";
-         "${modifier}+j" = "exec ${pkgs.joplin-desktop}/bin/joplin-desktop";
          "${modifier}+Left" = "focus left";
          "${modifier}+Right" = "focus right";
          "${modifier}+Up" = "focus up";

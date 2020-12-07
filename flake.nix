@@ -81,7 +81,24 @@
           roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
         })];
         cpuCores = 2;
-      };      
+      };   
+
+      junkbox = host.mkHost {
+        name = "junkbox";
+        NICS = [];
+        kernelPackage = pkgs.linuxPackages_5_9;
+        initrdMods = [ "xhci_pci", "ahci" "usb_storage" "sd_mod" ];
+        kernelMods = [ "kvm-intel" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
+        cpuCores = 4;
+        users = [ (user.mkUser {
+          name = "wil";
+          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+          uid = 1000;
+          shell = "zsh";
+          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
+        })];
+      };
     };
   };
 }

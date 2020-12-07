@@ -52,7 +52,7 @@
 
     extraConfig = ''
       " Basic editor config
-      set clipboard=unnamedplus
+      set clipboard+=unnamedplus
       set mouse=a
       set encoding=utf-8
       set number relativenumber
