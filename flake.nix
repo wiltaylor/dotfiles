@@ -87,7 +87,7 @@
         name = "junkbox";
         NICS = [];
         kernelPackage = pkgs.linuxPackages_5_9;
-        initrdMods = [ "xhci_pci", "ahci" "usb_storage" "sd_mod" ];
+        initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
         cpuCores = 4;

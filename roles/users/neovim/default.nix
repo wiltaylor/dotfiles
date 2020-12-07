@@ -77,10 +77,6 @@
       colorscheme nord
       let g:lightline = { 'colorscheme': 'nord', }
 
-      "Nerd tree config
-      map <C-n> :NERDTreeToggle<CR>
-      let NERDTreeShowHidden=1
-
       "COC settings
       map <a-cr> :CocAction<CR>
       "Vim wiki settings
