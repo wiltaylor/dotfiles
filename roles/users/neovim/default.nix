@@ -64,7 +64,7 @@
 
     extraConfig = ''
       " Basic editor config
-      set clipboard=unnamedplus
+      set clipboard+=unnamedplus
       set mouse=a
       set encoding=utf-8
       set number relativenumber
@@ -164,10 +164,6 @@
       "Colour theme
       colorscheme nord
       let g:lightline = { 'colorscheme': 'nord', }
-
-      "Nerd tree config
-      map <C-n> :NERDTreeToggle<CR>
-      let NERDTreeShowHidden=1
 
       "COC settings
       map <a-cr> :CocAction<CR>
