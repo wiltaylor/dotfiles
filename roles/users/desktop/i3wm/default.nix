@@ -17,7 +17,7 @@
 
   imports = [
     ../shared/fonts.nix
-    ./polybar.nix
+ #   ./polybar.nix
     ../shared/alacritty
     ../shared/wallpaper.nix
     ../shared/dunst.nix
@@ -28,6 +28,28 @@
     ../shared/gtk
     ../shared/kde
   ];
+
+  home.packages = with pkgs; [
+    i3blocks-gaps
+    my.i3blocks-contrib
+  ];
+
+  home.file.".config/i3/i3blocks.conf".text = ''
+
+
+    [battery2]
+    command=${pkgs.my.i3blocks-contrib}/share/i3blocks-contrib/battery2/battery2
+    markup=pango
+    interval=30
+
+
+
+    # Update time every 5 seconds
+    [time]
+    command=date "+%Y-%m-%d %T"
+    interval=5 
+    
+  '';
 
   xsession = {
     enable = true;
@@ -76,7 +98,53 @@
           modifier = "${modifier}";
         };
 
-        bars = [];
+        bars = [
+          {
+            position = "top";
+            statusCommand = "${pkgs.i3blocks-gaps}/bin/i3blocks -c ~/.config/i3/i3blocks.conf";
+          }
+        ];
+
+#        bars = [
+#          {
+#            mode = "dock";
+#            position = "top";
+ #           workspaceButtons = true;
+ #           workspaceNumbers = true;
+ #           statusCommand = "${pkgs.i3blocks-gaps}/bin/i3blocks -c ~/.config/i3/i3blocks.config";
+ #           trayOutput = "primary";
+  #          colors = {
+ #             background = "#000000";
+    #          statusline = "#ffffff";
+     #         separator = "#666666";
+  #            focusedWorkspace = {
+      #          border = "#4c7899";
+       #         background = "#285577";
+     #           text = "#ffffff";
+      #        };
+     #         activeWorkspace = {
+     #           border = "#333333";
+     #           background = "#5f676a";
+      #          text = "#ffffff";
+      #        };
+     #         inactiveWorkspace = {
+     #           border = "#333333";
+     #           background = "#222222";
+     #           text = "#888888";
+     #         };
+     #         urgentWorkspace = {
+     #           border = "#2f343a";
+     #           background = "#900000";
+     #           text = "#ffffff";
+      #        };
+      #        bindingMode = {
+      #          border = "#2f343a";
+      #          background = "#900000";
+      #          text = "#ffffff";
+      #        };
+      #      };
+     #     }
+      #  ];
 
         keybindings = {
          "${modifier}+Shift+r" = "restart";

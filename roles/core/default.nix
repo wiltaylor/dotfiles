@@ -17,6 +17,11 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   hardware.enableRedistributableFirmware = lib.mkDefault true;
+
+
+  environment.pathsToLink = ["/libexec" ];
+
+
   
 
   environment.systemPackages = with pkgs; [
@@ -50,6 +55,7 @@
     pstree
     linuxPackages_5_9.bcc
     my.dotfiles-manpages
+    acpi
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";
