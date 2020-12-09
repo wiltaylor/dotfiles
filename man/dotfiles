@@ -5,6 +5,17 @@
 .SH NAME
 Wil Taylor's dot files reference
 
+.nf
+        ______
+     .-'`  /\  `'-.
+   .'_____/__\_____`.
+  / `._  /    \  _.` \
+ |     `/      \'     |
+ |     / `-..-' \     |
+  \   /  .-'`-.  \   /
+   `./.-'      `-.\.'
+     `-..______..-'
+
 .SH DESCRIPTION
 This page contains a reference for all the key bindings and scripts i have added to my dotfiles.
 Mostly a reference for myself but can be useful to anyone reading my dotfiles.
@@ -79,5 +90,9 @@ Note: Mod key is windows key on most keyboards.
 - <number>@<letter>: Replay macro number of times
 - \\ww - Open Vim Wiki
 
+Drawing:
+- \\di and \\ds - Start and stop draw it mode
+- arrows - Draw lines
+- space - toggle draw or erase
 
 .SS Terminal (ZSH)

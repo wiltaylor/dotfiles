@@ -56,6 +56,12 @@
     linuxPackages_5_9.bcc
     my.dotfiles-manpages
     acpi
+    neovim
+    ( pkgs.runCommand "neovim-alias" {} ''
+	mkdir -p $out/bin
+	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf
+	ln ${pkgs.neovim}/bin/nvim $out/bin/vi -sf
+    '')
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";
