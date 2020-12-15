@@ -56,6 +56,7 @@
     linuxPackages_5_9.bcc
     my.dotfiles-manpages
     acpi
+    nix-index
     neovim
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin

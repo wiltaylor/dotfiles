@@ -11,4 +11,13 @@
 # Contact: web@wiltaylor.dev
 # Feel free to use this configuration as you wish.
 
-nixos-rebuild switch --flake '.#'  
+# Old command that basically works the same way.
+#nixos-rebuild switch --flake '.#'  
+
+# this is what nixos-rebuild basically does.
+# Simplifying build so i can start pulling it apart and creating my 
+# own boot loader and init setup.
+
+nix build .#nixosConfigurations.$HOSTNAME.system.build.toplevel
+./result/bin/switch-to-configuration
+

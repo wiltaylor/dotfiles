@@ -109,7 +109,7 @@ set t_vb=
 set tm=500
 
 "Colour theme
-lorscheme nord
+colorscheme nord
 let g:lightline = { 'colorscheme': 'nord', }
 
 "COC settings

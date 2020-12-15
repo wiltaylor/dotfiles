@@ -22,7 +22,7 @@ with stdenv.lib;
   # So getting nvim to install it during activation. A bit of a hack
   home.activation.neovim = lib.hm.dag.entryAfter ["writeBoundry"] ''
     nvim -c 'PlugInstall|q|q'
-    nvim -c 'CocInstall -sync coc-explorer coc-tsserver coc-json coc-html coc-css coc-yaml|q|q'
+    nvim -c 'CocInstall -sync coc-explorer coc-tsserver coc-json coc-html coc-css coc-yaml coc-git |q|q'
   '';
 
 #  programs.neovim = {
@@ -40,29 +40,17 @@ with stdenv.lib;
 #    ];
 #
 #    plugins = with pkgs.unstable.vimPlugins; [
-#      nord-vim
-#      vim-devicons
-#      vimwiki
-#      vim-nix
-#      coc-explorer
-#      coc-nvim
 ##      coc-python
 #      coc-tsserver
-#      coc-json
-#      coc-yaml
 ##      coc-wxml
 ##      coc-markdownlint
 ##      coc-vimlsp
 ##      coc-vimtex
 ##      coc-snippets
 ##      coc-rls
-#      coc-html
 ##      coc-jest
 ##      coc-go
-##      coc-git
-##      coc-fzf
 ##      coc-eslint
-#      coc-css
 #      fzf-vim
 #    ];
 #

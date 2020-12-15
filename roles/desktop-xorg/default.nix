@@ -3,7 +3,8 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.g810led.enable = true;
-  services.accounts-daemon.enable = true;
+#  services.accounts-daemon.enable = true;
+  boot.plymouth.enable = true;
 
   services.xserver = {
     enable = true;
