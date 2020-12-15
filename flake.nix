@@ -46,6 +46,27 @@
 
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
+    installMedia = {
+      i3 = host.mkHost {
+        name = "nixos";
+        NICs = [  ];
+        kernelPackage = pkgs.linuxPackages_5_9;
+        initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
+        kernelMods = [ "kvm-intel" "kvm-amd" ];
+        kernelParams = [ ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "wifi" "core" "iso" ];
+        users = [ (user.mkUser {
+          name = "wil";
+          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+          uid = 1000;
+          shell = "zsh";
+          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
+        })];
+        cpuCores = 2;
+       
+      };
+    };
+
     nixosConfigurations = {
       titan = host.mkHost {
         name = "titan";
