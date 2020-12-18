@@ -8,6 +8,7 @@
       automatic = true;
       options = "--delete-older-than 5d";
     };
+    package = pkgs.nixFlakes;
 
   };
 

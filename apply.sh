@@ -19,5 +19,5 @@
 # own boot loader and init setup.
 rm ./result -fr
 nix build .#nixosConfigurations.$(hostname).config.system.build.toplevel
-./result/bin/switch-to-configuration
+./result/bin/switch-to-configuration switch
 

@@ -36,7 +36,6 @@ with builtins;
           boot.kernelParams = kernelParams;
           boot.kernelPackages = kernelPackage;
 
-          nix.package = pkgs.nix; #Unstable;
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;
         }

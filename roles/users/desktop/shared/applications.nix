@@ -25,7 +25,7 @@
     gitkraken
     #masterplan
     dfeet
-    torbrowser
+    #torbrowser
     blender
   ];
 }
