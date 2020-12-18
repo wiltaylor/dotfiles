@@ -26,5 +26,6 @@
     #masterplan
     dfeet
     torbrowser
+    blender
   ];
 }

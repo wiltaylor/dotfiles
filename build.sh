@@ -18,6 +18,6 @@
 # Simplifying build so i can start pulling it apart and creating my 
 # own boot loader and init setup.
 rm ./result -fr
-nix build .#nixosConfigurations.$(hostname).config.system.build.toplevel
-./result/bin/switch-to-configuration
+nix build .#host.$(hostname)
+#./result/bin/switch-to-configuration
 

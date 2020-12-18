@@ -1,6 +1,7 @@
 { system, pkgs, home-manager, lib, ...}:
 with builtins;
 {
+
   mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores }:
     let 
       networkCfg = listToAttrs (map (n: {
@@ -18,6 +19,10 @@ with builtins;
 
       modules = [
         {
+          specialisation.foo.inheritParentConfig = true;
+          specialisation.foo.configuration = {
+          };
+
           imports = [ ../modules ] ++ roles_mods ;
 
           networking.hostName = "${name}";
