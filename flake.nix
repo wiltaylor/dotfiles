@@ -105,10 +105,11 @@
 
       junkbox = host.mkHost {
         name = "junkbox";
-        NICS = [];
+        NICs = [];
         kernelPackage = pkgs.linuxPackages_5_9;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
+        kernelParams = [];
         roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
         cpuCores = 4;
         users = [ (user.mkUser {
