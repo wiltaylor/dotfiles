@@ -49,7 +49,7 @@
       i3 = host.mkHost {
         name = "nixos";
         NICs = [  ];
-        kernelPackage = pkgs.linuxPackages_5_9;
+        kernelPackage = pkgs.unstable.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
         kernelMods = [ "kvm-intel" "kvm-amd" ];
         kernelParams = [ ];
@@ -70,7 +70,7 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp62s0" "wlp63s0" ];
-        kernelPackage = pkgs.linuxPackages_5_9;
+        kernelPackage = pkgs.unstable.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
         kernelParams = ["intel_pstate=active" ];

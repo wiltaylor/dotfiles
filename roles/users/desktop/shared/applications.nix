@@ -27,5 +27,6 @@
     dfeet
     #torbrowser
     blender
+    jetbrains.pycharm-professional
   ];
 }

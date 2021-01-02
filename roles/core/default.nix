@@ -58,7 +58,12 @@
     my.dotfiles-manpages
     acpi
     nix-index
+    unstable.btrfs-progs
+    smartmontools
     neovim
+    zfs
+    iotop
+    nvme-cli
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin
 	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf
