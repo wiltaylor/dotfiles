@@ -2,6 +2,36 @@
 with builtins;
 {
 
+  mkISO = { name, initrdMods, kernelMods, kernelParams, kernelPackage, roles }:
+    let
+      roles_mods = (map (r: mkRole r) roles );
+
+      mkRole = name: import (../roles/iso + "/${name}");
+
+    in lib.nixosSystem {
+      inherit system;
+
+      specialArgs = {};
+
+      modules = [
+        {
+          imports = [ ../modules ] ++ roles_mods;
+
+          networking.hostName = "${name}";
+          networking.useDHCP = true;
+
+          boot.initrd.availableKernelModules = initrdMods;
+          boot.kernelModules = kernelMods;
+
+          boot.kernelParams = kernelParams;
+          boot.kernelPackages = kernelPackage;
+
+          nixpkgs.pkgs = pkgs;
+
+        }
+      ];
+    };
+
   mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores }:
     let 
       networkCfg = listToAttrs (map (n: {
@@ -19,10 +49,6 @@ with builtins;
 
       modules = [
         {
-          specialisation.foo.inheritParentConfig = true;
-          specialisation.foo.configuration = {
-          };
-
           imports = [ ../modules ] ++ roles_mods ;
 
           networking.hostName = "${name}";

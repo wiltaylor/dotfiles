@@ -1,4 +1,4 @@
-{config, pkgs, lib, ...}:
+{config, pkgs, lib, modulesPath, ...}:
 {
   system.stateVersion = "20.09";
 
@@ -12,18 +12,21 @@
 
   };
 
+  # Make this config a iso config
+  imports = [ "${modulesPath}/installer/cd-dvd/iso-image.nix" ];
+
+  isoImage.makeEfiBootable = true;
+  isoImage.makeUsbBootable = true;
+
   i18n.defaultLocale = "en_AU.UTF-8";
   time.timeZone = "Australia/Brisbane";
   services.earlyoom.enable = true;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "perfomance";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   hardware.enableRedistributableFirmware = lib.mkDefault true;
 
 
-  environment.pathsToLink = ["/libexec" ];
-
-
-  
+  environment.pathsToLink = ["/libexec" ]; 
 
   environment.systemPackages = with pkgs; [
     wget

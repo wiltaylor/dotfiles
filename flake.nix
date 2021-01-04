@@ -46,22 +46,13 @@
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
     installMedia = {
-      i3 = host.mkHost {
+      i3 = host.mkISO {
         name = "nixos";
-        NICs = [  ];
         kernelPackage = pkgs.unstable.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
         kernelMods = [ "kvm-intel" "kvm-amd" ];
         kernelParams = [ ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "wifi" "core" "iso" ];
-        users = [ (user.mkUser {
-          name = "wil";
-          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-          uid = 1000;
-          shell = "zsh";
-          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
-        })];
-        cpuCores = 2;
+        roles = [ "core" "i3wm" "user" ];
        
       };
     };
@@ -73,7 +64,7 @@
         kernelPackage = pkgs.unstable.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         kernelMods = [" kvm-intel" ];
-        kernelParams = ["intel_pstate=active" ];
+        kernelParams = ["intel_pstate=active" "nvme_core.default_ps_max_latency_us=0" ];
         roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core" "alienware-amplifier"];
         users = [ (user.mkUser {
           name = "wil";
