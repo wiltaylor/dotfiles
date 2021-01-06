@@ -1,0 +1,5 @@
+#!/run/current-system/sw/bin/bash
+
+umount -R /mnt/sysinstall 
+cryptsetup close nixcryptroot
+rm /mnt/sysinstall -fr

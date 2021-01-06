@@ -1,0 +1,12 @@
+#!/run/current-system/sw/bin/bash
+
+mkdir /mnt/sysinstall -p
+cryptsetup open /dev/disk/by-label/NIXCRYPTROOT nixcryptroot
+mount /dev/disk/by-label/NIXROOT /mnt/sysinstall -o noatime,compress=lzo,space_cache,subvol,=@
+mount /dev/disk/by-label/NIXROOT /mnt/sysinstall/.pagefile -o noatime,compress=lzo,space_cache,subvol=@pagefile
+mount /dev/disk/by-label/NIXBOOT /mnt/sysinstall/boot 
+mount /dev/disk/by-label/NIXROOT /mnt/sysinstall/home -o noatime,compress=lzo,space_cache,subvol=@home
+mount /dev/disk/by-label/NIXROOT /mnt/sysinstall/var -o noatime,compress=lzo,space_cache,subvol=@var
+
+echo "System now mounted at /mnt/sysinstall"
+

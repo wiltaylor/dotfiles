@@ -60,12 +60,12 @@
     nixosConfigurations = {
       titan = host.mkHost {
         name = "titan";
-        NICs = [ "enp62s0" "wlp63s0" ];
+        NICs = [ "enp5s0" ];
         kernelPackage = pkgs.unstable.linuxPackages_5_10;
-        initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-        kernelMods = [" kvm-intel" ];
-        kernelParams = ["intel_pstate=active" "nvme_core.default_ps_max_latency_us=0" ];
-        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "wifi" "nvidia-graphics" "core" "alienware-amplifier"];
+        initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
+        kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
+        kernelParams = [];
+        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "nvidia-graphics" "core" "amd" ];
         users = [ (user.mkUser {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];

@@ -65,6 +65,7 @@
     iotop
     nvme-cli
     lm_sensors
+    parted
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin
 	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf
