@@ -51,6 +51,14 @@
     
   '';
 
+  #home.file.".config/i3/i3blocks.conf".text = mkIf config.wil.laptop == false ''
+  #  # Update time every 5 seconds
+  #  [time]
+ #   command=date "+%Y-%m-%d %T"
+ #   interval=5
+
+#  '';
+
   xsession = {
     enable = true;
     windowManager.i3 = {

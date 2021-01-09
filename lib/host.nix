@@ -32,24 +32,33 @@ with builtins;
       ];
     };
 
-  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores }:
+  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores, laptop }:
     let 
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
       }) NICs);
 
+      sysdata = [{
+        options.laptop = lib.mkEnableOption "test";
+      }];
+
       roles_mods = (map (r: mkRole r) roles );
+      sys_users = (map (u: usr.mkSystemUser u) users);
+      hm_users = flaten (map (u: usr.mkHomeUser (u // { inherit sysdata;})) users);
+
+      flaten = lst: foldl' (l: r: l // r) {} lst;
 
       mkRole = name: import (../roles + "/${name}");
+
+      usr = import ./user.nix { inherit pkgs home-manager;};
+
 
     in lib.nixosSystem {
       inherit system;
 
-      specialArgs = {};
-
       modules = [
         {
-          imports = [ ../modules ] ++ roles_mods ;
+          imports = [ ../modules ] ++ roles_mods ++ sys_users;
 
           networking.hostName = "${name}";
           networking.interfaces = networkCfg;
@@ -64,10 +73,15 @@ with builtins;
 
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;
+
         }
 
-      home-manager.nixosModules.home-manager
-      ] ++ users;
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users = hm_users;        
+        }
+      ];
     };
 
 

@@ -52,8 +52,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
         kernelMods = [ "kvm-intel" "kvm-amd" ];
         kernelParams = [ ];
-        roles = [ "core" "i3wm" "user" ];
-       
+        roles = [ "core" "i3wm" "user" ];       
       };
     };
 
@@ -66,14 +65,16 @@
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
         roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "nvidia-graphics" "core" "amd" ];
-        users = [ (user.mkUser {
+        users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
-          shell = "zsh";
+          shell = pkgs.zsh;
           roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
-        })];
+          data = {};
+        }];
         cpuCores = 8;
+        laptop = false;
       };
 
       mini = host.mkHost {
@@ -84,14 +85,16 @@
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];
         roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
-        users = [ (user.mkUser {
+        users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
-          shell = "zsh";
+          shell = pkgs.zsh;
           roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
-        })];
+          data = {};
+        }];
         cpuCores = 2;
+        laptop = true;
       };   
 
       junkbox = host.mkHost {
@@ -103,13 +106,15 @@
         kernelParams = [];
         roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
         cpuCores = 4;
-        users = [ (user.mkUser {
+        users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
-          shell = "zsh";
+          shell = pkgs.zsh;
           roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
-        })];
+          data = {};
+        }];
+        laptop = true;
       };
     };
   };
