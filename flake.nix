@@ -64,7 +64,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" ];
+        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];

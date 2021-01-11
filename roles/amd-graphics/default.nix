@@ -1,13 +1,17 @@
 { pkgs, ... }:
 {
   services.xserver.videoDrivers = [ "amdgpu" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.deviceSection = ''
+    BusID "PCI:B:0:0" 
+  '';
 
-  hardware.opengl.extraPackages = with pkgs; [
-    rocm-opencl-icd
-    rocm-opencl-runtime
-  ];
+#boot.initrd.kernelModules = [ "amdgpu" ];
 
-  environment.systemPackages = with pkgs; [ vulkan-tools ];
+#  hardware.opengl.extraPackages = with pkgs; [
+#    rocm-opencl-icd
+#    rocm-opencl-runtime
+#  ];
+
+  environment.systemPackages = with pkgs; [ vulkan-tools firmwareLinuxNonfree mesa mesa_drivers xorg.xf86videoamdgpu ];
 
 }
