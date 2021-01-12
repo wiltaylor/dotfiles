@@ -2,7 +2,7 @@
   description = "Wil Taylor's system configuration";
 
   inputs = {
-    nixos.url = "nixpkgs/nixos-20.09";
+    nixos.url = "nixpkgs/nixos-unstable";
     nixos-unstable.url = "nixpkgs/nixos-unstable";
     nixos-master.url = "nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/release-20.09";
@@ -64,7 +64,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" ];
+        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd"];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
