@@ -5,6 +5,7 @@
   hardware.g810led.enable = true;
 #  services.accounts-daemon.enable = true;
   boot.plymouth.enable = true;
+  services.autorandr.enable = true;
 
   services.xserver = {
     enable = true;

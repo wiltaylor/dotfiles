@@ -3,6 +3,7 @@
 
   imports = [
     ./spotify.nix
+    ./steam.nix
   ];
 
   home.packages = with pkgs;[

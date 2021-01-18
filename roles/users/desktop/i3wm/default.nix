@@ -71,7 +71,12 @@
 
         startup = [
           {
-            command = "${pkgs.xorg.xmodmap} -e 'clear Lock' -e 'keycode 0x42 = Escape'";
+            command = "${pkgs.autorandr}/bin/autorandr -c";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "${pkgs.xorg.xmodmap}/bin/xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'";
             always = true;
             notification = false;
           }

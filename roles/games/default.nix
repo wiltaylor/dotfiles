@@ -25,6 +25,5 @@
     winePackages.staging
     wineWowPackages.staging
     winetricks
-
   ];
 }

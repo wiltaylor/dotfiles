@@ -66,6 +66,8 @@
     nvme-cli
     lm_sensors
     parted
+    xar
+    darling-dmg
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin
 	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf
