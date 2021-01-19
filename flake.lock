@@ -80,48 +80,13 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1604762992,
-        "narHash": "sha256-7VB4fm5uIyqcMaUAgyx4MCqQEjsl9xZDdDzJMoi1DHo=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "a52e974cff8fb80c427e0d55c01b3b8c770ccec4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixos": "nixos",
         "nixos-master": "nixos-master",
         "nixos-unstable": "nixos-unstable",
-        "nixpkgs": "nixpkgs",
-        "wtdevtools": "wtdevtools"
-      }
-    },
-    "wtdevtools": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1608969837,
-        "narHash": "sha256-yN/mnGk7xdYG/loKfzjC/fuZUKtEaZE5xAv+YAMoOnw=",
-        "owner": "wiltaylor",
-        "repo": "wtdevtools",
-        "rev": "dc30c2f1717e7e9179bcb2a53a8bd2dce185ce80",
-        "type": "github"
-      },
-      "original": {
-        "owner": "wiltaylor",
-        "repo": "wtdevtools",
-        "type": "github"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

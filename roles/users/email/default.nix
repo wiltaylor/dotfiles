@@ -3,6 +3,9 @@
   home.packages = with pkgs; [
     neomutt
     hydroxide
+    taskwarrior
+    timewarrior
+    tasksh
   ];
 
   systemd.user.services.hydroxide = {

@@ -53,7 +53,6 @@
     unrar
     python3
     nix-bundle
-    my.devtools 
     microcodeIntel
     imagemagick
     pstree

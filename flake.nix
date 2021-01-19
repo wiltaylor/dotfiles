@@ -7,10 +7,9 @@
     nixos-master.url = "nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/release-20.09";
     home-manager.inputs.nixpkgs.follows = "nixos";
-    wtdevtools.url = "github:wiltaylor/wtdevtools";
   };
 
-  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, wtdevtools, nixpkgs, ... }:
+  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, nixpkgs, ... }:
   let
     inherit (nixos) lib;
     inherit (lib) attrValues;
@@ -41,7 +40,7 @@
         my = self.packages."${system}";
       };
 
-    packages."${system}" = import ./pkgs { inherit pkgs wtdevtools;};
+    packages."${system}" = import ./pkgs { inherit pkgs;};
 
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
