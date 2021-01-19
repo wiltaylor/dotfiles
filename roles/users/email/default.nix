@@ -27,8 +27,8 @@
   };
 
   home.file = {
-    ".secrets/mail".source = ../../../.secret/email/mail;
-    ".config/hydroxide/auth.json".source = ../../../.secret/email/auth.json;
+    #".secrets/mail".source = ../../../.secret/email/mail;
+    #".config/hydroxide/auth.json".source = ../../../.secret/email/auth.json;
     ".config/neomutt/neomuttrc".source = ./neomuttrc;
   };
 }
