@@ -6,6 +6,7 @@
     taskwarrior
     timewarrior
     tasksh
+    offlineimap
   ];
 
   systemd.user.services.hydroxide = {

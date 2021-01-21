@@ -55,6 +55,10 @@ in {
     "f /dev/shm/scream 0660 wil quem-libvirtd -"
   ];
 
-
-
+  # Fixes issue where this link doesn't exist
+  system.activationScripts.fixlibvirtsocket = {
+    text = ''
+      ln /run /var/lib/run -sf
+    '';
+  };
 }
