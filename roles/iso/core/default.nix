@@ -18,6 +18,8 @@
   isoImage.makeEfiBootable = true;
   isoImage.makeUsbBootable = true;
 
+  boot.blacklistedKernelModules = [ "sp5100_tco" ];
+
   i18n.defaultLocale = "en_AU.UTF-8";
   time.timeZone = "Australia/Brisbane";
   services.earlyoom.enable = true;
@@ -67,6 +69,7 @@
     iotop
     nvme-cli
     lm_sensors
+    unstable.firmwareLinuxNonfree
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin
 	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf
