@@ -1,12 +1,7 @@
 {config, pkgs, lib, ...}:
 {
- # sound.enable = true;
-#  hardware.pulseaudio.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-  };
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   hardware.g810led.enable = true;
 #  services.accounts-daemon.enable = true;
