@@ -79,7 +79,7 @@
       mini = host.mkHost {
         name = "mini";
         NICs = [ "wlo1" ];
-        kernelPackage = pkgs.linuxPackages_5_9;
+        kernelPackage = pkgs.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];
@@ -89,7 +89,7 @@
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
           shell = pkgs.zsh;
-          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
+          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
           data = {};
         }];
         cpuCores = 2;
