@@ -26,4 +26,6 @@
   environment.systemPackages = with pkgs; [
     appimage-run
   ];
+
+  services.gnome3.gnome-keyring.enable = true;
 }

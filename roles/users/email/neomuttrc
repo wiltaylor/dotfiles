@@ -1,77 +1,13 @@
+# "+" substitutes for `folder`
+set mbox_type=Maildir
+set folder="~/.mail/"
+set record=+Sent
+set postponed=+Drafts
+set trash=+Trash
+set mail_check=2 # seconds
+
+# smtp
 source ~/.secrets/mail
-
-set realname='Wil Taylor'
-set from=$my_email
-set folder="imap://localhost:1143/"
-set spoolfile = "+inbox"
-set record = "Sent"
-set trash = "Trash"
-set postponed = "Drafts"
-set imap_user = $my_user 
-set imap_pass = $my_password 
-set imap_check_subscribed = yes
-set imap_list_subscribed = yes
-set mail_check=90
-set timeout =15
-set ssl_force_tls = no
-set imap_keepalive=180
-set smtp_url = "smtp://$my_user:$my_password@localhost:1025"
-set sidebar_visible
-set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
-set mail_check_stats
-unset imap_passive
-
-auto_view text/html text/calendar application/ics
-alternative_order text/html text/plain text/enriched text/*
-
-set editor = "nvim"
-
-set header_cache=~/.cache/mutt
-set message_cachedir=~/.cache/mutt
-
-bind index,pager \CP sidebar-prev
-bind index,pager \CN sidebar-next
-bind index,pager \CI sidebar-open
-bind index,pager \CB sidebar-toggle-visible
-
-set envelope_from
-set edit_headers
-set fast_reply
-set forward_format = "fw: %s"
-set forward_decode
-set attribution = "On %d, %n wrote:"
-set reply_to
-set reverse_name
-set include
-set forward_quote
-set text_flowed
-unset sig_dashes
-unset mime_forward
-unset help
-unset confirmappend
-set quit
-unset mark_old
-set pipe_decode
-set thorough_search
-set timeout = 0
-
-set status_chars = " *%A"
-set status_format = "[ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?"
-set date_format = "%d.%m.%Y %H:%M"
-set sort = threads
-set sort_aux = reverse-last-date-received
-set uncollapse_jump
-set sort_re
-set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
-set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
-set send_charset = "utf-8:iso-8859-1:us-ascii"
-set charset = "utf-8"
-set arrow_cursor = "no" # Change `color indicator` depending
-
-# Pager View Options
-set pager_index_lines = 10  # Shows 10 lines of index when pager is active
-set pager_context = 3
-set pager_stop
-set menu_scroll
-set tilde
-unset markers
+set smtp_url=smtp://$my_email:$my_pass@127.0.0.1:1025
+set ssl_force_tls
+set ssl_starttls
