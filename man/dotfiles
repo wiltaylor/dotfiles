@@ -91,12 +91,10 @@ Note: Mod key is windows key on most keyboards.
 - <number>@<letter>: Replay macro number of times
 - \\ww - Open Vim Wiki
 
-Drawing:
-- \\di and \\ds - Start and stop draw it mode
-- arrows - Draw lines
-- space - toggle draw or erase
+.SS Task Workflow commands
 
-.SS Terminal (ZSH)
+.B ibx
+[text] - This will send an email to myself with text message. If empty it will open a vim buffer.
 
 
 .SS Mail Commands
