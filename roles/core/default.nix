@@ -32,6 +32,10 @@ let
       fi
     ;;
 
+    "find-doc")
+      ${pkgs.manix}/bin/manix $2 
+    ;;
+
     "apply")
       pushd ~/.dotfiles
       if [ -z "$2" ]; then
@@ -77,6 +81,7 @@ let
       echo "clean - GC and hard link nix store"
       echo "update - Updates dotfiles flake."
       echo "find [--overlay] - Find a nix package (overlay for custom packages)."
+      echo "find-doc - Finds documentation on a config item"
       echo "apply - Applies current configuration in dotfiles."
       echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
     ;;
