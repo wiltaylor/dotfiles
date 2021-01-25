@@ -1,5 +1,23 @@
 {pkgs, lib, config, fetchFromGitHub, ...}:
-{
+let
+  mailPkg = pkgs.writeScriptBin "mail" ''
+    tmux has-session -t mail 2>/dev/null
+
+    if [ $? != 0 ]; then
+      tmux new -A -s mail 'protonmail-bridge -c' \; new-window 'offlineimap' \; new-window 'neomutt'
+    else
+      tmux attach -t mail
+    fi
+  '';
+
+  mailKillPkg = pkgs.writeScriptBin "kill-mail" ''
+    tmux kill-session -t mail
+  '';
+in {
+
+
+
+
   home.packages = with pkgs; [
     neomutt
     taskwarrior
@@ -9,11 +27,14 @@
     offlineimap 
     notmuch
     msmtp
+    mailPkg
+    mailKillPkg
   ];
   
 
   home.file = {
-    ".secrets/mail".source = ../../../.secret/email/mail;
+    #".secrets/mail".source = ../../../.secret/email/mail;
+    #".msmtprc".source = ../../../.secret/email/msmtprc;
     #".config/hydroxide/auth.json".source = ../../../.secret/email/auth.json;
     ".config/neomutt/neomuttrc".text = ''
       # "+" substitutes for `folder`
@@ -26,15 +47,13 @@
       set mail_check=2 # seconds
 
       # smtp
-      source ~/.secrets/mail
-      set smtp_url=smtp://$my_email@127.0.0.1:1025
-      set smtp_pass = $my_pass
+      set sendmail = "msmtp -a default"
       set ssl_force_tls = yes
       set ssl_starttls = yes
       set ssl_verify_host = no
     '';
 
 
-    ".offlineimaprc".source = ../../../.secret/email/offlineimaprc;
+    #".offlineimaprc".source = ../../../.secret/email/offlineimaprc;
   };
 }

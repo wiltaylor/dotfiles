@@ -60,6 +60,7 @@ Note: Mod key is windows key on most keyboards.
 - Mod + Shift + r: Restart window manager
 - Mod + Return: Open terminal window
 - Mod + d: Open Application launcher
+- Mod + m: Open mail client in a terminal window
 - Mod + w: Start Firefox (default Profile)
 - Mod + Shift + w: Start Firefox (work profile)
 - Mod + Shift + q: Kill current window
@@ -96,3 +97,12 @@ Drawing:
 - space - toggle draw or erase
 
 .SS Terminal (ZSH)
+
+
+.SS Mail Commands
+
+.B mail 
+- will open tmux session with mail client and required agents.
+
+.B kill-mail 
+- Will kill mail tmux session if it is running
