@@ -161,6 +161,7 @@
 
       keybindings = {
          "${modifier}+m" = "exec ${pkgs.alacritty}/bin/alacritty -e mail";
+         "${modifier}+Shift+m" = "exec kill-mail";
          "${modifier}+Shift+r" = "restart";
  	       "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
          "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
