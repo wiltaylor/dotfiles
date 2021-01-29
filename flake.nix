@@ -86,7 +86,7 @@
         roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
         users = [ {
           name = "wil";
-          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+          groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
           uid = 1000;
           shell = pkgs.zsh;
           roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
