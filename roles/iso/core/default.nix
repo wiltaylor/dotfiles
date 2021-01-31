@@ -58,7 +58,6 @@
     microcodeIntel
     imagemagick
     pstree
-    linuxPackages_5_9.bcc
     my.dotfiles-manpages
     acpi
     nix-index
