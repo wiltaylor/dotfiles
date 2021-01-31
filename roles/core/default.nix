@@ -156,6 +156,7 @@ in {
     parted
     xar
     darling-dmg
+    nmap
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin
 	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf
