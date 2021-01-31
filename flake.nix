@@ -18,6 +18,7 @@
 
     inherit (util) host;
     inherit (util) user;
+    inherit (util) shell;
 
     mkPkgs = pkgs: extraOverlays: import pkgs {
       inherit system;
@@ -39,6 +40,14 @@
         master = mpkgs;
         my = self.packages."${system}";
       };
+
+    shells = {
+      test = shell.mkShell {
+        name = "test";
+        buildInputs = [];
+        script = "echo weeee";
+      };
+    };
 
     packages."${system}" = import ./pkgs { inherit pkgs;};
 

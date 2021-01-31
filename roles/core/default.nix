@@ -73,6 +73,11 @@ let
       popd
 
     ;;
+    "shell")
+      pushd ~/.dotfiles
+      nix develop .#shells.$2
+      popd
+    ;;
     *)
       echo "Usage:"
       echo "sys command"
@@ -84,6 +89,7 @@ let
       echo "find-doc - Finds documentation on a config item"
       echo "apply - Applies current configuration in dotfiles."
       echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
+      echo "shell - runs a shell defined in flake."
     ;;
     esac
   '';
