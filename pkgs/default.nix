@@ -8,4 +8,5 @@ with pkgs;
   i3blocks-contrib = (callPackage ./os-specific/linux/i3blocks-contrib/default.nix {});
   proton_5_21_ge_1 = (callPackage ./applications/games/GloriousEggroll/default.nix {});
   pm-bridge = (callPackage ./override/protonmail-bridge/default.nix {});
+  firefox-secure = (callPackage ./applications/browsers/firefox/default.nix {});
 }
