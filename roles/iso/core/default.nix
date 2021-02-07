@@ -68,6 +68,7 @@
     iotop
     nvme-cli
     lm_sensors
+    cryptsetup
     unstable.firmwareLinuxNonfree
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin
