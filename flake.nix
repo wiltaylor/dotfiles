@@ -60,7 +60,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
         kernelMods = [ "kvm-intel" "kvm-amd" ];
         kernelParams = [ ];
-        roles = [ "core" "i3wm" "user" "yubikey" ];       
+        roles = [ "core" "i3wm" "user" "yubikey" "amd-graphics" ];       
       };
     };
 
