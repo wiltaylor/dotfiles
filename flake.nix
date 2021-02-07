@@ -92,7 +92,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" "bluetooth" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];

@@ -75,7 +75,7 @@ let
     ;;
     "shell")
       pushd ~/.dotfiles
-      nix develop .#shells.$2
+      nix develop .#shells.$2 --command zsh
       popd
     ;;
     *)
