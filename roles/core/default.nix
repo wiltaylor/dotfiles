@@ -78,6 +78,13 @@ let
       nix develop .#shells.$2 --command zsh
       popd
     ;;
+
+    "installed")
+      nix-store -q -R /run/current-system | sed -n -e 's/\/nix\/store\/[0-9a-z]\{32\}-//p' | sort | uniq
+    ;;
+    "which")
+      nix-store -qR $(which $2)
+    ;;
     *)
       echo "Usage:"
       echo "sys command"
@@ -90,6 +97,8 @@ let
       echo "apply - Applies current configuration in dotfiles."
       echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
       echo "shell - runs a shell defined in flake."
+      echo "installed - lists all installed packages"
+      echo "which - prints the closure of target file"
     ;;
     esac
   '';
@@ -116,7 +125,7 @@ in {
 
 
   environment.pathsToLink = ["/libexec" ];
-
+  virtualisation.docker.enable = true;
 
   
 
@@ -159,9 +168,18 @@ in {
     iotop
     nvme-cli
     lm_sensors
+    fuse-overlayfs
+    unionfs-fuse
+    squashfsTools
+    squashfuse
     parted
     xar
     darling-dmg
+    linuxPackages_5_10.bpftrace
+    appimagekit
+
+   
+
     nmap
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin

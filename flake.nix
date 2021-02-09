@@ -39,6 +39,10 @@
         unstable = upkgs;
         master = mpkgs;
         my = self.packages."${system}";
+
+        #hwdata = self.packages."${system}".hwdata;
+        #pciutils = self.packages."${system}".pciutils;
+
       };
 
     shells = {
