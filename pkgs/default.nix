@@ -9,4 +9,6 @@ with pkgs;
   proton_5_21_ge_1 = (callPackage ./applications/games/GloriousEggroll/default.nix {});
   pm-bridge = (callPackage ./override/protonmail-bridge/default.nix {});
   firefox-secure = (callPackage ./applications/browsers/firefox/default.nix {});
+  hwdata = (callPackage ./os-specific/linux/hwdata/default.nix {});
+  pciutils = (callPackage ./os-specific/linux/pciutils/default.nix {});
 }
