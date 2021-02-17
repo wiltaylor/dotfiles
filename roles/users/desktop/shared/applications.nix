@@ -29,5 +29,6 @@
     #torbrowser
     blender
     jetbrains.pycharm-professional
+    element-desktop
   ];
 }
