@@ -177,6 +177,9 @@ in {
     darling-dmg
     linuxPackages_5_10.bpftrace
     appimagekit
+    kubectl
+    kubernetes-helm
+    kind
 
    
 

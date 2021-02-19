@@ -5,10 +5,15 @@ call plug#begin()
   Plug 'LnL7/vim-nix'
   Plug 'neoclide/coc.nvim'
   Plug 'weirongxu/coc-explorer'
-  Plug 'junegun/fzf'
+  Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'vim-scripts/DrawIt'
+  Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
+
+let g:coc_global_extensions=[ "coc-explorer", "coc-tsserver", "coc-json", "coc-html", "coc-css", "coc-yaml", "coc-git", "coc-angular", "coc-clangd", "coc-cmake", "coc-diagnostic", "coc-git", "coc-go", "coc-java", "coc-markdownlint", "coc-omnisharp", "coc-powershell", "coc-python", "coc-rls", "coc-spell-checker", "coc-sql", "coc-svg", "coc-swagger", "coc-texlab", "coc-toml", "coc-xml", "coc-yaml" ]
+
+" tod: coc-prettier and coc-sh
 
 " Basic editor config
 set clipboard+=unnamedplus
@@ -128,3 +133,8 @@ imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
+
+
+
+" C# settings
+let g:OmniSharp_server_path = "/etc/profiles/per-user/wil/bin/omnisharp"
