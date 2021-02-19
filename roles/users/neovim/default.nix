@@ -13,6 +13,8 @@ with stdenv.lib;
     omnisharp-roslyn
     mono
     rnix-lsp
+    clang-tools
+    rustup
   ];
 
   home.file = {
