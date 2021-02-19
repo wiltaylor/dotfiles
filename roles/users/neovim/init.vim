@@ -9,9 +9,10 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'vim-scripts/DrawIt'
   Plug 'OmniSharp/omnisharp-vim'
+  Plug 'dense-analysis/ale'
 call plug#end()
 
-let g:coc_global_extensions=[ "coc-explorer", "coc-tsserver", "coc-json", "coc-html", "coc-css", "coc-yaml", "coc-git", "coc-angular", "coc-clangd", "coc-cmake", "coc-diagnostic", "coc-git", "coc-go", "coc-java", "coc-markdownlint", "coc-omnisharp", "coc-powershell", "coc-python", "coc-rls", "coc-spell-checker", "coc-sql", "coc-svg", "coc-swagger", "coc-texlab", "coc-toml", "coc-xml", "coc-yaml" ]
+let g:coc_global_extensions=[ "coc-tsserver", "coc-json", "coc-html", "coc-css", "coc-yaml", "coc-git", "coc-angular", "coc-clangd", "coc-cmake", "coc-diagnostic", "coc-git", "coc-go", "coc-java", "coc-markdownlint", "coc-omnisharp", "coc-powershell", "coc-python", "coc-rls", "coc-spell-checker", "coc-sql", "coc-svg", "coc-swagger", "coc-texlab", "coc-toml", "coc-xml", "coc-yaml" ]
 
 " tod: coc-prettier and coc-sh
 
@@ -138,3 +139,13 @@ imap <right> <nop>
 
 " C# settings
 let g:OmniSharp_server_path = "/etc/profiles/per-user/wil/bin/omnisharp"
+
+
+" Ale config
+let g:ale_linters = { 'cs': ['OmniSharp'], 'nix': ['rnix_lsp'] }
+let b:ale_linters = [ 'cs', 'nix' ]
+
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}

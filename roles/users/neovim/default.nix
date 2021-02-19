@@ -12,6 +12,7 @@ with stdenv.lib;
     nodejs
     omnisharp-roslyn
     mono
+    rnix-lsp
   ];
 
   home.file = {
