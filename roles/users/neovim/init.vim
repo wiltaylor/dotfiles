@@ -19,6 +19,11 @@ call plug#begin()
   Plug 'lambdalisue/fern-git-status.vim'
 call plug#end()
 
+" Set leader to space
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+let maplocalleader=" "
+
 let g:coc_global_extensions=[ "coc-tsserver", "coc-json", "coc-html", "coc-css", "coc-yaml", "coc-git", "coc-angular", "coc-clangd", "coc-cmake", "coc-diagnostic", "coc-git", "coc-go", "coc-java", "coc-markdownlint", "coc-omnisharp", "coc-powershell", "coc-python", "coc-rls", "coc-spell-checker", "coc-sql", "coc-svg", "coc-swagger", "coc-texlab", "coc-toml", "coc-xml", "coc-yaml" ]
 
 " tod: coc-prettier and coc-sh
@@ -108,7 +113,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function',' ')}
 
-:nmap <space>e :Fern . -drawer -toggle<CR>
+noremap <silent> <leader>e :Fern . -drawer -toggle<CR>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -129,6 +134,7 @@ let g:lightline = { 'colorscheme': 'nord', }
 map <a-cr> :CocAction<CR>
 "Vim wiki settings
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/site_html', 'custom_wiki2html': 'vimwiki_markdown'}]
+
 
 " Disable Arrow keys in Normal mode
 map <up> <nop>

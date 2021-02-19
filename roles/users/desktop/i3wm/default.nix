@@ -17,7 +17,6 @@
 
   imports = [
     ../shared/fonts.nix
- #   ./polybar.nix
     ../shared/alacritty
     ../shared/wallpaper.nix
     ../shared/dunst.nix
@@ -50,14 +49,6 @@
     interval=5 
     
   '';
-
-  #home.file.".config/i3/i3blocks.conf".text = mkIf config.wil.laptop == false ''
-  #  # Update time every 5 seconds
-  #  [time]
- #   command=date "+%Y-%m-%d %T"
- #   interval=5
-
-#  '';
 
   xsession = {
     enable = true;
@@ -118,47 +109,6 @@
           }
         ];
 
-#        bars = [
-#          {
-#            mode = "dock";
-#            position = "top";
- #           workspaceButtons = true;
- #           workspaceNumbers = true;
- #           statusCommand = "${pkgs.i3blocks-gaps}/bin/i3blocks -c ~/.config/i3/i3blocks.config";
- #           trayOutput = "primary";
-  #          colors = {
- #             background = "#000000";
-    #          statusline = "#ffffff";
-     #         separator = "#666666";
-  #            focusedWorkspace = {
-      #          border = "#4c7899";
-       #         background = "#285577";
-     #           text = "#ffffff";
-      #        };
-     #         activeWorkspace = {
-     #           border = "#333333";
-     #           background = "#5f676a";
-      #          text = "#ffffff";
-      #        };
-     #         inactiveWorkspace = {
-     #           border = "#333333";
-     #           background = "#222222";
-     #           text = "#888888";
-     #         };
-     #         urgentWorkspace = {
-     #           border = "#2f343a";
-     #           background = "#900000";
-     #           text = "#ffffff";
-      #        };
-      #        bindingMode = {
-      #          border = "#2f343a";
-      #          background = "#900000";
-      #          text = "#ffffff";
-      #        };
-      #      };
-     #     }
-      #  ];
-
       keybindings = {
          "${modifier}+m" = "exec ${pkgs.alacritty}/bin/alacritty -e mail";
          "${modifier}+Shift+m" = "exec kill-mail";
@@ -202,7 +152,7 @@
          "${modifier}+v" = "split v";
          "${modifier}+shift+minus" = "move scratchpad";
          "${modifier}+minus" = "scratchpad show";
-         "${modifier}+l" = "exec --no-startup-id dm-tool lock";
+         "${modifier}+Escape" = "exec --no-startup-id dm-tool lock";
          "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` +5%";
          "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` -5%";
          "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` ndtoggle";
