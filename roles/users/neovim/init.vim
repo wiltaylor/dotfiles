@@ -4,7 +4,6 @@ call plug#begin()
   Plug 'vimwiki/vimwiki'
   Plug 'LnL7/vim-nix'
   Plug 'neoclide/coc.nvim'
-  Plug 'weirongxu/coc-explorer'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'vim-scripts/DrawIt'
@@ -12,6 +11,12 @@ call plug#begin()
   Plug 'dense-analysis/ale'
   Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-fugitive'
+  Plug 'antoinemadec/FixCursorHold.nvim'
+  Plug 'lambdalisue/fern.vim'
+  Plug 'lambdalisue/nerdfont.vim'
+  Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+  Plug 'lambdalisue/fern-hijack.vim'
+  Plug 'lambdalisue/fern-git-status.vim'
 call plug#end()
 
 let g:coc_global_extensions=[ "coc-tsserver", "coc-json", "coc-html", "coc-css", "coc-yaml", "coc-git", "coc-angular", "coc-clangd", "coc-cmake", "coc-diagnostic", "coc-git", "coc-go", "coc-java", "coc-markdownlint", "coc-omnisharp", "coc-powershell", "coc-python", "coc-rls", "coc-spell-checker", "coc-sql", "coc-svg", "coc-swagger", "coc-texlab", "coc-toml", "coc-xml", "coc-yaml" ]
@@ -103,7 +108,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function',' ')}
 
-:nmap <space>e :CocCommand explorer<CR>
+:nmap <space>e :Fern . -drawer -toggle<CR>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -151,3 +156,19 @@ let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'css': ['prettier'],
 \}
+
+
+let g:fern#renderer = "nerdfont"
+set noshowmode
+
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
