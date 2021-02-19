@@ -1,0 +1,11 @@
+{
+  "omnisharp.path": "/etc/profiles/per-user/wil/bin/omnisharp",
+    "languageserver": {
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": [
+        "nix"
+      ]
+    }
+  }
+}
