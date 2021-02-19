@@ -17,7 +17,17 @@ call plug#begin()
   Plug 'lambdalisue/fern-renderer-nerdfont.vim'
   Plug 'lambdalisue/fern-hijack.vim'
   Plug 'lambdalisue/fern-git-status.vim'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
+
+set exrc
+set nohlsearch
+set nowrap
+set incsearch
+set scrolloff=8
+set colorcolumn=80
 
 " Set leader to space
 nnoremap <SPACE> <Nop>
@@ -178,3 +188,24 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
+
+
+
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+fun! TrimWhiteSpace()
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
+endfun
+
+augroup WIL_AUG
+  autocmd!
+  autocmd BufWritePre * :call TrimWhiteSpace()
+augroup END

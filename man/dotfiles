@@ -73,6 +73,7 @@ Note: Mod key is windows key on most keyboards.
 - Mod + [1-9]: Open workspace 1 through 9
 - Mod + Shift + [1-9]: Move current window to workspace 1 through 9
 - Mod + f: Toggle fullscreen
+- Mod + Esc: Lock System
 - Mod + Space: Toggle floating window
 - Mod + h: Next split Horrizontal
 - Mod + v: Next split verticle 
