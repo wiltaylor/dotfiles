@@ -180,7 +180,7 @@ in {
     kubectl
     kubernetes-helm
     kind
-
+    jp2a
    
 
     nmap
