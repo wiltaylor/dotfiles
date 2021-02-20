@@ -181,6 +181,8 @@ in {
     kubernetes-helm
     kind
     jp2a
+    doctl
+
    
 
     nmap
