@@ -5,7 +5,7 @@ let
       echo "You are in a nix shell that redirected home!"
       echo "SYS will not work from here properly."
       exit 1
-    fi 
+    fi
 
     case $1 in
     "clean")
@@ -27,13 +27,13 @@ let
         pushd ~/.dotfiles
         nix search .# $3
         popd
-      else 
+      else
         nix search nixpkgs $2
       fi
     ;;
 
     "find-doc")
-      ${pkgs.manix}/bin/manix $2 
+      ${pkgs.manix}/bin/manix $2
     ;;
 
     "apply")
@@ -42,7 +42,7 @@ let
         sudo nixos-rebuild switch --flake '.#'
 
       elif [ $2 = "--boot" ]; then
-        sudo nixos-rebuild boot --flake '.#' 
+        sudo nixos-rebuild boot --flake '.#'
       elif [ $2 = "--test" ]; then
         sudo nixos-rebuild test --flake '.#'
       elif [ $2 = "--check" ]; then
@@ -52,7 +52,7 @@ let
       fi
 
       popd
-  
+
     ;;
     "iso")
       echo "Building iso file $2"
@@ -64,12 +64,12 @@ let
       elif [ $3 = "--burn" ]; then
         if [ -z "$4" ]; then
           echo "Expected a path to a usb drive following --burn."
-        else 
+        else
           sudo dd if=./result/iso/nixos.iso of=$4 status=progress bs=1M
         fi
       else
         echo "Unexpected option $3. Expected --burn"
-      fi 
+      fi
       popd
 
     ;;
@@ -127,7 +127,7 @@ in {
   environment.pathsToLink = ["/libexec" ];
   virtualisation.docker.enable = true;
 
-  
+
 
   environment.systemPackages = with pkgs; [
     wget
@@ -154,7 +154,7 @@ in {
     unrar
     python3
     nix-bundle
-    sysTool 
+    sysTool
     microcodeIntel
     imagemagick
     pstree
@@ -182,8 +182,9 @@ in {
     kind
     jp2a
     doctl
+    pwgen
 
-   
+
 
     nmap
     ( pkgs.runCommand "neovim-alias" {} ''

@@ -9,5 +9,10 @@
       key = "0xEC571018542D2ACC";
       signByDefault = false;
     };
+    extraConfig = {
+      init = {
+        defaultBranch = "master";
+      };
+    };
   };
 }

@@ -34,7 +34,7 @@
     system = "x86_64-linux";
 
   in {
-    overlay = 
+    overlay =
       final: prev: {
         unstable = upkgs;
         master = mpkgs;
@@ -60,11 +60,11 @@
     installMedia = {
       i3 = host.mkISO {
         name = "nixos";
-        kernelPackage = pkgs.unstable.linuxPackages_5_10;
+        kernelPackage = pkgs.unstable.linuxPackages_5_11;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
         kernelMods = [ "kvm-intel" "kvm-amd" ];
         kernelParams = [ ];
-        roles = [ "core" "i3wm" "user" "yubikey" "amd-graphics" ];       
+        roles = [ "core" "i3wm" "user" "yubikey" "amd-graphics" ];
       };
     };
 
@@ -72,7 +72,7 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.unstable.linuxPackages_5_10;
+        kernelPackage = pkgs.unstable.linuxPackages_5_11;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
@@ -107,7 +107,7 @@
         }];
         cpuCores = 2;
         laptop = true;
-      };   
+      };
 
       junkbox = host.mkHost {
         name = "junkbox";

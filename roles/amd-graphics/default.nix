@@ -19,7 +19,6 @@
      extraConfig = ''
        DRM_AMD_DC y
        DRM_AMD_DC_DCN y
-       DRM_AMD_DC_DCN3_0 y
      '';
    }];
 
