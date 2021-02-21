@@ -26,7 +26,7 @@
     gitkraken
     #masterplan
     dfeet
-    #torbrowser
+    torbrowser
     blender
     jetbrains.pycharm-professional
     element-desktop
