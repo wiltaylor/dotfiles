@@ -46,10 +46,12 @@
       };
 
     shells = {
-      test = shell.mkShell {
-        name = "test";
-        buildInputs = [];
-        script = "echo weeee";
+      video = shell.mkShell {
+        name = "video";
+        buildInputs = with pkgs; [ blender obs-studio obs-v4l2sink mpv ];
+        script = ''
+          echo "Video editing shell"
+        '';
       };
     };
 
@@ -60,7 +62,7 @@
     installMedia = {
       i3 = host.mkISO {
         name = "nixos";
-        kernelPackage = pkgs.unstable.linuxPackages_5_11;
+        kernelPackage = pkgs.unstable.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
         kernelMods = [ "kvm-intel" "kvm-amd" ];
         kernelParams = [ ];
@@ -72,7 +74,7 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.unstable.linuxPackages_5_11;
+        kernelPackage = pkgs.unstable.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];

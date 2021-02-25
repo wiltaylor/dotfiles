@@ -2,7 +2,7 @@
 {
   #mkUser = { name,groups, uid, shell, roles, ...}:
   #let
-  #  selectedShell = if shell == "zsh" then 
+  #  selectedShell = if shell == "zsh" then
   #    pkgs.zsh
   #  else if shell == "fish" then
   #    pkgs.fish
@@ -26,7 +26,7 @@
   #  home-manager.users."${name}" = {
 
    #   imports = mod_roles;
-      
+
       #nixpkgs = {
       #  config.allowUnfree = true;
       #  overlays = pkgs.overlays;
@@ -57,7 +57,7 @@
     mod_roles = map (r: mkRole r) roles;
     sysmod = {...}: { inherit sysdata; };
   in {
-    "${name}" = 
+    "${name}" =
     {
       imports = mod_roles ++ sysdata;
 

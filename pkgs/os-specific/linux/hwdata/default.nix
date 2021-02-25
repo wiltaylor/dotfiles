@@ -1,3 +1,4 @@
+
 { lib, stdenv, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
@@ -8,7 +9,7 @@ stdenv.mkDerivation rec {
     owner = "vcrhonek";
     repo = "hwdata";
     rev = "v${version}";
-    sha256 = "6uSIFJnpe2HG6fNNG1G5xIY4xBDOTGlQhpoElEmqVmc=";
+    sha256 = "0rsnm94r814shr86jk6f2323i1n4p58inkgkx7362yz9k4a8ir7a";
   };
 
   preConfigure = "patchShebangs ./configure";
@@ -19,7 +20,7 @@ stdenv.mkDerivation rec {
 
   outputHashMode = "recursive";
   outputHashAlgo = "sha256";
-  outputHash = "31ligZpLsYSQQGw5n3Zw6pE4sPf4RGKdJstN/Rv1NAQ=";
+  outputHash = "011lyldzskfb4sfn4i7qyyq3i4gaf1v9yfbc82889cabka0n4nfz";
 
   meta = {
     homepage = "https://github.com/vcrhonek/hwdata";

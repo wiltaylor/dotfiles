@@ -1,110 +1,9 @@
 {config, pkgs, lib, ...}:
 let
-  sysTool = pkgs.writeScriptBin "sys" ''
-    if [ -n "$INNIXSHELLHOME" ]; then
-      echo "You are in a nix shell that redirected home!"
-      echo "SYS will not work from here properly."
-      exit 1
-    fi
 
-    case $1 in
-    "clean")
-      echo "Running Garbage collection"
-      nix-store --gc
-      echo "Deduplication running...this may take awhile"
-      nix-store --optimise
-    ;;
-
-    "update")
-      echo "Updating dotfiles flake..."
-      pushd ~/.dotfiles
-      nix flake update --recreate-lock-file
-      popd
-    ;;
-
-    "find")
-      if [ $2 = "--overlay" ]; then
-        pushd ~/.dotfiles
-        nix search .# $3
-        popd
-      else
-        nix search nixpkgs $2
-      fi
-    ;;
-
-    "find-doc")
-      ${pkgs.manix}/bin/manix $2
-    ;;
-
-    "apply")
-      pushd ~/.dotfiles
-      if [ -z "$2" ]; then
-        sudo nixos-rebuild switch --flake '.#'
-
-      elif [ $2 = "--boot" ]; then
-        sudo nixos-rebuild boot --flake '.#'
-      elif [ $2 = "--test" ]; then
-        sudo nixos-rebuild test --flake '.#'
-      elif [ $2 = "--check" ]; then
-        nixos-rebuild dry-activate --flake '.#'
-      else
-        echo "Unknown option $2"
-      fi
-
-      popd
-
-    ;;
-    "iso")
-      echo "Building iso file $2"
-      pushd ~/.dotfiles
-      nix build ".#installMedia.$2.config.system.build.isoImage"
-
-      if [ -z "$3" ]; then
-        echo "ISO Image is located at ~/.dotfiles/result/iso/nixos.iso"
-      elif [ $3 = "--burn" ]; then
-        if [ -z "$4" ]; then
-          echo "Expected a path to a usb drive following --burn."
-        else
-          sudo dd if=./result/iso/nixos.iso of=$4 status=progress bs=1M
-        fi
-      else
-        echo "Unexpected option $3. Expected --burn"
-      fi
-      popd
-
-    ;;
-    "shell")
-      pushd ~/.dotfiles
-      nix develop .#shells.$2 --command zsh
-      popd
-    ;;
-
-    "installed")
-      nix-store -q -R /run/current-system | sed -n -e 's/\/nix\/store\/[0-9a-z]\{32\}-//p' | sort | uniq
-    ;;
-    "which")
-      nix-store -qR $(which $2)
-    ;;
-    *)
-      echo "Usage:"
-      echo "sys command"
-      echo ""
-      echo "Commands:"
-      echo "clean - GC and hard link nix store"
-      echo "update - Updates dotfiles flake."
-      echo "find [--overlay] - Find a nix package (overlay for custom packages)."
-      echo "find-doc - Finds documentation on a config item"
-      echo "apply - Applies current configuration in dotfiles."
-      echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
-      echo "shell - runs a shell defined in flake."
-      echo "installed - lists all installed packages"
-      echo "which - prints the closure of target file"
-    ;;
-    esac
-  '';
+  scripts = import ./scripts.nix { inherit pkgs; };
 
 in {
-  system.stateVersion = "20.09";
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
@@ -127,11 +26,12 @@ in {
   environment.pathsToLink = ["/libexec" ];
   virtualisation.docker.enable = true;
 
-
-
   environment.systemPackages = with pkgs; [
+
+    # Core utilities that need to be on every machine
     wget
-    pciutils
+    my.pciutils
+    my.hwdata
     curl
     bind
     killall
@@ -152,22 +52,28 @@ in {
     zsh
     dmg2img
     unrar
-    python3
-    nix-bundle
-    sysTool
-    microcodeIntel
-    imagemagick
-    pstree
-    my.dotfiles-manpages
     acpi
+    gh
+    lf
+    pwgen
+    usbutils
+
+    python3 # move out to things that need it
+    nix-bundle # Move out
+    scripts.sysTool
+    scripts.devTool
+    microcodeIntel # Move to intel package, get amd one too
+    imagemagick # move out to shells
+    pstree
+
+    my.dotfiles-manpages # split out
     nix-index
     unstable.btrfs-progs
     smartmontools
     neovim
-    zfs
     iotop
-    nvme-cli
-    lm_sensors
+    nvme-cli # Move to efi
+    lm_sensors # Move to amd and intel
     fuse-overlayfs
     unionfs-fuse
     squashfsTools
@@ -175,18 +81,18 @@ in {
     parted
     xar
     darling-dmg
-    linuxPackages_5_10.bpftrace
-    appimagekit
-    kubectl
-    kubernetes-helm
-    kind
-    jp2a
-    doctl
-    pwgen
+    linuxPackages_5_10.bpftrace # Add to diag pack
 
+    kubectl # Should be moved to shell
+    kubernetes-helm # Shell
+    kind # above shell
+    jp2a # Misc tools
+    doctl # devops shell
 
+    v4l-utils # Move out to video shell
+    xawtv # video shell
 
-    nmap
+    nmap # Security shell
     ( pkgs.runCommand "neovim-alias" {} ''
 	mkdir -p $out/bin
 	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf

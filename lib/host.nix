@@ -33,7 +33,7 @@ with builtins;
     };
 
   mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores, laptop }:
-    let 
+    let
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
       }) NICs);
@@ -65,7 +65,7 @@ with builtins;
 
           networking.networkmanager.enable = true;
           networking.useDHCP = false; # Disable any new interface added that is not in config.
-        
+
           boot.initrd.availableKernelModules = initrdMods;
           boot.kernelModules = kernelMods;
           boot.kernelParams = kernelParams;
@@ -74,12 +74,14 @@ with builtins;
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;
 
+          system.stateVersion = "20.09";
+
         }
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users = hm_users;        
+          home-manager.users = hm_users;
         }
       ];
     };
