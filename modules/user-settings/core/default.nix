@@ -9,7 +9,8 @@ let
 
   in {
     "$username".files."${path}/${name}".text = ''
-
+      mkdir -p ${path}
+      ln ${file} ${path}/${name} -sf
     '';
   };
 
@@ -191,8 +192,15 @@ in {
   };
 
 
-  config = mkIf (cfg.enable) {
-
+  config =
+  let
+    gdxConfig = map(p: mkFile {
+      name = p.name;
+      path = p.path;
+      text = p.text;
+    }) config.xgd.config.files;
+  in {
+    system.activationScripts = gdxConfig;
   };
 
 }
