@@ -26,7 +26,11 @@
 
   environment.systemPackages = with pkgs; [
     appimage-run
+    lightdm
+    dfeet
   ];
 
   services.gnome3.gnome-keyring.enable = true;
+  services.accounts-daemon.enable = true;
+  environment.pathsToLink = [ "/share/accountsservice" ];
 }

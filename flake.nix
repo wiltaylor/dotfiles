@@ -5,7 +5,7 @@
     nixos.url = "nixpkgs/nixos-unstable";
     nixos-unstable.url = "nixpkgs/nixos-unstable";
     nixos-master.url = "nixpkgs/master";
-    home-manager.url = "github:nix-community/home-manager/release-20.09";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixos";
   };
 
