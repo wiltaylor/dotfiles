@@ -28,6 +28,24 @@
     appimage-run
     lightdm
     dfeet
+
+    (pkgs.writeScriptBin "desktop" ''
+      #!${pkgs.bash}/bin/bash
+
+      case $1 in
+      "wallpaper")
+        ${pkgs.feh}/bin/feh --bg-fill --randomize ~/.config/wallpapers/*
+      ;;
+      *)
+        echo "Usage:"
+        echo "desktop command"
+        echo ""
+        echo "Commands:"
+        echo "wallpaper - randomly selects new wallpapers"
+      ;;
+      esac
+
+    '')
   ];
 
   services.gnome3.gnome-keyring.enable = true;

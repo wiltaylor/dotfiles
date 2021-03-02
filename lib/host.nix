@@ -32,7 +32,7 @@ with builtins;
       ];
     };
 
-  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores, laptop }:
+  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores, laptop, newUsers }:
     let
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
@@ -58,7 +58,7 @@ with builtins;
 
       modules = [
         {
-          imports = [ ../modules ] ++ roles_mods ++ sys_users;
+          imports = [ ../modules ] ++ roles_mods ++ sys_users ++ newUsers;
 
           networking.hostName = "${name}";
           networking.interfaces = networkCfg;
