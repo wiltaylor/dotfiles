@@ -2,13 +2,7 @@
 {
 
  mkSystemUser = {name, groups, uid, shell, ...}:
- let
-   uSettings = import ./usersettings.nix { inherit pkgs lib config; };
- in {
-   imports = [(uSettings.mkUser {
-     username = name;
-   })];
-
+ {
     users.users."${name}" = {
       name = name;
       isNormalUser = true;
