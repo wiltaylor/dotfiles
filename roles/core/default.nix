@@ -5,6 +5,14 @@ let
 
 in {
 
+  wil.xdg.config.files = {
+    name = "test";
+    path = "";
+    text = ''
+      test
+    '';
+  };
+
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
     gc = {

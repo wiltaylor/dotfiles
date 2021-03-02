@@ -186,21 +186,6 @@ in {
           description = "Specify files on the videos folder";
         };
       };
-
-
-
-  };
-
-
-  config =
-  let
-    gdxConfig = map(p: mkFile {
-      name = p.name;
-      path = p.path;
-      text = p.text;
-    }) config.xgd.config.files;
-  in {
-    system.activationScripts = gdxConfig;
-  };
-
+    };
+};
 }

@@ -89,7 +89,6 @@
         }];
         cpuCores = 8;
         laptop = false;
-        newUsers = [];
       };
 
       mini = host.mkHost {
@@ -110,7 +109,6 @@
         }];
         cpuCores = 2;
         laptop = true;
-        newUsers = [];
       };
 
       junkbox = host.mkHost {
@@ -131,7 +129,6 @@
           data = {};
         }];
         laptop = true;
-        newUsers = [];
       };
     };
   };

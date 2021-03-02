@@ -1,13 +1,18 @@
-{pkgs, ...}:
+{pkgs, lib, config, ...}:
 {
-  mkUser = { username, config }:
+  mkUser = { username }:
   let
     modList = import ../modules/user-settings;
-    loadMod = name: import (../modules/user-settings + "/${name}");
+
+    loadMod = name: {
+      "${username}" = import (../modules/user-settings + "/${name}"){
+        inherit username config lib pkgs;
+        homedir = "/home/${username}";
+      };
+    };
+
     mods = (map (m: loadMod m) modList);
   in {
-
     imports = mods;
-
   };
 }

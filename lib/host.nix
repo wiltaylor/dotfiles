@@ -32,7 +32,7 @@ with builtins;
       ];
     };
 
-  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores, laptop, newUsers }:
+  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, users, cpuCores, laptop }:
     let
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
@@ -50,7 +50,7 @@ with builtins;
 
       mkRole = name: import (../roles + "/${name}");
 
-      usr = import ./user.nix { inherit pkgs home-manager;};
+      usr = import ./user.nix { inherit pkgs home-manager lib config;};
 
 
     in lib.nixosSystem {
@@ -58,7 +58,7 @@ with builtins;
 
       modules = [
         {
-          imports = [ ../modules ] ++ roles_mods ++ sys_users ++ newUsers;
+          imports = [ ../modules ] ++ roles_mods ++ sys_users;
 
           networking.hostName = "${name}";
           networking.interfaces = networkCfg;
