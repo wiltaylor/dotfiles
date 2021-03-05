@@ -24,13 +24,12 @@
     my.vscodium-alias
     vscodium
     gitkraken
-    #masterplan
     dfeet
-    # torbrowser
     blender
     jetbrains.pycharm-professional
     element-desktop
     xournalpp
 #    cinelerra
+    pcmanfm
   ];
 }

@@ -19,8 +19,8 @@
     ];
 
     home.file = {
-      ".kde4/share/config/kdeglobals".source = ./kdeglobals;
-      ".kde4/share/apps/color-schemes/Breeze.colors".source = ./Breeze.colors;
-      ".kde4/share/apps/color-schemes/BreezeDark.colors".source = ./BreezeDark.colors;
+     # ".kde4/share/config/kdeglobals".source = ./kdeglobals;
+     # ".kde4/share/apps/color-schemes/Breeze.colors".source = ./Breeze.colors;
+     # ".kde4/share/apps/color-schemes/BreezeDark.colors".source = ./BreezeDark.colors;
     };
 }
