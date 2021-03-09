@@ -1,6 +1,5 @@
 {pkgs, config, lib, stdenv, ...}:
 with stdenv.lib;
-
 {
   home.sessionVariables = {
     EDITOR = "${pkgs.neovim-nightly}/bin/nvim";
@@ -75,6 +74,9 @@ with stdenv.lib;
       \ }
       \ }
 
+      " Editor config
+      let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 
       " NVIM Tree
       let g:nvim_tree_side = 'left'
@@ -118,6 +120,91 @@ with stdenv.lib;
       \ 'ext': '.md', 'path_html': '~/vimwiki/site_html',
       \ 'custom_wikihtml': 'vimwiki_markdown'}]
 
+
+      " Completion options
+      set completeopt=menuone,noinsert,noselect
+      let g:completion_matching_strategy_list = [ 'exact', 'substring', 'fuzzy' ]
+
+      " LSP Config
+      lua << EOF
+      local lspconfig = require'lspconfig'
+
+      -- Python
+      lspconfig.pyright.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = {'${pkgs.nodePackages.pyright}/bin/pyright-langserver', '--stdio'};
+      }
+
+      -- Bash
+      lspconfig.bashls.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.nodePackages.bash-language-server}/bin/bash-language-server', 'start'};
+      }
+
+      -- GO
+      lspconfig.gopls.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.gopls}/bin/gopls' };
+      }
+
+      -- NIX
+      lspconfig.rnix.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.rnix-lsp}/bin/rnix-lsp' };
+      }
+
+      -- Ruby
+      lspconfig.solargraph.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.solargraph}/bin/solargraph', 'stdio' };
+      }
+
+      -- Rust
+      lspconfig.rust_analyzer.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' }; 
+      }
+
+      -- Terraform
+      lspconfig.terraformls.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.terraform-ls}/bin/terraform-ls', 'serve' };
+      }
+
+      -- Typescript
+      lspconfig.tsserver.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio' };
+      }
+
+      -- Vim script
+      lspconfig.vimls.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.nodePackages.vim-language-server}/bin/vim-language-server', '--stdio' };
+      }
+
+      -- YAML
+      lspconfig.yamlls.setup {
+        on_attach=require'completion'.on_attach;
+        cmd = { '${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server', '--stdio' };
+      }
+
+      EOF
+
+
+      " LSP Config
+      "lua << EOF
+      "require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
+      "EOF
+
+      "if executable('rnix-lsp')
+      "     au User lsp_setup call lsp#register_server({
+      "  \ 'name': 'rnix-lsp',
+      "  \ 'cmd': {server_info->[&shell, &shellcmdflag, 'rnix-lsp']},
+      "  \ 'whitelist': ['nix'],
+      "  \ })
+      "endif
+
       " Disable arrow keys in normal mode
       map <up> <nop>
       map <down> <nop>
@@ -151,7 +238,6 @@ with stdenv.lib;
       vim-nix
       lightline-vim
       vim-fugitive
-      vimagit
       popup-nvim
       plenary-nvim
       telescope-nvim
@@ -160,20 +246,13 @@ with stdenv.lib;
       vim-startify
       nvim-lspconfig
       completion-nvim
+      barbar-nvim
+      editorconfig-vim
     ];
 
   };
 
   home.packages = with pkgs; [
-    #neovim-nightly
-
-    #neovitality
-
-    #(python3.withPackages (ps: with ps; [
-    #  black   flake8
-    #  flake8
-    #]))
-
     nodejs
     omnisharp-roslyn
     mono
@@ -182,15 +261,4 @@ with stdenv.lib;
     rustup
   ];
 
-  home.file = {
-    #".config/nvim/init.vim".source = ./init.vim;
-    #".local/share/nvim/site/autoload/plug.vim".source = ./plug.vim;
-    #".config/nvim/coc-settings.json".source = ./coc-settings.json;
-  };
-
-
-  # So getting nvim to install it during activation. A bit of a hack
- # home.activation.neovim = lib.hm.dag.entryAfter ["writeBoundry"] ''
- #   nvim -c 'PlugInstall|q|q'
-  #'';
 }
