@@ -28,6 +28,8 @@
     appimage-run
     lightdm
     dfeet
+    gnome3.zenity
+    ueberzug
 
     (pkgs.writeScriptBin "desktop" ''
       #!${pkgs.bash}/bin/bash
@@ -36,12 +38,19 @@
       "wallpaper")
         ${pkgs.feh}/bin/feh --bg-fill --randomize ~/.config/wallpapers/*
       ;;
+      "winman")
+        ${xlibs.xprop}/bin/xprop -root -notype | grep "_NET_WM_NAME =" | cut -d '"' -f2
+      ;;
+      "about")
+        ${pkgs.gnome3.zenity}/bin/zenity --about
+      ;;
       *)
         echo "Usage:"
         echo "desktop command"
         echo ""
         echo "Commands:"
         echo "wallpaper - randomly selects new wallpapers"
+        echo "winman - Prints the current window manager"
       ;;
       esac
 

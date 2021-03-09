@@ -3,23 +3,23 @@ call plug#begin()
   Plug 'arcticicestudio/nord-vim'
   Plug 'vimwiki/vimwiki'
   Plug 'LnL7/vim-nix'
-  Plug 'neoclide/coc.nvim'
+"  Plug 'neoclide/coc.nvim'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
-  Plug 'vim-scripts/DrawIt'
+"  Plug 'vim-scripts/DrawIt'
   Plug 'OmniSharp/omnisharp-vim'
-  Plug 'dense-analysis/ale'
+"  Plug 'dense-analysis/ale'
   Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'antoinemadec/FixCursorHold.nvim'
-  Plug 'lambdalisue/fern.vim'
-  Plug 'lambdalisue/nerdfont.vim'
-  Plug 'lambdalisue/fern-renderer-nerdfont.vim'
-  Plug 'lambdalisue/fern-hijack.vim'
-  Plug 'lambdalisue/fern-git-status.vim'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'kyazdani42/nvim-web-devicons' " for file icons
+  Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'mhinz/vim-startify'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
 call plug#end()
 
 set exrc
@@ -34,7 +34,13 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 let maplocalleader=" "
 
-let g:coc_global_extensions=[ "coc-tsserver", "coc-json", "coc-html", "coc-css", "coc-yaml", "coc-git", "coc-angular", "coc-clangd", "coc-cmake", "coc-diagnostic", "coc-git", "coc-go", "coc-java", "coc-markdownlint", "coc-omnisharp", "coc-powershell", "coc-python", "coc-rls", "coc-spell-checker", "coc-sql", "coc-svg", "coc-swagger", "coc-texlab", "coc-toml", "coc-xml", "coc-yaml" ]
+"let g:coc_global_extensions=[ "coc-godot", "coc-tsserver","coc-flutter",
+"      \ "coc-deno", "coc-json", "coc-html", "coc-css", "coc-yaml", "coc-git",
+"      \ "coc-angular", "coc-clangd", "coc-cmake", "coc-diagnostic", "coc-git",
+"      \ "coc-go", "coc-java", "coc-markdownlint", "coc-omnisharp",
+"      \ "coc-powershell", "coc-pyright", "coc-rls", "coc-spell-checker",
+"      \ "coc-sql", "coc-svg", "coc-swagger", "coc-texlab", "coc-toml",
+"      \ "coc-xml", "coc-yaml", "coc-r-lsp" ]
 
 " tod: coc-prettier and coc-sh
 
@@ -60,70 +66,70 @@ set shortmess+=c
 set signcolumn=yes
 
 " Mapping tab complete for coc
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <c-space> coc#refresh() " Space to trigger completion
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <silent><expr> <c-space> coc#refresh() " Space to trigger completion
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+"nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+"xmap <leader>a  <Plug>(coc-codeaction-selected)
+"nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+"nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+"nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
+"xmap if <Plug>(coc-funcobj-i)
+"omap if <Plug>(coc-funcobj-i)
+"xmap af <Plug>(coc-funcobj-a)
+"omap af <Plug>(coc-funcobj-a)
+"xmap ic <Plug>(coc-classobj-i)
+"omap ic <Plug>(coc-classobj-i)
+"xmap ac <Plug>(coc-classobj-a)
+"omap ac <Plug>(coc-classobj-a)
 
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+"inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+"vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+"nmap <silent> <C-s> <Plug>(coc-range-select)
+"xmap <silent> <C-s> <Plug>(coc-range-select)
 
-command! -nargs=0 Format :call CocAction('format')
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+"command! -nargs=0 Format :call CocAction('format')
+"command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function',' ')}
 
-noremap <silent> <leader>e :Fern . -drawer -toggle<CR>
+"noremap <silent> <leader>e :Fern . -drawer -toggle<CR>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -161,21 +167,17 @@ imap <right> <nop>
 
 
 " C# settings
-let g:OmniSharp_server_path = "/etc/profiles/per-user/wil/bin/omnisharp"
+"let g:OmniSharp_server_path = "/etc/profiles/per-user/wil/bin/omnisharp"
 
 
 " Ale config
-let g:ale_linters = { 'cs': ['OmniSharp'], 'nix': ['rnix_lsp'] }
-let b:ale_linters = [ 'cs', 'nix' ]
+"let g:ale_linters = { 'cs': ['OmniSharp'], 'nix': ['rnix_lsp'] }
+"let b:ale_linters = [ 'cs', 'nix' ]
 
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'css': ['prettier'],
-\}
-
-
-let g:fern#renderer = "nerdfont"
-set noshowmode
+"let g:ale_fixers = {
+"\   'javascript': ['prettier'],
+"\   'css': ['prettier'],
+"\}
 
 
 let g:lightline = {
@@ -209,3 +211,50 @@ augroup WIL_AUG
   autocmd!
   autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
+
+
+" NVIM Tree
+let g:nvim_tree_side = 'left'
+let g:nvim_tree_width = 40
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+let g:nvim_tree_auto_open = 1
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_follow = 1
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_hide_dotfiles = 0
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_root_folder_modifier = ':~'
+let g:nvim_tree_tab_open = 1
+let g:nvim_tree_disable_netrw = 1
+let g:nvim_tree_hijack_netrw = 1
+let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ }
+let g:nvim_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★"
+    \   },
+    \ 'folder': {
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   }
+    \ }
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+set termguicolors
+
+" Startify
+let g:startify_custom_header = [ '      NIXOS NEOVIM CONFIG' ]

@@ -19,10 +19,18 @@
      extraConfig = ''
        DRM_AMD_DC y
        DRM_AMD_DC_DCN y
+       DRM_AMD_DC_DCN3_0 y
      '';
    }];
 
-  environment.systemPackages = with pkgs; [ vulkan-tools mesa mesa_drivers  ];
+   environment.systemPackages = with pkgs; [
+     vulkan-tools
+     mesa mesa_drivers
+     rocm-opencl-icd
+     rocm-opencl-runtime
+     opencl-icd
+     opencl-info
+   ];
 
   hardware.firmware = with pkgs.unstable; [ firmwareLinuxNonfree ];
   hardware.enableAllFirmware = true;

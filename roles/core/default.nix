@@ -5,14 +5,6 @@ let
 
 in {
 
-  wil.xdg.config.files = {
-    name = "test";
-    path = "";
-    text = ''
-      test
-    '';
-  };
-
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
     gc = {
@@ -66,6 +58,7 @@ in {
     lf
     pwgen
     usbutils
+    clang_11
 
     python3 # move out to things that need it
     nix-bundle # Move out
@@ -102,11 +95,6 @@ in {
     xawtv # video shell
 
     nmap # Security shell
-    ( pkgs.runCommand "neovim-alias" {} ''
-	mkdir -p $out/bin
-	ln ${pkgs.neovim}/bin/nvim $out/bin/vim -sf
-	ln ${pkgs.neovim}/bin/nvim $out/bin/vi -sf
-    '')
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";

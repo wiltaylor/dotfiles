@@ -1,6 +1,10 @@
 {
   "omnisharp.path": "/etc/profiles/per-user/wil/bin/omnisharp",
-    "languageserver": {
+  "python.formatting.provider": "black",
+  "python.jediEnabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.pythonPath": "nvim-python3",
+  "languageserver": {
     "nix": {
       "command": "rnix-lsp",
       "filetypes": [

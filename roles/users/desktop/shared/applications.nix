@@ -30,6 +30,7 @@
     blender
     jetbrains.pycharm-professional
     element-desktop
+    xournalpp
 #    cinelerra
   ];
 }

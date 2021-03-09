@@ -7,9 +7,15 @@
     nixos-master.url = "nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixos";
+    nur.url = "github:nix-community/NUR";
+
+    flake-utils.url = github:numtide/flake-utils;
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+
   };
 
-  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, nixpkgs, ... }:
+  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, nixpkgs, nur, ... }:
   let
     inherit (nixos) lib;
     inherit (lib) attrValues;
@@ -20,31 +26,35 @@
     inherit (util) user;
     inherit (util) shell;
 
-    mkPkgs = pkgs: extraOverlays: import pkgs {
+    pkgs = import nixos {
       inherit system;
-      config.allowUnfree = true;
-      config.allowBroken = true;
-      overlays = extraOverlays;
-    };
+      config = { allowBroken = true; allowUnfree = true; };
+      overlays = [
+        inputs.neovim-nightly-overlay.overlay
+        (final: prev: {
+          unstable = import nixos-unstable {
+            inherit system;
+            config = { allowUnfree = true; };
+          };
 
-    pkgs = mkPkgs nixos [ self.overlay ];
-    upkgs = mkPkgs nixos-unstable [];
-    mpkgs = mkPkgs nixos-master [];
+          master = import nixos-master {
+            inherit system;
+            config = { allowUnfree = true; };
+          };
+
+          nur = import nur {
+            inherit system;
+            config = { allowUnfree = true; };
+          };
+
+          my = import ./pkgs { inherit pkgs; };
+        })
+      ];
+    };
 
     system = "x86_64-linux";
 
   in {
-    overlay =
-      final: prev: {
-        unstable = upkgs;
-        master = mpkgs;
-        my = self.packages."${system}";
-
-        #hwdata = self.packages."${system}".hwdata;
-        #pciutils = self.packages."${system}".pciutils;
-
-      };
-
     shells = {
       video = shell.mkShell {
         name = "video";
@@ -55,7 +65,8 @@
       };
     };
 
-    packages."${system}" = import ./pkgs { inherit pkgs;};
+    packages."${system}" = pkgs;
+#    nur = nur;
 
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
