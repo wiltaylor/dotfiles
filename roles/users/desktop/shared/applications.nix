@@ -29,6 +29,7 @@
     jetbrains.pycharm-professional
     element-desktop
     xournalpp
+    obsidian
 #    cinelerra
     pcmanfm
   ];

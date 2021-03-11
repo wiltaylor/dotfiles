@@ -119,6 +119,8 @@ with stdenv.lib;
       let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown',
       \ 'ext': '.md', 'path_html': '~/vimwiki/site_html',
       \ 'custom_wikihtml': 'vimwiki_markdown'}]
+      let g:vimwiki_use_mouse = 1
+      let g:vimwiki_global_ext = 0
 
 
       " Completion options
@@ -235,6 +237,7 @@ with stdenv.lib;
     plugins = with pkgs.vimPlugins; [
       nord-vim
       vimwiki
+      calendar-vim
       vim-nix
       lightline-vim
       vim-fugitive
