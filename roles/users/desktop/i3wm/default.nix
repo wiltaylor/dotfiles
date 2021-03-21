@@ -110,6 +110,8 @@
         ];
 
       keybindings = {
+         "${modifier}+t" = "xinput set-prop 12 \"Device Enabled\" 0";
+         "${modifier}+shift+t" = "xinput set-prop 12 \"Device Enabled\" 1";
          "${modifier}+m" = "exec ${pkgs.alacritty}/bin/alacritty -e mail";
          "${modifier}+Shift+m" = "exec kill-mail";
          "${modifier}+Shift+r" = "restart";
