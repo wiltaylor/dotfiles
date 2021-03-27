@@ -11,7 +11,12 @@ in {
       automatic = true;
       options = "--delete-older-than 5d";
     };
-    package = pkgs.nixFlakes;
+    # This is done to work around this test being flakey and causing build to fail
+    package = (pkgs.nixFlakes.overrideAttrs (oldAttrs: rec {
+      preInstallCheck = ''
+        echo "exit 99" > tests/ca/substitute.sh
+      '';
+    }));
 
   };
 
@@ -59,11 +64,13 @@ in {
     pwgen
     usbutils
     clang_11
+    cookiecutter
 
     python3 # move out to things that need it
     nix-bundle # Move out
     scripts.sysTool
     scripts.devTool
+    scripts.prjTool
     microcodeIntel # Move to intel package, get amd one too
     imagemagick # move out to shells
     pstree

@@ -13,15 +13,15 @@
 #    rocm-opencl-runtime
 #  ];
 
-   boot.kernelPatches = [{
-     name = "AMD 6800XT fix";
-     patch = null; # ./amd.patch;
-     extraConfig = ''
-       DRM_AMD_DC y
-       DRM_AMD_DC_DCN y
-       DRM_AMD_DC_DCN3_0 y
-     '';
-   }];
+#   boot.kernelPatches = [{
+#     name = "AMD 6800XT fix";
+#     patch = null; # ./amd.patch;
+#     extraConfig = ''
+#       DRM_AMD_DC y
+#       DRM_AMD_DC_DCN y
+#       DRM_AMD_DC_DCN3_0 y
+#     '';
+#   }];
 
    environment.systemPackages = with pkgs; [
      vulkan-tools

@@ -26,7 +26,7 @@
     vscodium
     gitkraken
     dfeet
-    blender
+    #blender
     jetbrains.pycharm-professional
     element-desktop
     xournalpp

@@ -9,7 +9,7 @@
   };
 
   hardware.pulseaudio.support32Bit = true;
-  hardware.steam-hardware.enable = true;
+  #hardware.steam-hardware.enable = true;
 
   environment.systemPackages = with pkgs; [
     master.steam
@@ -17,7 +17,7 @@
     glxinfo
     xonotic
     vkquake
-    lutris
+    #lutris
     vulkan-tools
     vulkan-loader
     vulkan-headers
