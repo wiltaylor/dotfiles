@@ -90,7 +90,7 @@ in {
     parted
     xar
     darling-dmg
-    linuxPackages_5_10.bpftrace # Add to diag pack
+    linuxPackages_5_11.bpftrace # Add to diag pack
 
     kubectl # Should be moved to shell
     kubernetes-helm # Shell

@@ -8,11 +8,11 @@
 
 #boot.initrd.kernelModules = [ "amdgpu" ];
 
-#  hardware.opengl.extraPackages = with pkgs; [
-#    rocm-opencl-icd
-#    rocm-opencl-runtime
-#  ];
-
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk 
+    rocm-opencl-icd
+  ];
+  
 #   boot.kernelPatches = [{
 #     name = "AMD 6800XT fix";
 #     patch = null; # ./amd.patch;
@@ -28,8 +28,12 @@
      mesa mesa_drivers
      rocm-opencl-icd
      rocm-opencl-runtime
+     rocm-runtime
      opencl-icd
      opencl-info
+     opencl-clang
+     opencl-headers
+
    ];
 
   hardware.firmware = with pkgs.unstable; [ firmwareLinuxNonfree ];

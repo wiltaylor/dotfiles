@@ -32,6 +32,7 @@
     xournalpp
     my.obsidian
 #    cinelerra
-    pcmanfm
+pcmanfm
+openspades
   ];
 }
