@@ -12,6 +12,12 @@
     amdvlk 
     rocm-opencl-icd
   ];
+
+  hardware.opengl.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
+
+
   
 #   boot.kernelPatches = [{
 #     name = "AMD 6800XT fix";
@@ -29,6 +35,10 @@
      rocm-opencl-icd
      rocm-opencl-runtime
      rocm-runtime
+     rocm-smi
+     rocm-thunk
+     rocm-comgr
+     rocm-device-libs
      opencl-icd
      opencl-info
      opencl-clang
