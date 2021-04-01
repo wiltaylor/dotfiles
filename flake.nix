@@ -20,7 +20,7 @@
     inherit (nixos) lib;
     inherit (lib) attrValues;
 
-    util = import ./lib { inherit system pkgs home-manager lib; };
+    util = import ./lib { inherit system pkgs home-manager lib; overlays = (pkgs.overlays); };
 
     inherit (util) host;
     inherit (util) user;
@@ -81,6 +81,13 @@
       };
     };
 
+    homeManagerConfigurations = {
+      wil = user.mkHMUser { 
+        roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
+        username = "wil";
+      };
+    };
+
     nixosConfigurations = {
       titan = host.mkHost {
         name = "titan";
@@ -95,8 +102,8 @@
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
           shell = pkgs.zsh;
-          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
-          data = {};
+          #roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
+          #data = {};
         }];
         cpuCores = 8;
         laptop = false;
@@ -115,8 +122,8 @@
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
           uid = 1000;
           shell = pkgs.zsh;
-          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
-          data = {};
+          #roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
+          #data = {};
         }];
         cpuCores = 2;
         laptop = true;
@@ -136,8 +143,8 @@
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
           shell = pkgs.zsh;
-          roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
-          data = {};
+          #roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
+          #data = {};
         }];
         laptop = true;
       };

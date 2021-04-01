@@ -101,6 +101,13 @@ in {
       popd
 
     ;;
+
+    "apply-user")
+      pushd ~/.dotfiles
+      nix build .#homeManagerConfigurations.$USER.activationPackage
+      ./result/activate
+      popd
+    ;;
     "iso")
       echo "Building iso file $2"
       pushd ~/.dotfiles
@@ -178,7 +185,8 @@ in {
       echo "find [--overlay] - Find a nix package (overlay for custom packages)."
       echo "find-doc - Finds documentation on a config item"
       echo "find-cmd - Finds the package a command is in"
-      echo "apply - Applies current configuration in dotfiles."
+      echo "apply - Applies current system configuration in dotfiles."
+      echo "apply-user - Applies current home manager configuration in dotfiles."
       echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
       echo "shell - runs a shell defined in flake."
       echo "installed - lists all installed packages"
