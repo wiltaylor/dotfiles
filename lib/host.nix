@@ -44,7 +44,6 @@ with builtins;
 
       roles_mods = (map (r: mkRole r) roles );
       sys_users = (map (u: user.mkSystemUser u) users);
-      #hm_users = flaten (map (u: usr.mkHomeUser (u // { inherit sysdata;})) users);
 
       flaten = lst: foldl' (l: r: l // r) {} lst;
 
@@ -75,11 +74,6 @@ with builtins;
 
         }
 
-        #home-manager.nixosModules.home-manager {
-        #  home-manager.useGlobalPkgs = true;
-        #  home-manager.useUserPackages = true;
-       #   home-manager.users = hm_users;
-       # }
       ];
     };
 

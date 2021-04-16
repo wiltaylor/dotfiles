@@ -219,3 +219,5 @@ key_bindings:
   - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                      }
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                      }
   - { key: NumpadEnter,             chars: "\n"                              }
+  - { key: Equals,   mods: Control, action: IncreaseFontSize                 }
+  - { key: Minus, mods: Control, action: DecreaseFontSize                 } 

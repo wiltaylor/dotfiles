@@ -35,21 +35,4 @@
       shell = shell;
     };
   };
-
-#  mkHomeUser = {name, roles, sysdata, ...}:
-#  let
-#    mkRole = name: import (../roles/users + "/${name}");
-#    mod_roles = map (r: mkRole r) roles;
-#    sysmod = {...}: { inherit sysdata; };
-#  in {
-#    "${name}" =
-#    {
-#      imports = mod_roles ++ sysdata;
-#
-#      systemd.user.startServices = true;
-#      home.stateVersion = "20.09";
-#      home.username = name;
-#      home.homeDirectory = "/home/${name}";
-#    };
-#  };
 }

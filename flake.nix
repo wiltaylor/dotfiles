@@ -7,7 +7,6 @@
     nixos-master.url = "nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixos";
-    nur.url = "github:nix-community/NUR";
 
     flake-utils.url = github:numtide/flake-utils;
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -42,11 +41,6 @@
             config = { allowUnfree = true; };
           };
 
-          nur = import nur {
-            inherit system;
-            config = { allowUnfree = true; };
-          };
-
           my = import ./pkgs { inherit pkgs; };
         })
       ];
@@ -66,8 +60,6 @@
     };
 
     packages."${system}" = pkgs;
-#    nur = nur;
-
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
     installMedia = {
@@ -102,8 +94,6 @@
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
           shell = pkgs.zsh;
-          #roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
-          #data = {};
         }];
         cpuCores = 8;
         laptop = false;
@@ -122,8 +112,6 @@
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
           uid = 1000;
           shell = pkgs.zsh;
-          #roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
-          #data = {};
         }];
         cpuCores = 2;
         laptop = true;
@@ -143,8 +131,6 @@
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
           shell = pkgs.zsh;
-          #roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" ];
-          #data = {};
         }];
         laptop = true;
       };
