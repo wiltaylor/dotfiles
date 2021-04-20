@@ -52,7 +52,7 @@
     shells = {
       video = shell.mkShell {
         name = "video";
-        buildInputs = with pkgs; [ blender obs-studio obs-v4l2sink mpv ];
+        buildInputs = with pkgs; [ blender obs-studio obs-v4l2sink mpv youtube-dl  ];
         script = ''
           echo "Video editing shell"
         '';
@@ -84,11 +84,11 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.unstable.linuxPackages_5_11;
+        kernelPackage = pkgs.unstable.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = [ "sshd" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" "datadrive" "sshd" ];
+        roles = [ "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" "datadrive" "sshd" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];

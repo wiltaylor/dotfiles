@@ -17,7 +17,6 @@
     glxinfo
     xonotic
     vkquake
-    #lutris
     vulkan-tools
     vulkan-loader
     vulkan-headers
@@ -26,5 +25,6 @@
     wineWowPackages.staging
     winetricks
     minecraft
+    quakespasm
   ];
 }
