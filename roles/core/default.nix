@@ -105,7 +105,7 @@ in {
 
     nmap # Security shell
 
-    #neovimWT
+    neovimWT
 
   ];
 

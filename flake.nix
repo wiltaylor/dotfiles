@@ -22,7 +22,7 @@
     inherit (util) host;
     inherit (util) user;
     inherit (util) shell;
-    #inherit (util) app;
+    inherit (util) app;
 
     pkgs = import nixos {
       inherit system;
@@ -44,7 +44,7 @@
           my = import ./pkgs { inherit pkgs; };
 
           #Flake apps
-          #neovimWT = app.mkFlakeApp { app = "github:wiltaylor/neovim-flake"; name = "vim"; };
+          neovimWT = app.mkFlakeApp { app = "github:wiltaylor/neovim-flake"; name = "vim"; };
         })
       ];
     };
