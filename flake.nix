@@ -9,12 +9,10 @@
     home-manager.inputs.nixpkgs.follows = "nixos";
 
     flake-utils.url = github:numtide/flake-utils;
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
 
   };
 
-  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, nixpkgs, nur, ... }:
+  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, nixpkgs, nur,  ... }:
   let
     inherit (nixos) lib;
     inherit (lib) attrValues;
@@ -24,12 +22,14 @@
     inherit (util) host;
     inherit (util) user;
     inherit (util) shell;
+    #inherit (util) app;
 
     pkgs = import nixos {
       inherit system;
       config = { allowBroken = true; allowUnfree = true; };
       overlays = [
-        inputs.neovim-nightly-overlay.overlay
+        #inputs.neovim-nightly-overlay.overlay
+        #inputs.neovim-flake.overlay
         (final: prev: {
           unstable = import nixos-unstable {
             inherit system;
@@ -42,6 +42,9 @@
           };
 
           my = import ./pkgs { inherit pkgs; };
+
+          #Flake apps
+          #neovimWT = app.mkFlakeApp { app = "github:wiltaylor/neovim-flake"; name = "vim"; };
         })
       ];
     };
@@ -75,7 +78,7 @@
 
     homeManagerConfigurations = {
       wil = user.mkHMUser { 
-        roles = [ "neovim" "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
+        roles = [ "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
         username = "wil";
       };
     };

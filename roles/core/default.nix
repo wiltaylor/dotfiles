@@ -27,6 +27,8 @@ in {
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   hardware.enableRedistributableFirmware = lib.mkDefault true;
 
+  # Hot fix for issues
+  documentation.info.enable = false;
 
   environment.pathsToLink = ["/libexec" ];
   virtualisation.docker.enable = true;
@@ -79,7 +81,7 @@ in {
     nix-index
     unstable.btrfs-progs
     smartmontools
-    neovim
+    #neovim
     iotop
     nvme-cli # Move to efi
     lm_sensors # Move to amd and intel
@@ -102,6 +104,9 @@ in {
     xawtv # video shell
 
     nmap # Security shell
+
+    #neovimWT
+
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";

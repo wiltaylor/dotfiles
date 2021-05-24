@@ -39,7 +39,7 @@
      rocm-thunk
      rocm-comgr
      rocm-device-libs
-     opencl-icd
+     #opencl-icd
      opencl-info
      opencl-clang
      opencl-headers
