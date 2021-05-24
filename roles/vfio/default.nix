@@ -45,7 +45,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     looking-glass-client
-    ( scream-receivers.override { pulseSupport = true; })
+    ( scream.override { pulseSupport = true; })
     winvmscript
     macosscript
   ];

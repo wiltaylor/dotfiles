@@ -43,6 +43,7 @@
      opencl-info
      opencl-clang
      opencl-headers
+     radeontop
 
    ];
 

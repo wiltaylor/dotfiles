@@ -52,7 +52,7 @@
     shells = {
       video = shell.mkShell {
         name = "video";
-        buildInputs = with pkgs; [ blender obs-studio obs-v4l2sink mpv youtube-dl  ];
+        buildInputs = with pkgs; [ blender obs-studio obs-v4l2sink mpv youtube-dl audacity ffmpeg ];
         script = ''
           echo "Video editing shell"
         '';
@@ -84,7 +84,7 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.unstable.linuxPackages_5_10;
+        kernelPackage = pkgs.unstable.linuxPackages_5_11;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
