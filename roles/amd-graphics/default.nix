@@ -47,7 +47,7 @@
 
    ];
 
-  hardware.firmware = with pkgs.unstable; [ firmwareLinuxNonfree ];
+  hardware.firmware = with pkgs;[ firmwareLinuxNonfree ];
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;

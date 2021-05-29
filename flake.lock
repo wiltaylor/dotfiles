@@ -1,20 +1,5 @@
 {
   "nodes": {
-    "flake-utils": {
-      "locked": {
-        "lastModified": 1620759905,
-        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -22,57 +7,45 @@
         ]
       },
       "locked": {
-        "lastModified": 1621794721,
-        "narHash": "sha256-JXfTSZUu9EVbT9D/MFsx0cXfa8bw1NFCzIxZ7gO73Uo=",
+        "lastModified": 1622145920,
+        "narHash": "sha256-/tt6IApLuVcGP5auy4zjLzfm5+MBHYLS3Nauvv2U2EQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "90493027e33ba9eb3f50dc1da365d0e4ca31bf14",
+        "rev": "0e6c61a44092e98ba1d75b41f4f947843dc7814d",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "ref": "master",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "kn": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1622209063,
+        "narHash": "sha256-fdW+7+SnOR/NO35fZneDBwZ13bKXwdalylBwkyLtKKI=",
+        "owner": "wiltaylor",
+        "repo": "kn",
+        "rev": "7da8227e99a0070972e138e4c5fd092f62129eeb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wiltaylor",
+        "repo": "kn",
         "type": "github"
       }
     },
     "nixos": {
       "locked": {
-        "lastModified": 1621728353,
-        "narHash": "sha256-cgRKslcI/lG5wnxgt1z6OGm+JnzmBqyR8m/JzpUNpYQ=",
+        "lastModified": 1622194753,
+        "narHash": "sha256-76qtvFp/vFEz46lz5iZMJ0mnsWQYmuGYlb0fHgKqqMg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "900115a4f7fdd9189e7803ca781a65be663f2c89",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
-      }
-    },
-    "nixos-master": {
-      "locked": {
-        "lastModified": 1621837049,
-        "narHash": "sha256-rYCoA3B9iA5jBV6pT1v3Km2Uyw0uYvwH+ECdRbWXMaA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b15dddd9e1101fb8e2eae3a68faabf8a73dc6d5b",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "master",
-        "type": "indirect"
-      }
-    },
-    "nixos-unstable": {
-      "locked": {
-        "lastModified": 1621728353,
-        "narHash": "sha256-cgRKslcI/lG5wnxgt1z6OGm+JnzmBqyR8m/JzpUNpYQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "900115a4f7fdd9189e7803ca781a65be663f2c89",
+        "rev": "540dccb2aeaffa9dc69bfdc41c55abd7ccc6baa3",
         "type": "github"
       },
       "original": {
@@ -83,41 +56,25 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1621837049,
-        "narHash": "sha256-rYCoA3B9iA5jBV6pT1v3Km2Uyw0uYvwH+ECdRbWXMaA=",
-        "owner": "NixOS",
+        "lastModified": 1621160191,
+        "narHash": "sha256-5xaEDqmmDsJnd2agtmEIrbUHSuNjTqidJPkBrmls6Ek=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b15dddd9e1101fb8e2eae3a68faabf8a73dc6d5b",
+        "rev": "7a1fbc38a4b538450ac0d42aec8a3e513b4d723e",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nur": {
-      "locked": {
-        "lastModified": 1621822619,
-        "narHash": "sha256-WCydaG1C9svydkDZavJl+kdpc8a/duWXybXBvGD4kSQ=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "5eba7c6f533d8de8acb4ffe269425a3f57420bb9",
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
-      },
-      "original": {
-        "id": "nur",
-        "type": "indirect"
       }
     },
     "root": {
       "inputs": {
-        "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "nixos": "nixos",
-        "nixos-master": "nixos-master",
-        "nixos-unstable": "nixos-unstable",
-        "nixpkgs": "nixpkgs",
-        "nur": "nur"
+        "kn": "kn",
+        "nixos": "nixos"
       }
     }
   },

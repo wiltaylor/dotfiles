@@ -6,6 +6,11 @@
     ./steam.nix
   ];
 
+  home.sessionVariables = {
+    ZKDIR = "$HOME/.zk";
+    EDITOR = "vim";
+  };
+
   home.packages = with pkgs;[
     firefox
     pavucontrol
@@ -32,8 +37,9 @@
     xournalpp
     my.obsidian
 #    cinelerra
-xmind
-pcmanfm
-openspades
+    kn
+    xmind
+    pcmanfm
+    openspades
   ];
 }

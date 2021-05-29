@@ -79,7 +79,7 @@ in {
 
     my.dotfiles-manpages # split out
     nix-index
-    unstable.btrfs-progs
+    btrfs-progs
     smartmontools
     #neovim
     iotop
@@ -105,7 +105,6 @@ in {
 
     nmap # Security shell
 
-    neovimWT
 
   ];
 

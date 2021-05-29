@@ -3,16 +3,13 @@
 
   inputs = {
     nixos.url = "nixpkgs/nixos-unstable";
-    nixos-unstable.url = "nixpkgs/nixos-unstable";
-    nixos-master.url = "nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixos";
-
-    flake-utils.url = github:numtide/flake-utils;
+    kn.url = "github:wiltaylor/kn";
 
   };
 
-  outputs = inputs @ {self, nixos, nixos-unstable, nixos-master, home-manager, nixpkgs, nur,  ... }:
+  outputs = inputs @ {self, nixos, home-manager, kn, ... }:
   let
     inherit (nixos) lib;
     inherit (lib) attrValues;
@@ -28,23 +25,9 @@
       inherit system;
       config = { allowBroken = true; allowUnfree = true; };
       overlays = [
-        #inputs.neovim-nightly-overlay.overlay
-        #inputs.neovim-flake.overlay
+        kn.overlay
         (final: prev: {
-          unstable = import nixos-unstable {
-            inherit system;
-            config = { allowUnfree = true; };
-          };
-
-          master = import nixos-master {
-            inherit system;
-            config = { allowUnfree = true; };
-          };
-
           my = import ./pkgs { inherit pkgs; };
-
-          #Flake apps
-          neovimWT = app.mkFlakeApp { app = "github:wiltaylor/neovim-flake"; name = "vim"; };
         })
       ];
     };
@@ -87,7 +70,7 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.unstable.linuxPackages_5_11;
+        kernelPackage = pkgs.linuxPackages_5_11;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];

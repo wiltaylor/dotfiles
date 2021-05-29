@@ -4,7 +4,6 @@
   hardware.pulseaudio.enable = true;
 
   hardware.g810led.enable = true;
-#  services.accounts-daemon.enable = true;
   boot.plymouth.enable = true;
   services.autorandr.enable = true;
 
@@ -57,7 +56,7 @@
     '')
   ];
 
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   services.accounts-daemon.enable = true;
   environment.pathsToLink = [ "/share/accountsservice" ];
 }
