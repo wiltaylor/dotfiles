@@ -2,16 +2,24 @@
   description = "Wil Taylor's system configuration";
 
   inputs = {
-    nixos.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixos";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     kn.url = "github:wiltaylor/kn";
+
+    neovim-flake = {
+	url = "github:wiltaylor/neovim-flake";
+        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.flake-utils.follows = "flake-utils";
+    };
+
+    flake-utils.url = "github:numtide/flake-utils";
 
   };
 
-  outputs = inputs @ {self, nixos, home-manager, kn, ... }:
+  outputs = inputs @ {self, nixpkgs, home-manager, kn, neovim-flake, ... }:
   let
-    inherit (nixos) lib;
+    inherit (nixpkgs) lib;
     inherit (lib) attrValues;
 
     util = import ./lib { inherit system pkgs home-manager lib; overlays = (pkgs.overlays); };
@@ -21,11 +29,12 @@
     inherit (util) shell;
     inherit (util) app;
 
-    pkgs = import nixos {
+    pkgs = import nixpkgs {
       inherit system;
       config = { allowBroken = true; allowUnfree = true; };
       overlays = [
         kn.overlay
+        neovim-flake.overlay."${system}"
         (final: prev: {
           my = import ./pkgs { inherit pkgs; };
         })

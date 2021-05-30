@@ -41,5 +41,6 @@
     xmind
     pcmanfm
     openspades
+    neovimWT
   ];
 }
