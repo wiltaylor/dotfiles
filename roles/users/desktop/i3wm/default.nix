@@ -118,7 +118,6 @@
  	       "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
          "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
          "${modifier}+w" = "exec MOZ_USE_XINPUT2=1 ${pkgs.firefox}/bin/firefox";
-         "${modifier}+shift+w" = "exec MOZ_USE_XINPUT2=1 ${pkgs.firefox}/bin/firefox -p vygo";
          "${modifier}+Shift+q" = "kill";
          "${modifier}+Left" = "focus left";
          "${modifier}+Right" = "focus right";
