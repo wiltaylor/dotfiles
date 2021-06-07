@@ -22,7 +22,6 @@
     ../shared/dunst.nix
     ../shared/picom.nix
     ../shared/rofi.nix
-    ../shared/fixSelection.nix
     ../shared/applications.nix
     ../shared/gtk
     ../shared/kde
@@ -79,11 +78,6 @@
           {
             command = "systemctl --user restart gpg-agent.service";
             always = false;
-            notification = false;
-          }
-          {
-            command = "systemctl --user restart xmousepasteblock"; 
-            always = true;
             notification = false;
           }
           {

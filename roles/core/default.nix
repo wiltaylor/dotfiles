@@ -105,7 +105,7 @@ in {
 
     nmap # Security shell
 
-    neovim
+    neovimWT
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";
