@@ -88,7 +88,7 @@
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           uid = 1000;
-          shell = pkgs.zsh;
+          shell = pkgs.bash;
         }];
         cpuCores = 8;
         laptop = false;

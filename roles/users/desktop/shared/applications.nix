@@ -42,5 +42,6 @@
     pcmanfm
     openspades
     neovimWT
+    ytfzf
   ];
 }

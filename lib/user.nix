@@ -29,6 +29,7 @@
     users.users."${name}" = {
       name = name;
       isNormalUser = true;
+      isSystemUser = false;
       extraGroups = groups;
       uid = uid;
       initialPassword = "P@ssw0rd01";
