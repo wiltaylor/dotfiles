@@ -92,6 +92,8 @@
         }];
         cpuCores = 8;
         laptop = false;
+        gpuTempSensor = ''sensors | grep "junction:" | awk '{print $2}' '';
+        cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
       };
 
       mini = host.mkHost {
@@ -111,6 +113,7 @@
         cpuCores = 2;
         laptop = true;
         wifi = [ "wlo1" ];
+        cpuTempSensor = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
       };
 
       junkbox = host.mkHost {

@@ -32,14 +32,27 @@ with builtins;
       ];
     };
 
-  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, cpuCores, laptop, users, wifi ? []}:
+    mkHost = { 
+      name, 
+      NICs, 
+      initrdMods,
+      kernelMods, 
+      kernelParams, 
+      kernelPackage, 
+      roles, 
+      cpuCores, 
+      laptop, 
+      users, 
+      wifi ? [],
+      gpuTempSensor ? null,
+      cpuTempSensor ? null}:
     let
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
       }) NICs);
 
       userCfg = {
-        inherit name NICs roles cpuCores laptop;
+        inherit name NICs roles cpuCores laptop gpuTempSensor cpuTempSensor;
       };
 
       sysdata = [{

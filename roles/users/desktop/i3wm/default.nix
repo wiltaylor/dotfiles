@@ -30,7 +30,10 @@
   home.packages = with pkgs; [
     i3blocks-gaps
     my.i3blocks-contrib
+    sysstat # Needed for mpstat for i3block
   ];
+
+
 
   home.file.".config/i3/i3blocks.conf".text = ''
 
@@ -41,7 +44,31 @@
     interval=30
     '' else ""}
 
+    [cpu_usage]
+    command=echo " $(grep 'cpu ' /proc/stat | awk '{usage=int(($2+$4)*100/($2+$4+$5))} END {print usage "%"}')"
+    interval=5
 
+    [memory_usage]
+    command=grep -E 'MemTotal|MemFree' /proc/meminfo | awk '/MemTotal/ {total=int($2/1024)} /MemFree/ {free=int($2/1024)} {used=total-free} END {print " " used "/" total "MB"}'
+    interval=5
+
+    [diskspace]
+    command=echo " $(df / -H | grep '/' | awk '{print $3 "/" $2}')"
+    interval=60
+
+    ${if config.machineData.gpuTempSensor != null then ''
+    [gpu_temp]
+    command=echo "GPU  $(${config.machineData.gpuTempSensor})"
+    interval=5
+
+    '' else ""}
+
+    ${if config.machineData.cpuTempSensor != null then ''
+    [gpu_temp]
+    command=echo "CPU  $(${config.machineData.cpuTempSensor})"
+    interval=5
+
+    '' else ""}
 
     # Update time every 5 seconds
     [time]
