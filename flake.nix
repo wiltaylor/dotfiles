@@ -110,6 +110,7 @@
         }];
         cpuCores = 2;
         laptop = true;
+        wifi = [ "wlo1" ];
       };
 
       junkbox = host.mkHost {
