@@ -32,11 +32,15 @@ with builtins;
       ];
     };
 
-  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, cpuCores, laptop, users }:
+  mkHost = { name, NICs, initrdMods, kernelMods, kernelParams, kernelPackage, roles, cpuCores, laptop, users, wifi ? []}:
     let
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
       }) NICs);
+
+      userCfg = {
+        inherit name NICs roles cpuCores laptop;
+      };
 
       sysdata = [{
         options.laptop = lib.mkEnableOption "test";
@@ -56,8 +60,13 @@ with builtins;
         {
           imports = [ ../modules ] ++ roles_mods ++ sys_users;
 
+          environment.etc = {
+            "hmsystemdata.json".text = builtins.toJSON userCfg;
+          };
+
           networking.hostName = "${name}";
           networking.interfaces = networkCfg;
+          networking.wireless.interfaces = wifi;
 
           networking.networkmanager.enable = true;
           networking.useDHCP = false; # Disable any new interface added that is not in config.
