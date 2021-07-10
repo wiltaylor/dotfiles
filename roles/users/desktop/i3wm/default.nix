@@ -34,11 +34,12 @@
 
   home.file.".config/i3/i3blocks.conf".text = ''
 
-
+    ${if config.machineData.laptop then ''
     [battery2]
     command=${pkgs.my.i3blocks-contrib}/share/i3blocks-contrib/battery2/battery2
     markup=pango
     interval=30
+    '' else ""}
 
 
 

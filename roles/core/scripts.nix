@@ -104,7 +104,9 @@ in {
 
     "apply-user")
       pushd ~/.dotfiles
-      nix build .#homeManagerConfigurations.$USER.activationPackage
+
+      #--impure is required so pacakge can reach out to /etc/hmsystemdata.json
+      nix build --impure .#homeManagerConfigurations.$USER.activationPackage
       ./result/activate
       popd
     ;;

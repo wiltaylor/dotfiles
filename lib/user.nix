@@ -1,4 +1,5 @@
 { pkgs, home-manager, lib, system, overlays, ... }:
+with builtins;
 {
 
  mkHMUser = {roles, username}:
@@ -7,6 +8,17 @@
     configuration = let
       mkRole = name: import (../roles/users + "/${name}");
       mod_roles = map (r: mkRole r) roles;
+      trySettings = tryEval(fromJSON(readFile(/etc/hmsystemdata.json)));
+      machineData = if trySettings.success then trySettings.value else {};
+
+      machineModule = { pkgs, config, lib, ...}: {
+        options.machineData = lib.mkOption {
+          default = {};
+          description = "Settings passed from nixos system configuration. If not present will be empty.";
+        };
+
+        config.machineData = machineData;
+      };
     in {
 
       nixpkgs.overlays = overlays;
@@ -17,7 +29,7 @@
       home.username = username;
       home.homeDirectory = "/home/${username}";
 
-      imports = mod_roles;
+      imports = mod_roles ++ [machineModule];
 
     };
     homeDirectory = "/home/${username}";
