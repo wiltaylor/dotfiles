@@ -33,8 +33,6 @@
     sysstat # Needed for mpstat for i3block
   ];
 
-
-
   home.file.".config/i3/i3blocks.conf".text = ''
 
     ${if config.machineData.laptop then ''

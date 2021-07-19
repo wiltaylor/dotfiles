@@ -69,6 +69,7 @@ in {
     usbutils
     clang_11
     cookiecutter
+    bintools
 
     python3 # move out to things that need it
     nix-bundle # Move out
