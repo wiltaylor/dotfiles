@@ -43,5 +43,6 @@
     openspades
     neovimWT
     ytfzf
+    obs-studio
   ];
 }

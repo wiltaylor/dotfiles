@@ -96,6 +96,7 @@ in {
     xar
     darling-dmg
     linuxPackages_5_12.bpftrace # Add to diag pack
+    linuxPackages_5_12.v4l2loopback
 
     kubectl # Should be moved to shell
     kubernetes-helm # Shell
@@ -114,4 +115,5 @@ in {
   ];
 
   security.sudo.extraConfig = "Defaults env_reset,timestamp_timeout=-1";
+  security.sudo.execWheelOnly = true;
 }
