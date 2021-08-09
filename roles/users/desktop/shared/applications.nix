@@ -32,6 +32,7 @@
     gitkraken
     dfeet
     #blender
+    jetbrains.rider
     jetbrains.pycharm-professional
     element-desktop
     xournalpp
