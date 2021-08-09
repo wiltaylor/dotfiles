@@ -44,5 +44,6 @@
     neovimWT
     ytfzf
     obs-studio
+    lutris
   ];
 }
