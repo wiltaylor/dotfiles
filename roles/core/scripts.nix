@@ -65,6 +65,15 @@ in {
       echo "Updating index. This will take a while"
       nix-index
     ;;
+    "save")
+      echo "Saving changes"
+      pushd ~/.dotfiles
+      git diff
+      git add .
+      git commit
+      git pull --rebase
+      git push
+    ;;
     "find")
       if [ $2 = "--overlay" ]; then
         pushd ~/.dotfiles
