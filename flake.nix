@@ -99,11 +99,11 @@
       mini = host.mkHost {
         name = "mini";
         NICs = [ "wlo1" ];
-        kernelPackage = pkgs.linuxPackages_5_10;
+        kernelPackage = pkgs.linuxPackages_5_4;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" "bluetooth" "sshd" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" "bluetooth" "sshd" "intel-graphics" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
