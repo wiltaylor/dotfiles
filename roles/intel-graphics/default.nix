@@ -1,5 +1,7 @@
 {pkgs, config, lib, ...}:
 {
+  services.xserver.videoDrivers = [ "modesetting" ];
+
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -10,7 +12,11 @@
     ];
   };
 
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel ];
+
   environment.systemPackages = with pkgs; [
     libva-utils
+    firmwareLinuxNonfree
+    microcodeIntel
   ];
 }
