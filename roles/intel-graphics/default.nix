@@ -1,6 +1,6 @@
 {pkgs, config, lib, ...}:
 {
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = [ "intel" ];
 
   hardware.opengl = {
     enable = true;
