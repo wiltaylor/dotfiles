@@ -35,6 +35,14 @@ in {
   environment.pathsToLink = ["/libexec" ];
   virtualisation.docker.enable = true;
 
+  boot.extraModulePackages = [
+    pkgs.linuxPackages_5_13.v4l2loopback
+  ];
+
+  boot.extraModprobeConfig = ''
+    options v4l2loopback exclusive_caps=1 video_nr=9 card_label="obs"
+  '';
+
   environment.systemPackages = with pkgs; [
 
     # Core utilities that need to be on every machine
@@ -95,8 +103,8 @@ in {
     parted
     xar
     darling-dmg
-    linuxPackages_5_12.bpftrace # Add to diag pack
-    linuxPackages_5_12.v4l2loopback
+    linuxPackages_5_13.bpftrace # Add to diag pack
+    linuxPackages_5_13.v4l2loopback
 
     kubectl # Should be moved to shell
     kubernetes-helm # Shell
@@ -105,6 +113,7 @@ in {
     doctl # devops shell
 
     v4l-utils # Move out to video shell
+    libv4l
     xawtv # video shell
 
     nmap # Security shell

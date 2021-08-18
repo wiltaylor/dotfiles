@@ -79,11 +79,11 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.linuxPackages_5_12;
+        kernelPackage = pkgs.linuxPackages_5_13;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = [ "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" "datadrive" "sshd" ];
+        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" "datadrive" "sshd" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];

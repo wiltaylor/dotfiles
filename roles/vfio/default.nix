@@ -2,9 +2,10 @@
 let
   winvmscript = pkgs.writeScriptBin "windows10-vm" ''
     sudo virsh start Windows10
-    scream-ivshmem-pulse /dev/shm/scream &
+    scream -o pulse &
+    #scream-ivshmem-pulse /dev/shm/scream &
     looking-glass-client -f /dev/shm/looking-glass input:hideCursor=yes
-    killall scream-ivshmem-pulse
+    killall scream
   '';
 
   macosscript = pkgs.writeScriptBin "macos-vm" ''

@@ -36,7 +36,7 @@
     jetbrains.pycharm-professional
     element-desktop
     xournalpp
-    my.obsidian
+    obsidian
 #    cinelerra
     kn
     xmind
@@ -46,5 +46,6 @@
     ytfzf
     obs-studio
     lutris
+    zotero
   ];
 }
