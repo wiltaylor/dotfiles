@@ -47,5 +47,6 @@
     obs-studio
     lutris
     zotero
+    superTuxKart
   ];
 }
