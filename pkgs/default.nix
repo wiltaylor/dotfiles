@@ -13,5 +13,4 @@ with pkgs;
   firefox-secure = (callPackage ./applications/browsers/firefox/default.nix {});
   hwdata = (callPackage ./os-specific/linux/hwdata/default.nix {});
   pciutils = (callPackage ./os-specific/linux/pciutils/default.nix {});
-  #obsidian = (callPackage ./override/obsidian/default.nix {});
 }
