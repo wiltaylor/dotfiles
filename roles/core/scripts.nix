@@ -41,6 +41,44 @@ in {
 
   sysTool = pkgs.writeScriptBin "sys" ''
     #!${runtimeShell}
+
+    function applyUser() {
+      echo "--------------------------------------------------------------------------------"
+      echo " Applying User Settings
+      echo "--------------------------------------------------------------------------------"
+ 
+
+      pushd ~/.dotfiles
+
+      #--impure is required so pacakge can reach out to /etc/hmsystemdata.json
+      nix build --impure .#homeManagerConfigurations.$USER.activationPackage
+      ./result/activate
+      popd 
+    }
+
+    function applyMachine() {
+      echo "--------------------------------------------------------------------------------"
+      echo " Applying Machine Settings
+      echo "--------------------------------------------------------------------------------"
+ 
+      pushd ~/.dotfiles
+      if [ -z "$2" ]; then
+        sudo nixos-rebuild switch --flake '.#'
+
+      elif [ $2 = "--boot" ]; then
+        sudo nixos-rebuild boot --flake '.#'
+      elif [ $2 = "--test" ]; then
+        sudo nixos-rebuild test --flake '.#'
+      elif [ $2 = "--check" ]; then
+        nixos-rebuild dry-activate --flake '.#'
+      else
+        echo "Unknown option $2"
+      fi
+
+      popd
+
+    }
+
     if [ -n "$INNIXSHELLHOME" ]; then
       echo "You are in a nix shell that redirected home!"
       echo "SYS will not work from here properly."
@@ -93,32 +131,17 @@ in {
     ;;
 
     "apply")
-      pushd ~/.dotfiles
-      if [ -z "$2" ]; then
-        sudo nixos-rebuild switch --flake '.#'
+      applyMachine
+      applyUser
+    ;;
 
-      elif [ $2 = "--boot" ]; then
-        sudo nixos-rebuild boot --flake '.#'
-      elif [ $2 = "--test" ]; then
-        sudo nixos-rebuild test --flake '.#'
-      elif [ $2 = "--check" ]; then
-        nixos-rebuild dry-activate --flake '.#'
-      else
-        echo "Unknown option $2"
-      fi
-
-      popd
-
+    "apply-machine")
+      applyMachine
     ;;
 
     "apply-user")
-      pushd ~/.dotfiles
-
-      #--impure is required so pacakge can reach out to /etc/hmsystemdata.json
-      nix build --impure .#homeManagerConfigurations.$USER.activationPackage
-      ./result/activate
-      popd
-    ;;
+      applyUser
+   ;;
     "iso")
       echo "Building iso file $2"
       pushd ~/.dotfiles
@@ -196,7 +219,8 @@ in {
       echo "find [--overlay] - Find a nix package (overlay for custom packages)."
       echo "find-doc - Finds documentation on a config item"
       echo "find-cmd - Finds the package a command is in"
-      echo "apply - Applies current system configuration in dotfiles."
+      echo "apply - Applies both user and machine settings"
+      echo "apply-machine - Applies current system configuration in dotfiles."
       echo "apply-user - Applies current home manager configuration in dotfiles."
       echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
       echo "shell - runs a shell defined in flake."
