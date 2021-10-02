@@ -49,6 +49,5 @@
     lutris
     zotero
     superTuxKart
-    free
   ];
 }
