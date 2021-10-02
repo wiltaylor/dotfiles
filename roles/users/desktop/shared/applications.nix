@@ -35,7 +35,8 @@
     jetbrains.rider
     jetbrains.pycharm-professional
     element-desktop
-    xournalpp
+    #xournalpp
+    mupdf
     obsidian
 #    cinelerra
     kn
@@ -48,5 +49,6 @@
     lutris
     zotero
     superTuxKart
+    free
   ];
 }

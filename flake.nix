@@ -79,7 +79,7 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.linuxPackages_5_13;
+        kernelPackage = pkgs.linuxPackages_latest;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];

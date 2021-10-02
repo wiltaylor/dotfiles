@@ -42,23 +42,23 @@ in {
   sysTool = pkgs.writeScriptBin "sys" ''
     #!${runtimeShell}
 
-    function applyUser() {
+    applyUser() {
       echo "--------------------------------------------------------------------------------"
-      echo " Applying User Settings
+      echo " Applying User Settings"
       echo "--------------------------------------------------------------------------------"
  
 
       pushd ~/.dotfiles
 
       #--impure is required so pacakge can reach out to /etc/hmsystemdata.json
-      nix build --impure .#homeManagerConfigurations.$USER.activationPackage
+      nix build --impure ".#homeManagerConfigurations.$USER.activationPackage"
       ./result/activate
       popd 
     }
 
-    function applyMachine() {
+    applyMachine() {
       echo "--------------------------------------------------------------------------------"
-      echo " Applying Machine Settings
+      echo " Applying Machine Settings"
       echo "--------------------------------------------------------------------------------"
  
       pushd ~/.dotfiles
@@ -76,7 +76,6 @@ in {
       fi
 
       popd
-
     }
 
     if [ -n "$INNIXSHELLHOME" ]; then

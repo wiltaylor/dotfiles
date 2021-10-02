@@ -36,7 +36,7 @@ in {
   virtualisation.docker.enable = true;
 
   boot.extraModulePackages = [
-    pkgs.linuxPackages_5_13.v4l2loopback
+    pkgs.linuxPackages_latest.v4l2loopback
   ];
 
   boot.extraModprobeConfig = ''
@@ -103,8 +103,8 @@ in {
     parted
     xar
     darling-dmg
-    linuxPackages_5_13.bpftrace # Add to diag pack
-    linuxPackages_5_13.v4l2loopback
+    #linuxPackages_latest.bpftrace # Add to diag pack
+    linuxPackages_latest.v4l2loopback
 
     kubectl # Should be moved to shell
     kubernetes-helm # Shell
