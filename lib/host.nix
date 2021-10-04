@@ -87,7 +87,8 @@ with builtins;
           boot.initrd.availableKernelModules = initrdMods;
           boot.kernelModules = kernelMods;
           boot.kernelParams = kernelParams;
-          boot.kernelPackages = kernelPackage;
+          #boot.kernelPackages = kernelPackage;
+          wt.machine.kernelPackage = kernelPackage;
 
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;

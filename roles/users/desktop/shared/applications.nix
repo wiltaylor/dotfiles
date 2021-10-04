@@ -37,6 +37,7 @@
     element-desktop
     #xournalpp
     mupdf
+    foxitreader
     obsidian
 #    cinelerra
     kn

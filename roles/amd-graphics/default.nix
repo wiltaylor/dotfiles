@@ -8,9 +8,11 @@
 
   boot.initrd.kernelModules = [ "amdgpu" ];
 
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
+
   hardware.opengl.extraPackages = with pkgs; [
     amdvlk 
-    rocm-opencl-icd
   ];
 
   hardware.opengl.extraPackages32 = with pkgs; [
@@ -19,15 +21,7 @@
   
    environment.systemPackages = with pkgs; [
      vulkan-tools
-     mesa mesa_drivers
-     rocm-opencl-icd
-     rocm-opencl-runtime
-     opencl-icd
-     opencl-info
-     opencl-clang
-     opencl-headers
      radeontop
-
    ];
 
   hardware.firmware = with pkgs;[ firmwareLinuxNonfree ];

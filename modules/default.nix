@@ -5,5 +5,6 @@
   imports = [
     ./g810led
     ./laptop
+    ./core
   ];
 }

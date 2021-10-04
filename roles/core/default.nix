@@ -2,6 +2,7 @@
 let
 
   scripts = import ./scripts.nix { inherit pkgs; };
+  kernelPackage = config.wt.machine.kernelPackage;
 
 in {
 
@@ -104,7 +105,7 @@ in {
     xar
     darling-dmg
     #linuxPackages_latest.bpftrace # Add to diag pack
-    linuxPackages_latest.v4l2loopback
+    kernelPackage.v4l2loopback
 
     kubectl # Should be moved to shell
     kubernetes-helm # Shell
