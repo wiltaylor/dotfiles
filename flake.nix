@@ -83,7 +83,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" "datadrive" "sshd" ];
+        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" "datadrive" "sshd" "v4l2loopback" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];

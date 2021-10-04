@@ -1,9 +1,5 @@
 {config, pkgs, lib, ...}:
-let
-
-  kernelPackage = config.wt.machine.kernelPackage;
-
-in {
+{
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
@@ -34,14 +30,6 @@ in {
 
   environment.pathsToLink = ["/libexec" ];
   virtualisation.docker.enable = true;
-
-  boot.extraModulePackages = [
-    pkgs.linuxPackages_latest.v4l2loopback
-  ];
-
-  boot.extraModprobeConfig = ''
-    options v4l2loopback exclusive_caps=1 video_nr=9 card_label="obs"
-  '';
 
   environment.systemPackages = with pkgs; [
 
@@ -101,17 +89,12 @@ in {
     xar
     darling-dmg
     #linuxPackages_latest.bpftrace # Add to diag pack
-    kernelPackage.v4l2loopback
 
     kubectl # Should be moved to shell
     kubernetes-helm # Shell
     kind # above shell
     jp2a # Misc tools
     doctl # devops shell
-
-    v4l-utils # Move out to video shell
-    libv4l
-    xawtv # video shell
 
     nmap # Security shell
 
