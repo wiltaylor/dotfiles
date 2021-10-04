@@ -1,7 +1,6 @@
 {config, pkgs, lib, ...}:
 let
 
-  scripts = import ./scripts.nix { inherit pkgs; };
   kernelPackage = config.wt.machine.kernelPackage;
 
 in {
@@ -82,9 +81,6 @@ in {
 
     python3 # move out to things that need it
     nix-bundle # Move out
-    scripts.sysTool
-    scripts.devTool
-    scripts.prjTool
     microcodeIntel # Move to intel package, get amd one too
     imagemagick # move out to shells
     pstree

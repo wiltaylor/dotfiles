@@ -4,6 +4,8 @@ with builtins;
 let
   cfg =  config.wt.machine;
 in {
+
+  imports = [ ./scripts.nix ];
   options.wt.machine = {
     kernelPackage = mkOption {
       default = pkgs.linuxPackages_latest;
