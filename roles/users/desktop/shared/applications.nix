@@ -50,5 +50,6 @@
     lutris
     zotero
     superTuxKart
+    nyxt
   ];
 }

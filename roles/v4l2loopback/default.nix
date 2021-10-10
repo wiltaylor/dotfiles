@@ -15,7 +15,7 @@ in {
   environment.systemPackages = with pkgs; [
 
     kernelPackage.v4l2loopback
-    l4l-utils
+    #l4vl-utils
     libv4l
     xawtv
   ];

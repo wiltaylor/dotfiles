@@ -21,10 +21,10 @@
     vulkan-tools
     vulkan-loader
     vulkan-headers
-    #wine-staging
-    #winePackages.staging
-    #wineWowPackages.staging
-    #winetricks
+    wine-staging
+    winePackages.staging
+    wineWowPackages.staging
+    winetricks
     minecraft
     quakespasm
   ];
