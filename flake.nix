@@ -99,7 +99,7 @@
       mini = host.mkHost {
         name = "mini";
         NICs = [ "wlo1" ];
-        kernelPackage = pkgs.linuxPackages_5_4;
+        kernelPackage = pkgs.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];
