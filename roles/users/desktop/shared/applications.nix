@@ -51,5 +51,6 @@
     zotero
     superTuxKart
     nyxt
+    emacs
   ];
 }
