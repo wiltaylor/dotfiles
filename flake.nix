@@ -94,8 +94,12 @@
         cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
         
         cfg = {
+          sys.locale = "en_AU.UTF-8";
+          sys.timeZone = "Australia/Brisbane";
+
           sys.virtualisation.vagrant.enable = true;
           sys.virtualisation.kvm.enable = true;
+          sys.virtualisation.docker.enable = true;
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;
@@ -144,6 +148,9 @@
         wifi = [ "wlo1" ];
         cpuTempSensor = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
         cfg = {
+          sys.locale = "en_AU.UTF-8";
+          sys.timeZone = "Australia/Brisbane";
+
           sys.kernelPackage = pkgs.linuxPackages_5_10;
           sys.cpu.type = "intel";
           sys.cpu.cores = 2;
@@ -152,6 +159,8 @@
           sys.graphics.primaryGPU = "intel";
           sys.audio.server = "pulse";
           sys.virtualisation.kvm = true;
+          sys.virtualisation.docker.enable = true;
+
         };
       };
     };

@@ -5,7 +5,13 @@ let
   cfg =  config.sys;
 in rec {
 
-  imports = [ ./scripts.nix ];
+  imports = [ 
+    ./scripts.nix 
+    ./nixos.nix
+    ./software.nix
+    ./security.nix
+    ./regional.nix
+  ];
   options.sys = {
     kernelPackage = mkOption {
       default = pkgs.linuxPackages_latest;
@@ -56,6 +62,12 @@ in rec {
   };
 
   config = {
+
+    # Earlyoom prevents systems from locking up when they run out of memory
+    services.earlyoom.enable = true;
+
+    # TTY font
+    console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
     # Enable all unfree hardware support.
     hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];

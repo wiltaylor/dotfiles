@@ -9,5 +9,6 @@
     ./virtualisation
     ./graphics
     ./audio
+    ./hotfix
   ];
 }
