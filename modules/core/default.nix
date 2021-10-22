@@ -2,11 +2,11 @@
 with lib;
 with builtins;
 let
-  cfg =  config.wt.machine;
+  cfg =  config.sys;
 in {
 
   imports = [ ./scripts.nix ];
-  options.wt.machine = {
+  options.sys = {
     kernelPackage = mkOption {
       default = pkgs.linuxPackages_latest;
       description = "Kernel package used to build this system";

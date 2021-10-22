@@ -2,7 +2,7 @@
 with lib;
 with builtins;
 let
-  kernelPackage = config.wt.machine.kernelPackage;
+  kernelPackage = config.sys.kernelPackage;
 in {
   boot.extraModprobeConfig = ''
     options v4l2loopback exclusive_caps=1 video_nr=9 card_label="obs"

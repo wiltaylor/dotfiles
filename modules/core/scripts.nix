@@ -4,7 +4,7 @@ with builtins;
 
 let
   runtimeShell = pkgs.runtimeShell;
-  cfg = config.wt.scripts;
+  cfg = config.sys.scripts;
 
   sysTool = pkgs.writeScriptBin "sys" ''
     #!${runtimeShell}
@@ -197,7 +197,7 @@ let
     esac
   '';
 in {
-  options.wt.scripts = {
+  options.sys.scripts = {
     systemScripts = mkOption {
       default = true;
       description = "Enable system management scripts like sys";

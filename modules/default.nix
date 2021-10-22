@@ -6,5 +6,6 @@
     ./g810led
     ./laptop
     ./core
+    ./virtualization
   ];
 }

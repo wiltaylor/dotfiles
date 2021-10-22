@@ -34,6 +34,7 @@ with builtins;
 
     mkHost = { 
       name, 
+      cfg ? {},
       NICs, 
       initrdMods,
       kernelMods, 
@@ -70,6 +71,7 @@ with builtins;
       inherit system;
 
       modules = [
+        cfg
         {
           imports = [ ../modules ] ++ roles_mods ++ sys_users;
 
@@ -87,8 +89,7 @@ with builtins;
           boot.initrd.availableKernelModules = initrdMods;
           boot.kernelModules = kernelMods;
           boot.kernelParams = kernelParams;
-          #boot.kernelPackages = kernelPackage;
-          wt.machine.kernelPackage = kernelPackage;
+          sys.kernelPackage = kernelPackage;
 
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;

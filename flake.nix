@@ -94,6 +94,9 @@
         laptop = false;
         gpuTempSensor = ''sensors | grep "junction:" | awk '{print $2}' '';
         cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
+        cfg = {
+          virtualization.vagrant.enable = true;
+        };
       };
 
       mini = host.mkHost {
@@ -119,7 +122,7 @@
       junkbox = host.mkHost {
         name = "junkbox";
         NICs = [];
-        kernelPackage = pkgs.linuxPackages_5_9;
+        kernelPackage = pkgs.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [];
