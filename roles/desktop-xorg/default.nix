@@ -1,27 +1,9 @@
 {config, pkgs, lib, ...}:
 {
   hardware.g810led.enable = true;
-  services.autorandr.enable = true;
-
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = true;
-    displayManager.session = [
-      {
-        manage = "desktop";
-        name = "xsession";
-        start = "exec $HOME/.xsession";
-      }
-    ];
-
-    displayManager.defaultSession = "xsession";
-    displayManager.job.logToJournal = true;
-    libinput.enable = true;
-  };
 
   environment.systemPackages = with pkgs; [
     appimage-run
-    lightdm
     dfeet
     gnome3.zenity
     ueberzug

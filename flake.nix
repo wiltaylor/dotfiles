@@ -106,6 +106,8 @@
           sys.cpu.threadsPerCore = 2;
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "amd";
+          sys.graphics.displayManager = "lightdm";
+          sys.graphics.desktopProtocols = [ "xorg" ];
           sys.audio.server = "pulse";
 
           sys.vfio.enable = true;
@@ -153,6 +155,8 @@
           sys.timeZone = "Australia/Brisbane";
 
           sys.kernelPackage = pkgs.linuxPackages_5_10;
+          sys.graphics.displayManager = "lightdm";
+          sys.graphics.desktopProtocol = [ "xorg" ];
           sys.cpu.type = "intel";
           sys.cpu.cores = 2;
           sys.cpu.threadsPerCore = 2;

@@ -24,6 +24,12 @@ in {
       default = [];
       description = "Desktop protocols you want to use for your desktop environment";
     };
+
+    displayManager = mkOption {
+      type = types.enum ["none" "lightdm"];
+      default = "none";
+      description = "Select the display manager you want to boot the system with";
+    };
   };
 
   config = let
@@ -45,17 +51,33 @@ in {
       (mkIf amd "amdgpu")
     ];
 
-    services.xserver.videoDrivers = mkIf xorg [
-      (mkIf amd "amdgpu") 
-      (mkIf intel "intel")
-      (mkIf nvidia "nvidia")
-    ];
+    services.xserver = mkIf xorg {
+      videoDrivers = [
+        (mkIf amd "amdgpu") 
+        (mkIf intel "intel")
+        (mkIf nvidia "nvidia")
+      ];
 
-    services.xserver.deviceSection = mkIf xorg ''
-      ${if (amd || intel) then ''
+      deviceSection = mkIf (intel || amd) ''
         Option "TearFree" "true"
-      '' else ""}
-    '';
+      '';
+
+      enable = true;
+      displayManager.lightdm.enable = cfg.displayManager == "lightdm";
+      displayManager.defaultSession = "xsession";
+      displayManager.job.logToJournal = true;
+      libinput.enable = true;
+
+      # This picks the display manager up from home manager.
+      # I might move this all back into system config as its a bit flaky.
+      displayManager.session = [
+        {
+          manage = "desktop";
+          name = "xsession";
+          start = "exec $HOME/.xsession";
+        }
+      ];
+    };
 
     hardware.nvidia.modesetting.enable = nvidia;
     hardware.opengl.enable = !headless;
@@ -84,5 +106,8 @@ in {
       (mkIf amd radeontop)
       (mkIf intel libva-utils)
     ];
+
+    services.autorandr.enable = xorg;
+
   };
 }
