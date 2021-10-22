@@ -64,6 +64,9 @@ in rec {
     nixpkgs.config.allowUnfree = true;
 
     boot.kernelPackages = cfg.kernelPackage;
+    boot.kernelParams = [
+      (mkIf (cfg.cpu.type == "intel") "intel_pstate=active")
+    ];
 
     environment.systemPackages = with pkgs; [
       (mkIf (cfg.cpu.type == "amd") microcodeAmd)

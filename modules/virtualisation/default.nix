@@ -2,6 +2,7 @@
 with lib;
 let
   cfg = config.sys.virtualisation;
+  cpuType = config.sys.cpu.type;
 
 in {
   options.sys.virtualisation = {
@@ -15,13 +16,20 @@ in {
     };
 
     kvm = {
-
+      enable = mkEnableOption "Enable KVM";
     };
   };
 
   config = {
     environment.systemPackages = with pkgs; [
       (if cfg.vagrant.enable then vagrant else nil)
+    ];
+
+    virtualisation.libvirtd.enable = cfg.kvm.enable;
+
+    boot.kernelModules = [
+      (mkIf (cpuType == "amd") "kvm-amd")
+      (mkIf (cpuType == "intel") "intel-amd")
     ];
 
     environment.variables = {

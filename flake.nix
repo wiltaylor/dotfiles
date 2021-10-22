@@ -82,7 +82,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "core" "vfio" "datadrive" "sshd" "v4l2loopback" ];
+        roles = ["flatpak" "sshd" "kindle" "yubikey" "desktop-xorg" "games" "core" "sshd" "v4l2loopback" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -92,14 +92,38 @@
         laptop = false;
         gpuTempSensor = ''sensors | grep "junction:" | awk '{print $2}' '';
         cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
+        
         cfg = {
           sys.virtualisation.vagrant.enable = true;
+          sys.virtualisation.kvm.enable = true;
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "amd";
           sys.audio.server = "pulse";
+
+          sys.vfio.enable = true;
+          sys.vfio.gpuType = "nvidia";
+          sys.vfio.gpuPciIds = "10de:1e87,10de:10f8,10de:1ad8,10de:1ad9";
+          sys.vfio.devIds = "0000:0c:00.0 0000:0c:00.1 0000:0c:00.2 0000:0c:00.3";
+
+          ## Extra mapped disk drives
+          boot.initrd.luks.devices."datacrypt".device = "/dev/disk/by-label/DATACRYPT";
+          boot.initrd.luks.devices."vmcrypt".device = "/dev/disk/by-label/VMCRYPT";
+
+          fileSystems."/data" = {
+            device = "/dev/disk/by-label/DATADISK";
+            fsType = "btrfs";
+            options = [ "subvol=@" ];
+          };
+
+          fileSystems."/vmstore" = 
+          {
+            device = "/dev/disk/by-label/VMSTORE";
+            fsType = "btrfs";
+            options = [ "subvol=@" ];
+          };
         };
       };
 
@@ -107,8 +131,8 @@
         name = "mini";
         NICs = [ "wlo1" ];
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
-        kernelMods = [ "kvm-intel" ];
-        kernelParams = [ "intel_pstate=active" ];
+        kernelMods = [ ];
+        kernelParams = [ ];
         roles = [ "sshd" "yubikey" "desktop-xorg" "wifi" "core" "bluetooth" "sshd" ];
         users = [ {
           name = "wil";
@@ -127,6 +151,7 @@
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "intel";
           sys.audio.server = "pulse";
+          sys.virtualisation.kvm = true;
         };
       };
     };

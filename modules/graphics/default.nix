@@ -4,6 +4,8 @@ with builtins;
 let
   cfg = config.sys.graphics;
 in {
+  imports = [ ./vfio.nix ];
+
   options.sys.graphics = {
     primaryGPU = mkOption {
       type = types.enum [ "amd" "intel" "nvidia" "none"];
