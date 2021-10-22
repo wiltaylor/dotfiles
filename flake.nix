@@ -82,7 +82,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["flatpak" "sshd" "kindle" "yubikey" "desktop-xorg" "games" "core" "sshd" "v4l2loopback" ];
+        roles = ["sshd" "kindle" "yubikey" "desktop-xorg" "games" "core" "sshd" "v4l2loopback" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -100,6 +100,7 @@
           sys.virtualisation.vagrant.enable = true;
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
+          sys.virtualisation.flatpak.enable = true;
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;

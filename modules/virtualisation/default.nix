@@ -22,6 +22,10 @@ in {
     docker = {
       enable = mkEnableOption "Enable Docker";
     };
+
+    flatpak = {
+      enable = mkEnableOption "Enable flatpack";
+    };
   };
 
   config = {
@@ -46,5 +50,8 @@ in {
         ${pkgs.vagrant}/bin/vagrant plugin install vagrant-libvirt
       '';
     };
+
+    services.flatpak.enable = cfg.flatpak.enable;
+    xdg.portal.enable = mkIf cfg.flatpak.enable true;
   };
 }
