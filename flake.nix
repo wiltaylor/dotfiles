@@ -80,7 +80,7 @@
         name = "titan";
         NICs = [ "enp5s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
-        kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
+        kernelMods = [ "it87" "k10temp" "nct6775" ];
         kernelParams = [];
         roles = ["flatpak" "sshd" "kindle" "yubikey" "desktop-xorg" "games" "core" "sshd" "v4l2loopback" ];
         users = [ {
