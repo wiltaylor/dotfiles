@@ -89,13 +89,14 @@
           uid = 1000;
           shell = pkgs.zsh;
         }];
-        cpuCores = 8;
         laptop = false;
         gpuTempSensor = ''sensors | grep "junction:" | awk '{print $2}' '';
         cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
         cfg = {
           sys.virtualisation.vagrant.enable = true;
-          sys.cpuType = "amd";
+          sys.cpu.type = "amd";
+          sys.cpu.cores = 16;
+          sys.cpu.threadsPerCore = 2;
           sys.graphics.primaryGPU = "amd";
           sys.audio.server = "pulse";
         };
@@ -114,13 +115,14 @@
           uid = 1000;
           shell = pkgs.zsh;
         }];
-        cpuCores = 2;
         laptop = true;
         wifi = [ "wlo1" ];
         cpuTempSensor = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
         cfg = {
           sys.kernelPackage = pkgs.linuxPackages_5_10;
-          sys.cpuType = "intel";
+          sys.cpu.type = "intel";
+          sys.cpu.cores = 2;
+          sys.cpu.threadsPerCore = 2;
           sys.graphics.primaryGPU = "intel";
           sys.audio.server = "pulse";
         };

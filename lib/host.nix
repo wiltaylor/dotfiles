@@ -40,7 +40,6 @@ with builtins;
       kernelParams, 
       kernelMods,
       roles, 
-      cpuCores, 
       laptop, 
       users, 
       wifi ? [],
@@ -52,7 +51,7 @@ with builtins;
       }) NICs);
 
       userCfg = {
-        inherit name NICs roles cpuCores laptop gpuTempSensor cpuTempSensor;
+        inherit name NICs roles laptop gpuTempSensor cpuTempSensor;
       };
 
       sysdata = [{
@@ -90,7 +89,6 @@ with builtins;
           boot.kernelParams = kernelParams;
 
           nixpkgs.pkgs = pkgs;
-          nix.maxJobs = lib.mkDefault cpuCores;
 
           system.stateVersion = "20.09";
 

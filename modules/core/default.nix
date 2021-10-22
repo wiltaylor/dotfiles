@@ -12,13 +12,35 @@ in {
       description = "Kernel package used to build this system";
     };
 
-    cpuType = mkOption {
-      type = types.enum ["intel" "amd"];
-      description = "Type of cpu the system has in it";
+    cpu = {
+      type = mkOption {
+        type = types.enum ["intel" "amd"];
+        description = "Type of cpu the system has in it";
+      };
+
+      cores = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Number of physical cores on cpu per socket";
+      };
+
+      sockets = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Number of CPU sockets installed in system";
+      };
+
+      threadsPerCore = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Number of threads per core.";
+      };
     };
   };
 
-  config = {
+  config = let
+    cpu = cfg.cpu;
+  in {
     # Enable all unfree hardware support.
     hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
     hardware.enableAllFirmware = true;
@@ -28,8 +50,10 @@ in {
     boot.kernelPackages = cfg.kernelPackage;
 
     environment.systemPackages = with pkgs; [
-      (mkIf (cfg.cpuType == "amd") microcodeAmd)
-      (mkIf (cfg.cpuType == "intel") microcodeIntel)
+      (mkIf (cpu.type == "amd") microcodeAmd)
+      (mkIf (cpu.type == "intel") microcodeIntel)
     ];
+
+    nix.maxJobs = cpu.cores * cpu.threadsPerCore * cpu.sockets;
   };
 }
