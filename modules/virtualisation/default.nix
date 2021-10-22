@@ -1,10 +1,10 @@
 {pkgs, lib, config, ...}:
 with lib;
 let
-  cfg = config.virtualization;
+  cfg = config.sys.virtualisation;
 
 in {
-  options.virtualization = {
+  options.sys.virtualisation = {
     vagrant = {
       enable = mkEnableOption "Enable Vagrant";
       provider = mkOption {
@@ -12,6 +12,10 @@ in {
         default = "libvirt";
         description = "The provider that vargrant will use.";
       };
+    };
+
+    kvm = {
+
     };
   };
 

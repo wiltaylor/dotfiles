@@ -37,9 +37,8 @@ with builtins;
       cfg ? {},
       NICs, 
       initrdMods,
-      kernelMods, 
       kernelParams, 
-      kernelPackage, 
+      kernelMods,
       roles, 
       cpuCores, 
       laptop, 
@@ -89,7 +88,6 @@ with builtins;
           boot.initrd.availableKernelModules = initrdMods;
           boot.kernelModules = kernelMods;
           boot.kernelParams = kernelParams;
-          sys.kernelPackage = kernelPackage;
 
           nixpkgs.pkgs = pkgs;
           nix.maxJobs = lib.mkDefault cpuCores;

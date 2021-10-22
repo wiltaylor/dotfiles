@@ -79,11 +79,10 @@
       titan = host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
-        kernelPackage = pkgs.linuxPackages_latest;
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "amd-graphics" "core" "amd" "vfio" "datadrive" "sshd" "v4l2loopback" ];
+        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "core" "vfio" "datadrive" "sshd" "v4l2loopback" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -95,18 +94,19 @@
         gpuTempSensor = ''sensors | grep "junction:" | awk '{print $2}' '';
         cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
         cfg = {
-          virtualization.vagrant.enable = true;
+          sys.virtualisation.vagrant.enable = true;
+          sys.cpuType = "amd";
+          sys.graphics.primaryGPU = "amd";
         };
       };
 
       mini = host.mkHost {
         name = "mini";
         NICs = [ "wlo1" ];
-        kernelPackage = pkgs.linuxPackages_5_10;
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" "bluetooth" "sshd" "intel-graphics" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" "bluetooth" "sshd" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
@@ -117,24 +117,11 @@
         laptop = true;
         wifi = [ "wlo1" ];
         cpuTempSensor = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
-      };
-
-      junkbox = host.mkHost {
-        name = "junkbox";
-        NICs = [];
-        kernelPackage = pkgs.linuxPackages_5_10;
-        initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
-        kernelMods = [ "kvm-intel" ];
-        kernelParams = [];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" ];
-        cpuCores = 4;
-        users = [ {
-          name = "wil";
-          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-          uid = 1000;
-          shell = pkgs.zsh;
-        }];
-        laptop = true;
+        cfg = {
+          sys.kernelPackage = pkgs.linuxPackages_5_10;
+          sys.cpuType = "intel";
+          sys.graphics.primaryGPU = "intel";
+        };
       };
     };
   };
