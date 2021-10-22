@@ -1,6 +1,8 @@
 {config, lib, pkgs, ...}:
 with lib;
 {
+  imports = [ ./alienware.nix ];
+
     options.laptop = mkOption {
       type = types.package;
       default = false;
