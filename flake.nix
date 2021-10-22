@@ -138,7 +138,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ ];
         kernelParams = [ ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "wifi" "core" "bluetooth" "sshd" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "wifi" "core" "sshd" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
@@ -161,6 +161,7 @@
           sys.audio.server = "pulse";
           sys.virtualisation.kvm = true;
           sys.virtualisation.docker.enable = true;
+          sys.bluetooth = true;
 
         };
       };

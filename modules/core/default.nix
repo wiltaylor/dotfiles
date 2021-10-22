@@ -35,6 +35,8 @@ in rec {
       description = "Specify the bios type of the machine";
     };
 
+    bluetooth = mkEnableOption "System has a bluetooth adapter";
+
     cpu = {
       type = mkOption {
         type = types.enum ["intel" "amd"];
@@ -89,6 +91,10 @@ in rec {
     boot.loader.efi.canTouchEfiVariables = cfg.bootloader == "systemd-boot";
 
     nix.maxJobs = cfg.cpu.cores * cfg.cpu.threadsPerCore * cfg.cpu.sockets;
+
+
+    hardware.bluetooth.enable = cfg.bluetooth;
+    services.blueman.enable = cfg.bluetooth;
 
     # This is the main layout I have on my systems. 
     # It works by using the correct labels for drives.
