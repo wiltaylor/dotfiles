@@ -1,7 +1,5 @@
 {config, pkgs, lib, ...}:
 {
-  hardware.g810led.enable = true;
-
   environment.systemPackages = with pkgs; [
     appimage-run
     dfeet

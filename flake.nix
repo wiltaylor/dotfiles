@@ -109,6 +109,7 @@
           sys.graphics.displayManager = "lightdm";
           sys.graphics.desktopProtocols = [ "xorg" ];
           sys.audio.server = "pulse";
+          sys.hardware.g810led = true;
 
           sys.vfio.enable = true;
           sys.vfio.gpuType = "nvidia";
