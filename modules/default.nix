@@ -8,5 +8,6 @@
     ./core
     ./virtualisation
     ./graphics
+    ./audio
   ];
 }

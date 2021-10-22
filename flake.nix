@@ -97,6 +97,7 @@
           sys.virtualisation.vagrant.enable = true;
           sys.cpuType = "amd";
           sys.graphics.primaryGPU = "amd";
+          sys.audio.server = "pulse";
         };
       };
 
@@ -121,6 +122,7 @@
           sys.kernelPackage = pkgs.linuxPackages_5_10;
           sys.cpuType = "intel";
           sys.graphics.primaryGPU = "intel";
+          sys.audio.server = "pulse";
         };
       };
     };

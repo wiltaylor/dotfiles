@@ -59,6 +59,7 @@ in {
     hardware.opengl.enable = !headless;
     hardware.opengl.driSupport = !headless;
     hardware.opengl.driSupport32Bit = !headless;
+    hardware.steam-hardware.enable = !headless;
 
     hardware.opengl.extraPackages = mkIf (!headless) (with pkgs;[
       (mkIf amd amdvlk)
@@ -66,6 +67,8 @@ in {
       (mkIf intel vaapiIntel)
       (mkIf intel vaapiVdpau)
       (mkIf intel libvdpau-va-gl)
+
+      libva
     ]);
 
     hardware.opengl.extraPackages32 = mkIf (!headless) (with pkgs.driversi686Linux;[
@@ -75,6 +78,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       vulkan-tools
+      glxinfo
       (mkIf amd radeontop)
       (mkIf intel libva-utils)
     ];

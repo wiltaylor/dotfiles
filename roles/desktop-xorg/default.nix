@@ -1,10 +1,6 @@
 {config, pkgs, lib, ...}:
 {
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   hardware.g810led.enable = true;
-  boot.plymouth.enable = true;
   services.autorandr.enable = true;
 
   services.xserver = {

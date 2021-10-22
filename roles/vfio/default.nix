@@ -42,8 +42,6 @@ in {
     options = [ "subvol=@" ];
   };
 
-  nixpkgs.config.pulseaudio = true;
-
   environment.systemPackages = with pkgs; [
     looking-glass-client
     ( scream.override { pulseSupport = true; })
