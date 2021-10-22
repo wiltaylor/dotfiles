@@ -3,13 +3,30 @@ with lib;
 with builtins;
 let
   cfg =  config.sys;
-in {
+in rec {
 
   imports = [ ./scripts.nix ];
   options.sys = {
     kernelPackage = mkOption {
       default = pkgs.linuxPackages_latest;
       description = "Kernel package used to build this system";
+    };
+
+    diskLayout = mkOption {
+      type = types.enum [ "btrfs-crypt" "vm" ];
+      description = "This is the layout of the disk used by the system.";
+      default = "btrfs-crypt";
+    };
+
+    bootloader = mkOption {
+      type = types.enum [ "grub" "systemd-boot" ];
+      description = "The boot loader used to boot the system";
+      default = "systemd-boot";
+    };
+
+    biosType = mkOption {
+      type = types.enum [ "efi" "bios"];
+      description = "Specify the bios type of the machine";
     };
 
     cpu = {
@@ -38,9 +55,8 @@ in {
     };
   };
 
-  config = let
-    cpu = cfg.cpu;
-  in {
+  config = {
+
     # Enable all unfree hardware support.
     hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
     hardware.enableAllFirmware = true;
@@ -50,10 +66,58 @@ in {
     boot.kernelPackages = cfg.kernelPackage;
 
     environment.systemPackages = with pkgs; [
-      (mkIf (cpu.type == "amd") microcodeAmd)
-      (mkIf (cpu.type == "intel") microcodeIntel)
+      (mkIf (cfg.cpu.type == "amd") microcodeAmd)
+      (mkIf (cfg.cpu.type == "intel") microcodeIntel)
     ];
 
-    nix.maxJobs = cpu.cores * cpu.threadsPerCore * cpu.sockets;
+    boot.loader.systemd-boot.enable = cfg.bootloader == "systemd-boot";
+    boot.loader.efi.canTouchEfiVariables = cfg.bootloader == "systemd-boot";
+
+    nix.maxJobs = cfg.cpu.cores * cfg.cpu.threadsPerCore * cfg.cpu.sockets;
+
+    # This is the main layout I have on my systems. 
+    # It works by using the correct labels for drives.
+    boot.initrd.luks.devices."cryptroot".device = (mkIf (cfg.diskLayout == "btrfs-crypt") "/dev/disk/by-label/CRYPTROOT");
+
+    fileSystems."/" = (if (cfg.diskLayout == "btrfs-crypt") then
+      { device = "/dev/disk/by-label/ROOT";
+        fsType = "btrfs";
+        options = [ "subvol=@" ];
+      } 
+      else 
+      {
+        device = "/dev/disk/by-label/ROOT";
+        fsType = "auto";
+        options = [ ];
+      });
+
+    fileSystems."/home" = (mkIf (cfg.diskLayout == "btrfs-crypt") 
+      { device = "/dev/disk/by-label/ROOT";
+        fsType = "btrfs";
+        options = [ "subvol=@home" ];
+      });
+
+    fileSystems."/var" = (mkIf (cfg.diskLayout == "btrfs-crypt") 
+      { device = "/dev/disk/by-label/ROOT";
+        fsType = "btrfs";
+        options = [ "subvol=@var" ];
+      });
+
+    fileSystems."/.pagefile" = (mkIf (cfg.diskLayout == "btrfs-crypt") 
+      { device = "/dev/disk/by-label/ROOT";
+        fsType = "btrfs";
+        options = [ "subvol=@pagefile" ];
+      });
+
+    fileSystems."/boot" = (mkIf (cfg.diskLayout == "btrfs-crypt") 
+      { device = "/dev/disk/by-label/BOOT";
+        fsType = "vfat";
+      });
+
+    swapDevices = (mkIf (cfg.diskLayout == "btrfs-crypt")[  
+      {
+        device = "/.pagefile/pagefile";
+      }
+    ]); 
   };
 }

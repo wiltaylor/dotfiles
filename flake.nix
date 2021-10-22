@@ -82,7 +82,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "kvm-amd" "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "efi" "core" "vfio" "datadrive" "sshd" "v4l2loopback" ];
+        roles = ["flatpak" "sshd" "kindle" "yubikey" "kvm" "desktop-xorg" "games" "core" "vfio" "datadrive" "sshd" "v4l2loopback" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -97,6 +97,7 @@
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;
+          sys.biosType = "efi";
           sys.graphics.primaryGPU = "amd";
           sys.audio.server = "pulse";
         };
@@ -108,7 +109,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ "kvm-intel" ];
         kernelParams = [ "intel_pstate=active" ];
-        roles = [ "sshd" "yubikey" "desktop-xorg" "efi" "wifi" "core" "bluetooth" "sshd" ];
+        roles = [ "sshd" "yubikey" "desktop-xorg" "wifi" "core" "bluetooth" "sshd" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
@@ -123,6 +124,7 @@
           sys.cpu.type = "intel";
           sys.cpu.cores = 2;
           sys.cpu.threadsPerCore = 2;
+          sys.biosType = "efi";
           sys.graphics.primaryGPU = "intel";
           sys.audio.server = "pulse";
         };
