@@ -1,5 +1,10 @@
 {pkgs, config, lib, ...}:
-{
+with lib;
+let
+  emacs-custom = pkgs.writeScriptBin "emacs" ''
+    ${pkgs.emacs}/bin/emacs -q -l ~/.config/emacs/init.el $@
+  '';
+in {
 
   imports = [
     ./spotify.nix
@@ -51,6 +56,6 @@
     zotero
     superTuxKart
     nyxt
-    emacs
+    emacs-custom
   ];
 }
