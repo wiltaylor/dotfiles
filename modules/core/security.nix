@@ -3,6 +3,7 @@ with lib;
 with builtins;
 let
   cfg = config.sys.security;
+  desktopMode = if ((length config.sys.graphics.desktopProtocols) > 0) then true else false;
 in {
 
   options.sys.security = {
@@ -39,6 +40,9 @@ in {
       (mkIf cfg.yubikey pinentry-gtk2)
     ];
 
+    services.gnome.gnome-keyring.enable = desktopMode;
+    environment.pathsToLink = [ "/share/accountsservice" ];
+    services.accounts-daemon.enable = true;
 
     services.pcscd.enable = cfg.yubikey;
     services.udev.packages = [ 

@@ -82,7 +82,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["desktop-xorg" "games" "core" ];
+        roles = ["games" "core" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -101,6 +101,7 @@
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.flatpak.enable = true;
+          sys.virtualisation.appImage.enable = true;
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;
@@ -147,7 +148,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ ];
         kernelParams = [ ];
-        roles = [ "desktop-xorg" "wifi" "core" ];
+        roles = [ "wifi" "core" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
@@ -172,6 +173,7 @@
           sys.audio.server = "pulse";
           sys.virtualisation.kvm = true;
           sys.virtualisation.docker.enable = true;
+          sys.virtualisation.appImage.enable = true;
           sys.bluetooth = true;
 
           sys.security.yubikey = true;

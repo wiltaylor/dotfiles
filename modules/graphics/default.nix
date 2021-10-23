@@ -4,7 +4,7 @@ with builtins;
 let
   cfg = config.sys.graphics;
 in {
-  imports = [ ./vfio.nix ];
+  imports = [ ./vfio.nix ./scripts.nix ];
 
   options.sys.graphics = {
     primaryGPU = mkOption {
@@ -45,6 +45,7 @@ in {
     nvidiaPrimary = cfg.PrimaryGPU == "nvidia";
 
     xorg = (elem "xorg" cfg.desktopProtocols);
+    desktopMode = xorg;
 
     headless = cfg.primaryGPU == "none";
 
@@ -121,6 +122,8 @@ in {
       (mkIf cfg.v4l2loopback kernelPackage.v4l2loopback)
       (mkIf cfg.v4l2loopback libv4l)
       (mkIf cfg.v4l2loopback xawtv)
+      (mkIf desktopMode ueberzug)
+      (mkIf desktopMode dfeet)
     ];
 
     services.autorandr.enable = xorg;

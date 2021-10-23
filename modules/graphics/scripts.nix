@@ -1,12 +1,10 @@
 {config, pkgs, lib, ...}:
-{
-  environment.systemPackages = with pkgs; [
-    appimage-run
-    dfeet
-    gnome3.zenity
-    ueberzug
+with lib;
+with builtins;
+let
+  desktopMode = (length config.sys.graphics.desktopProtocols) > 0;
 
-    (pkgs.writeScriptBin "desktop" ''
+  desktopScript = pkgs.writeScriptBin "desktop" ''
       #!${pkgs.bash}/bin/bash
 
       case $1 in
@@ -14,7 +12,7 @@
         ${pkgs.feh}/bin/feh --bg-fill --randomize ~/.config/wallpapers/*
       ;;
       "winman")
-        ${xlibs.xprop}/bin/xprop -root -notype | grep "_NET_WM_NAME =" | cut -d '"' -f2
+        ${pkgs.xlibs.xprop}/bin/xprop -root -notype | grep "_NET_WM_NAME =" | cut -d '"' -f2
       ;;
       "about")
         ${pkgs.gnome3.zenity}/bin/zenity --about
@@ -29,10 +27,10 @@
       ;;
       esac
 
-    '')
+    '';
+in {
+  environment.systemPackages = with pkgs; [
+    (mkIf desktopMode desktopScript)
   ];
 
-  services.gnome.gnome-keyring.enable = true;
-  services.accounts-daemon.enable = true;
-  environment.pathsToLink = [ "/share/accountsservice" ];
 }

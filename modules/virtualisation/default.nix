@@ -26,11 +26,16 @@ in {
     flatpak = {
       enable = mkEnableOption "Enable flatpack";
     };
+
+    appImage = {
+      enable = mkEnableOption "Enable app image";
+    };
   };
 
   config = {
     environment.systemPackages = with pkgs; [
       (if cfg.vagrant.enable then vagrant else nil)
+      (if cfg.appImage.enable then appimage-run else nil)
     ];
 
     virtualisation.libvirtd.enable = cfg.kvm.enable;
