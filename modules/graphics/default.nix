@@ -30,6 +30,8 @@ in {
       default = "none";
       description = "Select the display manager you want to boot the system with";
     };
+
+    v4l2loopback = mkEnableOption "Enable v4l2loop back on this system";
   };
 
   config = let
@@ -45,10 +47,20 @@ in {
     xorg = (elem "xorg" cfg.desktopProtocols);
 
     headless = cfg.primaryGPU == "none";
+
+    kernelPackage = config.sys.kernelPackage;
   in {
 
     boot.initrd.kernelModules = [
       (mkIf amd "amdgpu")
+    ];
+
+    boot.extraModprobeConfig = mkIf cfg.v4l2loopback ''
+      options v4l2loopback exclusive_caps=1 video_nr=9 card_label="obs"
+    '';
+
+    boot.extraModulePackages = [
+      (mkIf cfg.v4l2loopback kernelPackage.v4l2loopback)
     ];
 
     services.xserver = mkIf xorg {
@@ -105,6 +117,10 @@ in {
       glxinfo
       (mkIf amd radeontop)
       (mkIf intel libva-utils)
+
+      (mkIf cfg.v4l2loopback kernelPackage.v4l2loopback)
+      (mkIf cfg.v4l2loopback libv4l)
+      (mkIf cfg.v4l2loopback xawtv)
     ];
 
     services.autorandr.enable = xorg;

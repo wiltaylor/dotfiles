@@ -82,7 +82,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["desktop-xorg" "games" "core" "v4l2loopback" ];
+        roles = ["desktop-xorg" "games" "core" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -108,6 +108,7 @@
           sys.graphics.primaryGPU = "amd";
           sys.graphics.displayManager = "lightdm";
           sys.graphics.desktopProtocols = [ "xorg" ];
+          sys.graphics.v4l2loopback = true;
           sys.audio.server = "pulse";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
