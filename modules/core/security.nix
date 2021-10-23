@@ -18,6 +18,12 @@ in {
     };
 
     yubikey = mkEnableOption "Enable Yubikey support on this system";
+
+    secrets = mkOption {
+      type = types.attrs;
+      description = "Store secrets in this attribute in the git crypt layer.";
+      default = {};
+    };
   };
 
   config = {

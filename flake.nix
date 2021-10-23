@@ -148,7 +148,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ ];
         kernelParams = [ ];
-        roles = [ "wifi" "core" ];
+        roles = [ "core" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
@@ -175,6 +175,7 @@
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;
           sys.bluetooth = true;
+          sys.wifi = true;
 
           sys.security.yubikey = true;
           sys.security.username = "wil";

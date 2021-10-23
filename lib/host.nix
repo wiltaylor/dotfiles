@@ -58,6 +58,9 @@ with builtins;
         options.laptop = lib.mkEnableOption "test";
       }];
 
+      secretsResult = tryEval (import ../.secret/default.nix);
+      secrets = if secretsResult.success then secretsResult.value else {};
+
       roles_mods = (map (r: mkRole r) roles );
       sys_users = (map (u: user.mkSystemUser u) users);
 
@@ -76,6 +79,8 @@ with builtins;
           environment.etc = {
             "hmsystemdata.json".text = builtins.toJSON userCfg;
           };
+
+          sys.security.secrets = secrets;
 
           networking.hostName = "${name}";
           networking.interfaces = networkCfg;
