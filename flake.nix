@@ -82,7 +82,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["sshd" "kindle" "yubikey" "desktop-xorg" "games" "core" "sshd" "v4l2loopback" ];
+        roles = ["sshd" "yubikey" "desktop-xorg" "games" "core" "sshd" "v4l2loopback" ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -110,6 +110,7 @@
           sys.graphics.desktopProtocols = [ "xorg" ];
           sys.audio.server = "pulse";
           sys.hardware.g810led = true;
+          sys.hardware.kindle = true;
 
           sys.vfio.enable = true;
           sys.vfio.gpuType = "nvidia";

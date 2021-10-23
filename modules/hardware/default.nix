@@ -6,6 +6,7 @@ let
 in {
     options.sys.hardware = {
       g810led = mkEnableOption "Enable G810 Keyboard led control";
+      kindle = mkEnableOption "Enable Amazon Kindle";
     };
 
     config = let
@@ -13,6 +14,12 @@ in {
     in {
       environment.systemPackages = [
         (mkIf (cfg.g810led) pkgs.my.g810-led)
+        (mkIf (cfg.kindle) pkgs.libmtp)
+        (mkIf (cfg.kindle) pkgs.gvfs)
+      ];
+
+      boot.kernelModules = [
+        (mkIf cfg.kindle "msdos")
       ];
 
       services.udev = mkIf cfg.g810led {
