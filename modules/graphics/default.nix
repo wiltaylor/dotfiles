@@ -114,8 +114,10 @@ in {
     ]);
 
     environment.systemPackages = with pkgs; [
-      vulkan-tools
-      glxinfo
+      (mkIf desktopMode vulkan-tools)
+      (mkIf desktopMode vulkan-loader)
+      (mkIf desktopMode vulkan-headers)
+      (mkIf desktopMode glxinfo)
       (mkIf amd radeontop)
       (mkIf intel libva-utils)
 

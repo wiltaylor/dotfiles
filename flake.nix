@@ -82,7 +82,7 @@
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
         kernelMods = [ "it87" "k10temp" "nct6775" ];
         kernelParams = [];
-        roles = ["games" "core" ];
+        roles = [];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -113,6 +113,7 @@
           sys.audio.server = "pulse";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
+          sys.games.enable = true;
 
           sys.security.yubikey = true;
           sys.security.username = "wil";
@@ -148,7 +149,7 @@
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         kernelMods = [ ];
         kernelParams = [ ];
-        roles = [ "core" ];
+        roles = [ ];
         users = [ {
           name = "wil";
           groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];

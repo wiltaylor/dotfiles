@@ -1,5 +1,9 @@
 {pkgs, config, lib, ...}:
-{
+with lib;
+with builtins;
+let
+  desktopMode = (length config.sys.graphics.desktopProtocols) > 0;
+in {
   ## This is a list of core software I want to have on all of my machines.
 
   environment.systemPackages = with pkgs; [
@@ -46,6 +50,12 @@
     lf
     nix-index
     darling-dmg
+    nmap
+
+    neovimWT
+    lm_sensors
+
+    (mkIf desktopMode freerdp)
 
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];

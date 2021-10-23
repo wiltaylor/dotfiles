@@ -10,5 +10,6 @@
     ./audio
     ./hotfix
     ./hardware
+    ./games
   ];
 }
