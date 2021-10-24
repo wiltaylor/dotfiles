@@ -1,0 +1,314 @@
+#+TITLE: Wil's Emacs config
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.config/emacs/init.el
+
+* Introduction
+  This file contains all of my emacs configuration which is then tangled out into an init file.
+
+  This is not broken out into a flake yet because its very much an inprogress configuraiton.
+
+  To tangle config C-c C-v t.
+* Settings
+** Move emacs directory to ./config/emacs
+   My nix config has moved the emacs folder to *~/.config/emacs* so we need to set this at the top of the file for everything to work properly.
+   
+   #+begin_src emacs-lisp
+     (setq user-emacs-directory "~/.config/emacs/")
+   #+end_src
+   
+** Remove Default Startup Screen and menus
+   #+begin_src emacs-lisp
+     ; Get rid of startup message
+     (setq inhibit-startup-message t)
+
+     ; Get rid of ugly window chrome
+     (scroll-bar-mode -1)
+     (tool-bar-mode -1)
+     (tooltip-mode -1)
+     (set-fringe-mode 10) ; Some extra room around window
+     (menu-bar-mode -1)
+   #+end_src
+
+** Setup Use Package
+   #+begin_src emacs-lisp
+     ; Enabling packages
+     (require 'package)
+     (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			       ("org" . "https://orgmode.org/elpa")
+			       ("elpa" . "https://elpa.gnu.org/packages")))
+
+     ;; Make sure there is a package list on first open
+     (package-initialize)
+     (unless package-archive-contents
+       (package-refresh-contents))
+
+       ;; Initialize use-package
+       (unless (package-installed-p 'use-package)
+	 (package-install 'use-package))
+
+      (require 'use-package)
+       (setq use-package-always-ensure t) ;;Auto download
+   #+end_src
+
+** Theme Setup
+   #+begin_src emacs-lisp
+     ;;doom themes
+     (use-package doom-themes
+       :config
+       (setq doom-themes-enable-bold t
+	     doom-themes-enable-italic t)
+       (load-theme 'doom-one t))
+     (set-face-attribute 'default nil :font "FiraCode Nerd Font" :height 140)
+     ; All emacs icons
+     (use-package all-the-icons)
+
+     (set-frame-font "FiraCode Nerd Font Mono" t t)
+   #+end_src
+
+** Ivy
+
+   #+begin_src emacs-lisp
+     ;; Ivy setup
+     (use-package ivy
+       :diminish ; Prevents this from showing in the mode line.
+       :bind (("C-s" . swiper)
+	      :map ivy-minibuffer-map
+	      ("TAB" . ivy-alt-done)
+	      ("C-l" . ivy-alt-done)
+	      ("C-j" . ivy-next-line)
+	      ("C-l" . ivy-previous-line)
+	      :map ivy-switch-buffer-map
+	      ("C-k" . ivy-previous-line)
+	      ("C-l" . ivy-done)
+	      ("C-d" . ivy-swtich-buffer-kill)
+	      :map ivy-reverse-i-search-map
+	      ("C-k" . ivy-previous-line)
+	      ("C-d" . ivy-reverse-i-search-kill))
+       :config
+       (ivy-mode 1))
+
+     ;; Ivy-Rich - Gives details of commands when you complete with ivy.
+     (use-package ivy-rich
+       :init
+       (ivy-rich-mode 1))
+   #+end_src
+
+** Counsel
+   #+begin_src emacs-lisp
+     (use-package counsel
+       :bind (("M-x" . counsel-M-x)
+	      ("C-x b" . counsel-ibuffer)
+	      ("C-x C-f" . counsel-find-file)
+	      :map minibuffer-local-map
+	      ("C-r" . 'counsel-minibuffer-history)))
+   #+end_src
+
+** Doom Emacs Line
+   #+begin_src emacs-lisp
+     (use-package doom-modeline
+       :ensure t
+       :init (doom-modeline-mode 1)
+       :custom ((doom-modeline-height 15)))
+   #+end_src
+
+   
+** Evil Mode
+   #+begin_src emacs-lisp
+      ;; Setup line numbers
+      (column-number-mode)
+      (global-display-line-numbers-mode t)
+
+      ;;Make ESC quit prompts
+      (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+
+      (use-package evil
+	:init
+	(setq evil-want-intergration t)
+	(setq evil-want-keybinding nil)
+	(setq evil-want-C-u-scroll t)
+	(setq evil-C-i-jump nil)
+	:config
+	(evil-mode 1)
+	(define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+
+	;; Use visual line motions even outside of visual-line-mode buffers
+	(evil-global-set-key 'motion "j" 'evil-next-visual-line)
+	(evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+	(evil-set-initial-state 'messages-buffer-mode 'normal)
+	(evil-set-initial-state 'dashboard-mode 'normal))
+
+     (use-package evil-collection
+	:after evil
+	:config
+	(evil-collection-init))
+
+
+     (dolist (mode `(org-mode-hook
+	term-mode-hook
+	eshell-mode-hook
+	shell-mode-hook))
+     (add-hook mode (lambda () (display-line-numbers-mode 0))))
+   #+end_src
+
+** Hydra
+   #+begin_src emacs-lisp
+     (use-package hydra)
+
+     (defhydra hydra-text-scale (:timeout 4)
+       "scale text"
+       ("j" text-scale-increase "in")
+       ("k" text-scale-decrease "out")
+       ("f" nil "finished" :exit t))
+   #+end_src
+
+** Projectile
+   #+begin_src emacs-lisp
+     ;; Project management
+     (use-package projectile
+       :diminish projectile-mode
+       :config (projectile-mode)
+       :custom ((projectile-completion-system 'ivy))
+       :bind-keymap
+       ("C-c p" . projectile-command-map)
+       :init
+       (when (file-directory-p "~/repo")
+	 (setq projectile-project-search-path '("~/repo")))
+       (setq projectile-switch-project-action #'projectile-dired))
+
+     (use-package counsel-projectile
+       :config (counsel-projectile-mode 1))
+   #+end_src
+
+** General
+   #+begin_src emacs-lisp
+     (use-package general
+	 :after evil
+	 :config
+	 (general-create-definer wil/leader-keys
+	     :keymaps '(normal insert visual emacs)
+	     :prefix "SPC"
+	     :global-prefix "C-SPC")
+
+	 (wil/leader-keys
+	 "c"  '(:ignore t :which-key "Code")
+	 "g"  '(:ignore t :which-key "Git")
+	 "d"  '(:ignore t :which-key "Debug")
+	 "p"  '(:ignore t :which-key "Project")
+	 "f"  '(:ignore t :which-key "File")
+	 "w"  '(:ignore t :which-key "Window")
+	 "b"  '(:ignore t :which-key "Buffers")
+	 "e"  '(:ignore t :which-key "Editor")
+	 "es" '((lambda() (interactive) (find-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Edit Settings")
+         "ea" '((lambda() (interactive) (org-babel-tangle)) :which-key "Apply Settings")
+      ) )
+   #+end_src
+** Which Key
+   #+begin_src emacs-lisp
+     (use-package which-key
+       :init (which-key-mode)
+       :diminish which-key-mode
+       :config (setq which-key-idle-delay 0.3))
+   #+end_src
+** Helpful
+   #+begin_src emacs-lisp
+     ;; Helpful
+     (use-package helpful
+       :commands (helpful-callable helpful-variable helpful-command helpful-key)
+       :custom
+       (counsel-describe-function-function #'helpful-callable)
+       (counsel-describe-variable-function #'helpful-variable)
+       :bind
+       ([remap describe-function] . counsel-describe-function)
+       ([remap describe-command] . helpful-command)
+       ([remap describe-variable] . counsel-describe-variable)
+       ([remap describe-key] . helpful-key))
+   #+end_src
+
+** Rainbow delimiters
+   #+begin_src emacs-lisp
+     ;; Adding random delimiters
+     (use-package rainbow-delimiters
+       :hook (prog-mode . rainbow-delimiters-mode))
+   #+end_src
+
+** Magit
+   #+begin_src emacs-lisp
+     ;;Git intergration
+     (use-package magit
+       :custom
+       (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+   #+end_src
+
+** Org Mode
+   #+begin_src emacs-lisp
+     ;; Does intergration with github and gitlab
+
+     (defun dw/org-mode-setup()
+       (org-indent-mode)
+       (variable-pitch-mode 1)
+       (auto-fill-mode 0)
+       (visual-line-mode 1)
+       (setq evil-auto-indent nul))
+
+     (use-package org
+       ;;:hook (org-mode . dw/org-mode-setup)
+       :config
+       (setq org-ellipsis " "
+	     org-hide-emphasis-markers nil))
+
+     (use-package org-bullets
+       :after org
+       :hook (org-mode . org-bullets-mode)
+       :custom
+       (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+     (dolist (face '((org-level-1 . 1.2)
+		     (org-level-2 . 1.1)
+		     (org-level-3 . 1.05)
+		     (org-level-4 . 1.0)
+		     (org-level-5 . 1.1)
+		     (org-level-6 . 1.1)
+		     (org-level-7 . 1.1)
+		     (org-level-8 . 1.1)))
+       (set-face-attribute (car face) nil :font "NotoSans Nerd Font" :weight 'regular :height (cdr face)))
+   #+end_src
+
+** Dashboard
+  [[./logo.png]]
+   #+begin_src emacs-lisp
+	(use-package dashboard
+	    :config
+	    (setq dashboard-banner-logo-title "Not actually doom emacs")
+	    (setq dashboard-startup-banner (expand-file-name "~/.dotfiles/emacs/logo.png"))
+	    (setq dashboard-center-content t)
+	    (setq dashboard-items '((recents  . 5)
+				(bookmarks . 5)
+				(projects . 5)))
+	    (setq dashboard-set-navigator t)
+	    (setq dashboard-navigator-buttons
+		`(
+		    ((,
+		    (all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+		    "Wil's GitHub"
+		    "Browse Github"
+		    (lambda (&rest _)
+		    (browse-url "https://github.com/wiltaylor/")))
+
+		    (,
+		    (all-the-icons-octicon "globe" :height 1.1 :v-adjust 0.0)
+		    "Wil's Blog"
+		    "Browse Blog"
+		    (lambda (&rest _)
+		    (browse-url "https://www.wil.dev/"))))
+		))
+	(setq dashboard-footer-messages '("Ni!"))
+        (setq dashboard-footer-icon (all-the-icons-octicon "terminal"
+						    :height 1.1
+						    :v-adjust -0.05
+						    :face 'font-lock-keyword-face))
+	(dashboard-refresh-buffer)
+	(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+	(dashboard-setup-startup-hook))
+
+   #+end_src
