@@ -171,6 +171,7 @@
          "${modifier}+space" = "floating toggle";
          "${modifier}+h" = "split h";
          "${modifier}+v" = "split v";
+         "${modifier}+o" = ''exec xdg-open "obsidian://open?vault=Codex%20Astartes"'';
          "${modifier}+shift+minus" = "move scratchpad";
          "${modifier}+minus" = "scratchpad show";
          "${modifier}+Escape" = "exec --no-startup-id dm-tool lock";
