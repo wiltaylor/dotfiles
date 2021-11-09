@@ -6,10 +6,6 @@ let
   '';
 in {
 
-  imports = [
-    ./steam.nix
-  ];
-
   home.sessionVariables = {
     ZKDIR = "$HOME/.zk";
     EDITOR = "vim";
