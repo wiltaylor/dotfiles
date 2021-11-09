@@ -4,6 +4,8 @@ with lib;
 let
   cfg = config.sys.shell;
 in {
+  imports = [ ./tmux.nix ];
+
   options.sys.shell = {
     zsh = {
       enable = mkOption {
@@ -30,14 +32,14 @@ in {
       "HISTFILESIZE" = "1000000000"; # Bigger history files for all users
       "HISTSIZE" = "1000000000";
       "HISTTIMEFORMAT"="[%F %T] ";
-    };
+    }; 
 
     programs.zsh = {
       enable = true;
       enableCompletion = true;
       shellInit = ''
         source ${pkgs.spaceship-prompt}/share/zsh/site-functions/prompt_spaceship_setup
-
+        
         # Simple keybindings for moving around commands in history.
         bindkey -e      
         bindkey "$terminfo[khome]" beginning-of-line # Home
@@ -73,5 +75,5 @@ in {
         "EXTENDED_HISTORY"
       ];
     };
-  };
+  }; 
 }
