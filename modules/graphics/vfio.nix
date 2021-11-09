@@ -50,7 +50,7 @@ in {
     # Force libvirtd on
     virtualisation.libvirtd = {
       enable = true;
-      qemuOvmf = true;
+      qemu.ovmf.enable = true;
     };
 
     # Currently this is only implimented for my amd cpu. Have not tried this on an intel cpu yet.

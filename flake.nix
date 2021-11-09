@@ -70,7 +70,7 @@
 
     homeManagerConfigurations = {
       wil = user.mkHMUser { 
-        roles = [ "git" "desktop/i3wm" "ranger" "tmux" "zsh" "email" ];
+        roles = [ "git" "desktop/i3wm" "ranger" "tmux" "email" ];
         username = "wil";
       };
     };

@@ -11,5 +11,6 @@
     ./hotfix
     ./hardware
     ./games
+    ./shell
   ];
 }
