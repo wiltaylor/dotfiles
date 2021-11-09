@@ -69,8 +69,8 @@ let
         chmod +x ${staticPath}/cleanup.sh
       fi
 
-      ${buildLinker { inherit username fileSet group; }}
       ${buildLinker { inherit username group; fileSet = allUserFileSet; }}
+      ${buildLinker { inherit username fileSet group; }}
     '';
 in {
   options.sys.users = {
