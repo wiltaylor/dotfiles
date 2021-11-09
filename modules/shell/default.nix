@@ -34,6 +34,11 @@ in {
       "HISTTIMEFORMAT"="[%F %T] ";
     }; 
 
+    sys.users.allUsers.files.zshrc = {
+      text = "# This is empty and the system profile is used instead";
+      path = ".zshrc";
+    };
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -57,9 +62,6 @@ in {
         zle -N down-line-or-beginning-search
         bindkey "^[[A" up-line-or-beginning-search # Up
         bindkey "^[[B" down-line-or-beginning-search # Down
-
-        # Create user profile 
-        touch ~/.zshrc
       '';
 
       promptInit = ''
