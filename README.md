@@ -15,9 +15,9 @@ inspiration on creating your own setup.
 # Folder structure
 
 ```
+|-[modules] -- Contains all the modules that make up this configuraiton
 |-[lib] -- Contains my utility functions
 |-[roles] -- Contains roles which can be applied to machines.
-|--[users] -- Contains roles which can be applied to users of a machine.
 |-[pkgs] -- Contains packages which I have customised for my own use.
 |-[wallpapers] -- drop images into this folder to add to wallpaper cycle.
 |-apply.sh - Simple script to apply config to the current machine.
