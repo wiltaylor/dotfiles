@@ -16,8 +16,6 @@
 {
 
   imports = [
-    ../shared/alacritty
-    ../shared/dunst.nix
     ../shared/applications.nix
   ];
 

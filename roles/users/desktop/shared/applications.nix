@@ -7,7 +7,6 @@ let
 in {
 
   imports = [
-    ./spotify.nix
     ./steam.nix
   ];
 

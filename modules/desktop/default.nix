@@ -7,6 +7,8 @@
     ./wallpapers.nix
     ./launchers.nix
     ./picom.nix
+    ./dunst.nix
+    ./terminal.nix
   ];
 
 
