@@ -97,10 +97,18 @@
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
 
+          sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+          sys.users.primaryUser.files = {
+            barfile = {
+              text = "woooobarbarfoo";
+              path = ".config/foo.txt";
+              mode = "700";
+            };
+          };
+
           sys.virtualisation.vagrant.enable = true;
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
-          sys.virtualisation.flatpak.enable = true;
           sys.virtualisation.appImage.enable = true;
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;

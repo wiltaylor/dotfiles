@@ -62,7 +62,7 @@ with builtins;
       secrets = if secretsResult.success then secretsResult.value else {};
 
       roles_mods = (map (r: mkRole r) roles );
-      sys_users = (map (u: user.mkSystemUser u) users);
+      #sys_users = (map (u: user.mkSystemUser u) users);
 
       flaten = lst: foldl' (l: r: l // r) {} lst;
 
@@ -74,7 +74,7 @@ with builtins;
       modules = [
         cfg
         {
-          imports = [ ../modules ] ++ roles_mods ++ sys_users;
+          imports = [ ../modules ] ++ roles_mods; # ++ sys_users;
 
           environment.etc = {
             "hmsystemdata.json".text = builtins.toJSON userCfg;

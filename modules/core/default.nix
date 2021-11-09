@@ -12,6 +12,7 @@ in rec {
     ./security.nix
     ./regional.nix
     ./network.nix
+    ./user.nix
   ];
   options.sys = {
     kernelPackage = mkOption {

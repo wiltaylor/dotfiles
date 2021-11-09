@@ -34,18 +34,4 @@ with builtins;
     };
     homeDirectory = "/home/${username}";
   };
-
-
- mkSystemUser = {name, groups, uid, shell, ...}:
- {
-    users.users."${name}" = {
-      name = name;
-      isNormalUser = true;
-      isSystemUser = false;
-      extraGroups = groups;
-      uid = uid;
-      initialPassword = "P@ssw0rd01";
-      shell = shell;
-    };
-  };
 }
