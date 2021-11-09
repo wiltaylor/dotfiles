@@ -9,6 +9,8 @@
     ./picom.nix
     ./dunst.nix
     ./terminal.nix
+    ./applications.nix
+    ./i3.nix
   ];
 
 

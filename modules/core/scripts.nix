@@ -9,20 +9,6 @@ let
   sysTool = pkgs.writeScriptBin "sys" ''
     #!${runtimeShell}
 
-    applyUser() {
-      echo "--------------------------------------------------------------------------------"
-      echo " Applying User Settings"
-      echo "--------------------------------------------------------------------------------"
- 
-
-      pushd ~/.dotfiles
-
-      #--impure is required so pacakge can reach out to /etc/hmsystemdata.json
-      nix build --impure ".#homeManagerConfigurations.$USER.activationPackage"
-      ./result/activate
-      popd 
-    }
-
     applyMachine() {
       echo "--------------------------------------------------------------------------------"
       echo " Applying Machine Settings"
@@ -98,17 +84,11 @@ let
 
     "apply")
       applyMachine
-      applyUser
     ;;
 
-    "apply-machine")
-      applyMachine
-    ;;
-
-    "apply-user")
-      applyUser
-   ;;
     "iso")
+      echo "Currently broken. Need to fix"
+      exit
       echo "Building iso file $2"
       pushd ~/.dotfiles
       nix build ".#installMedia.$2.config.system.build.isoImage"
@@ -185,9 +165,7 @@ let
       echo "find [--overlay] - Find a nix package (overlay for custom packages)."
       echo "find-doc - Finds documentation on a config item"
       echo "find-cmd - Finds the package a command is in"
-      echo "apply - Applies both user and machine settings"
-      echo "apply-machine - Applies current system configuration in dotfiles."
-      echo "apply-user - Applies current home manager configuration in dotfiles."
+      echo "apply - Applies current system configuration in dotfiles."
       echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
       echo "shell - runs a shell defined in flake."
       echo "installed - lists all installed packages"

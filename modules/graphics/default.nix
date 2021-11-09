@@ -31,6 +31,11 @@ in {
       description = "Select the display manager you want to boot the system with";
     };
 
+    gpuSensorCommand = mkOption {
+      type = types.str;
+      description = "Command to get gpu temp";
+    };
+
     v4l2loopback = mkEnableOption "Enable v4l2loop back on this system";
   };
 
@@ -77,19 +82,9 @@ in {
 
       enable = true;
       displayManager.lightdm.enable = cfg.displayManager == "lightdm";
-      displayManager.defaultSession = "xsession";
       displayManager.job.logToJournal = true;
       libinput.enable = true;
 
-      # This picks the display manager up from home manager.
-      # I might move this all back into system config as its a bit flaky.
-      displayManager.session = [
-        {
-          manage = "desktop";
-          name = "xsession";
-          start = "exec $HOME/.xsession";
-        }
-      ];
     };
 
     hardware.nvidia.modesetting.enable = nvidia;
