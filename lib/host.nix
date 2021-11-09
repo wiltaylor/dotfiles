@@ -41,7 +41,6 @@ with builtins;
       kernelMods,
       roles, 
       laptop, 
-      users, 
       wifi ? [],
       gpuTempSensor ? null,
       cpuTempSensor ? null}:
@@ -62,7 +61,6 @@ with builtins;
       secrets = if secretsResult.success then secretsResult.value else {};
 
       roles_mods = (map (r: mkRole r) roles );
-      #sys_users = (map (u: user.mkSystemUser u) users);
 
       flaten = lst: foldl' (l: r: l // r) {} lst;
 

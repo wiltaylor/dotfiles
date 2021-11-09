@@ -83,12 +83,6 @@
         kernelMods = [ "it87" "k10temp" "nct6775" ];
         kernelParams = [];
         roles = [];
-        users = [ {
-          name = "wil";
-          groups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-          uid = 1000;
-          shell = pkgs.zsh;
-        }];
         laptop = false;
         gpuTempSensor = ''sensors | grep "junction:" | awk '{print $2}' '';
         cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
@@ -150,18 +144,14 @@
         kernelMods = [ ];
         kernelParams = [ ];
         roles = [ ];
-        users = [ {
-          name = "wil";
-          groups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
-          uid = 1000;
-          shell = pkgs.zsh;
-        }];
         laptop = true;
         wifi = [ "wlo1" ];
         cpuTempSensor = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
         cfg = {
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
+
+          sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
 
           sys.kernelPackage = pkgs.linuxPackages_5_10;
           sys.graphics.displayManager = "lightdm";

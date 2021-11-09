@@ -17,7 +17,6 @@
 
   imports = [
     ../shared/alacritty
-    ../shared/wallpaper.nix
     ../shared/dunst.nix
     ../shared/picom.nix
     ../shared/rofi.nix
