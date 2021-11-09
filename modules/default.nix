@@ -12,5 +12,6 @@
     ./hardware
     ./games
     ./shell
+    ./development
   ];
 }

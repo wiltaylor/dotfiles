@@ -70,7 +70,7 @@
 
     homeManagerConfigurations = {
       wil = user.mkHMUser { 
-        roles = [ "git" "desktop/i3wm" ];
+        roles = [ "desktop/i3wm" ];
         username = "wil";
       };
     };
@@ -98,14 +98,6 @@
           sys.timeZone = "Australia/Brisbane";
 
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-          sys.users.primaryUser.files = {
-            barfile = {
-              text = "woooobarbarfoo";
-              path = ".config/foo.txt";
-              mode = "700";
-            };
-          };
-
           sys.virtualisation.vagrant.enable = true;
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
