@@ -5,6 +5,8 @@
     ./gtk.nix
     ./qt.nix
     ./wallpapers.nix
+    ./launchers.nix
+    ./picom.nix
   ];
 
 

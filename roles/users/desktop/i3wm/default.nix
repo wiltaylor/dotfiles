@@ -18,8 +18,6 @@
   imports = [
     ../shared/alacritty
     ../shared/dunst.nix
-    ../shared/picom.nix
-    ../shared/rofi.nix
     ../shared/applications.nix
   ];
 
