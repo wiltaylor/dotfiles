@@ -16,15 +16,12 @@
 {
 
   imports = [
-    ../shared/fonts.nix
     ../shared/alacritty
     ../shared/wallpaper.nix
     ../shared/dunst.nix
     ../shared/picom.nix
     ../shared/rofi.nix
     ../shared/applications.nix
-    ../shared/gtk
-    ../shared/kde
   ];
 
   home.packages = with pkgs; [
