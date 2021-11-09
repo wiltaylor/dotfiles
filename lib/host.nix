@@ -49,14 +49,6 @@ with builtins;
         name = "${n}"; value = { useDHCP = true; };
       }) NICs);
 
-      userCfg = {
-        inherit name NICs roles laptop gpuTempSensor cpuTempSensor;
-      };
-
-      sysdata = [{
-        options.laptop = lib.mkEnableOption "test";
-      }];
-
       secretsResult = tryEval (import ../.secret/default.nix);
       secrets = if secretsResult.success then secretsResult.value else {};
 
@@ -73,10 +65,6 @@ with builtins;
         cfg
         {
           imports = [ ../modules ] ++ roles_mods; # ++ sys_users;
-
-          environment.etc = {
-            "hmsystemdata.json".text = builtins.toJSON userCfg;
-          };
 
           sys.security.secrets = secrets;
 
