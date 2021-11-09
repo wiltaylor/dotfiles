@@ -8,9 +8,7 @@ let
 in {
   
   config = mkIf desktopMode {
-    environment.systemPackages = with pkgs; [
-      nerdfonts
-    ];
+    fonts.fonts = with pkgs; [ nerdfonts ];
 
     sys.users.allUsers.files = {
       fontconf = {
