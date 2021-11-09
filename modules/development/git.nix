@@ -31,7 +31,7 @@ in {
 
     signCommits = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Do you want to sign GPG commits by default";
     };
 
