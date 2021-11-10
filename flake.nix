@@ -13,7 +13,7 @@
 
   };
 
-  outputs = inputs @ {self, nixpkgs, home-manager, kn, neovim-flake, ... }:
+  outputs = inputs @ {self, nixpkgs, neovim-flake, ... }:
   let
     inherit (nixpkgs) lib;
     inherit (lib) attrValues;
@@ -26,7 +26,6 @@
       inherit system;
       config = { allowBroken = true; allowUnfree = true; };
       overlays = [
-        kn.overlay
         neovim-flake.overlay."${system}"
         (final: prev: {
           my = import ./pkgs { inherit pkgs; };

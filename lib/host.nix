@@ -1,4 +1,4 @@
-{ system, pkgs, home-manager, lib, user, ...}:
+{ system, pkgs, lib, ...}:
 with builtins;
 {
 

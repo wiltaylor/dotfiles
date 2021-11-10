@@ -4,12 +4,12 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     git
     git-crypt
-    nixUnstable
+    nixFlakes
   ];
 
   shellHook = ''
       PATH=${pkgs.writeShellScriptBin "nix" ''
-        ${pkgs.nixFlakes}/bin/nix --option experimental-features "nix-command flakes" "$@"
+        ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
       ''}/bin:$PATH
     '';
   }
