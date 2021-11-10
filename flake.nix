@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    kn.url = "github:wiltaylor/kn";
-
     neovim-flake = {
 	url = "github:wiltaylor/neovim-flake";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -22,11 +18,9 @@
     inherit (nixpkgs) lib;
     inherit (lib) attrValues;
 
-    util = import ./lib { inherit system pkgs home-manager lib; overlays = (pkgs.overlays); };
+    util = import ./lib { inherit system pkgs lib; overlays = (pkgs.overlays); };
 
     inherit (util) host;
-    inherit (util) shell;
-    inherit (util) app;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -43,16 +37,6 @@
     system = "x86_64-linux";
 
   in {
-    shells = {
-      video = shell.mkShell {
-        name = "video";
-        buildInputs = with pkgs; [ blender obs-studio obs-v4l2sink mpv youtube-dl audacity ffmpeg ];
-        script = ''
-          echo "Video editing shell"
-        '';
-      };
-    };
-
     packages."${system}" = pkgs;
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
