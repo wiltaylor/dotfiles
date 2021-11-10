@@ -1,4 +1,0 @@
-* Have user accounts listed in lightdm
-* Fix polybar to show wifi and battery on all systems
-* Fix screens on mini laptop at work
-* Fix xcopyblock not workign from systemd

@@ -49,7 +49,7 @@ in {
       };
 
       i3config = {
-        path = ".config/i3";
+        path = ".config/i3/config";
         text = let 
           binDir = "/run/current-system/sw/bin";
         in ''
