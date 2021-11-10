@@ -1,37 +1,6 @@
 { system, pkgs, lib, ...}:
 with builtins;
 {
-
-  mkISO = { name, initrdMods, kernelMods, kernelParams, kernelPackage, roles }:
-    let
-      roles_mods = (map (r: mkRole r) roles );
-
-      mkRole = name: import (../roles/iso + "/${name}");
-
-    in lib.nixosSystem {
-      inherit system;
-
-      specialArgs = {};
-
-      modules = [
-        {
-          imports = [ ../modules ] ++ roles_mods;
-
-          networking.hostName = "${name}";
-          networking.useDHCP = true;
-
-          boot.initrd.availableKernelModules = initrdMods;
-          boot.kernelModules = kernelMods;
-
-          boot.kernelParams = kernelParams;
-          boot.kernelPackages = kernelPackage;
-
-          nixpkgs.pkgs = pkgs;
-
-        }
-      ];
-    };
-
     mkHost = { 
       name, 
       cfg ? {},

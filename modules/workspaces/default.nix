@@ -79,6 +79,29 @@ let
       echo ""
     }
 
+    versions() {
+      failIfInWorkspace
+      local workspaceName=$1
+
+      echo "Workspace versions:"
+      nix profile history --profile "$HOME/.local/share/nixworkspace/$workspaceName/.profile" 
+    }
+
+    rollback() {
+      failIfInWorkspace
+      local workspaceName=$1
+      local version=$2
+
+      nix profile rollback --to $version --profile "$HOME/.local/share/nixworkspace/$workspaceName/.profile" 
+    }
+
+    clean() {
+      failIfInWorkspace
+      local workspaceName=$1
+
+      nix profile wipe-history --profile "$HOME/.local/share/nixworkspace/$workspaceName/.profile"
+    }
+
     usage() {
       echo "Usage:"
       echo "wks command"
@@ -88,8 +111,11 @@ let
       echo "uninstall <workspacename> - Removes a workspace"
       echo "update <workspacename> - updates a installed workspace"
       echo "ls - Lists all workspaces installed on the system"
-      echo "enter - Enters a workspace"
-      echo "run - Executes a command in the workspace"
+      echo "enter <workspace> - Enters a workspace"
+      echo "run <workspace> <command> - Executes a command in the workspace"
+      echo "rollback <workspace> <version> - Rolls back workspace to a previous version"
+      echo "versions <workspace> - Shows all of the versions of a workspace on the system"
+      echo "clean <workspace> - Removes all other versions of workspace to clean it up"
       echo ""
       echo "Examples:"
       echo "Install a workspace from a flake"
@@ -129,6 +155,15 @@ let
       ;;
       "run")
         runInWorkspace $@
+      ;;
+      "rollback")
+        rollback $@
+      ;;
+      "versions")
+        versions $@
+      ;;
+      "clean")
+        clean $@
       ;;
       *)
         usage

@@ -86,39 +86,6 @@ let
       applyMachine
     ;;
 
-    "iso")
-      echo "Currently broken. Need to fix"
-      exit
-      echo "Building iso file $2"
-      pushd ~/.dotfiles
-      nix build ".#installMedia.$2.config.system.build.isoImage"
-
-      if [ -z "$3" ]; then
-        echo "ISO Image is located at ~/.dotfiles/result/iso/nixos.iso"
-      elif [ $3 = "--burn" ]; then
-        if [ -z "$4" ]; then
-          echo "Expected a path to a usb drive following --burn."
-        else
-          sudo dd if=./result/iso/nixos.iso of=$4 status=progress bs=1M
-        fi
-      else
-        echo "Unexpected option $3. Expected --burn"
-      fi
-      popd
-
-    ;;
-    "shell")
-      pushd ~/.dotfiles
-      nix develop .#shells.$2 --command zsh
-      popd
-    ;;
-
-    "installed")
-      nix-store -q -R /run/current-system | sed -n -e 's/\/nix\/store\/[0-9a-z]\{32\}-//p' | sort | uniq
-    ;;
-    "which")
-      nix-store -qR $(which $2)
-    ;;
     "exec")
       shift 1
       cmd=$1
@@ -166,10 +133,6 @@ let
       echo "find-doc - Finds documentation on a config item"
       echo "find-cmd - Finds the package a command is in"
       echo "apply - Applies current system configuration in dotfiles."
-      echo "iso image [--burn path] - Builds nixos install iso and optionally copies to usb."
-      echo "shell - runs a shell defined in flake."
-      echo "installed - lists all installed packages"
-      echo "which - prints the closure of target file"
       echo "exec - executes a command"
     ;;
     esac

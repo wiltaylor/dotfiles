@@ -39,17 +39,6 @@
     packages."${system}" = pkgs;
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
-    installMedia = {
-      i3 = host.mkISO {
-        name = "nixos";
-        kernelPackage = pkgs.unstable.linuxPackages_5_10;
-        initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
-        kernelMods = [ "kvm-intel" "kvm-amd" ];
-        kernelParams = [ ];
-        roles = [ "core" "i3wm" "user" "yubikey" "amd-graphics" ];
-      };
-    };
-
     nixosConfigurations = {
       titan = host.mkHost {
         name = "titan";

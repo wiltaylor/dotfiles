@@ -10,6 +10,10 @@
     '';
   }));
 
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
   # Hot fix for issues
   documentation.info.enable = false;
 
