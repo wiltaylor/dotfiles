@@ -52,6 +52,7 @@
         cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
         
         cfg = {
+          sys.kernelPackage = pkgs.linuxPackages_zen;
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
 
