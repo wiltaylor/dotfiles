@@ -1,4 +1,4 @@
 { pkgs, system, lib, ...}:
 {
-  inherit (import ./host.nix { inherit system pkgs lib;  });
+  host = import ./host.nix { inherit system pkgs lib;  };
 }    

@@ -38,7 +38,7 @@
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
     nixosConfigurations = {
-      titan = utils.mkHost {
+      titan = utils.host.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
