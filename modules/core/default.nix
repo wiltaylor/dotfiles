@@ -75,6 +75,8 @@ in rec {
     # Earlyoom prevents systems from locking up when they run out of memory
     services.earlyoom.enable = true;
 
+    services.fstrim.enable = true;
+
     # TTY font
     console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
@@ -110,7 +112,7 @@ in rec {
     fileSystems."/" = (if (cfg.diskLayout == "btrfs-crypt") then
       { device = "/dev/disk/by-label/ROOT";
         fsType = "btrfs";
-        options = [ "subvol=@" ];
+        options = [ "subvol=@" "discard=async" ];
       } 
       else 
       {
@@ -122,19 +124,19 @@ in rec {
     fileSystems."/home" = (mkIf (cfg.diskLayout == "btrfs-crypt") 
       { device = "/dev/disk/by-label/ROOT";
         fsType = "btrfs";
-        options = [ "subvol=@home" ];
+        options = [ "subvol=@home" "discard=async"  ];
       });
 
     fileSystems."/var" = (mkIf (cfg.diskLayout == "btrfs-crypt") 
       { device = "/dev/disk/by-label/ROOT";
         fsType = "btrfs";
-        options = [ "subvol=@var" ];
+        options = [ "subvol=@var" "discard=async" ];
       });
 
     fileSystems."/.pagefile" = (mkIf (cfg.diskLayout == "btrfs-crypt") 
       { device = "/dev/disk/by-label/ROOT";
         fsType = "btrfs";
-        options = [ "subvol=@pagefile" ];
+        options = [ "subvol=@pagefile" "discard=async" ];
       });
 
     fileSystems."/boot" = (mkIf (cfg.diskLayout == "btrfs-crypt") 

@@ -18,9 +18,7 @@
     inherit (nixpkgs) lib;
     inherit (lib) attrValues;
 
-    util = import ./lib { inherit system pkgs lib; overlays = (pkgs.overlays); };
-
-    inherit (util) host;
+    utils = import ./lib { inherit system pkgs lib; overlays = (pkgs.overlays); };
 
     pkgs = import nixpkgs {
       inherit system;
@@ -40,7 +38,7 @@
     devShell."${system}" = import ./shell.nix { inherit pkgs; };
 
     nixosConfigurations = {
-      titan = host.mkHost {
+      titan = utils.mkHost {
         name = "titan";
         NICs = [ "enp5s0" ];
         initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
@@ -102,7 +100,7 @@
         };
       };
 
-      mini = host.mkHost {
+      mini = utils.mkHost {
         name = "mini";
         NICs = [ "wlo1" ];
         initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
