@@ -47,6 +47,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1638122382,
+        "narHash": "sha256-sQzZzAbvKEqN9s0bzWuYmRaA03v40gaJ4+iL1LXjaeI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "74f7e4319258e287b0f9cb95426c9853b282730b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "fugitive": {
       "flake": false,
       "locked": {
@@ -129,11 +144,7 @@
     },
     "naersk": {
       "inputs": {
-        "nixpkgs": [
-          "neovim-flake",
-          "rnix-lsp",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1629707199,
@@ -151,14 +162,8 @@
     },
     "neovim": {
       "inputs": {
-        "flake-utils": [
-          "neovim-flake",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "neovim-flake",
-          "nixpkgs"
-        ]
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "dir": "contrib",
@@ -230,6 +235,36 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1640871638,
+        "narHash": "sha256-ty6sGnJUQEkCd43At5U3DRQZD7rPARz5VginSW6hZ3k=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5b091d4fbe3b7b7493c3b46fe0842e4b30ea24b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1641076644,
+        "narHash": "sha256-4x90qQM4wOfPAzdMnN1BnzVp7eO6wle+F5NmVkJ48qM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0fd74961da9fe2640ad2fbd960c3af08246e6749",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1630481079,
         "narHash": "sha256-leWXLchbAbqOlLT6tju631G40SzQWPqaAXQG3zH1Imw=",
         "owner": "nixos",
@@ -244,13 +279,28 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_4": {
       "locked": {
-        "lastModified": 1639525045,
-        "narHash": "sha256-z4GXFNzO+5V4CAUm2DDMAryLOWUKEbQif2ifvv1Ypg4=",
+        "lastModified": 1640871638,
+        "narHash": "sha256-ty6sGnJUQEkCd43At5U3DRQZD7rPARz5VginSW6hZ3k=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a2e281f5770247855b85d70c43454ba5bff34613",
+        "rev": "5b091d4fbe3b7b7493c3b46fe0842e4b30ea24b3",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1640871638,
+        "narHash": "sha256-ty6sGnJUQEkCd43At5U3DRQZD7rPARz5VginSW6hZ3k=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5b091d4fbe3b7b7493c3b46fe0842e4b30ea24b3",
         "type": "github"
       },
       "original": {
@@ -486,7 +536,7 @@
     "rnix-lsp": {
       "inputs": {
         "naersk": "naersk",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_3",
         "utils": "utils"
       },
       "locked": {
@@ -507,7 +557,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "neovim-flake": "neovim-flake",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_4",
+        "wks": "wks"
       }
     },
     "telescope-dap": {
@@ -618,6 +669,24 @@
       "original": {
         "owner": "jreybert",
         "repo": "vimagit",
+        "type": "github"
+      }
+    },
+    "wks": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1641132326,
+        "narHash": "sha256-KYafkYjgKkivgrQO9fLIJm1C8+HMLqTrUWdInNmQ4a0=",
+        "owner": "wiltaylor",
+        "repo": "nixwks",
+        "rev": "a164615dbc2f259cea15dbf2e348cb245d02ce42",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wiltaylor",
+        "repo": "nixwks",
         "type": "github"
       }
     }

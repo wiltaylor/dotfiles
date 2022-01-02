@@ -19,6 +19,8 @@ let
     '';
   };
 
+  kernelPackage = config.sys.kernelPackage;
+
   mkProtonShareFile = {name, version, url, hash}: {
     path = ".steam/root/compatibilitytools.d/${name}";
     source = "${mkProtonDerivation {inherit name version url hash;}}/proton";
@@ -46,6 +48,10 @@ in {
 
   config = mkIf cfg.enable {
     sys.users.allUsers.files = mkAllProtonGE cfg.protonGE;
+
+    #boot.extraModulePackages = [
+    #  kernelPackage.xpadneo
+    #];
 
     environment.systemPackages = with pkgs; [
       steam

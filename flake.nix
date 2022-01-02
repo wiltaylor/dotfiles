@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    wks.url = "github:wiltaylor/nixwks";
     neovim-flake = {
 	url = "github:wiltaylor/neovim-flake";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +14,7 @@
 
   };
 
-  outputs = inputs @ {self, nixpkgs, neovim-flake, ... }:
+  outputs = inputs @ {self, nixpkgs, neovim-flake, wks,... }:
   let
     inherit (nixpkgs) lib;
     inherit (lib) attrValues;
@@ -25,8 +26,10 @@
       config = { allowBroken = true; allowUnfree = true; };
       overlays = [
         neovim-flake.overlay."${system}"
+        #wks.overlay."${system}"
         (final: prev: {
           my = import ./pkgs { inherit pkgs; };
+          wksCli = wks.packages."${system}".wksCli;
         })
       ];
     };

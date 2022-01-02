@@ -175,7 +175,7 @@ in {
   options = {};
   config = {
     environment.systemPackages = [
-      wksScript
+      pkgs.wksCli
     ];
   };
 }
