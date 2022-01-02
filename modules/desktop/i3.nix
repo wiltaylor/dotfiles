@@ -104,7 +104,7 @@ in {
           bindsym Mod4+f fullscreen toggle
           bindsym Mod4+h split h
           bindsym Mod4+minus scratchpad show
-          bindsym Mod4+o exec xdg-open "obsidian://open?vault=Codex%20Astartes"
+          bindsym Mod4+o exec wks run orgSys obsidian
           bindsym Mod4+shift+Down move down
           bindsym Mod4+shift+Left move left
           bindsym Mod4+shift+Right move right

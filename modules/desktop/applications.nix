@@ -35,16 +35,11 @@ in {
       jetbrains.rider
       jetbrains.pycharm-professional
       element-desktop
-      foxitreader
-      obsidian
-      kn
-      xmind
       pcmanfm
       openspades
       neovimWT
       ytfzf
       obs-studio
-      zotero
       nyxt
       emacs-custom
     ];
