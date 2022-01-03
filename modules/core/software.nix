@@ -58,6 +58,8 @@ in {
 
     (mkIf desktopMode freerdp)
 
+    wksCli
+
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];
 

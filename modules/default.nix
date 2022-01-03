@@ -11,6 +11,5 @@
     ./shell
     ./development
     ./desktop
-    ./workspaces
   ];
 }
