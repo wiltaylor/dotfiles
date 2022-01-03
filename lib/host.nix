@@ -5,14 +5,8 @@ with builtins;
       name, 
       cfg ? {},
       NICs, 
-      initrdMods,
-      kernelParams, 
-      kernelMods,
       roles, 
-      laptop, 
-      wifi ? [],
-      gpuTempSensor ? null,
-      cpuTempSensor ? null}:
+      wifi ? []}:
     let
       networkCfg = listToAttrs (map (n: {
         name = "${n}"; value = { useDHCP = true; };
@@ -22,8 +16,6 @@ with builtins;
       secrets = if secretsResult.success then secretsResult.value else {};
 
       roles_mods = (map (r: mkRole r) roles );
-
-      flaten = lst: foldl' (l: r: l // r) {} lst;
 
       mkRole = name: import (../roles + "/${name}");
 
@@ -43,10 +35,6 @@ with builtins;
 
           networking.networkmanager.enable = true;
           networking.useDHCP = false; # Disable any new interface added that is not in config.
-
-          boot.initrd.availableKernelModules = initrdMods;
-          boot.kernelModules = kernelMods;
-          boot.kernelParams = kernelParams;
 
           nixpkgs.pkgs = pkgs;
 

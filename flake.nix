@@ -16,43 +16,50 @@
 
   outputs = inputs @ {self, nixpkgs, neovim-flake, wks,... }:
   let
+    tools = import ./lib/tools.nix;
+
     inherit (nixpkgs) lib;
     inherit (lib) attrValues;
 
     utils = import ./lib { inherit system pkgs lib; overlays = (pkgs.overlays); };
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = { allowBroken = true; allowUnfree = true; };
+    allPkgs = tools.mkPkgs { 
+      inherit nixpkgs; 
+      cfg = { allowUnfree = true; };
       overlays = [
-        neovim-flake.overlay."${system}"
-        #wks.overlay."${system}"
-        (final: prev: {
-          my = import ./pkgs { inherit pkgs; };
-          wksCli = wks.packages."${system}".wksCli;
-        })
+        neovim-flake.overlay
+        wks.overlay
+        (tools.mkOverlays {
+          inherit allPkgs;
+          overlayFunc = s: p: (top: last: {
+            my = import ./pkgs {pkgs = p;};
+          });
+        })    
       ];
-    };
+    }; 
+
+    pkgs = allPkgs."${system}";
 
     system = "x86_64-linux";
 
   in {
-    packages."${system}" = pkgs;
-    devShell."${system}" = import ./shell.nix { inherit pkgs; };
+    devShell = tools.withDefaultSystems (sys: let
+      pkgs = allPkgs."${sys}";
+    in import ./shell.nix { inherit pkgs; });
 
     nixosConfigurations = {
-      titan = utils.host.mkHost {
+      titan = tools.mkNixOSConfig { #utils.host.mkHost {
         name = "titan";
-        NICs = [ "enp5s0" ];
-        initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
-        kernelMods = [ "it87" "k10temp" "nct6775" ];
-        kernelParams = [];
-        roles = [];
-        laptop = false;
-        gpuTempSensor = ''sensors | grep "junction:" | awk '{print $2}' '';
-        cpuTempSensor = ''sensors | grep "Tdie" | awk '{print $2}' '';
-        
+        system = "x86_64-linux";
+        inherit nixpkgs allPkgs;
         cfg = {
+          boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
+          boot.kernelModules = [ "it87" "k10temp" "nct6775" ];
+
+          networking.interfaces."enp5s0" = { useDHCP = true; };
+          networking.networkmanager.enable = true;
+          networking.useDHCP = false; # Disable any new interface added that is not in config.
+
           sys.kernelPackage = pkgs.linuxPackages_zen;
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
@@ -65,11 +72,14 @@
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;
+          sys.cpu.sensorCommand = ''sensors | grep "Tdie" | awk '{print $2}' '';
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "amd";
           sys.graphics.displayManager = "lightdm";
           sys.graphics.desktopProtocols = [ "xorg" ];
           sys.graphics.v4l2loopback = true;
+          sys.graphics.gpuSensorCommand = ''sensors | grep "junction:" | awk '{print $2}' '';
+
           sys.audio.server = "pulse";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
@@ -105,15 +115,15 @@
 
       mini = utils.mkHost {
         name = "mini";
-        NICs = [ "wlo1" ];
-        initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
-        kernelMods = [ ];
-        kernelParams = [ ];
         roles = [ ];
-        laptop = true;
-        wifi = [ "wlo1" ];
-        cpuTempSensor = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
         cfg = {
+          boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
+
+          networking.interfaces."wlo1" = { useDHCP = true; };
+          networking.wireless.interfaces = [ "wol1" ];
+          networking.networkmanager.enable = true;
+          networking.useDHCP = false; # D
+
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
 
@@ -125,6 +135,7 @@
           sys.cpu.type = "intel";
           sys.cpu.cores = 2;
           sys.cpu.threadsPerCore = 2;
+          sys.cpu.sensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "intel";
           sys.audio.server = "pulse";
