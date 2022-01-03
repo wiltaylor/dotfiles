@@ -16,20 +16,15 @@
 
   outputs = inputs @ {self, nixpkgs, neovim-flake, wks,... }:
   let
-    tools = import ./lib/tools.nix;
+    lib = import ./lib;
 
-    inherit (nixpkgs) lib;
-    inherit (lib) attrValues;
-
-    utils = import ./lib { inherit system pkgs lib; overlays = (pkgs.overlays); };
-
-    allPkgs = tools.mkPkgs { 
+    allPkgs = lib.mkPkgs { 
       inherit nixpkgs; 
       cfg = { allowUnfree = true; };
       overlays = [
         neovim-flake.overlay
         wks.overlay
-        (tools.mkOverlays {
+        (lib.mkOverlays {
           inherit allPkgs;
           overlayFunc = s: p: (top: last: {
             my = import ./pkgs {pkgs = p;};
@@ -38,27 +33,25 @@
       ];
     }; 
 
-    pkgs = allPkgs."${system}";
-
-    system = "x86_64-linux";
-
   in {
-    devShell = tools.withDefaultSystems (sys: let
+    devShell = lib.withDefaultSystems (sys: let
       pkgs = allPkgs."${sys}";
     in import ./shell.nix { inherit pkgs; });
 
     nixosConfigurations = {
-      titan = tools.mkNixOSConfig { #utils.host.mkHost {
+      titan = lib.mkNixOSConfig {
         name = "titan";
         system = "x86_64-linux";
         inherit nixpkgs allPkgs;
-        cfg = {
+        cfg = let 
+          pkgs = allPkgs.x86_64-linux;
+        in {
           boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
           boot.kernelModules = [ "it87" "k10temp" "nct6775" ];
 
           networking.interfaces."enp5s0" = { useDHCP = true; };
           networking.networkmanager.enable = true;
-          networking.useDHCP = false; # Disable any new interface added that is not in config.
+          networking.useDHCP = false; 
 
           sys.kernelPackage = pkgs.linuxPackages_zen;
           sys.locale = "en_AU.UTF-8";
@@ -113,16 +106,19 @@
         };
       };
 
-      mini = utils.mkHost {
+      mini = lib.mkNixOSConfig {
         name = "mini";
-        roles = [ ];
-        cfg = {
+        system = "x86_64-linux";
+        inherit nixpkgs allPkgs;
+        cfg = let 
+          pkgs = allPkgs.x86_64-linux;
+        in {
           boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
 
           networking.interfaces."wlo1" = { useDHCP = true; };
           networking.wireless.interfaces = [ "wol1" ];
           networking.networkmanager.enable = true;
-          networking.useDHCP = false; # D
+          networking.useDHCP = false; 
 
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
