@@ -24,7 +24,6 @@ in {
       gimp
       virt-manager
       youtube-dl
-      wpsoffice
 
       # This stuff should be moved to work shell eventually
       google-chrome
@@ -34,7 +33,6 @@ in {
       dfeet
       jetbrains.rider
       jetbrains.pycharm-professional
-      element-desktop
       pcmanfm
       openspades
       neovimWT

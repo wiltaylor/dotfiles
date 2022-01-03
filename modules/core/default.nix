@@ -74,7 +74,6 @@ in rec {
 
     # Earlyoom prevents systems from locking up when they run out of memory
     services.earlyoom.enable = true;
-
     services.fstrim.enable = true;
 
     # TTY font
@@ -100,7 +99,6 @@ in rec {
     boot.loader.efi.canTouchEfiVariables = cfg.bootloader == "systemd-boot";
 
     nix.maxJobs = cfg.cpu.cores * cfg.cpu.threadsPerCore * cfg.cpu.sockets;
-
 
     hardware.bluetooth.enable = cfg.bluetooth;
     services.blueman.enable = cfg.bluetooth;

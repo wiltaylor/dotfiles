@@ -1,7 +1,5 @@
 {pkgs, ... }:
 {
-  #nixpkgs.overlays = overlay;
-
   imports = [
     ./laptop
     ./core
@@ -10,7 +8,6 @@
     ./audio
     ./hotfix
     ./hardware
-    ./games
     ./shell
     ./development
     ./desktop
