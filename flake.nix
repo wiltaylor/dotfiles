@@ -68,12 +68,12 @@
           sys.cpu.sensorCommand = ''sensors | grep "Tdie" | awk '{print $2}' '';
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "amd";
-          sys.graphics.displayManager = "lightdm";
+          sys.graphics.displayManager = "gdm";
           sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
           sys.graphics.v4l2loopback = true;
           sys.graphics.gpuSensorCommand = ''sensors | grep "junction:" | awk '{print $2}' '';
 
-          sys.audio.server = "pulse";
+          sys.audio.server = "pipewire";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
 

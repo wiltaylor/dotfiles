@@ -7,16 +7,13 @@ let
 in {
 
   config = mkIf desktopMode {
-    services.sway = {
+    programs.sway = {
       enable = true;
+      wrapperFeatures.gtk = true;
+      extraPackages = with pkgs; [
+        waybar
+        wofi
+      ];
     };
-
-    services.xserver.displayManager.session = [
-      {
-        manage = "desktop";
-        name = "i3";
-        start = "exec ${pkgs.sway}/bin/sway";
-      }
-    ];
   };
 }

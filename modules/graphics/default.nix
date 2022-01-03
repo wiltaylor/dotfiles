@@ -26,7 +26,7 @@ in {
     };
 
     displayManager = mkOption {
-      type = types.enum ["none" "lightdm"];
+      type = types.enum ["none" "lightdm" "greetd" "gdm"];
       default = "none";
       description = "Select the display manager you want to boot the system with";
     };
@@ -83,9 +83,13 @@ in {
       enable = true;
       displayManager.lightdm.enable = cfg.displayManager == "lightdm";
       displayManager.job.logToJournal = true;
+      displayManager.gdm.enable = cfg.displayManager == "gdm";
+      displayManager.gdm.wayland = cfg.displayManager == "gdm";
+      
       libinput.enable = true;
-
     };
+
+    services.greetd.enable = cfg.displayManager == "greetd";    
 
     hardware.nvidia.modesetting.enable = nvidia;
     hardware.opengl.enable = !headless;

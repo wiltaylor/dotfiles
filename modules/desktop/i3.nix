@@ -17,14 +17,6 @@ in {
       ];
     };
 
-    services.xserver.displayManager.session = [
-      {
-        manage = "desktop";
-        name = "i3";
-        start = "exec ${pkgs.i3-gaps}/bin/i3";
-      }
-    ];
-
     sys.users.allUsers.files = {
       i3blocksconfig = {
         path = ".config/i3/i3blocks.conf";
