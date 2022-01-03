@@ -76,7 +76,6 @@
           sys.audio.server = "pulse";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
-          sys.games.enable = true;
 
           sys.security.yubikey = true;
           sys.security.username = "wil";
