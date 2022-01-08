@@ -143,7 +143,7 @@
 
           sys.virtualisation.kvm.enable = true;
           sys.bluetooth = true;
-          sys.wifi = true;
+          #sys.wifi = true;
 
           sys.security.yubikey = true;
           sys.security.username = "wil";
