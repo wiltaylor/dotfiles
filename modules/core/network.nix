@@ -13,12 +13,10 @@ in {
   };
 
   config = {
+    networking.networkmanager.enable = true;
     networking.wireless.enable = cfg.wifi;
     networking.wireless.allowAuxiliaryImperativeNetworks = cfg.wifi;
-    networking.wireless.networks = wifiNetworks;
+    # networking.wireless.networks = wifiNetworks; #TODO: add networks to wifi via activation script.
 
-    networking.networkmanager.unmanaged = mkIf cfg.wifi [
-      "*" "except:type:wwan" "except:type:gsm"
-    ];
   };
 }
