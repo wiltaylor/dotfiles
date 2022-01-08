@@ -126,7 +126,7 @@
 
           sys.kernelPackage = pkgs.linuxPackages_5_10;
           sys.graphics.displayManager = "lightdm";
-          sys.graphics.desktopProtocol = [ "xorg" ];
+          sys.graphics.desktopProtocols = [ "xorg" ];
           sys.cpu.type = "intel";
           sys.cpu.cores = 2;
           sys.cpu.threadsPerCore = 2;
@@ -134,11 +134,12 @@
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "intel";
           sys.audio.server = "pulse";
-          sys.virtualisation.kvm = true;
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;
+
+          sys.virtualisation.kvm.enable = true;
           sys.bluetooth = true;
-          sys.wifi = true;
+          #sys.wifi = true;
 
           sys.security.yubikey = true;
           sys.security.username = "wil";

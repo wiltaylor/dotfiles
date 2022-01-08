@@ -1,5 +1,6 @@
 {pkgs, lib, config, ...}:
 with lib;
+with pkgs;
 let
   cfg = config.sys.virtualisation;
   cpuType = config.sys.cpu.type;
@@ -34,8 +35,8 @@ in {
 
   config = {
     environment.systemPackages = with pkgs; [
-      (if cfg.vagrant.enable then vagrant else nil)
-      (if cfg.appImage.enable then appimage-run else nil)
+      (mkIf cfg.vagrant.enable vagrant)
+      (mkIf cfg.appImage.enable appimage-run)
     ];
 
     virtualisation.libvirtd.enable = cfg.kvm.enable;
@@ -50,8 +51,8 @@ in {
       "VAGRANT_DEFAULT_PROVIDER" = mkIf (cfg.vagrant.enable) cfg.vagrant.provider;
     };
 
-    system.activationScripts = {
-      vagrant.text = mkIf (cfg.vagrant.enable) ''
+    system.activationScripts = mkIf (cfg.vagrant.enable){ 
+      vagrant.text = ''
         ${pkgs.vagrant}/bin/vagrant plugin install vagrant-libvirt
       '';
     };
