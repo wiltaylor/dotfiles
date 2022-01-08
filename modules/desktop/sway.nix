@@ -26,7 +26,7 @@ in {
           {
             "layer": "top",
             "modules-left": ["sway/workspaces", "sway/mode"],
-            "modules-right": [ "network", "memory", "cpu", "pulseaudio", "custom/disk_root", "custom/disk_vm", "custom/disk_mass", "tray", "clock" ],
+            "modules-right": [ "network", "memory", "cpu", "pulseaudio", "custom/disk_root", "tray", "clock" ],
             "sway/window": {
               "max-length": 50
             },
@@ -59,19 +59,6 @@ in {
               "format": "💽 / {} ",
               "interval": 30,
               "exec": "df -h --output=avail / | tail -1 | tr -d ' '"
-            },
-
-            "custom/disk_vm": {
-              "format": "💽 /vmstore {} ",
-              "interval": 30,
-              "exec": "df -h --output=avail /vmstore | tail -1 | tr -d ' '"
-            },
-
-            "custom/disk_mass": {
-              "format": "💽 /data {} ",
-              "interval": 30,
-              "exec": "df -h --output=avail /data | tail -1 | tr -d ' '"
-
             },
             "clock": {
               "format": "{:%a, %d. %b  %H:%M}"
