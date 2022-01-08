@@ -8,6 +8,10 @@ in {
     sound.enable = false;
     security.rtkit.enable = true;
 
+    environment.systemPackages = with pkgs; [
+      pulseaudio # This is instaleld to get access to pactl. It isn't enabled or run as a service.
+    ];
+
     services.pipewire = {
       enable = true;
       alsa.enable = true;
