@@ -49,6 +49,10 @@
           boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
           boot.kernelModules = [ "it87" "k10temp" "nct6775" ];
 
+          services.xserver.displayManager.defaultSession = "sway";
+
+          sys.hotfix.kernelVectorWarning = true;
+
           networking.interfaces."enp5s0" = { useDHCP = true; };
           networking.networkmanager.enable = true;
           networking.useDHCP = false; 

@@ -1,0 +1,11 @@
+--- ./arch/x86/kernel/irq.c	2020-10-01 10:36:35.000000000 -0500
++++ ./arch/x86/kernel/irq.c.new	2020-10-09 09:44:07.011189769 -0500
+@@ -251,7 +251,7 @@
+ 		ack_APIC_irq();
+ 
+ 		if (desc == VECTOR_UNUSED) {
+-			pr_emerg_ratelimited("%s: %d.%u No irq handler for vector\n",
++			pr_err_ratelimited("%s: %d.%u No irq handler for vector\n",
+ 					     __func__, smp_processor_id(),
+ 					     vector);
+ 		} else {

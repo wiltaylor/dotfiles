@@ -37,6 +37,12 @@ in rec {
       description = "Specify the bios type of the machine";
     };
 
+    bootLogLevel = mkOption {
+      type = types.ints.unsigned;
+      description = "Log level of the kernel console output. Must be 0 to 7. 3 being errors only";
+      default = 3;
+    };
+
     bluetooth = mkEnableOption "System has a bluetooth adapter";
 
     cpu = {
@@ -89,6 +95,8 @@ in rec {
     boot.kernelParams = [
       (mkIf (cfg.cpu.type == "intel") "intel_pstate=active")
     ];
+
+    boot.consoleLogLevel = cfg.bootLogLevel;
 
     environment.systemPackages = with pkgs; [
       (mkIf (cfg.cpu.type == "amd") microcodeAmd)
