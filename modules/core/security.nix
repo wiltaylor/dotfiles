@@ -43,7 +43,7 @@ in {
       (mkIf cfg.yubikey gnupg)
       (mkIf cfg.yubikey yubikey-personalization)
       (mkIf cfg.yubikey yubioath-desktop)
-      (mkIf cfg.yubikey pinentry-gtk2)
+      (mkIf cfg.yubikey pinentry-qt)
     ];
 
     services.gnome.gnome-keyring.enable = desktopMode;
@@ -60,7 +60,7 @@ in {
       gnupg.agent = {
         enable = true;
         enableSSHSupport = true;
-        pinentryFlavor = "gtk2";
+        pinentryFlavor = "qt";
       };
     };
   };

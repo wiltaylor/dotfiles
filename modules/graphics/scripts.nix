@@ -9,7 +9,13 @@ let
 
       case $1 in
       "wallpaper")
-        ${pkgs.feh}/bin/feh --bg-fill --randomize ~/.config/wallpapers/*
+
+        if [[ "$XDG_SESSION" -eq "wayland" ]]; then
+          killall swaybg
+          ${pkgs.swaybg}/bin/swaybg -i $(find ~/.config/wallpapers/. -type f| shuf -n1) &
+        else 
+          ${pkgs.feh}/bin/feh --bg-fill --randomize ~/.config/wallpapers/*
+        fi
       ;;
       "winman")
         ${pkgs.xlibs.xprop}/bin/xprop -root -notype | grep "_NET_WM_NAME =" | cut -d '"' -f2

@@ -13,7 +13,9 @@ in {
       # extraOptions = [ "--debug" ]; # Use this option to send sway logs to journalctl 
       extraPackages = with pkgs; [
         waybar
+        swaybg
         wofi
+        imv
       ];
     };
   };
