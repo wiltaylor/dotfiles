@@ -18,15 +18,10 @@ inspiration on creating your own setup.
 |-[modules] -- Contains all the modules that make up this configuraiton
 |-[lib] -- Contains my utility functions
 |-[roles] -- Contains roles which can be applied to machines.
-|-[pkgs] -- Contains packages which I have customised for my own use.
 |-[wallpapers] -- drop images into this folder to add to wallpaper cycle.
-|-apply.sh - Simple script to apply config to the current machine.
-|-test.sh - Tests the script for config errors. Simulates an apply.
-|-update.sh - Updates nixpkgs and other inputs.
 |-LICENSE - MIT License file.
 |-flake.nix - Cotains the main nix flake.
 |-shell.nix - Creates a nix shell with required tools to install.
-|-todo - Open issues with my config. Will remove eventually.
 
 ```
 
