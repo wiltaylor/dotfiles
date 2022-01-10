@@ -114,4 +114,15 @@ rec {
   LoadRepoSecrets = path: let
     data = tryEval (import path);
   in if data.success then data.value else {};
+
+  mkSearchablePackages = allPkgs: 
+  let
+    filterBadPkgs = pkgs: 
+    let
+      badList = filter (a: let res = tryEval(getAttr a pkgs);
+      in (res.success == false)) (attrNames pkgs);
+    in removeAttrs pkgs badList;
+  in foldl' (l: r: let
+    ret = {"${r}" = (filterBadPkgs allPkgs."${r}"); };
+  in l // ret) {} (attrNames allPkgs);
 }

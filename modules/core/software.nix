@@ -51,6 +51,7 @@ in {
     nix-index
     darling-dmg
     nmap
+    ntfsprogs
 
     neovimWT
     lm_sensors

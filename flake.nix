@@ -15,6 +15,7 @@
   };
 
   outputs = inputs @ {self, nixpkgs, neovim-flake, wks,... }:
+  with builtins;
   let
     lib = import ./lib;
 
@@ -31,12 +32,14 @@
           });
         })    
       ];
-    }; 
+    };
 
   in {
     devShell = lib.withDefaultSystems (sys: let
       pkgs = allPkgs."${sys}";
     in import ./shell.nix { inherit pkgs; });
+
+    packages = lib.mkSearchablePackages allPkgs;
 
     nixosConfigurations = {
       titan = lib.mkNixOSConfig {

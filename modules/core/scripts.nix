@@ -65,13 +65,9 @@ let
       git push
     ;;
     "find")
-      if [ $2 = "--overlay" ]; then
-        pushd ~/.dotfiles
-        nix search .# $3
-        popd
-      else
-        nix search nixpkgs $2
-      fi
+      pushd ~/.dotfiles
+      nix search .# $3
+      popd
     ;;
 
     "find-doc")
