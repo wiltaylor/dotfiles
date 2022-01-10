@@ -249,6 +249,24 @@
         "type": "github"
       }
     },
+    "nixpkgs-overlay": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1641801723,
+        "narHash": "sha256-ZDIWiw6s68ilw5bpOupdqDnfRaAmmKDTUWxkOCL2Lyo=",
+        "owner": "wiltaylor",
+        "repo": "nixpkgs-overlay",
+        "rev": "6395618afb68ea336fe71f637c6a66e743c40fdd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wiltaylor",
+        "repo": "nixpkgs-overlay",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1641577433,
@@ -295,6 +313,22 @@
       }
     },
     "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1641528457,
+        "narHash": "sha256-FyU9E63n1W7Ql4pMnhW2/rO9OftWZ37pLppn/c1aisY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ff377a78794d412a35245e05428c8f95fef3951f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1640871638,
         "narHash": "sha256-ty6sGnJUQEkCd43At5U3DRQZD7rPARz5VginSW6hZ3k=",
@@ -558,6 +592,7 @@
         "flake-utils": "flake-utils",
         "neovim-flake": "neovim-flake",
         "nixpkgs": "nixpkgs_4",
+        "nixpkgs-overlay": "nixpkgs-overlay",
         "wks": "wks"
       }
     },
@@ -674,7 +709,7 @@
     },
     "wks": {
       "inputs": {
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1641610860,

@@ -66,7 +66,7 @@ let
     ;;
     "find")
       pushd ~/.dotfiles
-      nix search .# $3
+      nix search .# $2
       popd
     ;;
 

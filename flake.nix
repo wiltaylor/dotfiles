@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     wks.url = "github:wiltaylor/nixwks";
+    nixpkgs-overlay.url = "github:wiltaylor/nixpkgs-overlay";
     neovim-flake = {
 	url = "github:wiltaylor/neovim-flake";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +15,7 @@
 
   };
 
-  outputs = inputs @ {self, nixpkgs, neovim-flake, wks,... }:
+  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, ... }:
   with builtins;
   let
     lib = import ./lib;
@@ -25,12 +26,7 @@
       overlays = [
         neovim-flake.overlay
         wks.overlay
-        (lib.mkOverlays {
-          inherit allPkgs;
-          overlayFunc = s: p: (top: last: {
-            my = import ./pkgs {pkgs = p;};
-          });
-        })    
+        nixpkgs-overlay.overlay
       ];
     };
 

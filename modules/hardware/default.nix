@@ -10,10 +10,10 @@ in {
     };
 
     config = let
-      g810pkg = pkgs.my.g810-led;
+      g810pkg = pkgs.g810-led;
     in {
       environment.systemPackages = [
-        (mkIf (cfg.g810led) pkgs.my.g810-led)
+        (mkIf (cfg.g810led) pkgs.g810-led)
         (mkIf (cfg.kindle) pkgs.libmtp)
         (mkIf (cfg.kindle) pkgs.gvfs)
       ];

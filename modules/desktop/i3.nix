@@ -12,7 +12,7 @@ in {
       package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
         i3blocks-gaps
-        my.i3blocks-contrib
+        i3blocks-contrib
         sysstat
       ];
     };
