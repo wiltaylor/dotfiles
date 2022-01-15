@@ -20,6 +20,21 @@ let
       "winman")
         ${pkgs.xlibs.xprop}/bin/xprop -root -notype | grep "_NET_WM_NAME =" | cut -d '"' -f2
       ;;
+      "screenshot")
+        if [[ "$XDG_SESSION" -eq "wayland" ]]; then
+          ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -o /tmp/screenshot.png - | wl-copy
+        else
+          maim -s --format png | xclip -selection clipboard -t image/png -i
+        fi
+      ;;
+      "lock")
+
+        if [[ "$XDG_SESSION" -eq "wayland" ]]; then
+          swaylock -c '#000000'
+        else
+          i3lock
+        fi
+      ;;
       "about")
         ${pkgs.gnome3.zenity}/bin/zenity --about
       ;;
@@ -30,6 +45,8 @@ let
         echo "Commands:"
         echo "wallpaper - randomly selects new wallpapers"
         echo "winman - Prints the current window manager"
+        echo "screenshot - Takes a screenshot"
+        echo "lock - Looks the screen"
       ;;
       esac
 

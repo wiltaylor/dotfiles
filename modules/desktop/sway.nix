@@ -17,6 +17,11 @@ in {
         wofi
         imv
         kanshi
+        swaylock
+        slurp
+        clipman
+        wl-clipboard
+        grim
       ];
     };
 
@@ -79,7 +84,6 @@ in {
                 "tooltip-format-disconnected": "Disconnected",
                 "max-length": 50
             }
-
           }
         '';
       };

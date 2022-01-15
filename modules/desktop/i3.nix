@@ -14,6 +14,7 @@ in {
         i3blocks-gaps
         i3blocks-contrib
         sysstat
+        i3lock
       ];
     };
 

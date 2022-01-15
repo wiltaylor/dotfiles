@@ -130,6 +130,8 @@ in {
         { key = "$mod+XF86AudioLowerVolume "; command = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` -5%"; }
         { key = "$mod+XF86AudioMute"; command = "exec --no-startup-id pactl set-sink-mute `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` ndtoggle"; }
         { key = "$mod+XF86AudioRaiseVolume"; command = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` +5%"; }
+        { key = "$mod+Print"; command = "exec ${binDir}/desktop screenshot"; }
+        { key = "$mod+Escape"; command = "exec ${binDir}/desktop lock"; }
       ];
     };
 
@@ -137,7 +139,6 @@ in {
       description = "List of keybinds to apply to wayland window managers";
       type = types.listOf keybindingType;
       default = [
-#TODO: lock screen $mod+esc
 #TODO: Screenshot $mod+Print
 
         { key = "$mod+Shift+r"; command = "reload"; }
@@ -149,11 +150,7 @@ in {
       type = types.listOf keybindingType;
       default = [
 
-#TODO: lock screen $mod+esc
-
-        { key = "$mod+Print"; command = "maim -s --format png | xclip -selection clipboard -t image/png -i"; }
-        { key = "$mod+Shift+q"; command = "restart"; }
-
+        { key = "$mod+Shift+r"; command = "restart"; }
       ];
     };
 
