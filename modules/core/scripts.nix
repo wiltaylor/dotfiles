@@ -117,6 +117,13 @@ let
         ;;
       esac
     ;;
+    "vm")
+      pushd ~/.dotfiles
+      shift 1
+      nixos-rebuild --flake ".#$1" build-vm
+      "./result/bin/run-$1-vm"
+      popd
+    ;;
     *)
       echo "Usage:"
       echo "sys command"
@@ -130,6 +137,7 @@ let
       echo "find-cmd - Finds the package a command is in"
       echo "apply - Applies current system configuration in dotfiles."
       echo "exec - executes a command"
+      echo "vm {config} - Starts a vm to test the target config"
     ;;
     esac
   '';

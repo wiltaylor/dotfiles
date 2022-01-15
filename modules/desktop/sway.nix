@@ -16,6 +16,7 @@ in {
         swaybg
         wofi
         imv
+        kanshi
       ];
     };
 
@@ -166,7 +167,8 @@ in {
           gaps outer -4
 
 
-          exec --no-startup-id /run/current-system/sw/bin/waybar
+          exec_always pkill kanshi; exec kanshi
+          exec_always pkill .waybar-wrapped; /run/current-system/sw/bin/waybar
           exec --no-startup-id systemctl --user restart gpg-agent.service
           exec --no-startup-id desktop wallpaper
 
@@ -190,10 +192,6 @@ in {
           client.urgent #56737a #1e1e20 #56737a #2c5159 #2c5159
           client.placeholder #56737a #1e1e20 #56737a #2c5159 #2c5159
           client.background #1e1e20
-
-          output DP-1 pos 0 0
-          output HDMI-A-1 pos 3840 0
-          output DP-2 pos 7680 0
         '';
       };
     };

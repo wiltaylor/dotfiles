@@ -13,6 +13,7 @@
     ./i3.nix
     ./plymouth.nix
     ./sway.nix
+    ./kanshi.nix
   ];
 
 

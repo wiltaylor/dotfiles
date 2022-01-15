@@ -56,6 +56,14 @@
           networking.networkmanager.enable = true;
           networking.useDHCP = false; 
 
+          sys.desktop.kanshi.profiles = [
+            {
+              "DP-1" = "position 0,0";
+              "HDMI-A-1" = "position 3840,0";
+              "DP-2" = "position 7680,0";
+            }
+          ];
+
           sys.kernelPackage = pkgs.linuxPackages_zen;
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
@@ -65,6 +73,7 @@
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;
+          sys.virtualisation.virtualBox.enable = true;
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;

@@ -20,6 +20,10 @@ in {
       enable = mkEnableOption "Enable KVM";
     };
 
+    virtualBox = {
+      enable = mkEnableOption "Enable VirtualBox";
+    };
+
     docker = {
       enable = mkEnableOption "Enable Docker";
     };
@@ -41,6 +45,8 @@ in {
 
     virtualisation.libvirtd.enable = cfg.kvm.enable;
     virtualisation.docker.enable = cfg.docker.enable;
+
+    virtualisation.virtualbox.host.enable = cfg.virtualBox.enable;
 
     boot.kernelModules = [
       (mkIf (cpuType == "amd") "kvm-amd")

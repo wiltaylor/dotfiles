@@ -63,6 +63,7 @@ find-doc - Finds documentation on a config item
 find-cmd - Finds the package a command is in
 apply - Applies current system configuration in dotfiles.
 exec - executes a command from any nix pkg without permanantly installing it.
+vm {config} - Builds one of the machine configs and runs it in a vm.
 ```
 # License
 The files and scripts in this repository are licensed under the MIT License, which is a very 
