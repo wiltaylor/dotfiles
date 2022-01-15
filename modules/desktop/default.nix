@@ -14,6 +14,7 @@
     ./plymouth.nix
     ./sway.nix
     ./kanshi.nix
+    ./tilewm.nix
   ];
 
 
