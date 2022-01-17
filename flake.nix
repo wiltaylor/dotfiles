@@ -5,17 +5,18 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     wks.url = "github:wiltaylor/nixwks";
     nixpkgs-overlay.url = "github:wiltaylor/nixpkgs-overlay";
-    neovim-flake = {
-	url = "github:wiltaylor/neovim-flake";
-        inputs.nixpkgs.follows = "nixpkgs";
-        inputs.flake-utils.follows = "flake-utils";
+    dev = {
+      url = "github:wiltaylor/dev";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
-
+    neovim-flake = {
+	    url = "github:wiltaylor/neovim-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, ... }:
+  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, dev, ... }:
   with builtins;
   let
     lib = import ./lib;
@@ -27,6 +28,7 @@
         neovim-flake.overlay
         wks.overlay
         nixpkgs-overlay.overlay
+        dev.overlay
       ];
     };
 

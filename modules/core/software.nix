@@ -56,6 +56,7 @@ in {
     neovimWT
     lm_sensors
     shellcheck
+    dev
 
     (mkIf desktopMode freerdp)
 
