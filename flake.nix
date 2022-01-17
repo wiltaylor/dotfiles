@@ -35,7 +35,7 @@
       pkgs = allPkgs."${sys}";
     in import ./shell.nix { inherit pkgs; });
 
-    packages = lib.mkSearchablePackages allPkgs;
+    #packages = lib.mkSearchablePackages allPkgs;
 
     nixosConfigurations = {
       titan = lib.mkNixOSConfig {
