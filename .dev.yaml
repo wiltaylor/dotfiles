@@ -1,0 +1,4 @@
+actions:
+  - name: apply
+    description: "Applies config but does it with debugging and will work if sys is busted"
+    command: "sudo nixos-rebuild switch --flake .# --show-trace"

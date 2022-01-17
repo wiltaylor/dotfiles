@@ -65,6 +65,11 @@ in {
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];
 
+  environment.variables = {
+    WTDEV = "/home/wil/repo/github.com/wiltaylor/dev-profile";
+
+  };
+
   # You need to add bash and zsh as login shells or dmlight won't recognise your user.
   environment.shells = [ pkgs.zsh pkgs.bash ];
 }
