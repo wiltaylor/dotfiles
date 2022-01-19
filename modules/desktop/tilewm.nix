@@ -118,18 +118,18 @@ in {
         { key = "$mod+Shift+Right"; command = "move right"; }
         { key = "$mod+Shift+Up"; command = "move up"; }
         { key = "$mod+Shift+Down"; command = "move down"; }
-        { key = "$mod+Return"; command = "exec ${binDir}/alacritty"; }
+        { key = "$mod+Return"; command = "exec ${binDir}/foot"; }
         { key = "$mod+Shift+q"; command = "kill"; }
-        { key = "$mod+d"; command = "${binDir}/rofi -show drun"; }
+        { key = "$mod+d"; command = "exec ${binDir}/rofi -show drun"; }
         { key = "$mod+f"; command = "fullscreen toggle"; }
         { key = "$mod+h"; command = "split h"; }
         { key = "$mod+v"; command = "split v"; }
         { key = "$mod+o"; command = "exec wks run orgSys obsidian"; }
         { key = "$mod+space"; command = "floating toggle"; }
         { key = "$mod+w"; command = "exec wks run browsers firefox"; }
-        { key = "$mod+XF86AudioLowerVolume "; command = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` -5%"; }
-        { key = "$mod+XF86AudioMute"; command = "exec --no-startup-id pactl set-sink-mute `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` ndtoggle"; }
-        { key = "$mod+XF86AudioRaiseVolume"; command = "exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep -m 1 RUNNING | awk '{print $1}'` +5%"; }
+        { key = "$mod+XF86AudioLowerVolume "; command = "exec desktop voldown"; }
+        { key = "$mod+XF86AudioMute"; command = "exec desktop volmute"; }
+        { key = "$mod+XF86AudioRaiseVolume"; command = "exec desktop volup"; }
         { key = "$mod+Print"; command = "exec ${binDir}/desktop screenshot"; }
         { key = "$mod+Escape"; command = "exec ${binDir}/desktop lock"; }
       ];

@@ -7,6 +7,18 @@ let
   desktopScript = pkgs.writeScriptBin "desktop" ''
       #!${pkgs.bash}/bin/bash
 
+      adjustvol() {
+        SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
+
+        ${pkgs.pulseaudio}/bin/pactl set-sink-volume $SINK $1
+      }
+
+      mutevol() {
+        SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
+
+        ${pkgs.pulseaudio}/bin/pactl set-sink-mute $SINK toggle
+      }
+
       case $1 in
       "wallpaper")
 
@@ -38,6 +50,15 @@ let
       "about")
         ${pkgs.gnome3.zenity}/bin/zenity --about
       ;;
+      "volup")
+        adjustvol "+5%"
+      ;;
+      "voldown")
+        adjustvol "-5%"
+      ;;
+      "volmute")
+        mutevol
+      ;;
       *)
         echo "Usage:"
         echo "desktop command"
@@ -47,6 +68,9 @@ let
         echo "winman - Prints the current window manager"
         echo "screenshot - Takes a screenshot"
         echo "lock - Looks the screen"
+        echo "volup - volume up"
+        echo "voldown - volume down"
+        echo "volmute - toggle mute"
       ;;
       esac
 

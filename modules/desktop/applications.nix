@@ -20,6 +20,9 @@ in {
       pkgs.xorg.xev
       feh
       virt-manager
+      foot
+      libsixel
+      ffmpeg-sixel
 
       dfeet
       pcmanfm
