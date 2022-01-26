@@ -60,6 +60,7 @@ let
     "update")
       echo "Updating dotfiles flake..."
       pushd ~/.dotfiles
+      git pull
       nix flake update
       popd
     ;;
