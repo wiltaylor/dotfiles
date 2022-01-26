@@ -31,8 +31,7 @@
         dev.overlay
 
         (self: last: {
-          neovimWT = neovim-flake.packages."${self.system}".neovimWT;
-          
+          neovimWT = neovim-flake.packages."${self.system}".neovimWT; 
         })
       ];
     };
