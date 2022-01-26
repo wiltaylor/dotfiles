@@ -52,11 +52,13 @@ in {
     darling-dmg
     nmap
     ntfsprogs
+    samba
 
     neovimWT
     lm_sensors
     shellcheck
     dev
+    socat
 
     (mkIf desktopMode freerdp)
 
