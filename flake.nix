@@ -25,10 +25,15 @@
       inherit nixpkgs; 
       cfg = { allowUnfree = true; };
       overlays = [
-        neovim-flake.overlay
+        #neovim-flake.overlay
         wks.overlay
         nixpkgs-overlay.overlay
         dev.overlay
+
+        (self: last: {
+          neovimWT = neovim-flake.packages."${self.system}".neovimWT;
+          
+        })
       ];
     };
 

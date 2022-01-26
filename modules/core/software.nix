@@ -54,7 +54,7 @@ in {
     ntfsprogs
     samba
 
-    neovimWT
+    #neovimWT
     lm_sensors
     shellcheck
     dev
