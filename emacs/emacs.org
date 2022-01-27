@@ -1,4 +1,6 @@
 #+TITLE: Wil's Emacs config
+#+STARTUP: content
+#+STARTUP: inlineimages
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.config/emacs/init.el
 
 * Introduction
@@ -8,13 +10,29 @@
 
   To tangle config C-c C-v t.
 * Settings
+
+** Startup Perfomance
+  #+begin_src emacs-lisp
+    ;; The default is 800 kilobytes.  Measured in bytes.
+    (setq gc-cons-threshold (* 50 1000 1000))
+
+    (defun efs/display-startup-time ()
+      (message "Emacs loaded in %s with %d garbage collections."
+	       (format "%.2f seconds"
+		       (float-time
+			(time-subtract after-init-time before-init-time)))
+	       gcs-done))
+
+    (add-hook 'emacs-startup-hook #'efs/display-startup-time)
+  #+end_src
+
 ** Move emacs directory to ./config/emacs
    My nix config has moved the emacs folder to *~/.config/emacs* so we need to set this at the top of the file for everything to work properly.
    
    #+begin_src emacs-lisp
      (setq user-emacs-directory "~/.config/emacs/")
    #+end_src
-   
+
 ** Remove Default Startup Screen and menus
    #+begin_src emacs-lisp
      ; Get rid of startup message
@@ -30,11 +48,12 @@
 
 ** Setup Use Package
    #+begin_src emacs-lisp
+     (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
      ; Enabling packages
      (require 'package)
-     (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			       ("org" . "https://orgmode.org/elpa")
-			       ("elpa" . "https://elpa.gnu.org/packages")))
+     (setq package-archives '(("melpa" . "http://melpa.org/packages/")
+			       ("org" . "http://orgmode.org/elpa/")
+			       ("elpa" . "http://elpa.gnu.org/packages/")))
 
      ;; Make sure there is a package list on first open
      (package-initialize)
@@ -48,6 +67,9 @@
       (require 'use-package)
        (setq use-package-always-ensure t) ;;Auto download
    #+end_src
+
+   #+RESULTS:
+   : t
 
 ** Theme Setup
    #+begin_src emacs-lisp
@@ -84,8 +106,7 @@
 		 ("C-k" . ivy-previous-line)
 		 ("C-d" . ivy-reverse-i-search-kill))
 	     :config
-	     (ivy-mode 1)
-     )
+	     (ivy-mode 1))
 
 	     ;; Ivy-Rich - Gives details of commands when you complete with ivy.
 	     (use-package ivy-rich
@@ -110,8 +131,7 @@
        :init (doom-modeline-mode 1)
        :custom ((doom-modeline-height 15)))
    #+end_src
-
-   
+ 
 ** Evil Mode
    #+begin_src emacs-lisp
       ;; Setup line numbers
@@ -121,15 +141,16 @@
       ;;Make ESC quit prompts
       (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-
       (use-package evil
 	:init
 	(setq evil-want-intergration t)
 	(setq evil-want-keybinding nil)
+	(setq evil-want-C-u-scroll t)
+
 	:config
 	(evil-mode 1)
 	(define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-        (define-key evil-motion-state-map " " nil)
+	(define-key evil-motion-state-map " " nil)
 
 	;; Use visual line motions even outside of visual-line-mode buffers
 	(evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -142,7 +163,6 @@
 	:after evil
 	:config
 	(evil-collection-init))
-
 
      (dolist (mode `(org-mode-hook
 	term-mode-hook
@@ -185,10 +205,10 @@
 	  (use-package general
 	      :after evil which-key
 	      :config
-	      (general-evil-setup)
+	      (general-evil-setup t)
 	      (general-create-definer wil/leader-keys
-                  :states 'normal
-                  :keymaps 'override
+		  :states '(normal insert visual emacs)
+		  :keymaps 'override
 		  :prefix "SPC"
 		  :global-prefix "C-SPC")
 
@@ -227,6 +247,7 @@
 
 	      "f"  '(:ignore t :which-key "File")
 	      "fn" '((lambda() (interactive) (treemacs)) :which-key "Toggle file tree")
+              "fs" '((lambda() (interactive) (lsp-treemacs-symbols)) :which-key "Toggle symbols")
 
 	      "b"  '(:ignore t :which-key "Buffers")
 	      "bl" '((lambda() (interactive) (ivy-read "Buffer List: " (mapcar #'buffer-name (buffer-list)) 
@@ -235,8 +256,10 @@
 	      "e"  '(:ignore t :which-key "Editor")
 	      "es" '((lambda() (interactive) (find-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Edit Settings")
 	      "ea" '((lambda() (interactive) (org-babel-tangle-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Apply Settings")
-	   ) )
+	      "er" '((lambda() (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload Config")
+     ))
    #+end_src
+
 ** Which Key
    #+begin_src emacs-lisp
      (use-package which-key
@@ -280,6 +303,8 @@
 
      (defun dw/org-mode-setup()
        (org-indent-mode)
+       (org-src-tab-acts-natively t)
+       (org-src-fontify-natively t)
        (variable-pitch-mode 1)
        (auto-fill-mode 0)
        (visual-line-mode 1)
@@ -290,7 +315,6 @@
        :config
        (setq org-ellipsis " "
 	     org-hide-emphasis-markers nil))
-
      (use-package org-bullets
        :after org
        :hook (org-mode . org-bullets-mode)
@@ -323,7 +347,7 @@
    #+end_src
    
 ** Dashboard
-  [[./logo.png]]
+   [[./logo.png]]
    #+begin_src emacs-lisp
 	(use-package dashboard
 	    :config
@@ -447,3 +471,58 @@
 	:after (treemacs magit)
 	:ensure t)
    #+end_src
+
+** Development
+*** LSP Mode
+   #+begin_src emacs-lisp
+     (defun wil/lsp-mode-setup ()
+       (setq lsp-headerline-breadcrum-segments '(path-up-to-project file symbols))
+       (lsp-headerline-breadcrumb-mode))
+
+     (use-package spinner)
+     (use-package lsp-mode
+      :after spinner
+      :commands (lsp lsp-deferred)
+      :hook (lsp-mode . wil/lsp-mode-setup)
+      :init
+      (setq lsp-keymap-prefix "C-c l"))
+
+     (use-package lsp-ui
+      :hook (lsp-mode . lsp-ui-mode)
+      :custom
+      (lsp-ui-doc-position 'bottom))
+
+     (use-package lsp-treemacs
+       :after lsp)
+   #+end_src
+*** Company Mode
+    #+begin_src emacs-lisp
+      (use-package company
+       :after lsp-mode
+       :hook (lsp-mode . company-mode)
+       :bind (:map company-active-map
+	      ("<tab>" . company-complete-slection))
+	     (:map lsp-mode-map
+	      ("<tab>" . company-indent-or-complete-common))
+       :custom
+       (company-minimum-prefix-length 1)
+       (company-idle-delay 0.0))
+
+      (use-package company-box
+      :hook (company-mode . company-box-mode))
+    #+end_src
+*** Typescript
+    #+begin_src emacs-lisp
+      (use-package typescript-mode
+       :mode "\\.ts\\'"
+       :hook (typescript-mode . lsp-deferred)
+       :config
+       (setq typescript-indent-level 2))
+    #+end_src
+   
+*** Go
+    #+begin_src emacs-lisp
+      (use-package go-mode
+       :mode "\\.go\\'"
+       :hook (go-mode . lsp-deferred))
+    #+end_src
