@@ -11,6 +11,15 @@
   To tangle config C-c C-v t.
 * Settings
 
+** Editor Settings
+   #+begin_src emacs-lisp
+     (setq default-tab-width 2)
+     (setq tab-width 2)
+     (setq custom-tab-width 2)
+     (setq-default electric-indent-inhibit t)
+     (setq-default evil-shift-width custom-tab-width)
+   #+end_src
+   
 ** Startup Perfomance
   #+begin_src emacs-lisp
     ;; The default is 800 kilobytes.  Measured in bytes.
@@ -214,7 +223,7 @@
 
 	      (wil/leader-keys
 	      "c"  '(:ignore t :which-key "Code")
-	      "cf" '((lambda() (interactive) (message "Format code")) :which-key "Format")
+	      "cf" '((lambda() (interactive) (lsp-format-buffer:w)) :which-key "Format")
 	      "ca" '((lambda() (interactive) (message "LSP Action")) :which-key "LSP Action")
 	      "cd" '((lambda() (interactive) (message "Got to definition")) :which-key "Go to definition")
 	      "ci" '((lambda() (interactive) (message "Got to implimentation")) :which-key "Go to implimentation")
@@ -477,6 +486,7 @@
    #+begin_src emacs-lisp
      (defun wil/lsp-mode-setup ()
        (setq lsp-headerline-breadcrum-segments '(path-up-to-project file symbols))
+       (setq tab-width 2)
        (lsp-headerline-breadcrumb-mode))
 
      (use-package spinner)
@@ -495,6 +505,18 @@
      (use-package lsp-treemacs
        :after lsp)
    #+end_src
+*** Tree Sitter
+    #+begin_src emacs-lisp
+      (use-package tree-sitter
+	:init
+	(global-tree-sitter-mode)
+	:hook
+        (prog-mode . tree-sitter-hl-mode)
+      )
+      (use-package tree-sitter-langs
+	:after tree-sitter
+      )
+    #+end_src
 *** Company Mode
     #+begin_src emacs-lisp
       (use-package company
@@ -525,4 +547,12 @@
       (use-package go-mode
        :mode "\\.go\\'"
        :hook (go-mode . lsp-deferred))
+    #+end_src
+
+*** NIX
+    #+begin_src emacs-lisp
+    (use-package nix-mode
+     :hook (nix-mode . lsp-deferred)
+     :mode "\\.nix\\'")
+
     #+end_src

@@ -63,6 +63,7 @@ in {
     (mkIf desktopMode freerdp)
 
     wksCli
+    rnix-lsp
 
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];
