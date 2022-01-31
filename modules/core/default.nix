@@ -106,7 +106,7 @@ in rec {
     boot.loader.systemd-boot.enable = cfg.bootloader == "systemd-boot";
     boot.loader.efi.canTouchEfiVariables = cfg.bootloader == "systemd-boot";
 
-    nix.maxJobs = cfg.cpu.cores * cfg.cpu.threadsPerCore * cfg.cpu.sockets;
+    nix.settings.max-jobs = cfg.cpu.cores * cfg.cpu.threadsPerCore * cfg.cpu.sockets;
 
     hardware.bluetooth.enable = cfg.bluetooth;
     services.blueman.enable = cfg.bluetooth;

@@ -144,6 +144,8 @@
 ** Evil Mode
    #+begin_src emacs-lisp
       ;; Setup line numbers
+
+      (setq display-line-numbers-type 'relative)
       (column-number-mode)
       (global-display-line-numbers-mode t)
 
@@ -173,10 +175,12 @@
 	:config
 	(evil-collection-init))
 
-     (dolist (mode `(org-mode-hook
+     (dolist (mode `(
 	term-mode-hook
 	eshell-mode-hook
+	treemacs-mode-hook
 	shell-mode-hook))
+
      (add-hook mode (lambda () (display-line-numbers-mode 0))))
    #+end_src
 
@@ -211,62 +215,203 @@
 
 ** General
    #+begin_src emacs-lisp
-	  (use-package general
-	      :after evil which-key
-	      :config
-	      (general-evil-setup t)
-	      (general-create-definer wil/leader-keys
-		  :states '(normal insert visual emacs)
-		  :keymaps 'override
-		  :prefix "SPC"
-		  :global-prefix "C-SPC")
+	 (use-package general
+	     :after evil which-key
+	     :config
+	     (general-evil-setup t)
+	     (general-create-definer wil/leader-keys
+		 :states '(normal insert visual emacs)
+		 :keymaps 'override
+		 :prefix "SPC"
+		 :global-prefix "C-SPC")
 
-	      (wil/leader-keys
-	      "c"  '(:ignore t :which-key "Code")
-	      "cf" '((lambda() (interactive) (lsp-format-buffer:w)) :which-key "Format")
-	      "ca" '((lambda() (interactive) (message "LSP Action")) :which-key "LSP Action")
-	      "cd" '((lambda() (interactive) (message "Got to definition")) :which-key "Go to definition")
-	      "ci" '((lambda() (interactive) (message "Got to implimentation")) :which-key "Go to implimentation")
-	      "cc" '((lambda() (interactive) (message "Toggle comments")) :which-key "Toggle Comments")
-	      "cr" '((lambda() (interactive) (message "Rename symbol")) :which-key "Rename Symbol")
-	      "cR" '((lambda() (interactive) (message "Find references")) :which-key "Find references")
+	     (general-create-definer wil/org-leader-keys
+		 :states '(normal)
+		 :keymaps 'org-mode-map
+		 :prefix "SPC"
+		 :global-prefix "C-SPC")
 
-	      "g"  '(:ignore t :which-key "Git")
-	      "gs" '((lambda() (interactive) (magit)) :which-key "Git status")
+	     (wil/org-leader-keys
+	     ;; "o" '(:ignore t :which-key "Org Mode")
+	      "oa" '((lambda() (interactive) (message "test")) :which-key "Do stuff")
+	      "ot" '((lambda() (interactive) (org-babel-tangle-file (buffer-file-name (current-buffer)))) :which-key "Tangle Current Buffer")
+	      "ob" '((lambda() (interactive) (org-roam-buffer-toggle)) :which-key "Toggle Roam Buffer")
+	      "of" '((lambda() (interactive) (org-roam-node-find)) :which-key "Find Node")
+	      "oi" '((lambda() (interactive) (org-roam-insert)) :which-key "Insert Node")
+	     )
 
-	      "d"  '(:ignore t :which-key "Debug")
-	      "ds" '((lambda() (interactive) (message "Step in")) :which-key "Step In")
-	      "do" '((lambda() (interactive) (message "Step Over")) :which-key "Step Over")
-	      "db" '((lambda() (interactive) (message "Toggle Breakpoint")) :which-key "Toggle breakpoint")
-	      "dc" '((lambda() (interactive) (message "Continue Debugger")) :which-key "Continue debugger")
+	     (wil/leader-keys
+	     "c"  '(:ignore t :which-key "Code")
+	     "cc" '((lambda() (interactive) (comment-region)) :which-key "Toggle Comments")	 
+	     "cu" '((lambda() (interactive) (uncomment-region)) :which-key "Toggle Comments")
+	     "cf" '((lambda() (interactive) (lsp-format-buffer)) :which-key "Format")
+	     "ca" '((lambda() (interactive) (lsp-execute-code-action)) :which-key "LSP Action")
+	     "cd" '((lambda() (interactive) (lsp-ui-peek-find-definitions)) :which-key "Go to definition")
+	     "ci" '((lambda() (interactive) (lsp-ui-peek-find-implementation)) :which-key "Go to implimentation")
+	     "cr" '((lambda() (interactive) (lsp-rename)) :which-key "Rename Symbol")
+	     "cR" '((lambda() (interactive) (lsp-ui-peek-find-references)) :which-key "Find references")
+	     "ce" '((lambda() (interactive) (lsp-treemacs-errors-list)) :which-key "List errors")
 
-	      "p"  '(:ignore t :which-key "Project")
-	      "po" '((lambda() (interactive) (projectile-switch-project)) :which-key "Open Project")
-	      "pf" '((lambda() (interactive) (projectile-find-file)) :which-key "Find file in project")
-	      "pg" '((lambda() (interactive) (projectile-grep)) :which-key "Grep in project")
+	     "h"  '(:ignore t :which-key "Help")
+	     "hA" '((lambda() (interactive) (about-emacs)) :which-key "About Emacs")
+	     "h." '((lambda() (interactive) (display-local-help)) :which-key "Local Help")
+	     "hk" '((lambda() (interactive) (describe-bindings)) :which-key "Key bindings")
+	     "hp" '((lambda() (interactive) (describe-package)) :which-key "Package")
+	     "ha" '((lambda() (interactive) (apropos)) :which-key "Apropos")
+	     "hi" '((lambda() (interactive) (info)) :which-key "Info")
 
-	      "w"  '(:ignore t :which-key "Window")
-	      "wh" '((lambda() (interactive) (windmove-left))  :which-key "Window - Left")
-	      "wj" '((lambda() (interactive) (windmove-down))  :which-key "Window - Down")
-	      "wk" '((lambda() (interactive) (windmove-up))    :which-key "Window - Up")
-	      "wl" '((lambda() (interactive) (windmove-right)) :which-key "Window - Right")
-	      "wc" '((lambda() (interactive) (delete-window)) :which-key "Close Window")
-	      "wsv" '((lambda() (interactive) (split-window-vertically)) :which-key "Split window vertically")
-	      "wsh" '((lambda() (interactive) (split-window-horizontally)) :which-key "Split window horizontally")
+	     "g"  '(:ignore t :which-key "Git")
+	     "gs" '((lambda() (interactive) (magit)) :which-key "Git status")
 
-	      "f"  '(:ignore t :which-key "File")
-	      "fn" '((lambda() (interactive) (treemacs)) :which-key "Toggle file tree")
-              "fs" '((lambda() (interactive) (lsp-treemacs-symbols)) :which-key "Toggle symbols")
+	     "o"  '(:ignore t :which-key "Org")
 
-	      "b"  '(:ignore t :which-key "Buffers")
-	      "bl" '((lambda() (interactive) (ivy-read "Buffer List: " (mapcar #'buffer-name (buffer-list)) 
-		       :action '(1 ("s" (lambda (x) (switch-to-buffer x)) "switch")))) :which-key "Buffer List")
-	      "bc" '((lambda() (interactive) (kill-current-buffer)) :which-key "Close Buffer")
-	      "e"  '(:ignore t :which-key "Editor")
-	      "es" '((lambda() (interactive) (find-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Edit Settings")
-	      "ea" '((lambda() (interactive) (org-babel-tangle-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Apply Settings")
-	      "er" '((lambda() (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload Config")
-     ))
+	     "d"  '(:ignore t :which-key "Debug")
+	     "ds" '((lambda() (interactive) (message "Step in")) :which-key "Step In")
+	     "do" '((lambda() (interactive) (message "Step Over")) :which-key "Step Over")
+	     "db" '((lambda() (interactive) (message "Toggle Breakpoint")) :which-key "Toggle breakpoint")
+	     "dc" '((lambda() (interactive) (message "Continue Debugger")) :which-key "Continue debugger")
+
+	     "p"  '(:ignore t :which-key "Project")
+	     "po" '((lambda() (interactive) (projectile-switch-project)) :which-key "Open Project")
+	     "pf" '((lambda() (interactive) (projectile-find-file)) :which-key "Find file in project")
+	     "pg" '((lambda() (interactive) (projectile-grep)) :which-key "Grep in project")
+
+	     "w"  '(:ignore t :which-key "Window")
+	     "wh" '((lambda() (interactive) (windmove-left))  :which-key "Window - Left")
+	     "wj" '((lambda() (interactive) (windmove-down))  :which-key "Window - Down")
+	     "wk" '((lambda() (interactive) (windmove-up))    :which-key "Window - Up")
+	     "wl" '((lambda() (interactive) (windmove-right)) :which-key "Window - Right")
+	     "wc" '((lambda() (interactive) (delete-window)) :which-key "Close Window")
+	     "wsv" '((lambda() (interactive) (split-window-vertically)) :which-key "Split window vertically")
+	     "wsh" '((lambda() (interactive) (split-window-horizontally)) :which-key "Split window horizontally")
+
+	     "f"  '(:ignore t :which-key "File")
+	     "fn" '((lambda() (interactive) (treemacs)) :which-key "Toggle file tree")
+	     "fs" '((lambda() (interactive) (lsp-treemacs-symbols)) :which-key "Toggle symbols")
+
+	     "b"  '(:ignore t :which-key "Buffers")
+	     "bl" '((lambda() (interactive) (ivy-read "Buffer List: " (mapcar #'buffer-name (buffer-list)) 
+		      :action '(1 ("s" (lambda (x) (switch-to-buffer x)) "switch")))) :which-key "Buffer List")
+	     "bc" '((lambda() (interactive) (kill-current-buffer)) :which-key "Close Buffer")
+	     "e"  '(:ignore t :which-key "Editor")
+	     "es" '((lambda() (interactive) (find-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Edit Settings")
+	     "ea" '((lambda() (interactive) (org-babel-tangle-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Apply Settings")
+	     "er" '((lambda() (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload Config"))
+
+	     ;; Remove global keys I don't use
+	    (global-unset-key (kbd "C-h C-a"))   
+	    (global-unset-key (kbd "C-h C-c"))
+	    (global-unset-key (kbd "C-h C-d"))
+	    (global-unset-key (kbd "C-h C-e"))
+	    (global-unset-key (kbd "C-h C-f"))
+	    (global-unset-key (kbd "C-h C-h"))
+	    (global-unset-key (kbd "C-h RET"))
+	    (global-unset-key (kbd "C-h C-n"))
+	    (global-unset-key (kbd "C-h C-o"))
+	    (global-unset-key (kbd "C-h C-p"))
+	    (global-unset-key (kbd "C-h C-s"))
+	    (global-unset-key (kbd "C-h C-t"))
+	    (global-unset-key (kbd "C-h C-w"))
+	    (global-unset-key (kbd "C-h C-\\"))
+	    (global-unset-key (kbd "C-h ."))
+	    (global-unset-key (kbd "C-h 4"))
+	    (global-unset-key (kbd "C-h ?"))
+	    (global-unset-key (kbd "C-h C"))
+	    (global-unset-key (kbd "C-h F"))
+	    (global-unset-key (kbd "C-h I"))
+	    (global-unset-key (kbd "C-h K"))
+	    (global-unset-key (kbd "C-h L"))
+	    (global-unset-key (kbd "C-h P"))
+	    (global-unset-key (kbd "C-h S"))
+	    (global-unset-key (kbd "C-h a"))
+	    (global-unset-key (kbd "C-h b"))
+	    (global-unset-key (kbd "C-h c"))
+	    (global-unset-key (kbd "C-h d"))
+	    (global-unset-key (kbd "C-h e"))
+	    (global-unset-key (kbd "C-h f"))
+	    (global-unset-key (kbd "C-h g"))
+	    (global-unset-key (kbd "C-h h"))
+	    (global-unset-key (kbd "C-h i"))
+	    (global-unset-key (kbd "C-h k"))
+	    (global-unset-key (kbd "C-h l"))
+	    (global-unset-key (kbd "C-h m"))
+	    (global-unset-key (kbd "C-h n"))
+	    (global-unset-key (kbd "C-h o"))
+	    (global-unset-key (kbd "C-h p"))
+	    (global-unset-key (kbd "C-h q"))
+	    (global-unset-key (kbd "C-h r"))
+	    (global-unset-key (kbd "C-h s"))
+	    (global-unset-key (kbd "C-h t"))
+	    (global-unset-key (kbd "C-h v"))
+	    (global-unset-key (kbd "C-h w"))
+	    (global-unset-key (kbd "C-h <f1>"))
+	    (global-unset-key (kbd "C-h <help>"))
+
+	    (global-unset-key (kbd "ESC"))
+
+	    (global-unset-key (kbd "C-@"))
+
+	    (global-unset-key (kbd "C-@"))
+	    (global-unset-key (kbd "C-@ s"))
+	    (global-unset-key (kbd "C-@ a"))
+	    (global-unset-key (kbd "C-@ c"))
+	    (global-unset-key (kbd "C-@ h"))
+	    (global-unset-key (kbd "C-@ m"))
+	    (global-unset-key (kbd "C-@ s"))
+	    (global-unset-key (kbd "C-a"))
+	    (global-unset-key (kbd "C-c"))
+	    ;;(global-unset-key (kbd "C-g")) - Leaving for now as it can be useful for getting out of problem areas.
+	    (global-unset-key (kbd "C-h"))
+	    (global-unset-key (kbd "C-j"))
+	    (global-unset-key (kbd "C-k"))
+	    (global-unset-key (kbd "C-l"))
+	    (global-unset-key (kbd "C-q"))
+	    (global-unset-key (kbd "C-s"))
+	    (global-unset-key (kbd "C-x"))
+	    (global-unset-key (kbd "C-\\"))
+	    (global-unset-key (kbd "C-_"))
+	    (global-unset-key (kbd "C--"))
+	    (global-unset-key (kbd "C-/"))
+	    (global-unset-key (kbd "C-S-<backspace>"))
+	    (global-unset-key (kbd "C-<delete>"))
+	    (global-unset-key (kbd "C-<down>"))
+	    (global-unset-key (kbd "C-<end>"))
+	    (global-unset-key (kbd "C-<f10>"))
+	    (global-unset-key (kbd "C-<home>"))
+	    (global-unset-key (kbd "C-<insert>"))
+	    (global-unset-key (kbd "C-<insertchar>"))
+	    (global-unset-key (kbd "M-<f10>"))
+	    (global-unset-key (kbd "M-<home>"))
+	    (global-unset-key (kbd "M-<end>"))
+	    (global-unset-key (kbd "S-<delete>"))
+	    (global-unset-key (kbd "S-<insert>"))
+	    (global-unset-key (kbd "S-<insertchar>"))
+
+	    (global-unset-key (kbd "<XF86Back>"))
+	    (global-unset-key (kbd "<XF86WakeUp>"))
+	    (global-unset-key (kbd "<XF86Forward>"))
+	    (global-unset-key (kbd "<again>"))
+	    (global-unset-key (kbd "<begin>"))
+	    (global-unset-key (kbd "<copy>"))
+	    (global-unset-key (kbd "<cut>"))
+	    (global-unset-key (kbd "<f1>"))
+	    (global-unset-key (kbd "<f2>"))
+	    (global-unset-key (kbd "<f3>"))
+	    (global-unset-key (kbd "<f4>"))
+	    (global-unset-key (kbd "<f10>"))
+	    (global-unset-key (kbd "<f11>"))
+	    (global-unset-key (kbd "<f16>"))
+	    (global-unset-key (kbd "<f18>"))
+	    (global-unset-key (kbd "<f20>"))
+	    (global-unset-key (kbd "<find>"))
+	    (global-unset-key (kbd "<help>"))
+	    (global-unset-key (kbd "<header-line>"))
+	    (global-unset-key (kbd "<menu>"))
+	    (global-unset-key (kbd "<paste>"))
+	    (global-unset-key (kbd "<undo>"))
+	    (global-unset-key (kbd "<redo>"))
+     )
+
    #+end_src
 
 ** Which Key
@@ -358,39 +503,46 @@
 ** Dashboard
    [[./logo.png]]
    #+begin_src emacs-lisp
-	(use-package dashboard
-	    :config
-	    (setq dashboard-banner-logo-title "Not actually doom emacs")
-	    (setq dashboard-startup-banner (expand-file-name "~/.dotfiles/emacs/logo.png"))
-	    (setq dashboard-center-content t)
-	    (setq dashboard-items '((recents  . 5)
-				(bookmarks . 5)
-				(projects . 5)))
-	    (setq dashboard-set-navigator t)
-	    (setq dashboard-navigator-buttons
-		`(
-		    ((,
-		    (all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
-		    "Wil's GitHub"
-		    "Browse Github"
-		    (lambda (&rest _)
-		    (browse-url "https://github.com/wiltaylor/")))
+     (use-package dashboard
+	 :config
+	 (setq dashboard-banner-logo-title "Not actually doom emacs")
+	 (setq dashboard-startup-banner (expand-file-name "~/.dotfiles/emacs/logo.png"))
+	 (setq dashboard-center-content t)
+	 (setq dashboard-items '((recents  . 5)
+			     (bookmarks . 5)
+			     (projects . 5)))
+	 (setq dashboard-set-navigator t)
+	 (setq dashboard-navigator-buttons
+	     `(
+		 ((,
+		 (all-the-icons-octicon "zap" :height 1.1 :v-adjust 0.0)
+		 "Wil's Zettlekasten"
+		 "Open Zettlekasten"
+		 (lambda (&rest _)
+		 (find-file "~/vaults/roam/20220130163826-index.org")))
+	     
+		 (,
+		 (all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+		 "Wil's GitHub"
+		 "Browse Github"
+		 (lambda (&rest _)
+		 (browse-url "https://github.com/wiltaylor/")))
 
-		    (,
-		    (all-the-icons-octicon "globe" :height 1.1 :v-adjust 0.0)
-		    "Wil's Blog"
-		    "Browse Blog"
-		    (lambda (&rest _)
-		    (browse-url "https://www.wil.dev/"))))
-		))
-	(setq dashboard-footer-messages '("Ni!"))
-        (setq dashboard-footer-icon (all-the-icons-octicon "terminal"
-						    :height 1.1
-						    :v-adjust -0.05
-						    :face 'font-lock-keyword-face))
-	(dashboard-refresh-buffer)
-	(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-	(dashboard-setup-startup-hook))
+		 (,
+		 (all-the-icons-octicon "globe" :height 1.1 :v-adjust 0.0)
+		 "Wil's Blog"
+		 "Browse Blog"
+		 (lambda (&rest _)
+		 (browse-url "https://www.wil.dev/"))))
+	     ))
+     (setq dashboard-footer-messages '("Ni!"))
+     (setq dashboard-footer-icon (all-the-icons-octicon "terminal"
+						 :height 1.1
+						 :v-adjust -0.05
+						 :face 'font-lock-keyword-face))
+     (dashboard-refresh-buffer)
+     (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+     (dashboard-setup-startup-hook))
 
    #+end_src
 ** Treemacs

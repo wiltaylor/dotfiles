@@ -6,8 +6,8 @@ let
   wayland = (elem "wayland" config.sys.graphics.desktopProtocols);
   desktopMode = xorg || wayland;
 
-  emacs-custom = pkgs.writeScriptBin "emacs" ''
-    ${pkgs.emacs}/bin/emacs -q -l ~/.config/emacs/init.el $@
+  emacs-custom = pkgs.writeScriptBin "emacs-run" ''
+    ${pkgs.emacs-sqlite}/bin/emacs -q -l ~/.config/emacs/init.el $@
   '';
 in {
 
@@ -28,6 +28,10 @@ in {
       pcmanfm
       neovimWT
       emacs-custom
+      emacs-sqlite
+      gcc
+      sqlite
+      nyxt
     ];
   };
 }
