@@ -118,7 +118,6 @@ in {
         { key = "$mod+Shift+Right"; command = "move right"; }
         { key = "$mod+Shift+Up"; command = "move up"; }
         { key = "$mod+Shift+Down"; command = "move down"; }
-        { key = "$mod+Return"; command = "exec ${binDir}/foot"; }
         { key = "$mod+Shift+q"; command = "kill"; }
         { key = "$mod+d"; command = "exec ${binDir}/rofi -show drun"; }
         { key = "$mod+f"; command = "fullscreen toggle"; }
@@ -140,6 +139,7 @@ in {
       type = types.listOf keybindingType;
       default = [
         { key = "$mod+Shift+r"; command = "reload"; }
+        { key = "$mod+Return"; command = "exec ${binDir}/foot"; }
       ];
     };
 
@@ -147,7 +147,7 @@ in {
       description = "List of keybinds to apply to xorg window managers";
       type = types.listOf keybindingType;
       default = [
-
+        { key = "$mod+Return"; command = "exec ${binDir}/alacritty"; }
         { key = "$mod+Shift+r"; command = "restart"; }
       ];
     };

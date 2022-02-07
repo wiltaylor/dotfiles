@@ -143,17 +143,24 @@
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
 
           sys.kernelPackage = pkgs.linuxPackages_5_10;
-          sys.graphics.displayManager = "lightdm";
-          sys.graphics.desktopProtocols = [ "xorg" ];
+          sys.graphics.displayManager = "gdm";
+          sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
           sys.cpu.type = "intel";
           sys.cpu.cores = 2;
           sys.cpu.threadsPerCore = 2;
           sys.cpu.sensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "intel";
-          sys.audio.server = "pulse";
+          sys.audio.server = "pipewire";
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;
+
+          sys.desktop.kanshi.profiles = [
+            {
+              "eDP-1" = "position 0,0";
+            }
+          ];
+
 
           sys.virtualisation.kvm.enable = true;
           sys.bluetooth = true;

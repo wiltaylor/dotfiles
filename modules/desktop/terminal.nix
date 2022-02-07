@@ -61,6 +61,7 @@ in {
             TERM: xterm-256color
 
           window:
+            opacity: 0.95
             dimensions:
               columns: 0
               lines: 0
@@ -130,7 +131,6 @@ in {
             animation: EaseOutExpo
             duration: 0
             color: '0xffffff'
-          background_opacity: 0.95
           mouse_bindings:
             - { mouse: Middle, action: PasteSelection }
           mouse:
