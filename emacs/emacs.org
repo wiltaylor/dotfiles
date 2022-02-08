@@ -47,6 +47,9 @@
      ; Get rid of startup message
      (setq inhibit-startup-message t)
 
+     ; Stop default.el from being loaded if present.
+     (setq inhibit-default-init t)
+
      ; Get rid of ugly window chrome
      (scroll-bar-mode -1)
      (tool-bar-mode -1)
@@ -123,6 +126,40 @@
 		 (ivy-rich-mode 1))
    #+end_src
 
+** Popper
+   #+begin_src emacs-lisp
+     (use-package popper
+       :ensure t
+       :init
+       (setq popper-reference-buffers
+	'("\\*Messages\\*"
+	  "Output\\*"
+	  "\\*Async Shell Command\\*"
+          help-mode
+	  compilation-mode))
+	 (popper-mode +1)
+	 (popper-echo-mode +1))
+   #+end_src
+** Window
+   #+begin_src emacs-lisp
+		;   (setq display-buffer-base-action
+		;     '((display-buffer-reuse-window
+	;		display-buffer-reuse-mode-window
+	;		display-buffer-same-window
+	;	       display-buffer-in-previous-window)
+	;	       . ((mode . (org-mode helpful-mode help-mode dired-mode))))  
+	;	   )
+
+     (add-to-list 'display-buffer-alist
+	  '((org-roam (display-buffer-reuse-window buffer-in-side-window)
+		(side . right)
+		(slot . 1)
+		(window-width . 0.33)
+		(reuseable-frames . nil)))
+           '((eq major-mode 'dired-mode)
+               (display-buffer-same-window))
+     )
+   #+end_src
 ** Counsel
    #+begin_src emacs-lisp
      (use-package counsel
@@ -157,6 +194,7 @@
 	(setq evil-want-intergration t)
 	(setq evil-want-keybinding nil)
 	(setq evil-want-C-u-scroll t)
+        (setq evil-want-fine-undo 'fine)
 
 	:config
 	(evil-mode 1)
@@ -237,7 +275,9 @@
 	      "ot" '((lambda() (interactive) (org-babel-tangle-file (buffer-file-name (current-buffer)))) :which-key "Tangle Current Buffer")
 	      "ob" '((lambda() (interactive) (org-roam-buffer-toggle)) :which-key "Toggle Roam Buffer")
 	      "of" '((lambda() (interactive) (org-roam-node-find)) :which-key "Find Node")
-	      "oi" '((lambda() (interactive) (org-roam-insert)) :which-key "Insert Node")
+	      "oi" '((lambda() (interactive) (org-roam-node-insert)) :which-key "Insert Node")
+	      "RET" '((lambda() (interactive) (org-open-at-point)) :which-key "Follow Link")
+	      "<backspace>" '((lambda() (interactive) (org-mark-ring-goto 1)) :which-key "Go Back")
 	     )
 
 	     (wil/leader-keys
@@ -265,6 +305,13 @@
 
 	     "o"  '(:ignore t :which-key "Org")
 
+	     "s"  '(:ignore t :which-key "Snippet")
+	     "sf" '((lambda() (interactive) (yas-visit-snippet-file)) :which-key "Snippet File")
+	     "sb" '((lambda() (interactive) (yas-describe-tables)) :which-key "Show Snippets for Buffer")
+
+
+	     "r"  '(:ignore t :which-key "Org-Roam")
+
 	     "d"  '(:ignore t :which-key "Debug")
 	     "ds" '((lambda() (interactive) (message "Step in")) :which-key "Step In")
 	     "do" '((lambda() (interactive) (message "Step Over")) :which-key "Step Over")
@@ -284,6 +331,9 @@
 	     "wc" '((lambda() (interactive) (delete-window)) :which-key "Close Window")
 	     "wsv" '((lambda() (interactive) (split-window-vertically)) :which-key "Split window vertically")
 	     "wsh" '((lambda() (interactive) (split-window-horizontally)) :which-key "Split window horizontally")
+	     "wtt" '((lambda() (interactive) (popper-toggle-type)) :which-key "Toggle Popper Type")
+	     "wtc" '((lambda() (interactive) (popper-cycle)) :which-key "Cycle Popper window")
+	     "wtl" '((lambda() (interactive) (popper-toggle-latest)) :which-key "Toggle Popper Latest")
 
 	     "f"  '(:ignore t :which-key "File")
 	     "fn" '((lambda() (interactive) (treemacs)) :which-key "Toggle file tree")
@@ -296,7 +346,8 @@
 	     "e"  '(:ignore t :which-key "Editor")
 	     "es" '((lambda() (interactive) (find-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Edit Settings")
 	     "ea" '((lambda() (interactive) (org-babel-tangle-file (expand-file-name "~/.dotfiles/emacs/emacs.org"))) :which-key "Apply Settings")
-	     "er" '((lambda() (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload Config"))
+	     "er" '((lambda() (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload Config")
+	     "ex" '(eval-last-sexp :which-key "Evaluate last lisp expression"))
 
 	     ;; Remove global keys I don't use
 	    (global-unset-key (kbd "C-h C-a"))   
@@ -634,6 +685,13 @@
    #+end_src
 
 ** Development
+*** Snippets
+   #+begin_src emacs-lisp
+     (use-package yasnippet)
+     (use-package yasnippet-snippets)
+
+     (yas-global-mode t)
+   #+end_src
 *** LSP Mode
    #+begin_src emacs-lisp
      (defun wil/lsp-mode-setup ()
@@ -657,18 +715,7 @@
      (use-package lsp-treemacs
        :after lsp)
    #+end_src
-*** Tree Sitter
-    #+begin_src emacs-lisp
-      (use-package tree-sitter
-	:init
-	(global-tree-sitter-mode)
-	:hook
-        (prog-mode . tree-sitter-hl-mode)
-      )
-      (use-package tree-sitter-langs
-	:after tree-sitter
-      )
-    #+end_src
+   
 *** Company Mode
     #+begin_src emacs-lisp
       (use-package company
@@ -687,11 +734,11 @@
     #+end_src
 *** Typescript
     #+begin_src emacs-lisp
-      (use-package typescript-mode
-       :mode "\\.ts\\'"
-       :hook (typescript-mode . lsp-deferred)
-       :config
-       (setq typescript-indent-level 2))
+      ;(use-package typescript-mode
+      ; :mode "\\.ts\\'"
+      ; :hook (typescript-mode . lsp-deferred)
+      ; :config
+      ; (setq typescript-indent-level 2))
     #+end_src
    
 *** Go
@@ -700,11 +747,21 @@
        :mode "\\.go\\'"
        :hook (go-mode . lsp-deferred))
     #+end_src
-
+    
 *** NIX
     #+begin_src emacs-lisp
     (use-package nix-mode
      :hook (nix-mode . lsp-deferred)
      :mode "\\.nix\\'")
-
     #+end_src
+
+
+
+
+
+
+
+
+
+    
+

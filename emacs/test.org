@@ -1,0 +1,20 @@
+* Test
+| Test | Bob |
+| ---- | --- |
+| hya  |   6 |
+| hxa  |   4 |
+| 7    |   5 |
+| hya  |     |
+|      |     |
+#+TBLFM: @4$1='(message "hxa")
+
+
+#+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
+| Sede      | Max cites | H-index |
+|-----------+-----------+---------|
+| Chile     |    257.72 |   21.39 |
+| Leeds     |    165.77 |   19.68 |
+| Sao Paolo |     71.00 |   11.50 |
+| Stockholm |    134.19 |   14.33 |
+| Morelia   |    257.56 |   17.67 |
+

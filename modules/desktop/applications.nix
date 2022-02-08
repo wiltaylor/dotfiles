@@ -29,6 +29,7 @@ in {
       neovimWT
       emacs-custom
       emacs-sqlite
+      gnuplot
       gcc
       sqlite
       nyxt

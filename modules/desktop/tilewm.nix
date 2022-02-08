@@ -69,7 +69,7 @@ in {
       type = types.listOf startupProgramType;
       default = [
         { command = "pkill kanshi; exec kanshi"; always = true; }
-        { command = "pkill .waybar-wrapped; /run/current-system/sw/bin/waybar;"; always = true; }
+        { command = "pkill waybar; waybar"; always = true; }
       ];
     };
 
@@ -173,6 +173,7 @@ in {
 
 
   config = mkIf desktopMode {
+
     sys.desktop.tilewm.extraConfig = ''
       # Extra Config
       set $mod ${cfg.modKey}
