@@ -64,6 +64,8 @@ in {
 
     wksCli
     rnix-lsp
+    bubblewrap
+    ventoy-bin
 
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];

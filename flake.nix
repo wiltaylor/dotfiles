@@ -5,6 +5,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     wks.url = "github:wiltaylor/nixwks";
     nixpkgs-overlay.url = "github:wiltaylor/nixpkgs-overlay";
+
     dev = {
       url = "github:wiltaylor/dev";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +17,7 @@
     };
   };
 
-  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, dev, ... }:
+  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, dev,  ... }:
   with builtins;
   let
     lib = import ./lib;
@@ -75,7 +76,7 @@
           sys.timeZone = "Australia/Brisbane";
 
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-          sys.virtualisation.vagrant.enable = true;
+          sys.virtualisation.vagrant.enable = false;
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;

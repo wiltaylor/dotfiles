@@ -19,7 +19,7 @@ in {
       xclip
       pkgs.xorg.xev
       feh
-      virt-manager
+      #virt-manager - Currently broken and moving away from it anyway
       foot
       libsixel
       ffmpeg-sixel
@@ -33,6 +33,7 @@ in {
       gcc
       sqlite
       nyxt
+      mupdf
     ];
   };
 }

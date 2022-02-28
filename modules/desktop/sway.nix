@@ -18,6 +18,7 @@ in {
         imv
         kanshi
         swaylock
+        swayidle
         slurp
         clipman
         wl-clipboard

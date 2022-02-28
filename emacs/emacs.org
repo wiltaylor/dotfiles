@@ -142,23 +142,6 @@
    #+end_src
 ** Window
    #+begin_src emacs-lisp
-		;   (setq display-buffer-base-action
-		;     '((display-buffer-reuse-window
-	;		display-buffer-reuse-mode-window
-	;		display-buffer-same-window
-	;	       display-buffer-in-previous-window)
-	;	       . ((mode . (org-mode helpful-mode help-mode dired-mode))))  
-	;	   )
-
-     (add-to-list 'display-buffer-alist
-	  '((org-roam (display-buffer-reuse-window buffer-in-side-window)
-		(side . right)
-		(slot . 1)
-		(window-width . 0.33)
-		(reuseable-frames . nil)))
-           '((eq major-mode 'dired-mode)
-               (display-buffer-same-window))
-     )
    #+end_src
 ** Counsel
    #+begin_src emacs-lisp
@@ -494,14 +477,6 @@
        :hook (prog-mode . rainbow-delimiters-mode))
    #+end_src
 
-** Magit
-   #+begin_src emacs-lisp
-     ;;Git intergration
-     (use-package magit
-       :custom
-       (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-   #+end_src
-
 ** Org Mode
    #+begin_src emacs-lisp
      ;; Does intergration with github and gitlab
@@ -540,13 +515,17 @@
 ** Org Roam
    #+begin_src emacs-lisp
      (use-package org-roam
+       :ensure t
        :init
        (setq org-roam-v2-ack t)
+       (setq org-roam-mode-section-functions
+         (list #'org-roam-backlinks-section
+            #'org-roam-reflinks-section
+            ;; #'org-roam-unlinked-references-section
+         ))
        :custom
        (org-roam-directory "~/vaults/roam")
-       :bind (("C-c n l" . org-roam-buffer-toggle)
-	      ("C-c n f" . org-roam-node-find)
-	      ("C-c n i" . org-roam-node-insert))
+       (org-roam-completion-everywhere t)
        :config
        (org-roam-setup))
    #+end_src

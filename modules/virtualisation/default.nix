@@ -41,12 +41,13 @@ in {
     environment.systemPackages = with pkgs; [
       (mkIf cfg.vagrant.enable vagrant)
       (mkIf cfg.appImage.enable appimage-run)
+      (mkIf cfg.kvm.enable quickemu)
     ];
 
     virtualisation.libvirtd.enable = cfg.kvm.enable;
     virtualisation.docker.enable = cfg.docker.enable;
 
-    virtualisation.virtualbox.host.enable = cfg.virtualBox.enable;
+    #virtualisation.virtualbox.host.enable = cfg.virtualBox.enable;
 
     boot.kernelModules = [
       (mkIf (cpuType == "amd") "kvm-amd")
