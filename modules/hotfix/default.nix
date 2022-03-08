@@ -14,6 +14,12 @@ in {
       default = false;
       description = "Patch kernel to lower priority of No irc handler for vector";
     };
+
+    CVE-2022-0847 = mkOption {
+      type = types.bool;
+      default = false;
+      description = "CVE-2022-0847 vuln. This is patched in 5.16.11, 5.15.25 and 5.10.102";
+    };
   };
 
   config = {
@@ -23,9 +29,17 @@ in {
 
     environment.pathsToLink = ["/libexec" ];
 
-    boot.kernelPatches = [ (mkIf cfg.kernelVectorWarning {
+    boot.kernelPatches = [ 
+    (mkIf cfg.kernelVectorWarning {
       name = "kernelVectorWarning";
       patch = ./no-irq-handler-for-vector.patch;
-    })]; 
+    })
+
+    (mkIf cfg.CVE-2022-0847 {
+      name = "CVE-2022-0847";
+      patch = ./CVE-2022-0847.patch;
+    })
+
+    ]; 
   };
 }

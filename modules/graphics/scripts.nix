@@ -30,7 +30,7 @@ let
         fi
       ;;
       "winman")
-        ${pkgs.xlibs.xprop}/bin/xprop -root -notype | grep "_NET_WM_NAME =" | cut -d '"' -f2
+        ${pkgs.xorg.xprop}/bin/xprop -root -notype | grep "_NET_WM_NAME =" | cut -d '"' -f2
       ;;
       "screenshot")
         if [[ "$XDG_SESSION" -eq "wayland" ]]; then

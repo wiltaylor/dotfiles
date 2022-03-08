@@ -58,6 +58,7 @@
           services.xserver.displayManager.defaultSession = "sway";
 
           sys.hotfix.kernelVectorWarning = true;
+          sys.hotfix.CVE-2022-0847 = true;
 
           networking.interfaces."enp5s0" = { useDHCP = true; };
           networking.networkmanager.enable = true;

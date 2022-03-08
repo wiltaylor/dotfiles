@@ -9,7 +9,7 @@ in {
       kindle = mkEnableOption "Enable Amazon Kindle";
     };
 
-    config = lib.mkIf (false) (let
+    config = let
       g810pkg = pkgs.g810-led;
     in {
       environment.systemPackages = [
@@ -79,5 +79,5 @@ in {
         "/etc/g810-led/group_keys".source = "${g810pkg}/etc/g810-led/samples/group_keys";
         "/etc/g810-led/reboot".source = "${g810pkg}/etc/g810-led/sampels/all_off";
       };
-    });
+    };
 }
