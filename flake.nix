@@ -58,7 +58,7 @@
           services.xserver.displayManager.defaultSession = "sway";
 
           sys.hotfix.kernelVectorWarning = true;
-          sys.hotfix.CVE-2022-0847 = true;
+          #sys.hotfix.CVE-2022-0847 = true;
 
           networking.interfaces."enp5s0" = { useDHCP = true; };
           networking.networkmanager.enable = true;
@@ -93,7 +93,9 @@
           sys.graphics.v4l2loopback = true;
           sys.graphics.gpuSensorCommand = ''sensors | grep "junction:" | awk '{print $2}' '';
 
-          sys.audio.server = "pipewire";
+          #sys.audio.server = "pipewire";
+
+          sys.audio.server = "pulse";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
 
