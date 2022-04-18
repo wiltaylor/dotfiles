@@ -23,6 +23,7 @@ in {
         clipman
         wl-clipboard
         grim
+        wlr-randr
       ];
     };
 

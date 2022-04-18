@@ -66,9 +66,13 @@
 
           sys.desktop.kanshi.profiles = [
             {
-              "DP-1" = "position 0,0";
+              "DP-2" = "position 0,0";
               "HDMI-A-1" = "position 3840,0";
-              "DP-2" = "position 7680,0";
+              "DP-1" = "position 7680,0";
+            }
+
+            {
+              "DP-1" = "position 0,0";
             }
           ];
 
@@ -93,9 +97,8 @@
           sys.graphics.v4l2loopback = true;
           sys.graphics.gpuSensorCommand = ''sensors | grep "junction:" | awk '{print $2}' '';
 
-          #sys.audio.server = "pipewire";
+          sys.audio.server = "pipewire";
 
-          sys.audio.server = "pulse";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
 

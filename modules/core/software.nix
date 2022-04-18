@@ -66,6 +66,8 @@ in {
     rnix-lsp
     bubblewrap
     ventoy-bin
+    rtw88-firmware
+    unixtools.xxd
 
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];
