@@ -68,6 +68,7 @@ in {
     ventoy-bin
     rtw88-firmware
     unixtools.xxd
+    ventoy-bin
 
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];
