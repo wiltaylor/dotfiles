@@ -99,11 +99,19 @@ in {
           default-key ${cfg.gpgKeyId}
         '';
       };
+
+
+      gpgAgent = {
+        path = ".gnupg/gpg-agent.conf";
+        text = ''
+          pinentry-program /run/current-system/sw/bin/pinentry-qt
+        '';
+      };
     };
 
     system.activationScripts = {
       gpgpubKey.text = mkIf cfg.yubikey ''
-        gpg --import ${./public.asc}
+        ${pkgs.gnupg}/bin/gpg --import ${./public.asc}
       '';
     };
   };

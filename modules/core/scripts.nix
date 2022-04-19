@@ -147,6 +147,11 @@ let
     "volmute")
       mutevol
     ;;
+    "resetyk")
+      gpg-connect-agent "scd serialno" "learn --force" /bye
+      ssh-add
+      gpgconf --reload gpg-agent
+    ;;
     *)
       echo "Usage:"
       echo "sys command"
@@ -164,6 +169,7 @@ let
       echo "volup - volume up"
       echo "voldown - volume down"
       echo "volmute - toggle mute"
+      echo "resetyk - Reset yubikey allowing you to put a different key in"
     ;;
     esac
   '';

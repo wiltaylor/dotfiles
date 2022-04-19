@@ -25,13 +25,13 @@ in {
 
     signingKey = mkOption {
       type = types.str;
-      default = "0xEC571018542D2ACC";
+      default = "0xB6840C8AFFAD67EC";
       description = "GPG Key to use when signing commits";
     };
 
     signCommits = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Do you want to sign GPG commits by default";
     };
 
