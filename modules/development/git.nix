@@ -19,7 +19,7 @@ in {
 
     email = mkOption {
       type = types.str;
-      default = "cert@wiltaylor.dev";
+      default = "email@wiltaylor.dev";
       description = "Git email address";
     };
 
