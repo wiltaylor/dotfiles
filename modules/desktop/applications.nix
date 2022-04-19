@@ -22,7 +22,6 @@ in {
       #virt-manager - Currently broken and moving away from it anyway
       foot
       libsixel
-      ffmpeg-sixel
 
       dfeet
       pcmanfm
