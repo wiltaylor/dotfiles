@@ -53,6 +53,7 @@ in {
     nmap
     ntfsprogs
     samba
+    manix
 
     #neovimWT
     lm_sensors
