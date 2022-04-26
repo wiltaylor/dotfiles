@@ -169,6 +169,12 @@ in {
       type = types.lines;
       default = "";
     };
+
+    sleepTimeout = mkOption {
+      description = "Time in seconds before screen lock kicks in.";
+      type = types.int;
+      default = 1800;
+    };
   };
 
 
@@ -229,6 +235,9 @@ in {
 
       # Wayland Key Bindings
       ${AllBindingToCfg cfg.keyBindingsWayland}
+
+      # Idle config
+      exec swayidle -w ${toString cfg.sleepTimeout} 'swaylock -f'
     '';
 
     sys.desktop.tilewm.extraConfigi3 = ''

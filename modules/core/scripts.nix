@@ -16,13 +16,27 @@ let
  
       pushd ~/.dotfiles
       if [ -z "$2" ]; then
-        sudo nixos-rebuild switch --flake '.#'
+        # Prompt for password before doing build so it doesn't sit waiting and time out.
+        sudo ls > /dev/null
+        nixos-rebuild build --flake '.#'
+        sudo ./result/bin/switch-to-configuration switch
 
       elif [ $2 = "--boot" ]; then
-        sudo nixos-rebuild boot --flake '.#'
+
+        # Prompt for password before doing build so it doesn't sit waiting and time out.
+        sudo ls > /dev/null
+
+        nixos-rebuild build --flake '.#'
+        sudo ./result/bin/switch-to-configuration boot
       elif [ $2 = "--test" ]; then
-        sudo nixos-rebuild test --flake '.#'
+
+        # Prompt for password before doing build so it doesn't sit waiting and time out.
+        sudo ls > /dev/null
+
+        nixos-rebuild build --flake '.#'
+        sudo ./result/bin/switch-to-configuration test
       elif [ $2 = "--check" ]; then
+
         nixos-rebuild dry-activate --flake '.#'
       else
         echo "Unknown option $2"
