@@ -13,6 +13,10 @@ let
       echo "--------------------------------------------------------------------------------"
       echo " Applying Machine Settings"
       echo "--------------------------------------------------------------------------------"
+
+      # There is a security fix in git that prevents you from building a repo that is not owned by root when you are root.
+      # https://github.com/NixOS/nixpkgs/issues/169193
+      # Because of this I am calling nix-rebuild build and then manually calling it's activation script.
  
       pushd ~/.dotfiles
       if [ -z "$2" ]; then
