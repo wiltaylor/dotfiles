@@ -9,12 +9,35 @@ let
 
       adjustvol() {
         SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
+        VOL=$(pactl list sinks | grep '^[[:space:]]Volume:' | awk '{print substr($5, 1, length($5)-1)}')
 
-        ${pkgs.pulseaudio}/bin/pactl set-sink-volume $SINK $1
+        if [[ $VOL -gt 0 ]]; then
+          VSTR="+$1%"
+        else
+          VSTR="$1%"
+        fi
+
+        if [ $((VOL + $1)) -gt 100 ]; then
+          VSTR="100%"
+        fi
+
+        if [ $((VOL + $1)) -lt 0 ]; then
+          VSTR="0%"
+        fi
+
+        ${pkgs.pulseaudio}/bin/pactl set-sink-volume $SINK $VSTR
+      }
+
+      vol() {
+        SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
+        VOL=$(pactl list sinks | grep '^[[:space:]]Volume:' | awk '{print substr($5, 1, length($5)-1)}')
+
+        echo $VOL
       }
 
       mutevol() {
         SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
+        VOL=$(pactl list sinks | grep '^[[:space:]]Volume:' | awk '{print substr($5, 1, length($5)-1)}')        
 
         ${pkgs.pulseaudio}/bin/pactl set-sink-mute $SINK toggle
       }
@@ -51,13 +74,16 @@ let
         ${pkgs.gnome3.zenity}/bin/zenity --about
       ;;
       "volup")
-        adjustvol "+5%"
+        adjustvol 5
       ;;
       "voldown")
-        adjustvol "-5%"
+        adjustvol -5
       ;;
       "volmute")
         mutevol
+      ;;
+      "vol")
+        vol
       ;;
       *)
         echo "Usage:"
@@ -71,6 +97,7 @@ let
         echo "volup - volume up"
         echo "voldown - volume down"
         echo "volmute - toggle mute"
+        echo "vol - Prints the current volume"
       ;;
       esac
 

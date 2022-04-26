@@ -24,6 +24,8 @@ in {
         wl-clipboard
         grim
         wlr-randr
+        libinput
+        wev
       ];
     };
 

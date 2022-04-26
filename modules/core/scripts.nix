@@ -31,18 +31,6 @@ let
       popd
     }
 
-    adjustvol() {
-      SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
-
-      ${pkgs.pulseaudio}/bin/pactl set-sink-volume $SINK $1
-    }
-
-    mutevol() {
-      SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
-
-      ${pkgs.pulseaudio}/bin/pactl set-sink-mute $SINK toggle
-    }
-
     if [ -n "$INNIXSHELLHOME" ]; then
       echo "You are in a nix shell that redirected home!"
       echo "SYS will not work from here properly."
@@ -137,16 +125,6 @@ let
       "./result/bin/run-$1-vm"
       popd
     ;;
-    "volup")
-      adjustvol "+5%"
-    ;;
-
-    "voldown")
-      adjustvol "-5%"
-    ;;
-    "volmute")
-      mutevol
-    ;;
     "resetyk")
       gpg-connect-agent "scd serialno" "learn --force" /bye
       ssh-add
@@ -166,9 +144,6 @@ let
       echo "apply - Applies current system configuration in dotfiles."
       echo "exec - executes a command"
       echo "vm {config} - Starts a vm to test the target config"
-      echo "volup - volume up"
-      echo "voldown - volume down"
-      echo "volmute - toggle mute"
       echo "resetyk - Reset yubikey allowing you to put a different key in"
     ;;
     esac
