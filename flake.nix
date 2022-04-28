@@ -159,6 +159,8 @@
           sys.cpu.sensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "intel";
+
+          sys.graphics.gpuSensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.audio.server = "pipewire";
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;

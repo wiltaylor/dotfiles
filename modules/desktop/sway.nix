@@ -65,7 +65,7 @@ in {
               color: rgba(255, 255, 255, 99);
           }
 
-          #memory, #cpu, #pulseaudio, #custom-disk_root, #clock, #tray, #network, #custom-cputemp, #custom-gputemp, #custom-launcher {
+          #memory, #cpu, #pulseaudio, #custom-disk_root, #clock, #tray, #network, #custom-cputemp, #custom-gputemp, #custom-launcher, #battery {
               padding: 0 0.2rem 0 0.3rem;
               margin: 0.3rem;
           }
@@ -78,7 +78,7 @@ in {
           {
             "layer": "top",
             "modules-left": ["custom/launcher", "sway/workspaces", "sway/mode"],
-            "modules-right": [ "custom/gputemp", "custom/cputemp", "network", "memory", "cpu", "pulseaudio", "custom/disk_root", "tray","batter", "clock" ],
+            "modules-right": [ "custom/gputemp", "custom/cputemp", "network", "memory", "cpu", "pulseaudio", "custom/disk_root", "tray", "battery", "clock" ],
             "sway/window": {
               "max-length": 50
             },
@@ -146,13 +146,15 @@ in {
               "tooltip": false
             },
             "battery": {
+                "bat": "BAT0",
+                "interval": 60,
                 "states": {
-                    "good": 75,
                     "warning": 30,
                     "critical": 15
                 },
-                "format": "{icon} {capacity}%",
-                "format-icons": ["", "", "", "", ""]
+                "format": "{capacity}% {icon}",
+                "format-icons": ["", "", "", "", ""],
+                "max-length": 25
             },
           }
         '';
