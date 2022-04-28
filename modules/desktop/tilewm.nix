@@ -118,7 +118,6 @@ in {
         { key = "$mod+Shift+Up"; command = "move up"; }
         { key = "$mod+Shift+Down"; command = "move down"; }
         { key = "$mod+Shift+q"; command = "kill"; }
-        { key = "$mod+d"; command = "exec ${binDir}/rofi -show drun"; }
         { key = "$mod+f"; command = "fullscreen toggle"; }
         { key = "$mod+h"; command = "split h"; }
         { key = "$mod+v"; command = "split v"; }
@@ -140,6 +139,8 @@ in {
         { key = "$mod+Shift+r"; command = "reload"; }
         { key = "$mod+Return"; command = "exec ${binDir}/foot"; }
         { key = "$mod+t"; command = "input type:touchpad events toggle enabled disabled"; }
+        { key = "$mod+shift+e"; command = "exec ${binDir}/wofi-emoji"; }
+        { key = "$mod+d"; command = "exec ${binDir}/wofi --show drun --allow-images"; }
       ];
     };
 
@@ -149,6 +150,7 @@ in {
       default = [
         { key = "$mod+Return"; command = "exec ${binDir}/alacritty"; }
         { key = "$mod+Shift+r"; command = "restart"; }
+        { key = "$mod+d"; command = "exec ${binDir}/rofi -show drun"; }
       ];
     };
 

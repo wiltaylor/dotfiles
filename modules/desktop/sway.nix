@@ -30,13 +30,55 @@ in {
     };
 
     sys.users.allUsers.files = {
+      swaybarcss = {
+        path = ".config/waybar/style.css";
+        text = ''
+          * {
+            color: rgba(255, 255, 255, 0.77);
+            border: 0px;
+            font-family:"system-ui";
+            font-size: 0.77rem;
+            margin-right: 0.2rem;
+            margin-left: 0.2rem;
+            padding: 0.02rem;
+            padding-bottom:0.01rem;
+            padding-top:0.01rem;
+          }
+   
+          window#waybar {
+              background: rgba(10, 10, 10, 0.66);
+          }
+
+          #workspaces button {
+              color: rgba(99, 19, 199, 4);
+              border-color: rgba(99, 19, 199, 9);
+              border-style: solid;
+          }     
+
+
+          #workspaces button.focused {
+            background-color: rgba(99, 19, 199, 45);
+            border-style: solid;
+          }
+
+          #mode {
+              color: rgba(255, 255, 255, 99);
+          }
+
+          #memory, #cpu, #pulseaudio, #custom-disk_root, #clock, #tray, #network, #custom-cputemp, #custom-gputemp, #custom-launcher {
+              padding: 0 0.2rem 0 0.3rem;
+              margin: 0.3rem;
+          }
+        '';
+      };
+
       swaybarconfig = {
         path = ".config/waybar/config";
         text = ''
           {
             "layer": "top",
-            "modules-left": ["sway/workspaces", "sway/mode"],
-            "modules-right": [ "network", "memory", "cpu", "pulseaudio", "custom/disk_root", "tray", "clock" ],
+            "modules-left": ["custom/launcher", "sway/workspaces", "sway/mode"],
+            "modules-right": [ "custom/gputemp", "custom/cputemp", "network", "memory", "cpu", "pulseaudio", "custom/disk_root", "tray","batter", "clock" ],
             "sway/window": {
               "max-length": 50
             },
@@ -87,12 +129,36 @@ in {
                 "tooltip-format-ethernet": "{ifname} ",
                 "tooltip-format-disconnected": "Disconnected",
                 "max-length": 50
-            }
+            },
+            "custom/cputemp": {
+              "format": "CPU: {}  ",
+              "interval": 30,
+              "exec": "desktop cputemp"
+            },
+            "custom/gputemp": {
+              "format": "GPU: {}  ",
+              "interval": 30,
+              "exec": "desktop gputemp"
+            },
+            "custom/launcher": {
+              "format":"  ",
+              "on-click": "exec wofi --show drun -iI",
+              "tooltip": false
+            },
+            "battery": {
+                "states": {
+                    "good": 75,
+                    "warning": 30,
+                    "critical": 15
+                },
+                "format": "{icon} {capacity}%",
+                "format-icons": ["", "", "", "", ""]
+            },
           }
         '';
       };
 
-      swatconfig = {
+      swayconfig = {
         path = ".config/sway/config";
         text = ''
           ${config.sys.desktop.tilewm.extraConfig}

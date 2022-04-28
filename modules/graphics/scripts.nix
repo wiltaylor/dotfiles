@@ -85,6 +85,12 @@ let
       "vol")
         vol
       ;;
+      "cputemp")
+        ${config.sys.cpu.sensorCommand}
+      ;;
+      "gputemp")
+        ${config.sys.graphics.gpuSensorCommand}
+      ;;
       *)
         echo "Usage:"
         echo "desktop command"
@@ -98,6 +104,8 @@ let
         echo "voldown - volume down"
         echo "volmute - toggle mute"
         echo "vol - Prints the current volume"
+        echo "cputemp - Prints current cpu temp"
+        echo "gputemp - Prints current gpu temp"
       ;;
       esac
 

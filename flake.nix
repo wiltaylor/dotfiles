@@ -89,7 +89,7 @@
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;
-          sys.cpu.sensorCommand = ''sensors | grep "Tdie" | awk '{print $2}' '';
+          sys.cpu.sensorCommand = ''sensors | grep "Tctl:" | awk '{print $2}' '';
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "amd";
           sys.graphics.displayManager = "gdm";

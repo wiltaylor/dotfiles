@@ -15,6 +15,7 @@
     ./sway.nix
     ./kanshi.nix
     ./tilewm.nix
+    ./wofi-emoji.nix
   ];
 
 
