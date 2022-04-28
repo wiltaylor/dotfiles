@@ -69,7 +69,6 @@ in {
       type = types.listOf startupProgramType;
       default = [
         { command = "pkill kanshi; exec kanshi"; always = true; }
-        { command = "pkill waybar; waybar"; always = true; }
       ];
     };
 
@@ -180,6 +179,10 @@ in {
 
   config = mkIf desktopMode {
 
+    environment.systemPackages = with pkgs; [
+      bibata-cursors # Material design style cursors.
+    ];
+
     sys.desktop.tilewm.extraConfig = ''
       # Extra Config
       set $mod ${cfg.modKey}
@@ -238,6 +241,14 @@ in {
 
       # Idle config
       exec swayidle -w ${toString cfg.sleepTimeout} 'swaylock -f'
+
+      # Bar
+      bar {
+        swaybar_command waybar
+      }
+
+      # Cursor theme
+      seat seat0 xcursor_theme Bibata-Modern-Classic 32
     '';
 
     sys.desktop.tilewm.extraConfigi3 = ''
