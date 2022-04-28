@@ -197,7 +197,6 @@ in {
       focus_on_window_activation smart
       mouse_warping output
       workspace_layout default
-      workspace_auto_back_and_forth no
       focus_on_window_activation smart
       mouse_warping output
       workspace_layout default

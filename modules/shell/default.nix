@@ -51,23 +51,21 @@ in {
         bindkey "$terminfo[kend]" end-of-line # End
         bindkey "$terminfo[kich1]" overwrite-mode # Insert
         bindkey "$terminfo[kdch1]" delete-char # Delete
-        bindkey "$terminfo[kcuu1]" up-line-or-history # Up
-        bindkey "$terminfo[kcuu1]" up-line-or-history # Up
         bindkey "$terminfo[kcub1]" backward-char # Left
         bindkey "$terminfo[kcuf1]" forward-char # Right
-
-        autoload -U up-line-or-beginning-search
-        autoload -U down-line-or-beginning-search
-        zle -N up-line-or-beginning-search
-        zle -N down-line-or-beginning-search
-        bindkey "^[[A" up-line-or-beginning-search # Up
-        bindkey "^[[B" down-line-or-beginning-search # Down
       '';
 
       promptInit = ''
         autoload -U promptinit; promptinit
         prompt spaceship
-      '';
+
+        autoload -U up-line-or-beginning-search
+        autoload -U down-line-or-beginning-search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
+        bindkey "$key[Up]" up-line-or-beginning-search
+        bindkey "$key[Down]" down-line-or-beginning-search
+              '';
 
       setOptions = [
         "autocd"
