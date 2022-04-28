@@ -210,6 +210,7 @@ in {
       for_window [class="Lxappearance"] floating enable sticky enable border
       for_window [class="Pavucontrol"] floating enable
       for_window [class="qt5ct"] floating enable sticky enable border normal
+      for_window [app_id="pinentry-qt"] floating enable
 
       floating_minimum_size 500 x 300
       floating_maximum_size 2000 x 1500
