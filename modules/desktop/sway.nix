@@ -65,10 +65,11 @@ in {
               color: rgba(255, 255, 255, 99);
           }
 
-          #memory, #cpu, #pulseaudio, #custom-disk_root, #clock, #tray, #network, #custom-cputemp, #custom-gputemp, #custom-launcher, #battery {
+          #memory, #cpu, #pulseaudio, #custom-disk_root, #clock, #tray, #network, #custom-cputemp, #custom-gputemp, #custom-launcher, #battery, .hvbut {
               padding: 0 0.2rem 0 0.3rem;
               margin: 0.3rem;
           }
+
         '';
       };
 
