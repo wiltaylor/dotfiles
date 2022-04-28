@@ -139,6 +139,7 @@ in {
       default = [
         { key = "$mod+Shift+r"; command = "reload"; }
         { key = "$mod+Return"; command = "exec ${binDir}/foot"; }
+        { key = "$mod+t"; command = "input type:touchpad events toggle enabled disabled"; }
       ];
     };
 
