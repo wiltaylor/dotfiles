@@ -16,6 +16,7 @@
     ./kanshi.nix
     ./tilewm.nix
     ./wofi-emoji.nix
+    ./udisk.nix
   ];
 
 

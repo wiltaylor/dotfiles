@@ -64,6 +64,7 @@
           networking.networkmanager.enable = true;
           networking.useDHCP = false; 
 
+          sys.desktop.usb.udisk2 = true;
           sys.desktop.kanshi.profiles = [
             {
               "DP-2" = "position 0,0";
@@ -150,6 +151,7 @@
 
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
 
+          sys.desktop.usb.udisk2 = true;
           sys.kernelPackage = pkgs.linuxPackages_5_10;
           sys.graphics.displayManager = "gdm";
           sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
