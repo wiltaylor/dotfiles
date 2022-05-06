@@ -66,8 +66,6 @@ exec - executes a command from any nix pkg without permanantly installing it.
 vm {config} - Builds one of the machine configs and runs it in a vm.
 ```
 # License
-The files and scripts in this repository are licensed under the MIT License, which is a very 
-permissive license allowing you to use, modify, copy, distribute, sell, give away, etc. the software. 
-In other words, do what you want with it. The only requirement with the MIT License is that the license 
-and copyright notice m:w
-ust be provided with the software.
+All content in my dotfiles is now released under a [CC0 Public Domain License](LICENSE).
+
+What this means is you are free to use whatever you want with the code without any requirment of attribution.
