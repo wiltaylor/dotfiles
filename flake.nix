@@ -82,7 +82,7 @@
           sys.timeZone = "Australia/Brisbane";
 
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-          sys.virtualisation.vagrant.enable = false;
+          sys.virtualisation.vagrant.enable = true;
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;
