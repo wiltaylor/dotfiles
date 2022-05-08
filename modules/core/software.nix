@@ -54,6 +54,7 @@ in {
     ntfsprogs
     samba
     manix
+    exfat
 
     #neovimWT
     lm_sensors
