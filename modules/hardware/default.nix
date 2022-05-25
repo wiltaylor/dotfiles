@@ -16,6 +16,8 @@ in {
         (mkIf (cfg.g810led) pkgs.g810-led)
         (mkIf (cfg.kindle) pkgs.libmtp)
         (mkIf (cfg.kindle) pkgs.gvfs)
+        pkgs.piper
+        pkgs.libratbag
       ];
 
       boot.kernelModules = [

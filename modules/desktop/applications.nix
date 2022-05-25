@@ -32,6 +32,8 @@ in {
       sqlite
       nyxt
       mupdf
+      pkgs.xorg.xhost
+      polymc
     ];
   };
 }
