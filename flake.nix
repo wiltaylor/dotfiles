@@ -57,7 +57,7 @@
 
           services.xserver.displayManager.defaultSession = "sway";
 
-          sys.hotfix.kernelVectorWarning = true;
+          sys.hotfix.kernelVectorWarning = true; 
           #sys.hotfix.CVE-2022-0847 = true;
 
           networking.interfaces."enp5s0" = { useDHCP = true; };
@@ -76,8 +76,9 @@
               "DP-1" = "position 0,0";
             }
           ];
-
-          sys.kernelPackage = pkgs.linuxPackages_zen;
+          
+          #Currently broken waiting for some updates.
+          #sys.kernelPackage = pkgs.linuxPackages_zen;
           sys.locale = "en_AU.UTF-8";
           sys.timeZone = "Australia/Brisbane";
 
