@@ -25,5 +25,7 @@ in {
       ];
 
       services.udev.packages = with pkgs; [ g810-led];
+
+      services.fwupd.enable = true;
     };
 }
