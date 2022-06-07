@@ -136,7 +136,7 @@
       zeus = lib.mkNixOSConfig {
         name = "zeus";
         system = "x86_64-linux";
-        inherit nixpkgs allpkgs;
+        inherit nixpkgs allPkgs;
 
         cfg = let 
           pkgs = allPkgs.x86_64-linux;
