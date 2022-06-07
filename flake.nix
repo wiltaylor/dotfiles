@@ -141,7 +141,7 @@
         cfg = let 
           pkgs = allPkgs.x86_64-linux;
         in {
-          boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
+          boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
 
           networking.interfaces."wlo1" = { useDHCP = true; };
           networking.wireless.interfaces = [ "wol1" ];
