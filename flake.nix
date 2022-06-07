@@ -17,6 +17,7 @@
     };
   };
 
+
   outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, dev,  ... }:
   with builtins;
   let
@@ -143,8 +144,8 @@
         in {
           boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
 
-          networking.interfaces."wlo1" = { useDHCP = true; };
-          networking.wireless.interfaces = [ "wol1" ];
+          networking.interfaces."wlp164s0" = { useDHCP = true; };
+          networking.wireless.interfaces = [ "wlp164s0" ];
           networking.networkmanager.enable = true;
           networking.useDHCP = false; 
 
