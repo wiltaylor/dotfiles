@@ -33,7 +33,28 @@ in {
       nyxt
       mupdf
       pkgs.xorg.xhost
+
       polymc
+
+      mpv
+      blender
+      gimp
+      youtube-dl
+      obs-studio
+      kdenlive
+      tenacity
+      ardour
+      firefox
+      chromium
+      xonotic
+      quakespasm
+      superTuxKart
+      openmw
+      wpsoffice
+      onlyoffice-bin
+      libreoffice
+      obsidian
+      
     ];
   };
 }

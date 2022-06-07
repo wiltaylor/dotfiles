@@ -121,9 +121,9 @@ in {
         { key = "$mod+f"; command = "fullscreen toggle"; }
         { key = "$mod+h"; command = "split h"; }
         { key = "$mod+v"; command = "split v"; }
-        { key = "$mod+o"; command = "exec wks run orgSys obsidian"; }
+        { key = "$mod+o"; command = "exec obsidian"; }
         { key = "$mod+space"; command = "floating toggle"; }
-        { key = "$mod+w"; command = "exec wks run browsers firefox"; }
+        { key = "$mod+w"; command = "exec firefox"; }
         { key = "XF86AudioLowerVolume"; command = "exec ${binDir}/desktop voldown"; }
         { key = "XF86AudioMute"; command = "exec ${binDir}/desktop volmute"; }
         { key = "XF86AudioRaiseVolume"; command = "exec ${binDir}/desktop volup"; }
