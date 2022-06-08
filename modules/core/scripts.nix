@@ -22,16 +22,14 @@ let
       if [ -z "$2" ]; then
         # Prompt for password before doing build so it doesn't sit waiting and time out.
         sudo ls > /dev/null
-        nixos-rebuild build --flake '.#'
-        sudo ./result/bin/switch-to-configuration switch
+        sudo nixos-rebuild switch --flake '.#'
 
       elif [ $2 = "--boot" ]; then
 
         # Prompt for password before doing build so it doesn't sit waiting and time out.
         sudo ls > /dev/null
 
-        nixos-rebuild build --flake '.#'
-        sudo ./result/bin/switch-to-configuration boot
+        sudo nixos-rebuild boot --flake '.#'
       elif [ $2 = "--test" ]; then
 
         # Prompt for password before doing build so it doesn't sit waiting and time out.
