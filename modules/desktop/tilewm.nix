@@ -243,7 +243,10 @@ in {
       ${AllBindingToCfg cfg.keyBindingsWayland}
 
       # Idle config
-      exec swayidle -w ${toString cfg.sleepTimeout} 'swaylock -f'
+      exec swayidle -w \
+	    timeout 1800 'swaylock -f' \
+    	timeout 1805 'swaymsg "output * dpms off"' \
+    	resume 'swaymsg "output * dpms on"'
 
       # Bar
       bar {
