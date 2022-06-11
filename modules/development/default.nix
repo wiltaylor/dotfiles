@@ -1,4 +1,7 @@
 {pkgs, lib, config, ...}:
 {
-  imports = [ ./git.nix ];
+  imports = [ 
+    ./git.nix 
+    ./infra.nix 
+];
 }
