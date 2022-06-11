@@ -16,6 +16,10 @@ in {
       };
     };
 
+    packer = {
+      enable = mkEnableOption "Enable Packer";
+    };
+
     kvm = {
       enable = mkEnableOption "Enable KVM";
     };
@@ -42,6 +46,7 @@ in {
       (mkIf cfg.vagrant.enable vagrant)
       (mkIf cfg.appImage.enable appimage-run)
       (mkIf cfg.kvm.enable quickemu)
+      (mkIf cfg.packer.enable packer)
     ];
 
     virtualisation.libvirtd.enable = cfg.kvm.enable;

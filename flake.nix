@@ -89,6 +89,8 @@
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.appImage.enable = true;
           sys.virtualisation.virtualBox.enable = true;
+          sys.virtualisation.packer.enable = true;
+
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
           sys.cpu.threadsPerCore = 2;
@@ -160,22 +162,24 @@
           sys.cpu.type = "intel";
           sys.cpu.cores = 4;
           sys.cpu.threadsPerCore = 2;
-          sys.cpu.sensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
+          sys.cpu.sensorCommand = ''sensors | grep "Package id 0:" | awk '{print $4}' | sed 's/+//' '';
           sys.biosType = "efi";
           sys.graphics.primaryGPU = "intel";
 
           sys.graphics.gpuSensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.audio.server = "pipewire";
           sys.virtualisation.docker.enable = true;
+          sys.virtualisation.vagrant.enable = true;
+          sys.virtualisation.kvm.enable = true;
           sys.virtualisation.appImage.enable = true;
-
+          sys.virtualisation.packer.enable = true;
+          
           sys.desktop.kanshi.profiles = [
             {
               "eDP-1" = "position 0,0";
             }
           ];
 
-          sys.virtualisation.kvm.enable = true;
           sys.bluetooth = true;
 
           sys.security.yubikey = true;
