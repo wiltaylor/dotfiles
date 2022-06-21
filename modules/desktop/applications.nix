@@ -54,7 +54,9 @@ in {
       onlyoffice-bin
       libreoffice
       obsidian
-      
+      steam
+      protonup
+      jetbrains.goland
     ];
   };
 }
