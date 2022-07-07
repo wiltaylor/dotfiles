@@ -80,6 +80,7 @@ in {
       dotnet-sdk
       dotnet-runtime
       mono
+      bottles
     ];
   };
 }
