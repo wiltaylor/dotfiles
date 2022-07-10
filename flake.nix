@@ -173,6 +173,7 @@
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.appImage.enable = true;
           sys.virtualisation.packer.enable = true;
+          sys.virtualisation.flatpak.enable = true;
           
           sys.desktop.kanshi.profiles = [
             {

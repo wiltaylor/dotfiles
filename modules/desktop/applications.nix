@@ -81,6 +81,7 @@ in {
       dotnet-runtime
       mono
       bottles
+      distrobox
     ];
   };
 }
