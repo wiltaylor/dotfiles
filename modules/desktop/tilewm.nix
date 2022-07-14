@@ -68,6 +68,7 @@ in {
       description = "List of programs to startup with wayland window manager.";
       type = types.listOf startupProgramType;
       default = [
+        { command = "exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK"; always = false; }
         { command = "pkill kanshi; exec kanshi"; always = true; }
       ];
     };
