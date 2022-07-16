@@ -67,9 +67,14 @@ in {
       vagrant.text = ''
         ${pkgs.vagrant}/bin/vagrant plugin install vagrant-libvirt
       '';
+
+      flatpak.text = ''
+        ${if cfg.flatpak.enable then "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo" else ""}
+      '';
     };
 
     services.flatpak.enable = cfg.flatpak.enable;
+    xdg.portal.gtkUsePortal = cfg.flatpak.enable;
     xdg.portal.enable = mkIf cfg.flatpak.enable true;
   };
 }

@@ -90,6 +90,7 @@
           sys.virtualisation.appImage.enable = true;
           sys.virtualisation.virtualBox.enable = true;
           sys.virtualisation.packer.enable = true;
+          sys.virtualisation.flatpak.enable = true;
 
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
