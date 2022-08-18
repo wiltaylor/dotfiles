@@ -28,6 +28,7 @@ in {
       feh
       foot
       libsixel
+      yed
 
       dfeet
       pcmanfm
@@ -82,6 +83,8 @@ in {
       mono
       bottles
       distrobox
+      virtmanager
+      retroarchFull
     ];
   };
 }

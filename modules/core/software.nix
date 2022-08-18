@@ -75,6 +75,7 @@ in {
     cue
     graphviz
     pandoc
+    uutils-coreutils
 
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];

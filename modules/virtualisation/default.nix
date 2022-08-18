@@ -74,7 +74,6 @@ in {
     };
 
     services.flatpak.enable = cfg.flatpak.enable;
-    xdg.portal.gtkUsePortal = cfg.flatpak.enable;
     xdg.portal.enable = mkIf cfg.flatpak.enable true;
   };
 }
