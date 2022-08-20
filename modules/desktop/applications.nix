@@ -42,8 +42,6 @@ in {
       mupdf
       pkgs.xorg.xhost
 
-      polymc
-
       mpv
       blender
       gimp
@@ -54,16 +52,10 @@ in {
       ardour
       firefox
       chromium
-      xonotic
-      quakespasm
-      superTuxKart
-      openmw
       wpsoffice
       onlyoffice-bin
       libreoffice
       obsidian
-      steam
-      protonup
       jetbrains.goland
       jetbrains.pycharm-professional
       jetbrains.rider
@@ -81,10 +73,8 @@ in {
       dotnet-sdk
       dotnet-runtime
       mono
-      bottles
       distrobox
       virtmanager
-      retroarchFull
     ];
   };
 }
