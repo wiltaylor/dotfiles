@@ -24,7 +24,6 @@ in {
     ltrace
     git
     git-crypt
-    gh
     tmux
     zsh
     unrar
@@ -46,36 +45,22 @@ in {
     ripgrep
     nvme-cli
     pstree
-    dmg2img
     lf
     nix-index
-    darling-dmg
     nmap
     ntfsprogs
     samba
     manix
     exfat
+    neovim
 
-    #neovimWT
     lm_sensors
-    shellcheck
     dev
     socat
 
-    (mkIf desktopMode freerdp)
-
-    wksCli
-    rnix-lsp
-    bubblewrap
-    ventoy-bin
     rtw88-firmware
     unixtools.xxd
-    ventoy-bin
     rclone
-    cue
-    graphviz
-    pandoc
-    uutils-coreutils
 
     python3 # I want to remove this eventually and get most dev dependancies out of my base environment
   ];

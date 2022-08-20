@@ -28,33 +28,12 @@ in {
       feh
       foot
       libsixel
-      yed
 
       dfeet
-      pcmanfm
-      neovimWT
-      emacs-custom
-      emacs-sqlite
-      gnuplot
-      mupdf
       pkgs.xorg.xhost
 
-      mpv
-      blender
-      gimp
-      youtube-dl
-      obs-studio
-      kdenlive
-      tenacity
-      ardour
       firefox
-      chromium
-      wpsoffice
-      onlyoffice-bin
-      libreoffice
-      obsidian
       distrobox
-      virtmanager
     ];
   };
 }
