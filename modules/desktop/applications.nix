@@ -36,9 +36,6 @@ in {
       emacs-custom
       emacs-sqlite
       gnuplot
-      gcc
-      sqlite
-      nyxt
       mupdf
       pkgs.xorg.xhost
 
@@ -56,23 +53,6 @@ in {
       onlyoffice-bin
       libreoffice
       obsidian
-      jetbrains.goland
-      jetbrains.pycharm-professional
-      jetbrains.rider
-      jetbrains.jdk
-      jetbrains.clion
-      jetbrains.datagrip
-      jetbrains.ruby-mine
-      jetbrains.idea-ultimate
-      go
-      rustup
-      clang
-      gcc
-      ruby
-      python3Full
-      dotnet-sdk
-      dotnet-runtime
-      mono
       distrobox
       virtmanager
     ];
