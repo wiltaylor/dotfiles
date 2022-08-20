@@ -7,25 +7,8 @@ let
 
 in {
   options.sys.virtualisation = {
-    vagrant = {
-      enable = mkEnableOption "Enable Vagrant";
-      provider = mkOption {
-        type = types.str;
-        default = "libvirt";
-        description = "The provider that vargrant will use.";
-      };
-    };
-
-    packer = {
-      enable = mkEnableOption "Enable Packer";
-    };
-
     kvm = {
       enable = mkEnableOption "Enable KVM";
-    };
-
-    virtualBox = {
-      enable = mkEnableOption "Enable VirtualBox";
     };
 
     docker = {
@@ -35,43 +18,16 @@ in {
     flatpak = {
       enable = mkEnableOption "Enable flatpack";
     };
-
-    appImage = {
-      enable = mkEnableOption "Enable app image";
-    };
   };
 
   config = {
-    environment.systemPackages = with pkgs; [
-      (mkIf cfg.vagrant.enable vagrant)
-      (mkIf cfg.appImage.enable appimage-run)
-      (mkIf cfg.kvm.enable quickemu)
-      (mkIf cfg.packer.enable packer)
-    ];
-
     virtualisation.libvirtd.enable = cfg.kvm.enable;
     virtualisation.docker.enable = cfg.docker.enable;
-
-    #virtualisation.virtualbox.host.enable = cfg.virtualBox.enable;
 
     boot.kernelModules = [
       (mkIf (cpuType == "amd") "kvm-amd")
       (mkIf (cpuType == "intel") "intel-amd")
     ];
-
-    environment.variables = {
-      "VAGRANT_DEFAULT_PROVIDER" = mkIf (cfg.vagrant.enable) cfg.vagrant.provider;
-    };
-
-    system.activationScripts = mkIf (cfg.vagrant.enable){ 
-      vagrant.text = ''
-        ${pkgs.vagrant}/bin/vagrant plugin install vagrant-libvirt
-      '';
-
-      flatpak.text = ''
-        ${if cfg.flatpak.enable then "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo" else ""}
-      '';
-    };
 
     services.flatpak.enable = cfg.flatpak.enable;
     xdg.portal.enable = mkIf cfg.flatpak.enable true;
