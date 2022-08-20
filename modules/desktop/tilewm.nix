@@ -122,7 +122,7 @@ in {
         { key = "$mod+f"; command = "fullscreen toggle"; }
         { key = "$mod+h"; command = "split h"; }
         { key = "$mod+v"; command = "split v"; }
-        { key = "$mod+o"; command = "exec obsidian"; }
+        { key = "$mod+o"; command = "exec distrobox enter productivity -- Obsidian; }
         { key = "$mod+space"; command = "floating toggle"; }
         { key = "XF86AudioLowerVolume"; command = "exec ${binDir}/desktop voldown"; }
         { key = "XF86AudioMute"; command = "exec ${binDir}/desktop volmute"; }
@@ -141,7 +141,7 @@ in {
         { key = "$mod+t"; command = "input type:touchpad events toggle enabled disabled"; }
         { key = "$mod+shift+e"; command = "exec ${binDir}/wofi-emoji"; }
         { key = "$mod+d"; command = "exec ${binDir}/wofi --show drun --allow-images"; }
-        { key = "$mod+w"; command = "exec MOZ_ENABLE_WAYLAND=1 firefox"; }
+        { key = "$mod+w"; command = "exec distrobox enter productivity -- firefox"; }
       ];
     };
 
