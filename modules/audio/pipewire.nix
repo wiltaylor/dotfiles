@@ -9,7 +9,7 @@ in {
     security.rtkit.enable = true;
 
     environment.systemPackages = with pkgs; [
-      pulseaudio # This is instaleld to get access to pactl. It isn't enabled or run as a service.
+      pulseaudio # This is installed to get access to pactl. It isn't enabled or run as a service.
     ];
 
     services.pipewire = {

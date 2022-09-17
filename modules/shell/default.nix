@@ -43,6 +43,10 @@ in {
       enable = true;
       enableCompletion = true;
       shellInit = ''
+        alias vim="nvim"
+
+        bindkey -v
+
         source ${pkgs.spaceship-prompt}/share/zsh/site-functions/prompt_spaceship_setup
         
         # Simple keybindings for moving around commands in history.

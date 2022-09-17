@@ -20,6 +20,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
+      xdg-desktop-portal-wlr
       pavucontrol
       pkgs.xorg.xmodmap
       maim

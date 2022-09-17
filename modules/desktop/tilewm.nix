@@ -122,7 +122,7 @@ in {
         { key = "$mod+f"; command = "fullscreen toggle"; }
         { key = "$mod+h"; command = "split h"; }
         { key = "$mod+v"; command = "split v"; }
-        { key = "$mod+o"; command = "exec distrobox enter productivity -- Obsidian; }
+        { key = "$mod+o"; command = "exec distrobox enter productivity -- Obsidian"; }
         { key = "$mod+space"; command = "floating toggle"; }
         { key = "XF86AudioLowerVolume"; command = "exec ${binDir}/desktop voldown"; }
         { key = "XF86AudioMute"; command = "exec ${binDir}/desktop volmute"; }
@@ -214,7 +214,9 @@ in {
       for_window [class="Pavucontrol"] floating enable
       for_window [class="qt5ct"] floating enable sticky enable border normal
       for_window [app_id="pinentry-qt"] floating enable
-
+      for_window [app_id="pavucontrol"] floating enable
+      for_window [app_id="firefox" title="^$"] border none, floating enable, move position 79 ppt 88 ppt
+      for_window [class="jetbrains-toolbox"] floating enable, border none 
       floating_minimum_size 500 x 300
       floating_maximum_size 2000 x 1500
       # Theme colors

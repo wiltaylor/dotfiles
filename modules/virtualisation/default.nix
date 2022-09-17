@@ -29,6 +29,10 @@ in {
       (mkIf (cpuType == "intel") "intel-amd")
     ];
 
+    environment.systemPackages = with pkgs; [
+        (mkIf (cfg.kvm.enable) quickemu)
+    ];
+
     services.flatpak.enable = cfg.flatpak.enable;
     xdg.portal.enable = mkIf cfg.flatpak.enable true;
   };
