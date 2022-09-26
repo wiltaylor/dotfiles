@@ -3,38 +3,20 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    wks.url = "github:wiltaylor/nixwks";
-    nixpkgs-overlay.url = "github:wiltaylor/nixpkgs-overlay";
-
-    dev = {
-      url = "github:wiltaylor/dev";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    neovim-flake = {
-	    url = "github:wiltaylor/neovim-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
 
-  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, dev,  ... }:
+  outputs = inputs @ {self, nixpkgs, ... }:
   with builtins;
   let
     lib = import ./lib;
+    localpkgs = import ./pkgs;
 
     allPkgs = lib.mkPkgs { 
       inherit nixpkgs; 
       cfg = { allowUnfree = true; };
       overlays = [
-        #neovim-flake.overlay
-        wks.overlay
-        nixpkgs-overlay.overlay
-        dev.overlay
-
-        (self: last: {
-          neovimWT = neovim-flake.packages."${self.system}".neovimWT; 
-        })
+        localpkgs
       ];
     };
 

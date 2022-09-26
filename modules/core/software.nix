@@ -55,7 +55,6 @@ in {
     neovim
 
     lm_sensors
-    dev
     socat
 
     rtw88-firmware
