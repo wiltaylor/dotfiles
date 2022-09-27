@@ -7,6 +7,9 @@ in {
   ## This is a list of core software I want to have on all of my machines.
 
   environment.systemPackages = with pkgs; [
+    dutree
+    hyperfine
+    bottom
     accountsservice
     wget
     curl
@@ -53,6 +56,7 @@ in {
     manix
     exfat
     neovim
+    nushell
 
     lm_sensors
     socat
@@ -70,5 +74,5 @@ in {
   };
 
   # You need to add bash and zsh as login shells or dmlight won't recognise your user.
-  environment.shells = [ pkgs.zsh pkgs.bash ];
+  environment.shells = with pkgs; [ zsh bash nushell ];
 }

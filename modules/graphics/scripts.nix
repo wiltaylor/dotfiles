@@ -71,7 +71,7 @@ let
         fi
       ;;
       "about")
-        ${pkgs.gnome3.zenity}/bin/zenity --about
+        ${pkgs.gnome.zenity}/bin/zenity --about
       ;;
       "volup")
         adjustvol 5

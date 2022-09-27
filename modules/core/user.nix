@@ -97,7 +97,7 @@ in {
 
       shell = mkOption {
         type = types.package;
-        default = pkgs.zsh;
+        default = pkgs.nushell;
         description = "Sets the shell used by primary user";
       };
 
