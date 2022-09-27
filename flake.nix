@@ -156,7 +156,7 @@
             }
           ];
 
-          sys.bluetooth = true;
+          sys.hardware.bluetooth = true;
 
           sys.security.yubikey = true;
           sys.security.username = "wil";
