@@ -4,6 +4,9 @@ with lib;
 let 
   cfg = config.sys.hardware;
 in {
+
+    imports = [ ./software.nix];
+
     options.sys.hardware = {
       g810led = mkEnableOption "Enable G810 Keyboard led control";
       kindle = mkEnableOption "Enable Amazon Kindle";
@@ -12,6 +15,7 @@ in {
     config = let
       g810pkg = pkgs.g810-led;
     in {
+
       environment.systemPackages = [
         (mkIf (cfg.g810led) pkgs.g810-led)
         (mkIf (cfg.kindle) pkgs.libmtp)

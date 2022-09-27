@@ -11,5 +11,6 @@
     ./shell
     ./development
     ./desktop
+    ./base
   ];
 }

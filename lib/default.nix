@@ -104,13 +104,6 @@ rec {
     ];
   };
 
-  mkNixOSConfigWithRoles = {name, roles ? [], nixpkgs, system, modules ? [../modules], cfg ? {}, ...}: let
-    mkRole = name: import (../roles + "/${name}");
-    roleMods = map(r: mkRole r) roles;
-    allMods = roleMods ++ modules;
-    
-  in mkNixOSConfig { inherit name nixpkgs system cfg; modules = allMods; };
-
   LoadRepoSecrets = path: let
     data = tryEval (import path);
   in if data.success then data.value else {};

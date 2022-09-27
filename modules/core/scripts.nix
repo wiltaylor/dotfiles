@@ -137,6 +137,13 @@ let
         shortHelp = "Searches for a package containing target executable.";
         longHelp = "Searches for a package with the target executable.";
     }
+
+    {
+        name = "info";
+        action = "freshfetch";
+        shortHelp = "Show system info";
+        longHelp = "Show system info";
+    }
     
     {
         name = "apply";

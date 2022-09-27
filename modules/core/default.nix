@@ -8,7 +8,6 @@ in rec {
   imports = [ 
     ./scripts.nix 
     ./nixos.nix
-    ./software.nix
     ./security.nix
     ./regional.nix
     ./network.nix
@@ -73,7 +72,15 @@ in rec {
         type = types.str;
         description = "Command to get cpu temp";
       };
-    };
+
+   };
+
+  software = mkOption {
+    type = with types; listOf package;
+    description = "List of software to install";
+    default = [];
+  };
+
   };
 
   config = {
@@ -101,7 +108,7 @@ in rec {
     environment.systemPackages = with pkgs; [
       (mkIf (cfg.cpu.type == "amd") microcodeAmd)
       (mkIf (cfg.cpu.type == "intel") microcodeIntel)
-    ];
+    ] ++ cfg.software;
 
     boot.loader.systemd-boot.enable = cfg.bootloader == "systemd-boot";
     boot.loader.efi.canTouchEfiVariables = cfg.bootloader == "systemd-boot";
