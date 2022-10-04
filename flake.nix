@@ -46,7 +46,6 @@
           networking.networkmanager.enable = true;
           networking.useDHCP = false; 
 
-          sys.desktop.usb.udisk2 = true;
           sys.desktop.kanshi.profiles = [
             { 
               "DP-2" = "position 0,0";
@@ -61,8 +60,6 @@
           
           #Currently broken waiting for some updates.
           sys.kernelPackage = pkgs.linuxPackages_zen;
-          sys.locale = "en_AU.UTF-8";
-          sys.timeZone = "Australia/Brisbane";
 
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           sys.virtualisation.kvm.enable = true;
@@ -129,12 +126,25 @@
           networking.networkmanager.enable = true;
           networking.useDHCP = false; 
 
-          sys.locale = "en_AU.UTF-8";
-          sys.timeZone = "Australia/Brisbane";
+          sys.user.root.files = {
+            test = {
+                path = "hello.txt";
+                text = "hello";
+            };
+          };
+
+          sys.user.users.wil = {
+              groups = [ "wheel" ];
+              files = {
+                bopa = {
+                    path = "bop.txt";
+                    text = "bop.txt";
+                };
+              };
+          };
 
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
 
-          sys.desktop.usb.udisk2 = true;
           sys.graphics.displayManager = "gdm";
           sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
           sys.cpu.type = "intel";

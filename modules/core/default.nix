@@ -7,10 +7,7 @@ in {
 
   imports = [ 
     ./scripts.nix 
-    ./nixos.nix
     ./security.nix
-    ./regional.nix
-    ./network.nix
     ./user.nix
   ];
 
@@ -20,6 +17,12 @@ in {
         description = "List of software to install";
         default = [];
       };
+    
+    security.secrets = mkOption {
+      type = types.attrs;
+      description = "Secrets are loaded into this set if git crypt is unlocked. Otherwise it is empty.";
+      default = {};
+    };
   };
 
   config = {

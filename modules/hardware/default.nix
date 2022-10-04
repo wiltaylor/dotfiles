@@ -9,6 +9,8 @@ in {
         ./software.nix
         ./cpu.nix
         ./firmware.nix
+        ./wifi.nix
+        ./yubikey.nix
     ];
 
     options.sys.hardware = {

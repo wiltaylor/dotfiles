@@ -6,5 +6,7 @@
         ./kernel.nix
         ./nix.nix
         ./syst.nix
+        ./regional.nix
+        ./security.nix
     ];
 }

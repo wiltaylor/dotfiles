@@ -12,5 +12,6 @@
     ./development
     ./desktop
     ./base
+    ./user
   ];
 }
