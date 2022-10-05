@@ -24,7 +24,7 @@ in {
       fzf-zsh
     ];
 
-    users.defaultUserShell = pkgs.zsh;
+    users.defaultUserShell = pkgs.nushell;
 
     environment.variables= {
       "EDITOR" = "nvim";

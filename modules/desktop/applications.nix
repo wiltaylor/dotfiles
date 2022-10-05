@@ -36,6 +36,7 @@ in {
 
       firefox
       distrobox
+      obsidian
     ];
   };
 }
