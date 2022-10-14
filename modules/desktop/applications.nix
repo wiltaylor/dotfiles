@@ -33,8 +33,6 @@ in {
 
       dfeet
       pkgs.xorg.xhost
-
-      firefox
       distrobox
     ];
   };

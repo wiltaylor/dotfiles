@@ -40,6 +40,12 @@ in {
             description = "A role is a list of functions which is run against a user if they are in said role. This allows for user specific machine settings to be split out and only run if a user has the role on a machine."; 
         };
 
+        allUserRoles = mkOption {
+            type = with types; listOf str;
+            default = [];
+            description = "A list of roles that are applied to all users";
+        };
+
         users = mkOption {
             type = with types; attrsOf (submodule {
                 options = {
@@ -156,7 +162,7 @@ in {
         '';
     usersList = attrNames cfg.user.users;
 
-    getRoleFunctions = roles: foldl' (l: r: r ++ l) [] (map (r: cfg.user.userRoles."${r}") roles);
+    getRoleFunctions = roles: foldl' (l: r: r ++ l) [] (map (r: cfg.user.userRoles."${r}") (roles ++ cfg.user.allUserRoles));
     applyRoles = {fns, user}: foldl' (u: fn: fn u) user fns;
     buildUser = user: let
         fns = getRoleFunctions user.roles;

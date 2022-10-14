@@ -133,17 +133,17 @@
             };
           };
 
-          sys.user.userRoles.productivity = [
-            (user: user // {
-                software = with pkgs; [ obsidian ];
-                files = {
-                    pop = {
-                        path = "pop.txt";
-                        text = "pop.txt";
-                    };
-                };
-            })
-          ];
+          #sys.user.userRoles.productivity = [
+          #  (user: user // {
+          #      software = with pkgs; [ obsidian ];
+          #      files = {
+          #          pop = {
+          #              path = "pop.txt";
+          #              text = "pop.txt";
+          #          };
+          #      };
+          #  })
+          #];
 
           sys.user.users.wil = {
               groups = [ "wheel" ];
