@@ -8,5 +8,6 @@
         ./syst.nix
         ./regional.nix
         ./security.nix
+        ./shell.nix
     ];
 }
