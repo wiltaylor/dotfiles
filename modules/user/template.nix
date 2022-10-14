@@ -20,12 +20,68 @@ in {
                 default = {};
                 description = "Files to add to root user profile";
             };
+
+            software = mkOption {
+                type = with types; listOf package;
+                default = [];
+                description = "Software to install as this user";
+            };
+
+            shell = mkOption {
+                type = types.enum [ "bash" "zsh" "nu"];
+                default = "nu";
+                description = "Type of shell to use for this user";
+            };
+        };
+
+        userRoles = mkOption {
+            type = with types; attrsOf (listOf anything);
+            default = {};
+            description = "A role is a list of functions which is run against a user if they are in said role. This allows for user specific machine settings to be split out and only run if a user has the role on a machine."; 
         };
 
         users = mkOption {
-            type = types.attrs;
-            default = {};
-            description = "Extra users to add to the system";
+            type = with types; attrsOf (submodule {
+                options = {
+                    files = mkOption {
+                        type = types.attrs;
+                        default = {};
+                        description = "Files to add to the user profile.";
+                    };
+
+                    groups = mkOption {
+                        type = with types; listOf str;
+                        default = [];
+                        description = "Extra groups to add to the user.";
+                    };
+
+                    software = mkOption {
+                        type = with types; listOf package;
+                        default = [];
+                        description = "Software to install as this user";
+                    };
+
+                    roles = mkOption {
+                        type = with types; listOf str;
+                        default = [];
+                        description = "Roles to apply to this user on this machine";
+                    };
+
+                    shell = mkOption {
+                        type = types.enum [ "bash" "zsh" "nu"];
+                        default = "nu";
+                        description = "Type of shell to use for this user";
+                    };
+
+                    home = mkOption {
+                        type = types.str;
+                        default = "";
+                        description = "Directory of the users path";
+                    };
+                };
+            });
+
+            description = "Define users of the system here.";
         };
     };
 
@@ -52,7 +108,7 @@ in {
 
       mkLinker = {user, filename, homePath, group }: let
         userProfile = "${config.users.users."${user}".home}";
-        staticHome = "${userProfile}/.local/share/nixi-static";
+        staticHome = "${userProfile}/.local/share/nix-static";
         targetPath = "${userProfile}/${homePath}";
         targetFolder = dirOf targetPath;
       in ''
@@ -100,23 +156,59 @@ in {
         '';
     usersList = attrNames cfg.user.users;
 
-    userScripts = mapAttrs (n: v: { text = mkBuildScript {
-        username = n;
-        fileSet = v.files // cfg.user.allUsers.files;
-        group = "users";
-    };}) cfg.user.users;
+    getRoleFunctions = roles: foldl' (l: r: r ++ l) [] (map (r: cfg.user.userRoles."${r}") roles);
+    applyRoles = {fns, user}: foldl' (u: fn: fn u) user fns;
+    buildUser = user: let
+        fns = getRoleFunctions user.roles;
+    in 
+        applyRoles { inherit fns user; };
+
+    userScripts = mapAttrs (n: v: let
+        user = buildUser v;
+    in { 
+        text = mkBuildScript {
+            username = n;
+            fileSet = user.files // cfg.user.allUsers.files;
+            group = "users";
+        };
+    }) cfg.user.users;
 
     userSettings = listToAttrs( 
      map (v: {
         name = v;
-        value = {
+        value = let
+            compiledUser = buildUser cfg.user.users."${v}";
+            shellpkg = if (compiledUser.shell == "nu") then 
+                pkgs.nushell
+            else
+                (if (compildUser.shell == "zsh") then
+                    pkgs.zsh
+                else
+                    pkgs.bash);
+        in {
             name = v;
             isNormalUser = true;
             isSystemUser = false;
-            extraGroups = if (hasAttr "groups" cfg.user.users."${v}") then cfg.user.users."${v}".groups else [];
+            extraGroups = compiledUser.groups;
             initialPassword = "P@ssw0rd01";
+            packages = compiledUser.software;
+            shell = shellpkg;
         };
-    }) usersList);
+    }) usersList) // {
+        root = let
+            shellpkg = if (cfg.user.root.shell == "nu") then 
+                pkgs.nushell
+            else
+                (if (cfg.user.root.shell == "zsh") then
+                    pkgs.zsh
+                else
+                    pkgs.bash);
+
+        in {
+            packages = cfg.user.root.software;
+            shell = shellpkg;
+        };
+    };
 
     in {
         system.activationScripts = {
