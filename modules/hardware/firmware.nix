@@ -9,5 +9,8 @@ in {
         hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
         hardware.enableAllFirmware = true;
         hardware.enableRedistributableFirmware = true;
+
+        # Enable firmware update service
+        services.fwupd.enable = true;
     };
 }

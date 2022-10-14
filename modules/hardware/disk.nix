@@ -13,6 +13,10 @@ in {
     };
 
     config = {
-        services.udisk2.enable = cfg.hardware.usb.udisk2;
+        services.udisks2.enable = cfg.hardware.usb.udisk2;
+
+        # Pretty much all of my systems have ssd these days.
+        # So we should always enable trim.
+        services.fstrim.enable = true;
     };
 }
