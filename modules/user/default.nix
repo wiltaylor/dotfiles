@@ -1,6 +1,6 @@
 { pkgs, config, lib, ...}:
 {
     imports = [
-        ./template.nix
+        ./core.nix
     ];
 }
