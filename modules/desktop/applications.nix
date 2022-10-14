@@ -5,14 +5,7 @@ let
   xorg = (elem "xorg" config.sys.hardware.graphics.desktopProtocols);
   wayland = (elem "wayland" config.sys.hardware.graphics.desktopProtocols);
   desktopMode = xorg || wayland;
-
-  emacs-custom = pkgs.writeScriptBin "emacs-run" ''
-    ${pkgs.emacs-sqlite}/bin/emacs -q -l ~/.config/emacs/init.el $@
-  '';
 in {
-
-
-
   config = mkIf desktopMode {
 
   environment.sessionVariables = {
