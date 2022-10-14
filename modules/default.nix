@@ -1,7 +1,6 @@
 {pkgs, ... }:
 {
   imports = [
-    ./laptop
     ./core
     ./virtualisation
     ./graphics
