@@ -77,8 +77,7 @@
           sys.graphics.v4l2loopback = true;
           sys.graphics.gpuSensorCommand = ''sensors | grep "junction:" | awk '{print $2}' '';
 
-          sys.audio.server = "pipewire";
-
+          sys.hardware.audio.server = "pipewire";
           sys.hardware.g810led = true;
           sys.hardware.kindle = true;
 
@@ -133,18 +132,6 @@
             };
           };
 
-          #sys.user.userRoles.productivity = [
-          #  (user: user // {
-          #      software = with pkgs; [ obsidian ];
-          #      files = {
-          #          pop = {
-          #              path = "pop.txt";
-          #              text = "pop.txt";
-          #          };
-          #      };
-          #  })
-          #];
-
           sys.user.users.wil = {
               groups = [ "wheel" ];
               roles = ["productivity"];
@@ -168,7 +155,7 @@
           sys.graphics.primaryGPU = "intel";
 
           sys.graphics.gpuSensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
-          sys.audio.server = "pipewire";
+          sys.hardware.audio.server = "pipewire";
           sys.virtualisation.docker.enable = true;
           sys.virtualisation.kvm.enable = true;
           sys.virtualisation.flatpak.enable = true;

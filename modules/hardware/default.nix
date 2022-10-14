@@ -10,5 +10,6 @@
         ./kindle.nix
         ./disk.nix
         ./bluetooth.nix
+        ./audio.nix
     ];
 }

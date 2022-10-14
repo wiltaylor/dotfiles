@@ -5,7 +5,6 @@
     ./core
     ./virtualisation
     ./graphics
-    ./audio
     ./hotfix
     ./hardware
     ./shell
