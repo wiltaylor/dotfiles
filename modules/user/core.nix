@@ -90,6 +90,12 @@ in {
                         default = {};
                         description = "You can put custom configuration in this section to help configure roles";
                     };
+
+                    sshPublicKeys = mkOption {
+                        type = with types; listOf str;
+                        default = [];
+                        description = "Public ssh key for this account";
+                    };
                 };
             });
 
@@ -205,6 +211,7 @@ in {
             initialPassword = "P@ssw0rd01";
             packages = compiledUser.software;
             shell = shellpkg;
+            openssh.authorizedKeys.keys = compiledUser.sshPublicKeys;
         };
     }) usersList) // {
         root = let

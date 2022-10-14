@@ -7,7 +7,6 @@ in {
 
   imports = [ 
     ./scripts.nix 
-    ./security.nix
     ./user.nix
   ];
 
