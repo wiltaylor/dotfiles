@@ -4,7 +4,7 @@ with pkgs;
 with lib;
 let
   cfg = config.sys.desktop.kanshi;
-  wayland = (elem "wayland" config.sys.graphics.desktopProtocols);
+  wayland = (elem "wayland" config.sys.hardware.graphics.desktopProtocols);
   desktopMode = wayland;
   mkConfigLine = name: value: "\toutput ${name} ${value}\n";
   mkProfile = set: let

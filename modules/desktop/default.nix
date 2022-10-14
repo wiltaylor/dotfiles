@@ -16,5 +16,6 @@
     ./kanshi.nix
     ./tilewm.nix
     ./wofi-emoji.nix
+    ./script.nix
   ];
 }

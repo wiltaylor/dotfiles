@@ -2,8 +2,8 @@
 with lib;
 with builtins;
 let
-  xorg = (elem "xorg" config.sys.graphics.desktopProtocols);
-  wayland = (elem "wayland" config.sys.graphics.desktopProtocols);
+  xorg = (elem "xorg" config.sys.hardware.graphics.desktopProtocols);
+  wayland = (elem "wayland" config.sys.hardware.graphics.desktopProtocols);
   desktopMode = xorg || wayland;
 in {
 

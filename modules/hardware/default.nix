@@ -11,5 +11,6 @@
         ./disk.nix
         ./bluetooth.nix
         ./audio.nix
+        ./gpu.nix
     ];
 }

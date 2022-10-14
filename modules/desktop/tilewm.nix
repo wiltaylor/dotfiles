@@ -4,8 +4,8 @@ with lib;
 with builtins;
 let
 
-  wayland = (elem "wayland" config.sys.graphics.desktopProtocols);
-  xorg = (elem "xorg" config.sys.graphics.desktopProtocols);
+  wayland = (elem "wayland" config.sys.hardware.graphics.desktopProtocols);
+  xorg = (elem "xorg" config.sys.hardware.graphics.desktopProtocols);
 
   desktopMode = if (wayland == null && xorg == null) then false else true;
   startupProgramType = with types; submodule {

@@ -2,7 +2,7 @@
 with lib;
 with builtins;
 let
-  wayland = (elem "wayland" config.sys.graphics.desktopProtocols);
+  wayland = (elem "wayland" config.sys.hardware.graphics.desktopProtocols);
   desktopMode = wayland;
 in {
 

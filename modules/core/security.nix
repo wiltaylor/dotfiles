@@ -3,7 +3,7 @@ with lib;
 with builtins;
 let
   cfg = config.sys.security;
-  desktopMode = if ((length config.sys.graphics.desktopProtocols) > 0) then true else false;
+  desktopMode = if ((length config.sys.hardware.graphics.desktopProtocols) > 0) then true else false;
 in {
 
   options.sys.security = {

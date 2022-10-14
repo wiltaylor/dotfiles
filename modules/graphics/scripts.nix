@@ -2,7 +2,7 @@
 with lib;
 with builtins;
 let
-  desktopMode = (length config.sys.graphics.desktopProtocols) > 0;
+  desktopMode = (length config.sys.hardware.graphics.desktopProtocols) > 0;
 
   desktopScript = pkgs.writeScriptBin "desktop" ''
       #!${pkgs.bash}/bin/bash
@@ -89,7 +89,7 @@ let
         ${config.sys.cpu.sensorCommand}
       ;;
       "gputemp")
-        ${config.sys.graphics.gpuSensorCommand}
+        ${config.sys.hardware.graphics.gpuSensorCommand}
       ;;
       *)
         echo "Usage:"
