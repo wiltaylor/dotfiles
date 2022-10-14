@@ -3,7 +3,6 @@
   imports = [
     ./core
     ./virtualisation
-    ./graphics
     ./hotfix
     ./hardware
     ./shell
