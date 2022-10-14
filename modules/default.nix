@@ -4,7 +4,6 @@
     ./core
     ./hotfix
     ./hardware
-    ./development
     ./desktop
     ./base
     ./user

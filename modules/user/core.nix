@@ -84,6 +84,12 @@ in {
                         default = "";
                         description = "Directory of the users path";
                     };
+
+                    config = mkOption {
+                        type = types.attrs;
+                        default = {};
+                        description = "You can put custom configuration in this section to help configure roles";
+                    };
                 };
             });
 

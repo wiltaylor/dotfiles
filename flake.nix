@@ -132,12 +132,17 @@
 
           sys.user.users.wil = {
               groups = [ "wheel" ];
-              roles = ["productivity"];
+              roles = ["productivity" "development"];
               files = {
                 bopa = {
                     path = "bop.txt";
                     text = "bop.txt";
                 };
+              };
+              config = {
+                email = "email@wiltaylor.dev";
+                name = "Wil Taylor";
+                signingKey = "0xB6840C8AFFAD67EC";
               };
           };
 
