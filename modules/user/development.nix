@@ -21,6 +21,8 @@ in {
                 consul
                 nomad
                 vault
+                docker
+                distrobox
             ];
 
             files = {

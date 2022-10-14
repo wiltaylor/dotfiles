@@ -28,7 +28,7 @@ in {
   };
 
   config = mkIf desktopMode {
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       kanshiConfig = {
         path = ".config/kanshi/config";
         text = genFile;

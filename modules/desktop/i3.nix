@@ -18,7 +18,7 @@ in {
       ];
     };
 
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       i3blocksconfig = {
         path = ".config/i3/i3blocks.conf";
         text = ''

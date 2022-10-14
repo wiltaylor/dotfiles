@@ -7,7 +7,7 @@ let
   desktopMode = xorg || wayland;
 in {
   config = mkIf desktopMode {
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       wallpapers = {
         path = ".config/wallpapers";
         source = ../../wallpapers;

@@ -7,8 +7,6 @@ let
   desktopMode = xorg || wayland;
 in {
   config = mkIf desktopMode {
-    environment.systemPackages = with pkgs; [
-      breeze-qt5
-    ];
+    sys.software = with pkgs; [ breeze-qt5 ];
   };
 }

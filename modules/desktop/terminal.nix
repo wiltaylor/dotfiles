@@ -12,13 +12,13 @@ in {
       TERMINAL = "${pkgs.alacritty}/bin/alacritty";
     };
 
-    environment.systemPackages = with pkgs; [
-      alacritty
-      foot
-      xterm # Backup terminal incase something goes wrong with gpu
+    sys.software = with pkgs; [
+        alacritty
+        foot
+        xterm
     ];
 
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       footConfig = {
         path = ".config/foot/foot.ini";
         text = ''

@@ -12,7 +12,7 @@ in {
       breeze-gtk
     ];
 
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       gtkSettings3 = {
         path = ".config/gtk-3.0/settings.ini";
         text = ''

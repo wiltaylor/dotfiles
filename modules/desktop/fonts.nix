@@ -10,7 +10,7 @@ in {
   config = mkIf desktopMode {
     fonts.fonts = with pkgs; [ nerdfonts ];
 
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       fontconf = {
         path = ".config/fontconfig/fonts.conf";
         text = ''

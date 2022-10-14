@@ -7,7 +7,6 @@ in {
 
   imports = [ 
     ./scripts.nix 
-    ./user.nix
   ];
 
   options.sys = {

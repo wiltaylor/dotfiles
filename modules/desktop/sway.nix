@@ -29,7 +29,7 @@ in {
       ];
     };
 
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       swaybarcss = {
         path = ".config/waybar/style.css";
         text = ''

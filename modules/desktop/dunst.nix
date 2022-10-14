@@ -8,8 +8,8 @@ let
 in {
   config = mkIf desktopMode {
     
-    sys.users.allUsers.files = {
-      dunstconfg = {
+    sys.user.allUsers.files = {
+      dunstcfg = {
         path = ".config/dunst/dunstrc";
         text = ''
           [global]
@@ -61,6 +61,7 @@ in {
           background="#000000"
           foreground="#ffffff"
           timeout=6
+
         '';
       };
     };

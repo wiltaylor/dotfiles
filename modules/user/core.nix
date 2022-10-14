@@ -121,7 +121,7 @@ in {
         updatedPath = "${userProfile}/${homePath}";
       in ''
         echo "rm ${updatedPath} -fr" >> ${staticHome}/cleanup.sh
-        echo "rm ${staticHome}/${filename}" >> ${staticHome}/cleanup.sh
+        echo "rm ${staticHome}/${filename} --force" >> ${staticHome}/cleanup.sh
       '';
 
       mkLinker = {user, filename, homePath, group }: let
@@ -186,7 +186,7 @@ in {
     in { 
         text = mkBuildScript {
             username = n;
-            fileSet = user.files // cfg.user.allUsers.files;
+            fileSet = user.files; # // cfg.user.allUsers.files;
             group = "users";
         };
     }) cfg.user.users;
@@ -233,7 +233,7 @@ in {
         system.activationScripts = {
             user-rootFile.text = mkBuildScript { 
                 username = "root"; 
-                fileSet = cfg.user.root.files // cfg.user.allUsers.files; 
+                fileSet = cfg.user.root.files; 
                 group = "root"; 
             };
         } // userScripts;

@@ -6,9 +6,7 @@ let
   desktopMode = xorg;
 in {
   config = mkIf desktopMode {
-    environment.systemPackages = with pkgs; [
-      picom
-    ];
+    sys.software = with pkgs; [ picom ];
 
     services.picom = {
       enable = true;

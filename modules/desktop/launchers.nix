@@ -21,7 +21,7 @@ in {
       rofi
     ];
 
-    sys.users.allUsers.files = {
+    sys.user.allUsers.files = {
       roficonfig = {
         path = ".config/rofi/config.rasi";
         text = ''

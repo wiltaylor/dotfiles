@@ -8,6 +8,7 @@ let
 in {
   config = mkIf desktopMode {
 
+  # Fix issue with java applications and tiling window managers.
   environment.sessionVariables = {
     "_JAVA_AWT_WM_NONREPARENTING" = "1";
   };
@@ -26,7 +27,6 @@ in {
 
       dfeet
       pkgs.xorg.xhost
-      distrobox
     ];
   };
 }
