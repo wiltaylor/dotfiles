@@ -8,6 +8,7 @@ in {
     sys.software = [
         zsh
         nushell
+        bash
         spaceship-prompt
     ];
 
@@ -17,6 +18,10 @@ in {
       "EDITOR" = "nvim";
       "VISUAL" = "nvim";
     }; 
+
+    # This is so you can set zsh, bash or nushell as your interactive shell.
+    # If you don't set this it will not show your user on the login screen.
+    environment.shells = with pkgs; [ zsh bash nushell ];
 
     programs.tmux = {
       enable = true;

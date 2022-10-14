@@ -62,9 +62,7 @@
           sys.kernelPackage = pkgs.linuxPackages_zen;
 
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-          sys.virtualisation.kvm.enable = true;
           sys.virtualisation.docker.enable = true;
-          sys.virtualisation.flatpak.enable = true;
 
           sys.cpu.type = "amd";
           sys.cpu.cores = 16;
@@ -157,8 +155,6 @@
           sys.hardware.graphics.gpuSensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.hardware.audio.server = "pipewire";
           sys.virtualisation.docker.enable = true;
-          sys.virtualisation.kvm.enable = true;
-          sys.virtualisation.flatpak.enable = true;
           
           sys.desktop.kanshi.profiles = [
             {

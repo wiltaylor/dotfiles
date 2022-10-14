@@ -9,5 +9,6 @@
         ./regional.nix
         ./security.nix
         ./shell.nix
+        ./virtualisation.nix
     ];
 }

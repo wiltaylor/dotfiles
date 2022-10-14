@@ -33,6 +33,12 @@ in {
         type = types.str;
         description = "Command to get cpu temp";
       };
+
+      kvm = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Enable KVM virtualisation on this machine";
+      };
     };
    };
 
@@ -41,9 +47,16 @@ in {
             (mkIf (cfg.cpu.type == "intel") "intel_pstate=active")
         ];
 
+        boot.kernelModules = [
+            (mkIf cfg.cpu.kvm (mkIf (cfg.cpu.type == "amd") "kvm-amd"))
+            (mkIf cfg.cpu.kvm (mkIf (cfg.cpu.type == "intel") "kvm-intel"))
+        ];
+
         sys.software = [
             (mkIf (cfg.cpu.type == "amd") microcodeAmd)
             (mkIf (cfg.cpu.type == "intel") microcodeIntel)
         ];
+
+        virtualisation.libvirtd.enable = cfg.cpu.kvm;
    };
 }

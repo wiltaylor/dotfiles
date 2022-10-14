@@ -1,9 +1,5 @@
 {pkgs, config, lib, ...}:
 {
-    # This is so you can set zsh, bash or nushell as your interactive shell.
-    # If you don't set this it will not show your user on the login screen.
-    environment.shells = with pkgs; [ zsh bash nushell ];
-
     # This is a list of cli tools that should be present on all of my systems.
     sys.software = with pkgs; [
         # Misc cli tools
@@ -40,15 +36,9 @@
         git
         git-crypt
 
-        # Shells.
-        bash
-        zsh
-        nushell
-
         # Base nix tools
         nix-index
         manix
-
 
         # Ported from core - need to move out to somewhere else
         fuse-overlayfs # prob not in base
