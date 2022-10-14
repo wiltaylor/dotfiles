@@ -12,7 +12,7 @@ in {
     };
 
     sys.user.userRoles.development = [
-        (user: user // {
+        (user: mergeUser user {
             software = [
                 git
                 git-crypt

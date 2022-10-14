@@ -6,7 +6,7 @@ let
     cfg = config.sys;
 in {
     sys.user.userRoles.productivity = [
-        (user: user // {
+        (user: mergeUser user {
             software = with pkgs; [
                 obsidian
                 firefox

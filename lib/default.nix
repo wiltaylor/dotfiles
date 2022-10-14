@@ -60,7 +60,7 @@ rec {
 
   evalMods = {allPkgs, systems ? defaultSystems, modules, args ?{}}: withSystems systems (sys: let
     pkgs = allPkgs."${sys}";
-  in pkgs.lib.evalModules {
+    in pkgs.lib.evalModules {
     inherit modules;
     specialArgs = { inherit pkgs;} // args;
   });
@@ -86,6 +86,7 @@ rec {
 
   mkNixOSConfig = {name, nixpkgs, allPkgs, system, modules ? [../modules], cfg ? {}, ...}: let
     pkgs = allPkgs."${system}";
+
     secrets = LoadRepoSecrets ../.secrets;
   in nixpkgs.lib.nixosSystem {
     inherit system;

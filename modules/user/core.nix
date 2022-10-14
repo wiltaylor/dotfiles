@@ -179,7 +179,7 @@ in {
     buildUser = user: let
         fns = getRoleFunctions user.roles;
     in 
-        applyRoles { inherit fns user; };
+        applyRoles { inherit fns user; }; 
 
     userScripts = mapAttrs (n: v: let
         user = buildUser v;
