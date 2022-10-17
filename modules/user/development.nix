@@ -22,7 +22,8 @@ in {
                 nomad
                 vault
                 docker
-                distrobox
+                rustup
+                python3Full
             ];
 
             files = {

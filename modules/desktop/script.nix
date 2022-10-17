@@ -80,11 +80,11 @@ in {
               VSTR="5%"
             fi
 
-            if [ $((VOL - 5)) -gt 100 ]; then
+            if [ $((VOL + -5)) -gt 100 ]; then
               VSTR="100%"
             fi
 
-            if [ $((VOL - 5)) -lt 0 ]; then
+            if [ $((VOL + -5)) -lt 0 ]; then
               VSTR="0%"
             fi
 

@@ -4,5 +4,6 @@
         ./core.nix
         ./productivity.nix
         ./development.nix
+        ./games.nix
     ];
 }

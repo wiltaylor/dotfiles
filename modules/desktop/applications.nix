@@ -24,6 +24,7 @@ in {
       foot
       libsixel
       mpv
+      distrobox
 
       dfeet
       pkgs.xorg.xhost

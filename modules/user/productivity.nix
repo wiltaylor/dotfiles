@@ -10,6 +10,7 @@ in {
             software = with pkgs; [
                 obsidian
                 firefox
+                onlyoffice-bin
             ];
         })
     ];
