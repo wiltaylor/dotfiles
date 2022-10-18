@@ -18,4 +18,7 @@
     ./wofi-emoji.nix
     ./script.nix
   ];
+  
+  # Move to a game section at some point
+  programs.gamemode.enable = true;
 }

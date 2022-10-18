@@ -46,7 +46,6 @@ in {
     {
         name = "volup";
         action = ''
-            SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
             VOL=$(pactl list sinks | grep '^[[:space:]]Volume:' | awk '{print substr($5, 1, length($5)-1)}')
 
             if [[ $VOL -gt 0 ]]; then
@@ -63,7 +62,7 @@ in {
               VSTR="0%"
             fi
 
-            ${pkgs.pulseaudio}/bin/pactl set-sink-volume $SINK $VSTR
+            pactl set-sink-volume @DEFAULT_SINK@ $VSTR
         '';
         shortHelp = "Increments the volume up.";
         longHelp = "Increments the volume up.";
@@ -71,11 +70,10 @@ in {
     {
         name = "voldown";
         action = ''
-            SINK=$(pactl list short| grep RUNNING | awk '{print $1}')
             VOL=$(pactl list sinks | grep '^[[:space:]]Volume:' | awk '{print substr($5, 1, length($5)-1)}')
 
             if [[ $VOL -gt 0 ]]; then
-              VSTR="+5%"
+              VSTR="-5%"
             else
               VSTR="5%"
             fi
@@ -88,7 +86,7 @@ in {
               VSTR="0%"
             fi
 
-            ${pkgs.pulseaudio}/bin/pactl set-sink-volume $SINK $VSTR
+            ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ $VSTR
         
         '';
         shortHelp = "Decrements the volume down.";
