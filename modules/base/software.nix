@@ -14,12 +14,14 @@
         file
         bintools
         tmux
+        zellij
         parted
         ripgrep
         socat
         unixtools.xxd
         rclone
         freshfetch
+        samba # Probably not in here
         
         # Archive Tools
         unzip
@@ -31,6 +33,7 @@
         # System monitoring tools
         strace
         ltrace
+        kmon
 
         # This is in base because nix makes use of it with flakes.
         git

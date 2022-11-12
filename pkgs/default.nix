@@ -1,4 +1,19 @@
 self: super: {
+    steam-gamescope = super.steam.override {
+        extraPkgs = pkgs: with pkgs; [
+                xorg.libXcursor
+                xorg.libXi
+                xorg.libXinerama
+                xorg.libXScrnSaver
+                libpng
+                libpulseaudio
+                libvorbis
+                stdenv.cc.cc.lib
+                libkrb5
+                keyutils
+        ];
+    };
+
     distrobox = super.distrobox.overrideAttrs (old: {
         version = "1.4.1";
 	

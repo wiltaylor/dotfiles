@@ -5,6 +5,7 @@ let
     cfg = config.sys;
 in {
     nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowBroken = true; #Someone put a broken package in haskel so this works around that when searching.
     
     nix = {
         settings = {

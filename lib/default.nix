@@ -8,6 +8,12 @@ rec {
     "x86_64-linux"
   ];
 
+  # Package names to exclude from search
+  # Use to exclude packages that cause errors during search.
+  searchBlackList = [
+    "hyper-haskell-server-with-packages"
+  ];
+
   # Taken from flake-utils
   # List of all systems defined in nixpkgs
   # Keep in sync with nixpkgs wit the following command:
@@ -113,8 +119,10 @@ rec {
   let
     filterBadPkgs = pkgs: 
     let
-      badList = filter (a: let res = tryEval(getAttr a pkgs);
-      in (res.success == false)) (attrNames pkgs);
+      badList = filter (a: let 
+        res = tryEval(getAttr a pkgs);
+        data = if res.success then pkgs."${a}" else {};
+      in (res.success == false)) (attrNames pkgs) ++ searchBlackList;
     in removeAttrs pkgs badList;
   in foldl' (l: r: let
     ret = {"${r}" = (filterBadPkgs allPkgs."${r}"); };

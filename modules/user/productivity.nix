@@ -11,6 +11,7 @@ in {
                 obsidian
                 firefox
                 onlyoffice-bin
+                google-chrome
             ];
         })
     ];

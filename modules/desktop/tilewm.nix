@@ -141,7 +141,7 @@ in {
         { key = "$mod+t"; command = "input type:touchpad events toggle enabled disabled"; }
         { key = "$mod+shift+e"; command = "exec ${binDir}/wofi-emoji"; }
         { key = "$mod+d"; command = "exec ${binDir}/wofi --show drun --allow-images"; }
-        { key = "$mod+w"; command = "exec distrobox enter productivity -- firefox"; }
+        { key = "$mod+w"; command = "exec firefox"; }
       ];
     };
 

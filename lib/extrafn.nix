@@ -1,5 +1,19 @@
+{pkgs}:
 with builtins;
 {
+    debugPrint = obj: trace (toJSON obj) obj;
+
+    mkNuScriptBin = name: text: 
+        pkgs.writeTextFile {
+          name = name;
+          text = ''
+            #!${pkgs.nushell}/bin/nu
+            ${text}
+          '';
+          executable = true;
+          destination = "/bin/${name}";
+        };
+
     mergeUser = user: config: 
     {
 

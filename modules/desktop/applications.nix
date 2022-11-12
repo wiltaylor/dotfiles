@@ -25,9 +25,13 @@ in {
       libsixel
       mpv
       distrobox
+      kdenlive
+      gimp
 
       dfeet
       pkgs.xorg.xhost
+      virtmanager
+      pandoc
     ];
   };
 }

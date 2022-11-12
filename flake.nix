@@ -10,7 +10,7 @@
   let
     lib = import ./lib;
     localpkgs = import ./pkgs;
-    extralib = self: super: import ./lib/extrafn.nix;
+    extralib = self: super: import ./lib/extrafn.nix {pkgs = super;};
 
     allPkgs = lib.mkPkgs { 
       inherit nixpkgs; 

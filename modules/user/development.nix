@@ -24,6 +24,10 @@ in {
                 docker
                 rustup
                 python3Full
+                zeal
+                jupyter
+                quickemu
+                remmina
             ];
 
             files = {

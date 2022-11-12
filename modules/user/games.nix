@@ -8,7 +8,7 @@ in {
     sys.user.userRoles.games = [
         (user: mergeUser user {
             software = with pkgs; [
-                steam
+                steam-gamescope
                 steam-run
                 steam-tui
                 steamcmd
@@ -16,7 +16,10 @@ in {
                 protonup
                 lutris
                 retroarchFull
-
+                gamescope
+                vkBasalt
+                mangohud
+                goverlay
             ];
         })
     ];
