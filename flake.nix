@@ -99,10 +99,10 @@
 
           sys.security.yubikey = true;
 
-          sys.hardware.vfio.enable = true;
-          sys.hardware.vfio.gpuType = "nvidia";
-          sys.hardware.vfio.gpuPciIds = "10de:1e87,10de:10f8,10de:1ad8,10de:1ad9";
-          sys.hardware.vfio.devIds = "0000:0c:00.0 0000:0c:00.1 0000:0c:00.2 0000:0c:00.3";
+          #sys.hardware.vfio.enable = true;
+          #sys.hardware.vfio.gpuType = "nvidia";
+          #sys.hardware.vfio.gpuPciIds = "10de:1e87,10de:10f8,10de:1ad8,10de:1ad9";
+          #sys.hardware.vfio.devIds = "0000:0c:00.0 0000:0c:00.1 0000:0c:00.2 0000:0c:00.3";
 
           ## Extra mapped disk drives
           boot.initrd.luks.devices."datacrypt".device = "/dev/disk/by-label/DATACRYPT";
