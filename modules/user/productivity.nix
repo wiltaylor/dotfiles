@@ -12,6 +12,7 @@ in {
                 firefox
                 onlyoffice-bin
                 google-chrome
+                calibre
             ];
         })
     ];

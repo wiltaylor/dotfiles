@@ -32,7 +32,12 @@ in {
                 gcc
                 nodejs # Needed for neovim lsp and tree sitter. Really want to remove this.
                 rust-analyzer 
-
+                bear
+                clang
+                llvm_14
+                llvm_14.dev
+                cmake
+                gnumake
             ];
 
             files = {

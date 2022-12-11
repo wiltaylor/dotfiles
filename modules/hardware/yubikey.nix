@@ -12,7 +12,6 @@ in {
         sys.software = [
             gnupg
             yubikey-personalization
-            yubioath-desktop
             pinentry-qt
         ];
 

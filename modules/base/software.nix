@@ -20,6 +20,8 @@
         socat
         unixtools.xxd
         rclone
+        nmap
+        rustscan
         freshfetch
         samba # Probably not in here
         

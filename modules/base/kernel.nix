@@ -19,5 +19,9 @@ in {
         
         boot.consoleLogLevel = cfg.bootLogLevel;
         boot.kernelPackages = cfg.kernelPackage;
+
+        sys.software = [
+            bpftrace
+        ];
     };
 }

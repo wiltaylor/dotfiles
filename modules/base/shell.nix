@@ -14,6 +14,18 @@ in {
 
     users.defaultUserShell = pkgs.nushell;
 
+    sys.user.allUsers.files = {
+        filea = {
+            path = ".config/nushell/config.nu";
+            text = readFile ./config.nu;
+        };
+
+        fileb = {
+            path = ".config/nushell/env.nu";
+            text = readFile ./env.nu;
+        };
+    };
+
     environment.variables= {
       "EDITOR" = "nvim";
       "VISUAL" = "nvim";
