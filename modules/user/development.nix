@@ -38,6 +38,7 @@ in {
                 llvm_14.dev
                 cmake
                 gnumake
+                neo4j-desktop
             ];
 
             files = {

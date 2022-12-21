@@ -13,6 +13,7 @@ in {
                 onlyoffice-bin
                 google-chrome
                 calibre
+                pcmanfm
             ];
         })
     ];
