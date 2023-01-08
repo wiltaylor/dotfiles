@@ -22,7 +22,6 @@ in {
                 nomad
                 vault
                 docker
-                rustup
                 python3Full
                 zeal
                 jupyter
@@ -39,6 +38,7 @@ in {
                 cmake
                 gnumake
                 neo4j-desktop
+                direnv
             ];
 
             files = {

@@ -27,6 +27,7 @@ in {
       distrobox
       kdenlive
       gimp
+      appimage-run
 
       dfeet
       pkgs.xorg.xhost
