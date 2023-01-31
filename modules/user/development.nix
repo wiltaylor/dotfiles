@@ -39,6 +39,7 @@ in {
                 gnumake
                 neo4j-desktop
                 direnv
+                libsForQt5.umbrello
             ];
 
             files = {

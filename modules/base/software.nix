@@ -4,6 +4,7 @@
     sys.software = with pkgs; [
         # Misc cli tools
         dutree
+        btdu # better disk usage tools for btrfs
         hyperfine
         bottom
         wget
