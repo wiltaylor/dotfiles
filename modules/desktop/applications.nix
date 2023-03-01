@@ -33,6 +33,7 @@ in {
       pkgs.xorg.xhost
       virtmanager
       pandoc
+      remmina
     ];
   };
 }

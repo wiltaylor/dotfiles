@@ -14,16 +14,13 @@ self: super: {
         ];
     };
 
-    distrobox = super.distrobox.overrideAttrs (old: {
-        version = "1.4.1";
-	
-      	src = super.fetchFromGitHub {
-    		owner = "89luca89";
-    		repo = "distrobox";
-    		rev = "1.4.1";
-    		sha256 = "sha256-WIpl3eSdResAmWFc8OG8Jm0uLTGaovkItGAZTOEzhuE=";
-        };
-    });  
+    #Fix from https://github.com/NixOS/nixpkgs/issues/214617
+    vscode = super.vscode.overrideAttrs (finalAttrs: previousAttrs: {
+      installPhase = previousAttrs.installPhase + ''
+        chmod +x $out/lib/vscode/resources/app/node_modules/node-pty/build/Release/spawn-helper
+        chmod +x $out/lib/vscode/resources/app/node_modules.asar.unpacked/node-pty/build/Release/spawn-helper
+      '';
+    });
 
     g810-led = super.stdenv.mkDerivation {
       pname = "g810led";

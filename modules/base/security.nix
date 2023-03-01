@@ -19,6 +19,7 @@ in {
         security.sudo.execWheelOnly = true;
 
         services.tailscale.enable = true;
+        services.gnome.gnome-keyring.enable = true;
 
         services.openssh.enable = cfg.sshd.enable;
         networking.firewall.allowedTCPPorts = [ (mkIf cfg.sshd.enable 22) 8080 ];

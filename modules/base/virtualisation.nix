@@ -17,5 +17,6 @@ in {
 
     config = {
         virtualisation.docker.enable = cfg.virtualisation.docker.enable;
+        virtualisation.docker.storageDriver = "overlay2";
     };
 }

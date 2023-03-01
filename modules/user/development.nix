@@ -16,6 +16,7 @@ in {
             software = [
                 git
                 git-crypt
+                gitkraken
                 ansible
                 terraform
                 consul
@@ -39,7 +40,8 @@ in {
                 gnumake
                 neo4j-desktop
                 direnv
-                libsForQt5.umbrello
+                vscode
+                d2
             ];
 
             files = {
