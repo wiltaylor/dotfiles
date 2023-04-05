@@ -34,6 +34,7 @@ in {
       virtmanager
       pandoc
       remmina
+      krdc
     ];
   };
 }

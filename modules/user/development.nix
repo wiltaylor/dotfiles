@@ -27,7 +27,6 @@ in {
                 zeal
                 jupyter
                 quickemu
-                netcoredbg
                 tree-sitter
                 gcc
                 nodejs # Needed for neovim lsp and tree sitter. Really want to remove this.
