@@ -20,7 +20,7 @@ inspiration on creating your own setup.
 |-[roles] -- Contains roles which can be applied to machines.
 |-[wallpapers] -- drop images into this folder to add to wallpaper cycle.
 |-LICENSE - MIT License file.
-|-flake.nix - Cotains the main nix flake.
+|-flake.nix - Contains the main nix flake.
 |-shell.nix - Creates a nix shell with required tools to install.
 ```
 
